@@ -100,7 +100,11 @@ public class AshOfSinBindingEvent {
 
         boolean flameKatanaCaravella = mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "flame_katana_caravella")) ||
                 mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "flame_katana_caravella_sheath")) ||
-                offHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "flame_katana_caravella_sheath"));
+                offHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "flame_katana_caravella_sheath"))||
+                mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "soul_of_the_king_fire")) ||
+                offHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "soul_of_the_king_fire"))||
+                mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "soul_of_the_king_lightning")) ||
+                offHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "soul_of_the_king_lightning"));
         boolean isWenH_ = holder.getGameProfile().getName().contains("WenH_");
         if (!(mainHand.isEmpty()) && (flameKatanaCaravella)) {
             if (!isOP) {

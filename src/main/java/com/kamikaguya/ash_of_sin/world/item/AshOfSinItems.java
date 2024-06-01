@@ -39,6 +39,10 @@ public class AshOfSinItems {
 
     public static final RegistryObject<Item> FLAME_KATANA_CARAVELLA_SHEATH = ITEMS.register("flame_katana_caravella_sheath", () -> new Item(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
 
+    public static final RegistryObject<Item> SOUL_OF_THE_KING_FIRE = ITEMS.register("soul_of_the_king_fire", () -> new SoulOfTheKingFireItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
+
+    public static final RegistryObject<Item> SOUL_OF_THE_KING_LIGHTNING = ITEMS.register("soul_of_the_king_lightning", () -> new SoulOfTheKingLightningItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
+
     public static final RegistryObject<Item> ELUCIDATOR = ITEMS.register("elucidator", () -> new ElucidatorItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
 
     public static final RegistryObject<Item> DARK_REPULSER = ITEMS.register("dark_repulser", () -> new DarkRepulserItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
