@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "epicfight:netherite_greatsword"
+    },
+    "addition": {
+        "item" : "wildbackport:sculk_catalyst"
+    },
+    "result": {
+        "item": "ash_of_sin:sculk_greatsword"
+    }
+}

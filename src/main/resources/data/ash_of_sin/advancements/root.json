@@ -1,0 +1,27 @@
+{
+    "__comment": "Made with TheDestruc7i0n's advancements generator: https://advancements.thedestruc7i0n.ca",
+    "display": {
+        "title": {
+            "text": "罪业余烬",
+            "color": "dark_purple",
+            "bold": true
+        },
+        "description": {
+            "text": "将遵循夜的法则，开始千年的旅途。众生啊，在这冰冷的长夜中，漫长的思考吧——何谓恐惧、彷徨、孤独？以及何谓深入黑暗。",
+            "color": "dark_red"
+        },
+        "icon": {
+            "item": "ash_of_sin:ash_of_sin"
+        },
+        "frame": "challenge",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false,
+        "background": "ash_of_sin:textures/gui/advancements/backgrounds/background.png"
+    },
+    "criteria": {
+        "Start": {
+            "trigger": "minecraft:impossible"
+        }
+    }
+}

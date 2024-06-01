@@ -1,0 +1,50 @@
+{
+  "type": "ash_of_sin:absolute_space_time_realm",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "ash_of_sin:absolute_space_time_realm",
+      "lakes": true,
+      "features": true,
+      "layers": [
+        {
+          "block": "minecraft:bedrock",
+          "height": 4
+        },
+        {
+          "block": "minecraft:deepslate",
+          "height": 66
+        },
+        {
+          "block": "minecraft:stone",
+          "height": 5
+        },
+        {
+          "block": "minecraft:granite",
+          "height": 7
+        },
+        {
+          "block": "minecraft:stone",
+          "height": 9
+        },
+        {
+          "block": "minecraft:andesite",
+          "height": 5
+        },
+        {
+          "block": "minecraft:granite",
+          "height": 2
+        },
+        {
+          "block": "minecraft:gravel",
+          "height": 1
+        },
+        {
+          "block": "minecraft:water",
+          "height": 28
+        }
+      ],
+      "structure_overrides": []
+    }
+  }
+}

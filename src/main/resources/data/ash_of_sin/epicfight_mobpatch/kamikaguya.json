@@ -1,0 +1,1583 @@
+{
+  "model": "epicfight:entity/biped_slim_arm",
+  "armature": "epicfight:entity/biped",
+  "renderer": "player",
+  "isHumanoid": true,
+  "faction": "neutral",
+  "attributes": {
+    "impact": 0.5,
+    "armor_negation": 100,
+    "max_strikes": 39,
+    "chasing_speed": 3.9,
+    "scale": 1
+  },
+  "default_livingmotions": {
+    "idle": "epicfight:biped/living/idle",
+    "walk": "epicfight:biped/living/walk",
+    "chase": "epicfight:biped/living/run",
+    "mount": "epicfight:biped/living/mount",
+    "fall": "epicfight:biped/living/fall",
+    "death": "epicfight:biped/living/death"
+  },
+  "stun_animations": {
+    "short": "epicfight:biped/combat/hit_short",
+    "long": "epicfight:biped/combat/hit_long",
+    "knockdown": "epicfight:biped/combat/knockdown",
+    "fall": "epicfight:biped/living/landing",
+    "neutralize": "epicfight:biped/skill/guard_break1"
+  },
+  "combat_behavior": [
+    {
+      "weapon_categories": ["greatsword"],
+      "style": "common",
+      "behavior_series": [
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 12.0
+                }
+              ],
+              "animation": "wom:biped/combat/torment_dash"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/shadow_step_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 4.0
+                }
+              ],
+              "animation": "wom:biped/combat/torment_auto_1"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 4.0
+                }
+              ],
+              "animation": "wom:biped/combat/torment_auto_2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 4.0
+                }
+              ],
+              "animation": "wom:biped/combat/torment_auto_3"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 4.0
+                }
+              ],
+              "animation": "wom:biped/combat/torment_auto_4"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/shadow_step_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 12.0
+                }
+              ],
+              "animation": "wom:biped/combat/torment_dash"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 10.0
+                }
+              ],
+              "animation": "wom:biped/combat/torment_airslam"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/shadow_step_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/combat/torment_charged_attack_1"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/shadow_step_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 6.0
+                }
+              ],
+              "animation": "wom:biped/combat/torment_charged_attack_2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/shadow_step_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                }
+              ],
+              "animation": "wom:biped/combat/torment_charged_attack_3"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/shadow_step_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 6.0
+                }
+              ],
+              "animation": "wom:biped/combat/torment_charged_attack_2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/combat/torment_charged_attack_1"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 6.0
+                }
+              ],
+              "animation": "wom:biped/combat/torment_charged_attack_2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                }
+              ],
+              "animation": "wom:biped/combat/torment_charged_attack_3"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 6.0
+                }
+              ],
+              "animation": "wom:biped/combat/torment_charged_attack_2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 10.0
+                }
+              ],
+              "animation": "wom:biped/combat/torment_airslam"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/skill/torment_berserk_auto_1"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/skill/torment_berserk_auto_2"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/skill/torment_berserk_auto_1"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/skill/torment_berserk_auto_2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 6.0
+                }
+              ],
+              "animation": "wom:biped/combat/torment_charged_attack_2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 10.0
+                }
+              ],
+              "animation": "wom:biped/combat/torment_airslam"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/skill/torment_berserk_auto_1"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/skill/torment_berserk_auto_2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 6.0
+                }
+              ],
+              "animation": "wom:biped/combat/torment_charged_attack_2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/combat/torment_charged_attack_1"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/skill/torment_berserk_auto_1"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/skill/torment_berserk_auto_2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 6.0
+                }
+              ],
+              "animation": "wom:biped/combat/torment_charged_attack_2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                }
+              ],
+              "animation": "wom:biped/combat/torment_charged_attack_3"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/skill/torment_berserk_auto_1"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/skill/torment_berserk_auto_2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 6.0
+                }
+              ],
+              "animation": "wom:biped/skill/torment_berserk_convert"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 6.0
+                }
+              ],
+              "animation": "wom:biped/combat/torment_charged_attack_2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                }
+              ],
+              "animation": "wom:biped/combat/torment_charged_attack_3"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 4.0
+                }
+              ],
+              "animation": "wom:biped/combat/ruine_dash"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/shadow_step_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 4.0
+                }
+              ],
+              "animation": "wom:biped/combat/ruine_auto_1"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/combat/ruine_auto_2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/combat/ruine_auto_3"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/combat/ruine_auto_4"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/shadow_step_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 13.0
+                }
+              ],
+              "animation": "wom:biped/combat/ruine_comet"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/shadow_step_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 6.0
+                }
+              ],
+              "animation": "wom:biped/skill/ruine_plunder"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/shadow_step_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 13.0
+                }
+              ],
+              "animation": "wom:biped/combat/ruine_comet"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 4.0
+                }
+              ],
+              "animation": "wom:biped/combat/ruine_auto_1"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/combat/ruine_auto_2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/combat/ruine_auto_3"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/combat/ruine_auto_4"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 6.0
+                }
+              ],
+              "animation": "wom:biped/skill/ruine_plunder"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 4.0
+                }
+              ],
+              "animation": "wom:biped/combat/ruine_auto_1"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/combat/ruine_auto_2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/combat/ruine_auto_3"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/combat/ruine_auto_4"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 8
+                }
+              ],
+              "animation": "wom:biped/combat/agony_clawstrike"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/shadow_step_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 8
+                }
+              ],
+              "animation": "wom:biped/combat/agony_auto_1"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/combat/agony_auto_2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/combat/agony_auto_3"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/combat/agony_auto_4"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/shadow_step_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 5.0
+                }
+              ],
+              "animation": "wom:biped/combat/agony_airslash"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/shadow_step_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 8
+                }
+              ],
+              "animation": "wom:biped/skill/agony_plunge_forward_x"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/shadow_step_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 8
+                }
+              ],
+              "animation": "wom:biped/combat/agony_auto_1"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/combat/agony_auto_2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/combat/agony_auto_3"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/combat/agony_auto_4"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 8
+                }
+              ],
+              "animation": "wom:biped/combat/agony_clawstrike"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 8
+                }
+              ],
+              "animation": "wom:biped/combat/agony_auto_1"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/combat/agony_auto_2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/combat/agony_auto_3"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "wom:biped/combat/agony_auto_4"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 8
+                }
+              ],
+              "animation": "wom:biped/skill/agony_plunge_forward_x"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 6.0
+                }
+              ],
+              "animation": "wom:biped/skill/antitheus_lapse"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 6.0
+                }
+              ],
+              "animation": "wom:biped/skill/antitheus_ascended_blackhole"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 6.0
+                }
+              ],
+              "animation": "wom:biped/skill/antitheus_lapse"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 6.0
+                }
+              ],
+              "animation": "wom:biped/skill/antitheus_ascended_blackhole"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 8
+                }
+              ],
+              "animation": "wom:biped/skill/agony_plunge_forward_x"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                }
+              ],
+              "animation": "wom:biped/skill/shadow_step_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                }
+              ],
+              "animation": "wom:biped/skill/shadow_step_forward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 6.04
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/shadow_step_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 6.04
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/shadow_step_forward"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1945 @@
+{
+  "model": "epicfight:entity/biped_slim_arm",
+  "armature": "epicfight:entity/biped",
+  "renderer": "player",
+  "isHumanoid": true,
+  "faction": "neutral",
+  "attributes": {
+    "impact": 0.5,
+    "armor_negation": 100,
+    "max_strikes": 7,
+    "chasing_speed": 3.0,
+    "scale": 1
+  },
+  "default_livingmotions": {
+    "idle": "epicfight:biped/living/idle",
+    "walk": "epicfight:biped/living/walk",
+    "chase": "epicfight:biped/living/run",
+    "mount": "epicfight:biped/living/mount",
+    "fall": "epicfight:biped/living/fall",
+    "death": "epicfight:biped/living/death"
+  },
+  "stun_animations": {
+    "short": "epicfight:biped/combat/hit_short",
+    "long": "epicfight:biped/combat/hit_long",
+    "knockdown": "epicfight:biped/combat/knockdown",
+    "fall": "epicfight:biped/living/landing",
+    "neutralize": "epicfight:biped/skill/guard_break1"
+  },
+  "combat_behavior": [
+    {
+      "weapon_categories": ["dagger"],
+      "style": "one_hand",
+      "behavior_series": [
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "epicfight:biped/combat/dagger_dash"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 1.5
+                }
+              ],
+              "animation": "epicfight:biped/skill/eviscerate_first"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 1.5
+                }
+              ],
+              "animation": "epicfight:biped/skill/eviscerate_second"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/dodgemaster_back"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "epicfight:biped/combat/dagger_auto1"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "epicfight:biped/combat/dagger_auto2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "epicfight:biped/combat/dagger_auto3"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/dodgemaster_back"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "epicfight:biped/combat/dagger_dash"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 1.5
+                }
+              ],
+              "animation": "epicfight:biped/combat/dagger_airslash"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/dodgemaster_back"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 1.5
+                }
+              ],
+              "animation": "epicfight:biped/combat/dagger_airslash"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/dodgemaster_back"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 1.5
+                }
+              ],
+              "animation": "epicfight:biped/skill/eviscerate_first"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 1.5
+                }
+              ],
+              "animation": "epicfight:biped/skill/eviscerate_second"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/dodgemaster_back"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "canBeInterrupted": true,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "greater_ratio"
+                }
+              ],
+              "animation": "epicfight:biped/skill/step_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "canBeInterrupted": true,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 13.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "greater_ratio"
+                }
+              ],
+              "animation": "epicfight:biped/skill/step_forward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "canBeInterrupted": true,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/dodgemaster_back"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "canBeInterrupted": true,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/dodgemaster_left"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "canBeInterrupted": true,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/dodgemaster_right"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "weapon_categories": ["dagger"],
+      "style": "two_hand",
+      "behavior_series": [
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "epicfight:biped/combat/dagger_dual_dash"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 4.0
+                }
+              ],
+              "animation": "epicfight:biped/skill/blade_rush_combo1"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 4.0
+                }
+              ],
+              "animation": "epicfight:biped/skill/blade_rush_combo2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 4.0
+                }
+              ],
+              "animation": "epicfight:biped/skill/blade_rush_combo3"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/dodgemaster_back"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 3.0
+                }
+              ],
+              "animation": "epicfight:biped/combat/dagger_dual_auto1"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 3.0
+                }
+              ],
+              "animation": "epicfight:biped/combat/dagger_dual_auto2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 3.0
+                }
+              ],
+              "animation": "epicfight:biped/combat/dagger_dual_auto3"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 3.0
+                }
+              ],
+              "animation": "epicfight:biped/combat/dagger_dual_auto4"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/dodgemaster_back"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "epicfight:biped/combat/dagger_dual_dash"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 1.5
+                }
+              ],
+              "animation": "epicfight:biped/combat/sword_dual_airslash"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/dodgemaster_back"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 1.5
+                }
+              ],
+              "animation": "epicfight:biped/combat/sword_dual_airslash"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/dodgemaster_back"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 4.0
+                }
+              ],
+              "animation": "epicfight:biped/skill/blade_rush_combo1"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 4.0
+                }
+              ],
+              "animation": "epicfight:biped/skill/blade_rush_combo2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 4.0
+                }
+              ],
+              "animation": "epicfight:biped/skill/blade_rush_combo3"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/dodgemaster_back"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "canBeInterrupted": true,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "greater_ratio"
+                }
+              ],
+              "animation": "epicfight:biped/skill/step_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "canBeInterrupted": true,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 13.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "greater_ratio"
+                }
+              ],
+              "animation": "epicfight:biped/skill/step_forward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "canBeInterrupted": true,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/dodgemaster_back"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "canBeInterrupted": true,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/dodgemaster_left"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "canBeInterrupted": true,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/dodgemaster_right"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "weapon_categories": ["axe", "hoe", "pickaxe", "shovel"],
+      "style": "common",
+      "behavior_series": [
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "epicfight:biped/combat/axe_dash"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 1.5
+                }
+              ],
+              "animation": "epicfight:biped/skill/the_guillotine"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/roll_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "epicfight:biped/combat/axe_auto1"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "epicfight:biped/combat/axe_auto2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/roll_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.0
+                }
+              ],
+              "animation": "epicfight:biped/combat/axe_dash"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 1.5
+                }
+              ],
+              "animation": "epicfight:biped/combat/axe_airslash"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/roll_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 1.5
+                }
+              ],
+              "animation": "epicfight:biped/combat/axe_airslash"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/roll_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 1.5
+                }
+              ],
+              "animation": "epicfight:biped/skill/the_guillotine"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/roll_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 6.0
+                }
+              ],
+              "animation": "wom:biped/skill/antitheus_lapse"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 6.0
+                }
+              ],
+              "animation": "wom:biped/skill/antitheus_ascended_blackhole"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 13.0
+                }
+              ],
+              "animation": "wom:biped/skill/torment_berserk_convert"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 3.0,
+                  "max": 30.0
+                }
+              ],
+              "animation": "wom:biped/skill/antitheus_shoot"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 3.0,
+                  "max": 30.0
+                }
+              ],
+              "animation": "wom:biped/skill/antitheus_shoot"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 3.0,
+                  "max": 30.0
+                }
+              ],
+              "animation": "wom:biped/skill/antitheus_shoot"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 3.0,
+                  "max": 30.0
+                }
+              ],
+              "animation": "wom:biped/skill/antitheus_shoot"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 3.0,
+                  "max": 30.0
+                }
+              ],
+              "animation": "wom:biped/skill/antitheus_shoot"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 3.0,
+                  "max": 30.0
+                }
+              ],
+              "animation": "wom:biped/skill/antitheus_shoot"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "canBeInterrupted": true,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "greater_ratio"
+                }
+              ],
+              "animation": "epicfight:biped/skill/roll_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "canBeInterrupted": true,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 13.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "greater_ratio"
+                }
+              ],
+              "animation": "epicfight:biped/skill/roll_forward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "canBeInterrupted": true,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/roll_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "canBeInterrupted": true,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 13.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/roll_forward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "canBeInterrupted": true,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/roll_left"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "canBeInterrupted": true,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                },
+                {
+                  "predicate": "health",
+                  "health": 0.5,
+                  "comparator": "less_ratio"
+                }
+              ],
+              "animation": "wom:biped/skill/roll_right"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "weapon_categories": ["not_weapon", "fist", "ranged"],
+      "style": "common",
+      "behavior_series": [
+        {
+          "weight": 100.0,
+          "cooldown": 100,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.5
+                },
+                {
+                  "predicate": "within_angle_horizontal",
+                  "min": -30,
+                  "max": 3.0
+                }
+              ],
+              "animation": "epicfight:biped/combat/fist_auto1"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.5
+                },
+                {
+                  "predicate": "within_angle_horizontal",
+                  "min": -30,
+                  "max": 3.0
+                }
+              ],
+              "animation": "epicfight:biped/combat/fist_auto2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.5
+                },
+                {
+                  "predicate": "within_angle_horizontal",
+                  "min": -30,
+                  "max": 3.0
+                }
+              ],
+              "animation": "epicfight:biped/combat/fist_auto3"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.5
+                },
+                {
+                  "predicate": "within_angle_horizontal",
+                  "min": -30,
+                  "max": 3.0
+                }
+              ],
+              "animation": "epicfight:biped/combat/fist_airslash"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.5,
+                  "max": 2.5
+                },
+                {
+                  "predicate": "within_angle_horizontal",
+                  "min": -30,
+                  "max": 3.0
+                }
+              ],
+              "animation": "epicfight:biped/skill/relentless_combo"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.5
+                }
+              ],
+              "animation": "wom:biped/combat/enderblaster_onehand_auto_1"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 5.0
+                }
+              ],
+              "animation": "wom:biped/combat/enderblaster_onehand_auto_2"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.5
+                }
+              ],
+              "animation": "wom:biped/combat/enderblaster_onehand_auto_3"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.5
+                }
+              ],
+              "animation": "wom:biped/combat/enderblaster_onehand_auto_4"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.5
+                }
+              ],
+              "animation": "wom:biped/combat/enderblaster_onehand_jumpkick"
+            },
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.5
+                }
+              ],
+              "animation": "wom:biped/combat/enderblaster_onehand_dash"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 450,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 2.5,
+                  "max": 7.5
+                },
+                {
+                  "predicate": "within_angle_horizontal",
+                  "min": -30,
+                  "max": 3.0
+                }
+              ],
+              "animation": "wom:biped/skill/bull_charge"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 250,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 1.5,
+                  "max": 7.5
+                }
+              ],
+              "animation": "wom:biped/skill/torment_berserk_dash"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.5
+                },
+                {
+                  "predicate": "within_angle_horizontal",
+                  "min": -30,
+                  "max": 3.0
+                }
+              ],
+              "animation": "epicfight:enderman/kick_twice"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.5
+                },
+                {
+                  "predicate": "within_angle_horizontal",
+                  "min": -30,
+                  "max": 3.0
+                }
+              ],
+              "animation": "epicfight:enderman/knee"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 2.5
+                },
+                {
+                  "predicate": "within_angle_horizontal",
+                  "min": -30,
+                  "max": 3.0
+                }
+              ],
+              "animation": "epicfight:enderman/rush_kick"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 250,
+          "canBeInterrupted": false,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 2.5,
+                  "max": 7.5
+                },
+                {
+                  "predicate": "within_angle_horizontal",
+                  "min": -30,
+                  "max": 3.0
+                }
+              ],
+              "animation": "wom:biped/skill/torment_berserk_dash"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "canBeInterrupted": true,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                }
+              ],
+              "animation": "wom:biped/skill/enderstep_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "canBeInterrupted": true,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 13.0
+                }
+              ],
+              "animation": "wom:biped/skill/enderstep_forward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "canBeInterrupted": true,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                }
+              ],
+              "animation": "wom:biped/skill/enderstep_left"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "canBeInterrupted": true,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                }
+              ],
+              "animation": "wom:biped/skill/enderstep_right"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "weapon_categories": ["shield"],
+      "style": "common",
+      "behavior_series": [
+        {
+          "weight": 100.0,
+          "canBeInterrupted": false,
+          "looping": true,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 1.6
+                },
+                {
+                  "predicate": "within_angle_horizontal",
+                  "min": 0.0,
+                  "max": 90
+                }
+              ],
+              "animation": "epicfight:iron_golem/attack1"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": true,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                }
+              ],
+              "animation": "wom:biped/skill/enderstep_backward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": true,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 13.0
+                }
+              ],
+              "animation": "wom:biped/skill/enderstep_forward"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": true,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                }
+              ],
+              "animation": "wom:biped/skill/enderstep_left"
+            }
+          ]
+        },
+        {
+          "weight": 100.0,
+          "cooldown": 140,
+          "canBeInterrupted": true,
+          "looping": false,
+          "behaviors": [
+            {
+              "conditions": [
+                {
+                  "predicate": "within_eye_height"
+                },
+                {
+                  "predicate": "within_distance",
+                  "min": 0.0,
+                  "max": 7.0
+                }
+              ],
+              "animation": "wom:biped/skill/enderstep_right"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

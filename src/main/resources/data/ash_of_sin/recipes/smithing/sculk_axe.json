@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "minecraft:netherite_axe"
+    },
+    "addition": {
+        "item" : "wildbackport:sculk_catalyst"
+    },
+    "result": {
+        "item": "ash_of_sin:sculk_axe"
+    }
+}

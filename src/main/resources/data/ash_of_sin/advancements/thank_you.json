@@ -1,0 +1,27 @@
+{
+    "__comment": "Made with TheDestruc7i0n's advancements generator: https://advancements.thedestruc7i0n.ca",
+    "display": {
+        "title": {
+            "text": "39！",
+            "color": "aqua",
+            "bold": true
+        },
+        "description": {
+            "text": "Thank You",
+            "color": "aqua"
+        },
+        "icon": {
+            "item": "minecraft:axolotl_bucket"
+        },
+        "frame": "challenge",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "Start": {
+            "trigger": "minecraft:impossible"
+        }
+    },
+    "parent": "ash_of_sin:root"
+}

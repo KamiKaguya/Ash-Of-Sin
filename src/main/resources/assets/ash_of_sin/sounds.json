@@ -1,0 +1,34 @@
+{
+  "mob.gate.gate_open": {
+    "sounds": [
+      {
+        "name": "ash_of_sin:mob/gate/gate_open",
+        "stream": true
+      }
+    ]
+  },
+  "mob.gate.gate_ambient_loop": {
+    "sounds": [
+      {
+        "name": "ash_of_sin:mob/gate/gate_ambient_loop",
+        "stream": true
+      }
+    ]
+  },
+  "mob.gate.gate_warp": {
+    "sounds": [
+      {
+        "name": "ash_of_sin:mob/gate/gate_warp",
+        "stream": true
+      }
+    ]
+  },
+  "enchantment.chalk_wall.tick_tack": {
+    "sounds": [
+      {
+        "name": "ash_of_sin:enchantment/chalk_wall/tick_tack",
+        "stream": true
+      }
+    ]
+  }
+}
