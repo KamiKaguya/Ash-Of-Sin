@@ -34,7 +34,7 @@ credits="KamiKaguya" #optional
 authors="KamiKaguya" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-§0§l『§4§l罪业余烬§0§l』§f服务器特供
+Ash Of Sin
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.ash_of_sin]] #optional
