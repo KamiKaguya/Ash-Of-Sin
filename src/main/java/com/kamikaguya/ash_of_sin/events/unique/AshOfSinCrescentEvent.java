@@ -8,15 +8,19 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.List;
 import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -39,6 +43,7 @@ public class AshOfSinCrescentEvent {
             if (holdCrescent(livingEntity)) {
                 if (livingEntity instanceof ServerPlayer player && !(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(player))) {
                     float originalDamage = event.getAmount();
+                    crescent(target, livingEntity, originalDamage);
                     if (RANDOM.nextFloat() < 0.15F) {
                         target.hurt(DamageSource.playerAttack(player).setMagic(), originalDamage);
                         Shock(target);
@@ -87,6 +92,32 @@ public class AshOfSinCrescentEvent {
         if (shock != null) {
             MobEffectInstance shockEffect = new MobEffectInstance(shock, 5 * 20, 0);
             target.addEffect(shockEffect);
+        }
+    }
+
+    private static void crescent(LivingEntity target, LivingEntity attacker, float damage) {
+        MobEffect glowing = MobEffects.GLOWING;
+        boolean alreadyCrescent = target.getActiveEffects().stream()
+                .anyMatch(existingEffect -> existingEffect.getEffect().equals(glowing) && existingEffect.getAmplifier() >= 0);
+        if (!alreadyCrescent) {
+            target.addEffect(new MobEffectInstance(glowing, 7 * 20, 0));
+        } else {
+            EntityType<?> livingEntityType = target.getType();
+            double targetX = target.getX();
+            double targetY = target.getY();
+            double targetZ = target.getZ();
+            List<LivingEntity> nearbyEntities = target.level.getEntitiesOfClass(LivingEntity.class, new AABB(
+                    targetX - 3, targetY - 3, targetZ - 3,
+                    targetX + 3, targetY + 3, targetZ + 3
+            ));
+            for (LivingEntity nearbyEntity : nearbyEntities) {
+                if (livingEntityType.equals(nearbyEntity.getType())) {
+                    if (RANDOM.nextFloat() > 0.295F) {
+                        nearbyEntity.addEffect(new MobEffectInstance(glowing, 7 * 20, 0));
+                        nearbyEntity.hurt(DamageSource.mobAttack(attacker), damage);
+                    }
+                }
+            }
         }
     }
 }

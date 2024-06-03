@@ -34,17 +34,17 @@ public class AshOfSinShikamaDojiEvent {
         LivingEntity target = event.getEntityLiving();
         DamageSource damageSource = event.getSource();
         Entity attacker = damageSource.getEntity();
-        if (attacker instanceof ServerPlayer player) {
-            if (holdShikamaDoji(player)) {
-                if (!(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(player))) {
+        if (attacker instanceof ServerPlayer serverPlayer) {
+            if (holdShikamaDoji(serverPlayer)) {
+                if (!(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
                     bloodSoaked(target);
                 }
             }
         }
     }
 
-    private static boolean holdShikamaDoji(ServerPlayer player) {
-        ItemStack mainHand = player.getMainHandItem();
+    private static boolean holdShikamaDoji(ServerPlayer serverPlayer) {
+        ItemStack mainHand = serverPlayer.getMainHandItem();
         boolean holdShikamaDoji = mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "shikama_doji"));
         if (!(mainHand.isEmpty()) && (holdShikamaDoji)) {
             return true;
@@ -61,11 +61,11 @@ public class AshOfSinShikamaDojiEvent {
             return;
         }
 
-        ServerPlayer player = (ServerPlayer) event.getEntityLiving();
+        ServerPlayer serverPlayer = (ServerPlayer) event.getEntityLiving();
         MobEffect bleed = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("apotheosis","bleeding"));
-        if (holdShikamaDoji(player)) {
+        if (holdShikamaDoji(serverPlayer)) {
             if (bleed != null) {
-                player.removeEffect(bleed);
+                serverPlayer.removeEffect(bleed);
             }
         }
     }

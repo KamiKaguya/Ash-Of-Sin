@@ -7,10 +7,7 @@ import com.kamikaguya.ash_of_sin.events.*;
 import com.kamikaguya.ash_of_sin.events.enchantent.AshOfSinAnotherEvent;
 import com.kamikaguya.ash_of_sin.events.enchantent.AshOfSinChalkWallEvent;
 import com.kamikaguya.ash_of_sin.events.special.*;
-import com.kamikaguya.ash_of_sin.events.unique.AshOfSinCarianEvent;
-import com.kamikaguya.ash_of_sin.events.unique.AshOfSinFlameKatanaCaravellaEvent;
-import com.kamikaguya.ash_of_sin.events.unique.AshOfSinShikamaDojiEvent;
-import com.kamikaguya.ash_of_sin.events.unique.AshOfSinSubCravenBowEvent;
+import com.kamikaguya.ash_of_sin.events.unique.*;
 import com.kamikaguya.ash_of_sin.gameasset.AshOfSinSounds;
 import com.kamikaguya.ash_of_sin.world.dimension.AbsoluteSpaceTimeRealmDimension;
 import com.kamikaguya.ash_of_sin.world.biome.AshOfSinBiomes;
@@ -112,6 +109,7 @@ public class AshOfSin {
         MinecraftForge.EVENT_BUS.register(new AshOfSinSubCravenBowEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinShikamaDojiEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinFlameKatanaCaravellaEvent());
+        MinecraftForge.EVENT_BUS.register(new AshOfSinDualBladesEvent());
 
         MinecraftForge.EVENT_BUS.register(new AshOfSinCustomAntiEnchantmentEntityEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinCustomAntiSeatEntityEvent());
