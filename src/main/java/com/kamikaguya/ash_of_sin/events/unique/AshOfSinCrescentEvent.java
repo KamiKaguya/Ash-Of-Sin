@@ -2,7 +2,6 @@ package com.kamikaguya.ash_of_sin.events.unique;
 
 import com.kamikaguya.ash_of_sin.events.special.AshOfSinBindingEvent;
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
-import com.kamikaguya.ash_of_sin.world.entity.Another;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
@@ -10,7 +9,6 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
@@ -39,18 +37,18 @@ public class AshOfSinCrescentEvent {
         LivingEntity target = (LivingEntity) event.getEntity();
         DamageSource damageSource = event.getSource();
         Entity attacker = damageSource.getEntity();
-        if (attacker instanceof LivingEntity livingEntity) {
-            if (holdCrescent(livingEntity)) {
-                if (livingEntity instanceof ServerPlayer player && !(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(player))) {
+        if (attacker instanceof ServerPlayer serverPlayer) {
+            if (holdCrescent(serverPlayer)) {
+                if (!(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
                     float originalDamage = event.getAmount();
-                    crescent(target, livingEntity, originalDamage);
+                    crescent(target, serverPlayer, originalDamage);
                     if (RANDOM.nextFloat() < 0.15F) {
-                        target.hurt(DamageSource.playerAttack(player).setMagic(), originalDamage);
+                        target.hurt(DamageSource.playerAttack(serverPlayer).setMagic(), originalDamage);
                         Shock(target);
                     }
                     if (RANDOM.nextFloat() < 0.25F) {
                         float bonusDamage = originalDamage * 2.0F;
-                        target.hurt(DamageSource.playerAttack(player).setMagic(), bonusDamage);
+                        target.hurt(DamageSource.playerAttack(serverPlayer).setMagic(), bonusDamage);
                         Shock(target);
                     }
                 }
@@ -58,8 +56,8 @@ public class AshOfSinCrescentEvent {
         }
     }
 
-    private static boolean holdCrescent(LivingEntity livingEntity) {
-        ItemStack mainHand = livingEntity.getMainHandItem();
+    private static boolean holdCrescent(ServerPlayer serverPlayer) {
+        ItemStack mainHand = serverPlayer.getMainHandItem();
         boolean holdCrescent = mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "crescent"));
         if (!(mainHand.isEmpty()) && (holdCrescent)) {
             return true;
@@ -77,11 +75,13 @@ public class AshOfSinCrescentEvent {
         }
 
         LivingEntity livingEntity = event.getEntityLiving();
-        MobEffect shock = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("simple_mobs", "shock"));
-        if (holdCrescent(livingEntity)) {
-            if (shock != null) {
-                if (livingEntity instanceof ServerPlayer player && !(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(player))) {
-                    player.removeEffect(shock);
+        if (livingEntity instanceof ServerPlayer serverPlayer) {
+            MobEffect shock = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("simple_mobs", "shock"));
+            if (holdCrescent(serverPlayer)) {
+                if (shock != null) {
+                    if (!(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
+                        serverPlayer.removeEffect(shock);
+                    }
                 }
             }
         }
@@ -95,7 +95,7 @@ public class AshOfSinCrescentEvent {
         }
     }
 
-    private static void crescent(LivingEntity target, LivingEntity attacker, float damage) {
+    private static void crescent(LivingEntity target, ServerPlayer attacker, float damage) {
         MobEffect glowing = MobEffects.GLOWING;
         boolean alreadyCrescent = target.getActiveEffects().stream()
                 .anyMatch(existingEffect -> existingEffect.getEffect().equals(glowing) && existingEffect.getAmplifier() >= 0);

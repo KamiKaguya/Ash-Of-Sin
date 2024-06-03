@@ -1,9 +1,7 @@
 package com.kamikaguya.ash_of_sin.events.special;
 
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
-import com.kamikaguya.ash_of_sin.world.item.AshOfSinItems;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -11,8 +9,6 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -107,8 +103,8 @@ public class AshOfSinSculkEvent {
                     double targetY = target.getY();
                     double targetZ = target.getZ();
                     List<LivingEntity> nearbyEntities = target.level.getEntitiesOfClass(LivingEntity.class, new AABB(
-                            targetX - 14, targetY - 7, targetZ - 14,
-                            targetX + 14, targetY + 7, targetZ + 14
+                            targetX - 7, targetY - 7, targetZ - 7,
+                            targetX + 7, targetY + 7, targetZ + 7
                     ));
                     for (LivingEntity nearbyEntity : nearbyEntities) {
                         if (livingEntityType.equals(nearbyEntity.getType())) {
