@@ -3,12 +3,6 @@ package com.kamikaguya.ash_of_sin.config;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.fml.loading.FMLPaths;
 import java.nio.file.Path;
 import java.nio.file.Files;
@@ -16,7 +10,6 @@ import java.io.IOException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 public class CustomEntityEffectConfigManager {
@@ -340,45 +333,6 @@ public class CustomEntityEffectConfigManager {
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
                     new CustomEntityEffectConfig("darkersouls:nameless_king", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
-                    )),
-                    new CustomEntityEffectConfig("soul_like_boss:miniboss_paladin", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
-                    )),
-                    new CustomEntityEffectConfig("soul_like_boss:beasthunter", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
-                    )),
-                    new CustomEntityEffectConfig("soul_like_boss:boss_steelknight", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
-                    )),
-                    new CustomEntityEffectConfig("soul_like_boss:boss_abysswatcher", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
-                    )),
-                    new CustomEntityEffectConfig("soul_like_boss:otherabysswatcher", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
-                    )),
-                    new CustomEntityEffectConfig("soul_like_boss:boss_dragonslayerarmour", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
-                    )),
-                    new CustomEntityEffectConfig("soul_like_boss:boss_ornstein", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
-                    )),
-                    new CustomEntityEffectConfig("soul_like_boss:mobsmough", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
-                    )),
-                    new CustomEntityEffectConfig("soul_like_boss:boss_namelessking", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
-                    )),
-                    new CustomEntityEffectConfig("soul_like_boss:boss_cinderking", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
-                    )),
-                    new CustomEntityEffectConfig("gwyn:boss_gwyn", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
-                    )),
-                    new CustomEntityEffectConfig("artorias:artorias", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
-                    )),
-                    new CustomEntityEffectConfig("gwyndolin:gwyndolin", Arrays.asList(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
                     new CustomEntityEffectConfig("cataclysm:ignis", Arrays.asList(

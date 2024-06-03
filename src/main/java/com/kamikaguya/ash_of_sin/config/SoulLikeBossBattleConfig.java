@@ -2,7 +2,6 @@ package com.kamikaguya.ash_of_sin.config;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
-import net.minecraft.world.entity.Entity;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.loading.FMLPaths;
 
@@ -72,19 +71,6 @@ public class SoulLikeBossBattleConfig {
                                 "whisperwoods:hirschgeist",
                                 "irons_spellbooks:dead_king",
                                 "darkersouls:nameless_king",
-                                "soul_like_boss:miniboss_paladin",
-                                "soul_like_boss:beasthunter",
-                                "soul_like_boss:boss_steelknight",
-                                "soul_like_boss:boss_abysswatcher",
-                                "soul_like_boss:otherabysswatcher",
-                                "soul_like_boss:boss_dragonslayerarmour",
-                                "soul_like_boss:boss_ornstein",
-                                "soul_like_boss:mobsmough",
-                                "soul_like_boss:boss_namelessking",
-                                "soul_like_boss:boss_cinderking",
-                                "gwyn:boss_gwyn",
-                                "artorias:artorias",
-                                "gwyndolin:gwyndolin",
                                 "cataclysm:ignis",
                                 "cataclysm:netherite_monstrosity",
                                 "simple_mobs:twins_stone",
