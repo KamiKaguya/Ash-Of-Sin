@@ -7,12 +7,12 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class AshOfSinDualBladesEvent {
     @SubscribeEvent
@@ -27,9 +27,9 @@ public class AshOfSinDualBladesEvent {
         DamageSource damageSource = event.getSource();
         Entity attacker = damageSource.getEntity();
         if (attacker instanceof ServerPlayer serverPlayer) {
-            if (holdDualBlades(serverPlayer)) {
+            if (holdElucidator(serverPlayer) && holdDarkRepulser(serverPlayer)) {
                 if (!(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
-                    MobEffect haste = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("minecraft","haste"));
+                    MobEffect haste = MobEffects.DIG_SPEED;
                     boolean alreadyDualBlades = serverPlayer.getActiveEffects().stream()
                             .anyMatch(existingEffect -> existingEffect.getEffect().equals(haste) && existingEffect.getAmplifier() >= 0);
                     boolean alreadyStarBurstStream = serverPlayer.getActiveEffects().stream()
@@ -52,12 +52,19 @@ public class AshOfSinDualBladesEvent {
         }
     }
 
-    private static boolean holdDualBlades(ServerPlayer serverPlayer) {
+    private static boolean holdElucidator(ServerPlayer serverPlayer) {
         ItemStack mainHand = serverPlayer.getMainHandItem();
+        boolean holdDualBlades = mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "elucidator"));
+        if (!(mainHand.isEmpty()) && (holdDualBlades)) {
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean holdDarkRepulser(ServerPlayer serverPlayer) {
         ItemStack offHand = serverPlayer.getOffhandItem();
-        boolean holdDualBlades = mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "elucidator")) &&
-                offHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "dark_repulser"));
-        if (!(mainHand.isEmpty()) && !(offHand.isEmpty()) && (holdDualBlades)) {
+        boolean holdDarkRepulser = offHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "dark_repulser"));
+        if (!(offHand.isEmpty()) && (holdDarkRepulser)) {
             return true;
         }
         return false;
