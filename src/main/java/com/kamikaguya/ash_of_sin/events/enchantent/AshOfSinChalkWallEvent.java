@@ -174,14 +174,14 @@ public class AshOfSinChalkWallEvent {
         int chalkWallDuration = entityData.getInt(CHALK_WALL_DURATION_KEY);
 
         if (chalkWallDuration <= 0 && hasChalkWall) {
+            float absorptionHealth = entity.getMaxHealth() * 0.15F;
+            entity.setAbsorptionAmount(absorptionHealth);
             entityData.putBoolean(CHALK_WALL_KEY, false);
+            entity.setInvulnerable(false);
         }
 
         if (inChalkWallCD && chalkWallDuration <= 0) {
-            entity.setInvulnerable(false);
             entityData.putInt(CHALK_WALL_DURATION_KEY, 0);
-            float absorptionHealth = entity.getMaxHealth() * 0.15F;
-            entity.setAbsorptionAmount(absorptionHealth);
             if (entity.getHealth() >= entity.getMaxHealth()) {
                 entityData.putBoolean(CHALK_WALL_CD_KEY, false);
             }
