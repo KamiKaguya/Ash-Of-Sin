@@ -38,7 +38,7 @@ public class AshOfSinSubCravenBowEvent {
                 float originalDamage = event.getAmount();
                 float bonusDamage = originalDamage * 2.22F;
                 event.setAmount(bonusDamage);
-                if (RANDOM.nextFloat() < 0.08F) {
+                if (RANDOM.nextFloat() <= 0.08F) {
                     float baseSubCravenBowDamage = bonusDamage * 1.22F;
                     event.setAmount(baseSubCravenBowDamage);
                 }

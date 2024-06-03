@@ -49,7 +49,7 @@ public class AshOfSinCarianEvent {
                 if (attacker instanceof ServerPlayer serverPlayer) {
                     if (!(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
                         target.hurt(DamageSource.MAGIC, magicDamage);
-                        if (RANDOM.nextFloat() < 0.7F) {
+                        if (RANDOM.nextFloat() <= 0.7F) {
                             target.hurt(DamageSource.FREEZE, freezeDamage);
                         }
                     }
@@ -57,7 +57,7 @@ public class AshOfSinCarianEvent {
 
                 if (attacker instanceof KamiKaguya) {
                     target.hurt(DamageSource.MAGIC, magicDamage);
-                    if (RANDOM.nextFloat() < 0.7F) {
+                    if (RANDOM.nextFloat() <= 0.7F) {
                         target.hurt(DamageSource.FREEZE, freezeDamage);
                     }
                 }

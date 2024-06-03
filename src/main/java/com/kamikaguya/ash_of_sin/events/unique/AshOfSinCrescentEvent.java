@@ -102,7 +102,6 @@ public class AshOfSinCrescentEvent {
         if (!alreadyCrescent) {
             target.addEffect(new MobEffectInstance(glowing, 7 * 20, 0));
         } else {
-            EntityType<?> livingEntityType = target.getType();
             double targetX = target.getX();
             double targetY = target.getY();
             double targetZ = target.getZ();
@@ -110,13 +109,11 @@ public class AshOfSinCrescentEvent {
                     targetX - 3, targetY - 3, targetZ - 3,
                     targetX + 3, targetY + 3, targetZ + 3
             ));
-            for (LivingEntity nearbyEntity : nearbyEntities) {
-                if (livingEntityType.equals(nearbyEntity.getType())) {
-                    if (RANDOM.nextFloat() > 0.295F) {
-                        nearbyEntity.addEffect(new MobEffectInstance(glowing, 7 * 20, 0));
-                        nearbyEntity.hurt(DamageSource.mobAttack(attacker), damage);
-                    }
-                }
+            LivingEntity nearbyEntity = nearbyEntities.get(Integer.MAX_VALUE - 1);
+            if (RANDOM.nextFloat() <= 0.295F) {
+                nearbyEntity.addEffect(new MobEffectInstance(glowing, 7 * 20, 0));
+                nearbyEntity.hurt(DamageSource.mobAttack(attacker), damage);
+                nearbyEntity.hurt(DamageSource.FREEZE, damage);
             }
         }
     }

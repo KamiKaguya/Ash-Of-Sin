@@ -113,7 +113,7 @@ public class AshOfSinSculkEvent {
                     for (LivingEntity nearbyEntity : nearbyEntities) {
                         if (livingEntityType.equals(nearbyEntity.getType())) {
                             if (!holdSculkWeapon(nearbyEntity)) {
-                                if (RANDOM.nextFloat() > 0.75F) {
+                                if (RANDOM.nextFloat() <= 0.25F) {
                                     float sonicBoomDamage = sculkDamege * 1.25F;
                                     nearbyEntity.hurt(DamageSource.mobAttack(attacker).setMagic(), sonicBoomDamage);
                                 } else {
