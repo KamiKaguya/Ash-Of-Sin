@@ -49,19 +49,6 @@ public class AshOfSinCrescentEvent {
                         Shock(target);
                     }
                 }
-
-                if (livingEntity instanceof Another another && !(AshOfSinBindingEvent.mismatchingAnotherHoldUniqueWeapon(another))) {
-                    float originalDamage = event.getAmount();
-                    if (RANDOM.nextFloat() < 0.15F) {
-                        target.hurt(DamageSource.mobAttack(another).setMagic(), originalDamage);
-                        Shock(target);
-                    }
-                    if (RANDOM.nextFloat() < 0.25F) {
-                        float bonusDamage = originalDamage * 2.0F;
-                        target.hurt(DamageSource.mobAttack(another).setMagic(), bonusDamage);
-                        Shock(target);
-                    }
-                }
             }
         }
     }
@@ -90,10 +77,6 @@ public class AshOfSinCrescentEvent {
             if (shock != null) {
                 if (livingEntity instanceof ServerPlayer player && !(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(player))) {
                     player.removeEffect(shock);
-                }
-
-                if (livingEntity instanceof Another another && !(AshOfSinBindingEvent.mismatchingAnotherHoldUniqueWeapon(another))) {
-                    another.removeEffect(shock);
                 }
             }
         }

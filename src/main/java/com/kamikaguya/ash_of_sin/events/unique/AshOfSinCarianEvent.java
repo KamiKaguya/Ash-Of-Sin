@@ -54,14 +54,6 @@ public class AshOfSinCarianEvent {
                         }
                     }
                 }
-                if (attacker instanceof Another another) {
-                    if (!(AshOfSinBindingEvent.mismatchingAnotherHoldUniqueWeapon(another))) {
-                        target.hurt(DamageSource.MAGIC, magicDamage);
-                        if (RANDOM.nextFloat() < 0.7F) {
-                            target.hurt(DamageSource.FREEZE, freezeDamage);
-                        }
-                    }
-                }
 
                 if (attacker instanceof KamiKaguya) {
                     target.hurt(DamageSource.MAGIC, magicDamage);
@@ -77,11 +69,6 @@ public class AshOfSinCarianEvent {
                 float finalDamage = originalDamage + correctionDamage;
                 if (attacker instanceof ServerPlayer serverPlayer) {
                     if (!(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
-                        target.hurt(DamageSource.MAGIC, finalDamage);
-                    }
-                }
-                if (attacker instanceof Another another) {
-                    if (!(AshOfSinBindingEvent.mismatchingAnotherHoldUniqueWeapon(another))) {
                         target.hurt(DamageSource.MAGIC, finalDamage);
                     }
                 }
@@ -124,17 +111,14 @@ public class AshOfSinCarianEvent {
                 if (hasProtectionEnchantmentAromor(livingEntity, Enchantments.ALL_DAMAGE_PROTECTION)) {
                     originalDamage = damageAftertArmorProtection(livingEntity.getArmorSlots(), originalDamage);
                 }
+
                 float reductionDamage = originalDamage * 0.2F;
                 if (livingEntity instanceof ServerPlayer player) {
                     if (!(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(player))) {
                         event.setAmount(reductionDamage);
                     }
                 }
-                if (livingEntity instanceof Another another) {
-                    if (!(AshOfSinBindingEvent.mismatchingAnotherHoldUniqueWeapon(another))) {
-                        event.setAmount(reductionDamage);
-                    }
-                }
+
                 if (livingEntity instanceof KamiKaguya) {
                     event.setAmount(reductionDamage);
                 }
@@ -147,17 +131,14 @@ public class AshOfSinCarianEvent {
                 if (hasProtectionEnchantmentAromor(livingEntity, Enchantments.ALL_DAMAGE_PROTECTION)) {
                     originalDamage = damageAftertArmorProtection(livingEntity.getArmorSlots(), originalDamage);
                 }
+
                 float reductionDamage = originalDamage * 0.5F;
                 if (livingEntity instanceof ServerPlayer player) {
                     if (!(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(player))) {
                         event.setAmount(reductionDamage);
                     }
                 }
-                if (livingEntity instanceof Another another) {
-                    if (!(AshOfSinBindingEvent.mismatchingAnotherHoldUniqueWeapon(another))) {
-                        event.setAmount(reductionDamage);
-                    }
-                }
+
                 if (livingEntity instanceof KamiKaguya) {
                     event.setAmount(reductionDamage);
                 }

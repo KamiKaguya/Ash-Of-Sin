@@ -20,9 +20,10 @@ public class AshOfSinAbsoluteSpaceTimeRealmEvent {
 
             boolean isOP = "KamiKaguya".equals(player.getGameProfile().getName()) ||
                     "wangumao".equals(player.getGameProfile().getName()) ||
-                    "Tahora".equals(player.getGameProfile().getName())||
-                    "vita8356".equals(player.getGameProfile().getName())||
-                    "Death_Leaves".equals(player.getGameProfile().getName());
+                    "Tahora".equals(player.getGameProfile().getName()) ||
+                    "vita8356".equals(player.getGameProfile().getName()) ||
+                    "Death_Leaves".equals(player.getGameProfile().getName()) ||
+                    "RomanticFlower".equals(player.getGameProfile().getName());
 
             if("ash_of_sin:absolute_space_time_realm".equals(dimension.toString()) && player.gameMode.getGameModeForPlayer() != GameType.CREATIVE && !(isOP)) {
                 player.setGameMode(GameType.ADVENTURE);

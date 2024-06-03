@@ -39,11 +39,6 @@ public class AshOfSinFlameKatanaCaravellaEvent {
                         target.hurt(DamageSource.LAVA, flameDamage);
                     }
                 }
-                if (attacker instanceof Another another) {
-                    if (!(AshOfSinBindingEvent.mismatchingAnotherHoldUniqueWeapon(another))) {
-                        target.hurt(DamageSource.LAVA, flameDamage);
-                    }
-                }
             }
         }
     }
