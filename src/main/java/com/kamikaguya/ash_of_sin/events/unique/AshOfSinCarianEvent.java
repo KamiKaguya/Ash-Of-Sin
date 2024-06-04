@@ -2,21 +2,17 @@ package com.kamikaguya.ash_of_sin.events.unique;
 
 import com.kamikaguya.ash_of_sin.events.special.AshOfSinBindingEvent;
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
-import com.kamikaguya.ash_of_sin.world.entity.Another;
 import com.kamikaguya.ash_of_sin.world.entity.KamiKaguya;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.vehicle.Minecart;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.enchantment.ProtectionEnchantment;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -156,21 +152,6 @@ public class AshOfSinCarianEvent {
         return false;
     }
 
-    public static float damageAftertArmorProtection(Iterable<ItemStack> armorItems, float originalDamage) {
-        float damageAfterArmorProtection = 0;
-        for (ItemStack armorItem : armorItems) {
-            Map<Enchantment, Integer> enchants = EnchantmentHelper.getEnchantments(armorItem);
-            for (Map.Entry<Enchantment, Integer> entry : enchants.entrySet()) {
-                if (entry.getKey() instanceof ProtectionEnchantment) {
-                    int protectLevel = entry.getValue();
-
-                    damageAfterArmorProtection += originalDamage * (10 / (protectLevel + 10.0f));
-                }
-            }
-        }
-        return damageAfterArmorProtection;
-    }
-
     public static float damageAfterTargetArmorProtection(Iterable<ItemStack> armorItems, float originalDamage) {
         float damageAfterArmorProtection = 0;
         float correctionDamage = 0;
@@ -186,5 +167,20 @@ public class AshOfSinCarianEvent {
             }
         }
         return correctionDamage;
+    }
+
+    public static float damageAftertArmorProtection(Iterable<ItemStack> armorItems, float originalDamage) {
+        float damageAfterArmorProtection = 0;
+        for (ItemStack armorItem : armorItems) {
+            Map<Enchantment, Integer> enchants = EnchantmentHelper.getEnchantments(armorItem);
+            for (Map.Entry<Enchantment, Integer> entry : enchants.entrySet()) {
+                if (entry.getKey() instanceof ProtectionEnchantment) {
+                    int protectLevel = entry.getValue();
+
+                    damageAfterArmorProtection += originalDamage * (10 / (protectLevel + 10.0f));
+                }
+            }
+        }
+        return damageAfterArmorProtection;
     }
 }

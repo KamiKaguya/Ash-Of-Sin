@@ -6,7 +6,6 @@ import com.kamikaguya.ash_of_sin.world.entity.*;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.*;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -16,7 +15,7 @@ import java.util.*;
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinAntiSameModifierEvent {
 
-    private static final List<Attribute> STANDARD_ATTRIBUTES = new ArrayList<>();
+    public static final List<Attribute> STANDARD_ATTRIBUTES = new ArrayList<>();
 
     static {
         STANDARD_ATTRIBUTES.add(Attributes.ATTACK_DAMAGE);
