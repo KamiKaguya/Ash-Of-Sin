@@ -3,7 +3,6 @@ package com.kamikaguya.ash_of_sin.events.unique;
 import com.kamikaguya.ash_of_sin.events.special.AshOfSinBindingEvent;
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
 import com.kamikaguya.ash_of_sin.world.entity.Another;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
@@ -12,10 +11,6 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeInstance;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -36,68 +31,6 @@ import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinMirrorOfTheDarkNightEvent {
-
-    public static final List<Attribute> Armor_and_ArmorToughness = new ArrayList<>();
-
-    static {
-        Armor_and_ArmorToughness.add(Attributes.ARMOR);
-        Armor_and_ArmorToughness.add(Attributes.ARMOR_TOUGHNESS);
-    }
-
-    public static final String ABSOLUTE_DEFENSE = "AbsoluteDefense";
-    private static final UUID ABSOLUTE_DEFENSE_UUID = UUID.randomUUID();
-    @SubscribeEvent
-    public static void skillAbsoluteDefense(LivingEvent.LivingUpdateEvent event) {
-        if (event.getEntityLiving().level.isClientSide() || event.getEntity().level.isClientSide()) {
-            return;
-        }
-        if (!(event.getEntityLiving() instanceof LivingEntity) || !(event.getEntity() instanceof LivingEntity)) {
-            return;
-        }
-
-        LivingEntity livingEntity = (LivingEntity) event.getEntity();
-        CompoundTag livingentityData = livingEntity.getPersistentData();
-        boolean hasAbsoluteDefense = livingentityData.getBoolean(ABSOLUTE_DEFENSE);
-        AttributeModifier modifierAbsoluteDefense = new AttributeModifier(ABSOLUTE_DEFENSE_UUID, "Absolute Defense", 2, AttributeModifier.Operation.MULTIPLY_BASE);
-        for (Attribute attribute : Armor_and_ArmorToughness) {
-            AttributeInstance attributeInstance = livingEntity.getAttribute(attribute);
-            if (livingEntity instanceof ServerPlayer serverPlayer) {
-                if (holdMirrorOfTheDarkNight(serverPlayer)) {
-                    if (!(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
-                        if ((attributeInstance != null) && !(hasAbsoluteDefense)) {
-                            attributeInstance.addPermanentModifier(modifierAbsoluteDefense);
-                            livingentityData.putBoolean(ABSOLUTE_DEFENSE, true);
-                        }
-                    }
-                }
-                if (!(holdMirrorOfTheDarkNight(serverPlayer)) && hasAbsoluteDefense) {
-                    if (attributeInstance != null) {
-                        attributeInstance.removeModifier(ABSOLUTE_DEFENSE_UUID);
-                        livingentityData.putBoolean(ABSOLUTE_DEFENSE, false);
-                    }
-                }
-            }
-            if (livingEntity instanceof Another another) {
-                if (holdMirrorOfTheDarkNight(another)) {
-                    if (another.getOwner() instanceof ServerPlayer serverPlayer) {
-                        if (!(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
-                            if ((attributeInstance != null) && !(hasAbsoluteDefense)) {
-                                attributeInstance.addPermanentModifier(modifierAbsoluteDefense);
-                                livingentityData.putBoolean(ABSOLUTE_DEFENSE, true);
-                            }
-                        }
-                    }
-                }
-                if (!(holdMirrorOfTheDarkNight(another)) && hasAbsoluteDefense) {
-                    if (attributeInstance != null) {
-                        attributeInstance.removeModifier(ABSOLUTE_DEFENSE_UUID);
-                        livingentityData.putBoolean(ABSOLUTE_DEFENSE, false);
-                    }
-                }
-            }
-        }
-    }
-
     @SubscribeEvent
     public static void skillShielderMindset(LivingHurtEvent event) {
         if (event.getEntityLiving().level.isClientSide() || event.getEntity().level.isClientSide()) {
