@@ -32,6 +32,7 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinMirrorOfTheDarkNightEvent {
@@ -44,7 +45,7 @@ public class AshOfSinMirrorOfTheDarkNightEvent {
     }
 
     public static final String ABSOLUTE_DEFENSE = "AbsoluteDefense";
-
+    private static final UUID ABSOLUTE_DEFENSE_UUID = UUID.randomUUID();
     @SubscribeEvent
     public static void skillAbsoluteDefense(LivingEvent.LivingUpdateEvent event) {
         if (event.getEntityLiving().level.isClientSide() || event.getEntity().level.isClientSide()) {
@@ -57,9 +58,9 @@ public class AshOfSinMirrorOfTheDarkNightEvent {
         LivingEntity livingEntity = (LivingEntity) event.getEntity();
         CompoundTag livingentityData = livingEntity.getPersistentData();
         boolean hasAbsoluteDefense = livingentityData.getBoolean(ABSOLUTE_DEFENSE);
+        AttributeModifier modifierAbsoluteDefense = new AttributeModifier(ABSOLUTE_DEFENSE_UUID, "Absolute Defense", 2, AttributeModifier.Operation.MULTIPLY_BASE);
         for (Attribute attribute : Armor_and_ArmorToughness) {
             AttributeInstance attributeInstance = livingEntity.getAttribute(attribute);
-            AttributeModifier modifierAbsoluteDefense = new AttributeModifier("Absolute Defense", 2, AttributeModifier.Operation.MULTIPLY_BASE);
             if (livingEntity instanceof ServerPlayer serverPlayer) {
                 if (holdMirrorOfTheDarkNight(serverPlayer)) {
                     if (!(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
@@ -68,9 +69,10 @@ public class AshOfSinMirrorOfTheDarkNightEvent {
                             livingentityData.putBoolean(ABSOLUTE_DEFENSE, true);
                         }
                     }
-                } else {
-                    if (attributeInstance != null && hasAbsoluteDefense) {
-                        attributeInstance.removeModifier(modifierAbsoluteDefense);
+                }
+                if (!(holdMirrorOfTheDarkNight(serverPlayer)) && hasAbsoluteDefense) {
+                    if (attributeInstance != null) {
+                        attributeInstance.removeModifier(ABSOLUTE_DEFENSE_UUID);
                         livingentityData.putBoolean(ABSOLUTE_DEFENSE, false);
                     }
                 }
@@ -85,9 +87,10 @@ public class AshOfSinMirrorOfTheDarkNightEvent {
                             }
                         }
                     }
-                } else {
-                    if (attributeInstance != null && hasAbsoluteDefense) {
-                        attributeInstance.removeModifier(modifierAbsoluteDefense);
+                }
+                if (!(holdMirrorOfTheDarkNight(another)) && hasAbsoluteDefense) {
+                    if (attributeInstance != null) {
+                        attributeInstance.removeModifier(ABSOLUTE_DEFENSE_UUID);
                         livingentityData.putBoolean(ABSOLUTE_DEFENSE, false);
                     }
                 }
