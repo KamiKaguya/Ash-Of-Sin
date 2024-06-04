@@ -68,6 +68,11 @@ public class AshOfSinMirrorOfTheDarkNightEvent {
                             livingentityData.putBoolean(ABSOLUTE_DEFENSE, true);
                         }
                     }
+                } else {
+                    if (attributeInstance != null && hasAbsoluteDefense) {
+                        attributeInstance.removeModifier(modifierAbsoluteDefense);
+                        livingentityData.putBoolean(ABSOLUTE_DEFENSE, false);
+                    }
                 }
             }
             if (livingEntity instanceof Another another) {
