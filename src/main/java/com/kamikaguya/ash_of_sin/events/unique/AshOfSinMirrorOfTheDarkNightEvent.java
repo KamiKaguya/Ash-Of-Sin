@@ -55,32 +55,35 @@ public class AshOfSinMirrorOfTheDarkNightEvent {
         }
 
         LivingEntity livingEntity = (LivingEntity) event.getEntity();
-        CompoundTag entityData = livingEntity.getPersistentData();
-        boolean hasAbsoluteDefense = entityData.getBoolean(ABSOLUTE_DEFENSE);
-        if (livingEntity instanceof ServerPlayer serverPlayer) {
-            if (holdMirrorOfTheDarkNight(serverPlayer)) {
-                if (!(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
-                    for (Attribute attribute : Armor_and_ArmorToughness) {
-                        AttributeInstance attributeInstance = livingEntity.getAttribute(attribute);
-                        AttributeModifier modifierAbsoluteDefense = new AttributeModifier("Absolute Defense", 2, AttributeModifier.Operation.MULTIPLY_BASE);
+        CompoundTag livingentityData = livingEntity.getPersistentData();
+        boolean hasAbsoluteDefense = livingentityData.getBoolean(ABSOLUTE_DEFENSE);
+        for (Attribute attribute : Armor_and_ArmorToughness) {
+            AttributeInstance attributeInstance = livingEntity.getAttribute(attribute);
+            AttributeModifier modifierAbsoluteDefense = new AttributeModifier("Absolute Defense", 2, AttributeModifier.Operation.MULTIPLY_BASE);
+            if (livingEntity instanceof ServerPlayer serverPlayer) {
+                if (holdMirrorOfTheDarkNight(serverPlayer)) {
+                    if (!(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
                         if ((attributeInstance != null) && !(hasAbsoluteDefense)) {
                             attributeInstance.addPermanentModifier(modifierAbsoluteDefense);
+                            livingentityData.putBoolean(ABSOLUTE_DEFENSE, true);
                         }
                     }
                 }
             }
-        }
-        if (livingEntity instanceof Another another) {
-            if (holdMirrorOfTheDarkNight(another)) {
-                if (another.getOwner() instanceof ServerPlayer serverPlayer) {
-                    if (!(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
-                        for (Attribute attribute : Armor_and_ArmorToughness) {
-                            AttributeInstance attributeInstance = livingEntity.getAttribute(attribute);
-                            AttributeModifier modifierAbsoluteDefense = new AttributeModifier("Absolute Defense", 2, AttributeModifier.Operation.MULTIPLY_BASE);
+            if (livingEntity instanceof Another another) {
+                if (holdMirrorOfTheDarkNight(another)) {
+                    if (another.getOwner() instanceof ServerPlayer serverPlayer) {
+                        if (!(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
                             if ((attributeInstance != null) && !(hasAbsoluteDefense)) {
                                 attributeInstance.addPermanentModifier(modifierAbsoluteDefense);
+                                livingentityData.putBoolean(ABSOLUTE_DEFENSE, true);
                             }
                         }
+                    }
+                } else {
+                    if (attributeInstance != null && hasAbsoluteDefense) {
+                        attributeInstance.removeModifier(modifierAbsoluteDefense);
+                        livingentityData.putBoolean(ABSOLUTE_DEFENSE, false);
                     }
                 }
             }
