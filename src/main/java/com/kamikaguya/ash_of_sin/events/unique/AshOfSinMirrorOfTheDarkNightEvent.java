@@ -2,6 +2,7 @@ package com.kamikaguya.ash_of_sin.events.unique;
 
 import com.kamikaguya.ash_of_sin.events.special.AshOfSinBindingEvent;
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
+import com.kamikaguya.ash_of_sin.world.entity.Another;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
@@ -23,8 +24,9 @@ public class AshOfSinMirrorOfTheDarkNightEvent {
         }
 
         DamageSource damageSource = event.getSource();
-        LivingEntity livingEntity = (LivingEntity) event.getEntity();
-        if (livingEntity instanceof ServerPlayer serverPlayer) {
+        LivingEntity playerEntity = (LivingEntity) event.getEntity();
+        LivingEntity anotherEntity = (LivingEntity) event.getEntity();
+        if (playerEntity instanceof ServerPlayer serverPlayer) {
             if (holdMirrorOfTheDarkNight(serverPlayer)) {
                 if (!(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
                     float originalDamage = event.getAmount();
@@ -33,11 +35,22 @@ public class AshOfSinMirrorOfTheDarkNightEvent {
                 }
             }
         }
+        if (anotherEntity instanceof Another another) {
+            if (holdMirrorOfTheDarkNight(another)) {
+                if (another.getOwner() instanceof ServerPlayer serverPlayer) {
+                    if (!(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
+                        float originalDamage = event.getAmount();
+                        float afterReductionDamage = originalDamage * 0.2F;
+                        event.setAmount(afterReductionDamage);
+                    }
+                }
+            }
+        }
     }
 
-    private static boolean holdMirrorOfTheDarkNight(ServerPlayer serverPlayer) {
-        ItemStack mainHand = serverPlayer.getMainHandItem();
-        ItemStack offHand = serverPlayer.getOffhandItem();
+    private static boolean holdMirrorOfTheDarkNight(LivingEntity livingEntity) {
+        ItemStack mainHand = livingEntity.getMainHandItem();
+        ItemStack offHand = livingEntity.getOffhandItem();
         boolean holdMirrorOfTheDarkNight = mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "mirror_of_the_dark_night")) ||
                 offHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "mirror_of_the_dark_night"));
         if (!(mainHand.isEmpty()) && (holdMirrorOfTheDarkNight)) {
