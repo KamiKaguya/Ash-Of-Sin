@@ -87,7 +87,7 @@ public class AshOfSinChalkWallEvent {
 
         boolean hasChalkWall = entityData.getBoolean(CHALK_WALL_KEY);
         if (hasChalkWall) {
-            event.setCanceled(true);
+            event.setAmount(0);
         }
     }
 
@@ -138,7 +138,6 @@ public class AshOfSinChalkWallEvent {
             int chalkWallDuration = entityData.getInt(CHALK_WALL_DURATION_KEY);
             if (chalkWallDuration > 0) {
                 entity.setHealth(entity.getMaxHealth() * 0.25F);
-                entity.setInvulnerable(true);
                 if (entity instanceof ServerPlayer player) {
                     player.getFoodData().setFoodLevel(16);
                     if (chalkWallDuration == 9 * 20 ||
@@ -177,7 +176,6 @@ public class AshOfSinChalkWallEvent {
             float absorptionHealth = entity.getMaxHealth() * 0.15F;
             entity.setAbsorptionAmount(absorptionHealth);
             entityData.putBoolean(CHALK_WALL_KEY, false);
-            entity.setInvulnerable(false);
         }
 
         if (inChalkWallCD && chalkWallDuration <= 0) {
@@ -185,10 +183,6 @@ public class AshOfSinChalkWallEvent {
             if (entity.getHealth() >= entity.getMaxHealth()) {
                 entityData.putBoolean(CHALK_WALL_CD_KEY, false);
             }
-        }
-
-        if (chalkWallDuration <= 0 && entity.isInvulnerable()) {
-            entity.setInvulnerable(false);
         }
     }
 
