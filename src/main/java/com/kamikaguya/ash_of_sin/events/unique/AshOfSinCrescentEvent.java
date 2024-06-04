@@ -2,6 +2,7 @@ package com.kamikaguya.ash_of_sin.events.unique;
 
 import com.kamikaguya.ash_of_sin.events.special.AshOfSinBindingEvent;
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
+import com.kamikaguya.ash_of_sin.world.entity.Another;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
@@ -110,6 +111,10 @@ public class AshOfSinCrescentEvent {
                     targetX + 3, targetY + 3, targetZ + 3
             ));
             for (LivingEntity nearbyEntity : nearbyEntities) {
+                if (nearbyEntity == attacker || nearbyEntity instanceof Another another && another.getOwner() == attacker) {
+                    return;
+                }
+
                 if (RANDOM.nextFloat() <= 0.295F) {
                     nearbyEntity.addEffect(new MobEffectInstance(glowing, 7 * 20, 0));
                     nearbyEntity.hurt(DamageSource.mobAttack(attacker), damage);

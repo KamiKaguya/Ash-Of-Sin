@@ -43,11 +43,12 @@ public class AshOfSinGoblinEvent {
         if (event.getEntityLiving().level.isClientSide() || event.getEntity().level.isClientSide()) {
             return;
         }
-        if (!(event.getEntity().level instanceof ServerLevel serverWorld)) {
+        if (!(event.getEntityLiving().level instanceof ServerLevel serverWorld)) {
             return;
         }
+        LivingEntity goblinKingEntity = event.getEntityLiving();
 
-        if (event.getEntity().getType().getRegistryName() == goblinkingID) {
+        if (goblinKingEntity.getType().getRegistryName() == goblinkingID) {
 
             for (ServerPlayer player : serverWorld.players()) {
                 List<Entity> goblinKings = serverWorld.getEntitiesOfClass(Entity.class,
