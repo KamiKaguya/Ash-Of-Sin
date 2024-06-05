@@ -89,9 +89,9 @@ public class AshOfSinShikamaDojiEvent {
                     MobEffectInstance bleedEffect = new MobEffectInstance(bleed, 60 * 20, 2);
                     target.addEffect(bleedEffect);
                     if (RANDOM.nextFloat() <= 0.15F) {
-                        MobEffect sundering = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("apotheosis","sundering"));
-                        MobEffectInstance sunderingEffect = new MobEffectInstance(sundering, 7 * 20, 0);
-                        target.addEffect(sunderingEffect);
+                        MobEffect sunderingEffect = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("apotheosis","sundering"));
+                        MobEffectInstance sundering = new MobEffectInstance(sunderingEffect, 7 * 20, 0);
+                        target.addEffect(sundering);
                     }
                 }
             }

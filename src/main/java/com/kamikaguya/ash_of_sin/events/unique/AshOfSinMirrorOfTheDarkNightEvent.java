@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.EntityDamageSource;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,11 +24,9 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.ShieldBlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinMirrorOfTheDarkNightEvent {
@@ -106,6 +105,8 @@ public class AshOfSinMirrorOfTheDarkNightEvent {
         Entity targetEntity = event.getDamageSource().getEntity();
         LivingEntity livingEntity = (LivingEntity) event.getEntity();
         if (targetEntity instanceof LivingEntity target) {
+            MobEffect sunderingEffect = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("apotheosis","sundering"));
+            MobEffectInstance sundering = new MobEffectInstance(sunderingEffect, 7 * 20, 98);
             if (livingEntity instanceof ServerPlayer serverPlayer) {
                 if (holdMirrorOfTheDarkNight(serverPlayer)) {
                     if (!(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
@@ -113,8 +114,10 @@ public class AshOfSinMirrorOfTheDarkNightEvent {
                         float devourOriginalDamage = target.getMaxHealth();
                         if (hasProtectionEnchantmentAromor(target, Enchantments.ALL_DAMAGE_PROTECTION)) {
                             float devourCorrectionDamage = damageAfterTargetArmorProtection(target.getArmorSlots(), devourOriginalDamage);
+                            target.addEffect(sundering);
                             target.hurt(new EntityDamageSource("Devour", serverPlayer).setMagic(), devourCorrectionDamage);
                         } else {
+                            target.addEffect(sundering);
                             target.hurt(new EntityDamageSource("Devour", serverPlayer).setMagic(), devourOriginalDamage);
                         }
                     }
@@ -128,8 +131,10 @@ public class AshOfSinMirrorOfTheDarkNightEvent {
                             float devourOriginalDamage = target.getMaxHealth();
                             if (hasProtectionEnchantmentAromor(target, Enchantments.ALL_DAMAGE_PROTECTION)) {
                                 float devourCorrectionDamage = damageAfterTargetArmorProtection(target.getArmorSlots(), devourOriginalDamage);
+                                target.addEffect(sundering);
                                 target.hurt(new EntityDamageSource("Devour", serverPlayer).setMagic(), devourCorrectionDamage);
                             } else {
+                                target.addEffect(sundering);
                                 target.hurt(new EntityDamageSource("Devour", serverPlayer).setMagic(), devourOriginalDamage);
                             }
                         }
