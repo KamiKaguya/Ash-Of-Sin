@@ -20,12 +20,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
-import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinCrescentEvent {
-    private static final Random RANDOM = new Random();
-
     @SubscribeEvent
     public static void onHurt(LivingHurtEvent event) {
         if (event.getEntityLiving().level.isClientSide() || event.getEntity().level.isClientSide()) {
@@ -35,30 +32,19 @@ public class AshOfSinCrescentEvent {
             return;
         }
 
-        LivingEntity target = (LivingEntity) event.getEntity();
         DamageSource damageSource = event.getSource();
         Entity attacker = damageSource.getEntity();
         if (attacker instanceof ServerPlayer serverPlayer) {
             if (holdCrescent(serverPlayer)) {
                 if (!(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
-                    float originalDamage = event.getAmount();
-                    crescent(target, serverPlayer, originalDamage);
-                    if (RANDOM.nextFloat() < 0.15F) {
-                        target.hurt(DamageSource.playerAttack(serverPlayer).setMagic(), originalDamage);
-                        Shock(target);
-                    }
-                    if (RANDOM.nextFloat() < 0.25F) {
-                        float bonusDamage = originalDamage * 2.0F;
-                        target.hurt(DamageSource.playerAttack(serverPlayer).setMagic(), bonusDamage);
-                        Shock(target);
-                    }
+                    skillHydraDevour(serverPlayer);
                 }
             }
         }
     }
 
-    private static boolean holdCrescent(ServerPlayer serverPlayer) {
-        ItemStack mainHand = serverPlayer.getMainHandItem();
+    private static boolean holdCrescent(LivingEntity livingEntity) {
+        ItemStack mainHand = livingEntity.getMainHandItem();
         boolean holdCrescent = mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "crescent"));
         if (!(mainHand.isEmpty()) && (holdCrescent)) {
             return true;
@@ -67,7 +53,7 @@ public class AshOfSinCrescentEvent {
     }
 
     @SubscribeEvent
-    public static void immuneShock(LivingEvent.LivingUpdateEvent event) {
+    public static void skillHydraDevour(LivingEvent.LivingUpdateEvent event) {
         if (event.getEntityLiving().level.isClientSide() || event.getEntity().level.isClientSide()) {
             return;
         }
@@ -77,50 +63,53 @@ public class AshOfSinCrescentEvent {
 
         LivingEntity livingEntity = event.getEntityLiving();
         if (livingEntity instanceof ServerPlayer serverPlayer) {
-            MobEffect shock = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("simple_mobs", "shock"));
             if (holdCrescent(serverPlayer)) {
-                if (shock != null) {
-                    if (!(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
+                if (!(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
+                    MobEffect poison = MobEffects.POISON;
+                    MobEffect shock = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("simple_mobs", "shock"));
+                    if (serverPlayer.getActiveEffects().equals(poison)) {
+                        serverPlayer.removeEffect(poison);
+                    }
+                    if (shock != null && serverPlayer.getActiveEffects().equals(shock)) {
                         serverPlayer.removeEffect(shock);
+                    }
+                }
+            }
+        }
+        if (livingEntity instanceof Another another) {
+            if (holdCrescent(another)) {
+                if (another.getOwner() instanceof ServerPlayer serverPlayer) {
+                    if (!(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
+                        MobEffect poison = MobEffects.POISON;
+                        MobEffect shock = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("simple_mobs", "shock"));
+                        if (another.getActiveEffects().equals(poison)) {
+                            another.removeEffect(poison);
+                        }
+                        if (shock != null && another.getActiveEffects().equals(shock)) {
+                            another.removeEffect(shock);
+                        }
                     }
                 }
             }
         }
     }
 
-    private static void Shock(LivingEntity target) {
+    public static void skillHydraDevour(ServerPlayer attacker) {
         MobEffect shock = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("simple_mobs", "shock"));
-        if (shock != null) {
-            MobEffectInstance shockEffect = new MobEffectInstance(shock, 5 * 20, 0);
-            target.addEffect(shockEffect);
-        }
-    }
-
-    private static void crescent(LivingEntity target, ServerPlayer attacker, float damage) {
-        MobEffect glowing = MobEffects.GLOWING;
-        boolean alreadyCrescent = target.getActiveEffects().stream()
-                .anyMatch(existingEffect -> existingEffect.getEffect().equals(glowing) && existingEffect.getAmplifier() >= 0);
-        if (!alreadyCrescent) {
-            target.addEffect(new MobEffectInstance(glowing, 7 * 20, 0));
-        } else {
-            double targetX = target.getX();
-            double targetY = target.getY();
-            double targetZ = target.getZ();
-            List<LivingEntity> nearbyEntities = target.level.getEntitiesOfClass(LivingEntity.class, new AABB(
-                    targetX - 3, targetY - 3, targetZ - 3,
-                    targetX + 3, targetY + 3, targetZ + 3
-            ));
-            for (LivingEntity nearbyEntity : nearbyEntities) {
-                if (nearbyEntity == attacker || nearbyEntity instanceof Another another && another.getOwner() == attacker) {
+        MobEffect poison = MobEffects.POISON;
+        double attackerX = attacker.getX();
+        double attackerY = attacker.getY();
+        double attackerZ = attacker.getZ();
+        List<LivingEntity> nearbyEntities = attacker.level.getEntitiesOfClass(LivingEntity.class, new AABB(
+                attackerX - 7, attackerY - 7, attackerZ - 7,
+                attackerX + 7, attackerY + 7, attackerZ + 7
+        ));
+        for (LivingEntity nearbyEntity : nearbyEntities) {
+            if (nearbyEntity == attacker || nearbyEntity instanceof Another another && another.getOwner() == attacker) {
                     return;
-                }
-
-                if (RANDOM.nextFloat() <= 0.295F) {
-                    nearbyEntity.addEffect(new MobEffectInstance(glowing, 7 * 20, 0));
-                    nearbyEntity.hurt(DamageSource.mobAttack(attacker), damage);
-                    nearbyEntity.hurt(DamageSource.FREEZE, damage);
-                }
             }
+            nearbyEntity.addEffect(new MobEffectInstance(shock, 30 * 20, 0));
+            nearbyEntity.addEffect(new MobEffectInstance(poison, 30 * 20, 2));
         }
     }
 }

@@ -7,10 +7,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.network.protocol.game.ClientboundSoundPacket;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,16 +22,15 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinChalkWallEvent {
 
-    public static final String CHALK_WALL_DURATION_KEY = "ChalkWallD";
-    public static final String CHALK_WALL_CD_KEY = "ChalkWallCD";
-    public static final String CHALK_WALL_KEY = "ChalkWall";
+    public static final String CHALK_WALL_DURATION = "ChalkWallD";
+    public static final String CHALK_WALL_CD = "ChalkWallCD";
+    public static final String CHALK_WALL = "ChalkWall";
 
     @SubscribeEvent
     public static void onHurt(LivingHurtEvent event) {
@@ -45,47 +41,47 @@ public class AshOfSinChalkWallEvent {
             return;
         }
 
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity livingEntity = event.getEntityLiving();
         DamageSource damageSource = event.getSource();
-        if (damageSource.getDirectEntity() instanceof Another another && (another.getCustomName() != null) && another.getCustomName().equals(entity)) {
+        if (damageSource.getDirectEntity() instanceof Another another && (another.getCustomName() != null) && another.getCustomName().equals(livingEntity)) {
             return;
         }
 
-        if (damageSource.getEntity() instanceof Another another && (another.getCustomName() != null) && another.getCustomName().equals(entity)) {
+        if (damageSource.getEntity() instanceof Another another && (another.getCustomName() != null) && another.getCustomName().equals(livingEntity)) {
             return;
         }
 
-        CompoundTag entityData = entity.getPersistentData();
-        boolean inChalkWallCD = entityData.getBoolean(CHALK_WALL_CD_KEY);
+        CompoundTag livingEntityData = livingEntity.getPersistentData();
+        boolean inChalkWallCD = livingEntityData.getBoolean(CHALK_WALL_CD);
 
         if (inChalkWallCD) {
             return;
         }
 
         float originalDamage = event.getAmount();
-        float damageAfterArmorReduction = damageAfterArmor(entity, originalDamage);
-        float damageAfterArmorProtection = damageAfterArmorProtection(entity.getArmorSlots(),damageAfterArmorReduction);
-        boolean isTriggered = entity.getHealth() <= entity.getMaxHealth() * 0.05
-                || damageAfterArmorProtection >= entity.getHealth();
+        float damageAfterArmorReduction = damageAfterArmor(livingEntity, originalDamage);
+        float damageAfterArmorProtection = damageAfterArmorProtection(livingEntity.getArmorSlots(),damageAfterArmorReduction);
+        boolean isTriggered = livingEntity.getHealth() <= livingEntity.getMaxHealth() * 0.05
+                || damageAfterArmorProtection >= livingEntity.getHealth();
         if (!isTriggered) {
             return;
         }
 
-        int enchantmentLevel = getEnchantmentLevel(entity, AshOfSin.CHALK_WALL.get());
+        int enchantmentLevel = getEnchantmentLevel(livingEntity, AshOfSin.CHALK_WALL.get());
         if (enchantmentLevel > 3) {
             return;
         }
 
         if (enchantmentLevel > 0) {
-            consumeDurabilityBasedOnEnchantmentLevel(entity, AshOfSin.CHALK_WALL.get());
-            int chalkWallDuration = enchantmentLevel * 3 * 20;
-            entityData.putInt(CHALK_WALL_DURATION_KEY, chalkWallDuration);
-            entityData.putBoolean(CHALK_WALL_KEY, true);
-            entityData.putBoolean(CHALK_WALL_CD_KEY, true);
-            entity.removeAllEffects();
+            consumeDurabilityBasedOnEnchantmentLevel(livingEntity, AshOfSin.CHALK_WALL.get());
+            float chalkWallDuration = enchantmentLevel * 3 * 20;
+            livingEntityData.putFloat(CHALK_WALL_DURATION, chalkWallDuration);
+            livingEntityData.putBoolean(CHALK_WALL, true);
+            livingEntityData.putBoolean(CHALK_WALL_CD, true);
+            livingEntity.removeAllEffects();
         }
 
-        boolean hasChalkWall = entityData.getBoolean(CHALK_WALL_KEY);
+        boolean hasChalkWall = livingEntityData.getBoolean(CHALK_WALL);
         if (hasChalkWall) {
             event.setAmount(0);
         }
@@ -132,10 +128,10 @@ public class AshOfSinChalkWallEvent {
 
         LivingEntity entity = event.getEntityLiving();
         CompoundTag entityData = entity.getPersistentData();
-        boolean hasChalkWall = entityData.getBoolean(CHALK_WALL_KEY);
+        boolean hasChalkWall = entityData.getBoolean(CHALK_WALL);
 
         if (hasChalkWall) {
-            int chalkWallDuration = entityData.getInt(CHALK_WALL_DURATION_KEY);
+            float chalkWallDuration = entityData.getFloat(CHALK_WALL_DURATION);
             if (chalkWallDuration > 0) {
                 entity.setHealth(entity.getMaxHealth() * 0.25F);
                 if (entity instanceof ServerPlayer player) {
@@ -165,23 +161,23 @@ public class AshOfSinChalkWallEvent {
                     player.displayClientMessage(new TranslatableComponent("message.ash_of_sin.chalk_wall").setStyle(Style.EMPTY.withColor(ChatFormatting.RED).withBold(true)), true);
                 }
 
-                entityData.putInt(CHALK_WALL_DURATION_KEY, chalkWallDuration - 1);
+                entityData.putFloat(CHALK_WALL_DURATION, chalkWallDuration - 1);
             }
         }
 
-        boolean inChalkWallCD = entityData.getBoolean(CHALK_WALL_CD_KEY);
-        int chalkWallDuration = entityData.getInt(CHALK_WALL_DURATION_KEY);
+        boolean inChalkWallCD = entityData.getBoolean(CHALK_WALL_CD);
+        float chalkWallDuration = entityData.getFloat(CHALK_WALL_DURATION);
 
         if (chalkWallDuration <= 0 && hasChalkWall) {
             float absorptionHealth = entity.getMaxHealth() * 0.15F;
             entity.setAbsorptionAmount(absorptionHealth);
-            entityData.putBoolean(CHALK_WALL_KEY, false);
+            entityData.putBoolean(CHALK_WALL, false);
         }
 
         if (inChalkWallCD && chalkWallDuration <= 0) {
-            entityData.putInt(CHALK_WALL_DURATION_KEY, 0);
+            entityData.putFloat(CHALK_WALL_DURATION, 0);
             if (entity.getHealth() >= entity.getMaxHealth()) {
-                entityData.putBoolean(CHALK_WALL_CD_KEY, false);
+                entityData.putBoolean(CHALK_WALL_CD, false);
             }
         }
     }
@@ -202,24 +198,24 @@ public class AshOfSinChalkWallEvent {
                 return;
             }
 
-            boolean inChalkWallCD = entityData.getBoolean(CHALK_WALL_CD_KEY);
+            boolean inChalkWallCD = entityData.getBoolean(CHALK_WALL_CD);
 
             if ((enchantmentLevel > 0) && !(inChalkWallCD)) {
                 consumeDurabilityBasedOnEnchantmentLevel(entity, AshOfSin.CHALK_WALL.get());
                 int chalkWallDuration = enchantmentLevel * 3 * 20;
-                entityData.putInt(CHALK_WALL_DURATION_KEY, chalkWallDuration);
-                entityData.putBoolean(CHALK_WALL_KEY, true);
-                entityData.putBoolean(CHALK_WALL_CD_KEY, true);
+                entityData.putFloat(CHALK_WALL_DURATION, chalkWallDuration);
+                entityData.putBoolean(CHALK_WALL, true);
+                entityData.putBoolean(CHALK_WALL_CD, true);
                 entity.removeAllEffects();
                 event.setCanceled(true);
             }
 
             if (inChalkWallCD) {
-                entityData.putBoolean(CHALK_WALL_CD_KEY, false);
+                entityData.putBoolean(CHALK_WALL_CD, false);
             }
         }
 
-        boolean hasChalkWall = entityData.getBoolean(CHALK_WALL_KEY);
+        boolean hasChalkWall = entityData.getBoolean(CHALK_WALL);
         if (hasChalkWall) {
             event.setCanceled(true);
         }
@@ -256,7 +252,7 @@ public class AshOfSinChalkWallEvent {
     public static void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
         ServerPlayer player = (ServerPlayer) event.getPlayer();
         CompoundTag entityData = player.getPersistentData();
-        entityData.remove(CHALK_WALL_KEY);
-        entityData.remove(CHALK_WALL_DURATION_KEY);
+        entityData.remove(CHALK_WALL);
+        entityData.remove(CHALK_WALL_DURATION);
     }
 }

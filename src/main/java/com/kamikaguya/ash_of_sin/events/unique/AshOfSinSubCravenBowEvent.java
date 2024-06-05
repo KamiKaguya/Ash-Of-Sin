@@ -27,7 +27,6 @@ public class AshOfSinSubCravenBowEvent {
             return;
         }
 
-        Entity entity = event.getEntity();
         DamageSource damageSource = event.getSource();
         Entity attacker = damageSource.getEntity();
         if (attacker instanceof LivingEntity livingEntity) {

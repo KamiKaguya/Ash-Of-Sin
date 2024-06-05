@@ -26,7 +26,7 @@ public class AshOfSinDualBladesEvent {
             return;
         }
 
-        LivingEntity target = (LivingEntity) event.getEntity();
+        LivingEntity target = event.getEntityLiving();
         DamageSource damageSource = event.getSource();
         Entity attacker = damageSource.getEntity();
         if (attacker instanceof ServerPlayer serverPlayer) {

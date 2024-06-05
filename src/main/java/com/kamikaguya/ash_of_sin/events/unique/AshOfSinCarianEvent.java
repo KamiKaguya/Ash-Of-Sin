@@ -33,7 +33,7 @@ public class AshOfSinCarianEvent {
             return;
         }
 
-        LivingEntity target = (LivingEntity) event.getEntity();
+        LivingEntity target = event.getEntityLiving();
         DamageSource damageSource = event.getSource();
         Entity entity = damageSource.getEntity();
         if (entity instanceof LivingEntity attacker) {

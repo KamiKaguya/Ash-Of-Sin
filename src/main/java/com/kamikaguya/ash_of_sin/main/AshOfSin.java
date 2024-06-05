@@ -93,7 +93,6 @@ public class AshOfSin {
         AshOfSinSounds.SOUNDS.register(bus);
         MinecraftForge.EVENT_BUS.register(new AshOfSinRegisterCommandsEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinEntityEvent());
-        MinecraftForge.EVENT_BUS.register(new AshOfSinLoadEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinRealmGateOpenEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinSounds());
         MinecraftForge.EVENT_BUS.register(new AshOfSinAbsoluteSpaceTimeRealmEvent());

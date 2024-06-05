@@ -30,5 +30,13 @@
         "stream": true
       }
     ]
+  },
+  "item.mirror_of_the_dark_night.skill_devour": {
+    "sounds": [
+      {
+        "name": "ash_of_sin:item/mirror_of_the_dark_night/skill_devour",
+        "stream": true
+      }
+    ]
   }
 }
