@@ -102,6 +102,7 @@
     "message.ash_of_sin.kamikaguya.join": "§eKamiKaguya joined the game",
     "message.ash_of_sin.another.timetosummon": "You can summon another right now",
     "message.ash_of_sin.chalk_wall": "Chalk Wall",
+    "death.attack.devour": "%1$s was devoured by %2$s...",
     "mob.gate.gate_open":"",
     "mob.gate.gate_ambient_loop":"",
     "mob.gate.gate_warp":"",
