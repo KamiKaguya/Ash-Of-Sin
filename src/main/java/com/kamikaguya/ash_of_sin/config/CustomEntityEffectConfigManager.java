@@ -100,9 +100,6 @@ public class CustomEntityEffectConfigManager {
                             new CustomEffectConfig("alexsmobs:knockback_resistance", "infinite", 0),
                             new CustomEffectConfig("alexsmobs:poison_resistance", "infinite", 0)
                     )),
-                    new CustomEntityEffectConfig("witherstormmod:command_block", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
-                    )),
                     new CustomEntityEffectConfig("hmag:ender_executor", Arrays.asList(
                             new CustomEffectConfig("minecraft:fire_resistance", "infinite", 0),
                             new CustomEffectConfig("minecraft:haste", "infinite", 4),

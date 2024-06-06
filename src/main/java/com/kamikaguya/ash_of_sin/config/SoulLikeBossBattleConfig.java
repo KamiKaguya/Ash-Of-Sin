@@ -45,7 +45,6 @@ public class SoulLikeBossBattleConfig {
                                 "simple_mobs:herobrine",
                                 "simple_mobs:dragon_lord",
                                 "witherstormmod:wither_storm",
-                                "witherstormmod:command_block",
                                 "bloodandmadness:father_gascoigne",
                                 "bloodandmadness:gascoigne_beast",
                                 "bloodandmadness:micolash",
