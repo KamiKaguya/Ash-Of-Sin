@@ -90,11 +90,13 @@ public class AshOfSinMirrorOfTheDarkNightEvent {
                             target.hurt(new EntityDamageSource("Devour", serverPlayer).setMagic(), devourCorrectionDamage);
                             serverPlayer.level.playSound(null, serverPlayer.getOnPos(), AshOfSinSounds.SKILL_DEVOUR.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
                             serverPlayer.heal(devourCorrectionDamage);
+                            serverPlayer.getFoodData().setFoodLevel(20);
                         } else {
                             target.addEffect(sundering);
                             target.hurt(new EntityDamageSource("Devour", serverPlayer).setMagic(), devourOriginalDamage);
                             serverPlayer.level.playSound(null, serverPlayer.getOnPos(), AshOfSinSounds.SKILL_DEVOUR.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
                             serverPlayer.heal(devourOriginalDamage);
+                            serverPlayer.getFoodData().setFoodLevel(20);
                         }
                     }
                 }
@@ -112,12 +114,14 @@ public class AshOfSinMirrorOfTheDarkNightEvent {
                                 another.level.playSound(null, serverPlayer.getOnPos(), AshOfSinSounds.SKILL_DEVOUR.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
                                 another.heal(devourCorrectionDamage);
                                 serverPlayer.heal(devourCorrectionDamage);
+                                serverPlayer.getFoodData().setFoodLevel(20);
                             } else {
                                 target.addEffect(sundering);
                                 target.hurt(new EntityDamageSource("Devour", serverPlayer).setMagic(), devourOriginalDamage);
                                 another.level.playSound(null, serverPlayer.getOnPos(), AshOfSinSounds.SKILL_DEVOUR.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
                                 another.heal(devourOriginalDamage);
                                 serverPlayer.heal(devourOriginalDamage);
+                                serverPlayer.getFoodData().setFoodLevel(20);
                             }
                         }
                     }
