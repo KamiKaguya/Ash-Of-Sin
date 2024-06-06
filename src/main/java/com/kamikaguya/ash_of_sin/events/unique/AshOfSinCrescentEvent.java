@@ -65,14 +65,9 @@ public class AshOfSinCrescentEvent {
         if (livingEntity instanceof ServerPlayer serverPlayer) {
             if (holdCrescent(serverPlayer)) {
                 if (!(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
-                    MobEffect poison = MobEffects.POISON;
                     MobEffect shock = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("simple_mobs", "shock"));
-                    if (serverPlayer.getActiveEffects().equals(poison)) {
-                        serverPlayer.removeEffect(poison);
-                    }
-                    if (shock != null && serverPlayer.getActiveEffects().equals(shock)) {
-                        serverPlayer.removeEffect(shock);
-                    }
+                    serverPlayer.removeEffect(MobEffects.POISON);
+                    serverPlayer.removeEffect(shock);
                 }
             }
         }
@@ -80,14 +75,9 @@ public class AshOfSinCrescentEvent {
             if (holdCrescent(another)) {
                 if (another.getOwner() instanceof ServerPlayer serverPlayer) {
                     if (!(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
-                        MobEffect poison = MobEffects.POISON;
                         MobEffect shock = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("simple_mobs", "shock"));
-                        if (another.getActiveEffects().equals(poison)) {
-                            another.removeEffect(poison);
-                        }
-                        if (shock != null && another.getActiveEffects().equals(shock)) {
-                            another.removeEffect(shock);
-                        }
+                        another.removeEffect(MobEffects.POISON);
+                        another.removeEffect(shock);
                     }
                 }
             }
