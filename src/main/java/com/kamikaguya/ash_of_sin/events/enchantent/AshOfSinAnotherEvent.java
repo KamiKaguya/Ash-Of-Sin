@@ -30,19 +30,21 @@ public class AshOfSinAnotherEvent {
 
     @SubscribeEvent
     public void onPlayerHurt(LivingHurtEvent event) {
-        if (!(event.getEntityLiving() instanceof ServerPlayer player)) {
+        if (!(event.getEntityLiving() instanceof ServerPlayer serverPlayer)) {
             return;
         }
 
-        ItemStack mainHand = player.getMainHandItem();
-        boolean holdTickingWeapon = (mainHand.getItem().getRegistryName().equals(new ResourceLocation("wom","antitheus")) || mainHand.getItem().getRegistryName().equals(AshOfSinItems.SHIKAMA_DOJI));
+        ItemStack mainHand = serverPlayer.getMainHandItem();
+        boolean holdTickingWeapon = (mainHand.getItem().getRegistryName().equals(new ResourceLocation("wom","antitheus")) || mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "shikama_doji")));
         if (holdTickingWeapon) {
             return;
         }
 
-        if (!(player.level.isClientSide())) {
-            if (hasAnotherEnchantmentAromor(player, AshOfSin.ANOTHER.get())) {
-                summonAnother(player);
+        DamageSource damageSource = event.getSource();
+        Entity sourceEntity = damageSource.getEntity();
+        if (sourceEntity instanceof LivingEntity attacker) {
+            if ( hasAnotherEnchantmentAromor(serverPlayer, AshOfSin.ANOTHER.get())) {
+                summonAnother(serverPlayer, attacker);
             }
         }
     }
@@ -59,26 +61,24 @@ public class AshOfSinAnotherEvent {
 
     private static final int KILL_COOLDOWN_REDUCTION = 3 * 20;
 
-    private void summonAnother(ServerPlayer player) {
-        if (!(player.level.isClientSide())) {
+    private void summonAnother(ServerPlayer serverPlayer, LivingEntity attacker) {
 
-            long currentGameTime = player.level.getGameTime();
-            long lastSummonTime = player.getPersistentData().getLong("AnotherLastSummonTime");
-            long timeSinceLastSummon = currentGameTime - lastSummonTime;
+        long currentGameTime = serverPlayer.level.getGameTime();
+        long lastSummonTime = serverPlayer.getPersistentData().getLong("AnotherLastSummonTime");
+        long timeSinceLastSummon = currentGameTime - lastSummonTime;
 
-            if (timeSinceLastSummon >= (3 * 20 * 60)) {
-                ServerLevel serverLevel = (ServerLevel) player.level;
-                Another another = new Another(AshOfSinEntities.ANOTHER.get(), serverLevel);
+        if (timeSinceLastSummon >= (3 * 20 * 60)) {
+            ServerLevel serverLevel = (ServerLevel) serverPlayer.level;
+            Another another = new Another(AshOfSinEntities.ANOTHER.get(), serverLevel);
 
-                another.setPos(player.getX(), player.getY(), player.getZ());
-                another.copyPlayerDataToAnother(player);
-                another.copyPlayerAttributes(player);
+            another.setPos(attacker.getX(), attacker.getY(), attacker.getZ());
+            another.copyPlayerDataToAnother(serverPlayer);
+            another.copyPlayerAttributes(serverPlayer);
 
-                serverLevel.addFreshEntity(another);
+            serverLevel.addFreshEntity(another);
 
-                player.getPersistentData().putLong("AnotherLastSummonTime", currentGameTime);
-                player.getPersistentData().putInt("AnotherSummonCDKillCount", 0);
-            }
+            serverPlayer.getPersistentData().putLong("AnotherLastSummonTime", currentGameTime);
+            serverPlayer.getPersistentData().putInt("AnotherSummonCDKillCount", 0);
         }
     }
 
@@ -145,15 +145,15 @@ public class AshOfSinAnotherEvent {
         }
     }
 
-    private void updateCoolDown(ServerPlayer player, long lastSummonTime) {
-        long newCoolDownTime = Math.max(0, lastSummonTime - ((long) AshOfSinAnotherEvent.KILL_COOLDOWN_REDUCTION * player.getPersistentData().getInt("AnotherSummonCDKillCount")));
-        player.getPersistentData().putLong("AnotherLastSummonTime", newCoolDownTime);
-        player.getPersistentData().putInt("AnotherSummonCDKillCount", 0);
+    private void updateCoolDown(ServerPlayer serverPlayer, long lastSummonTime) {
+        long newCoolDownTime = Math.max(0, lastSummonTime - ((long) AshOfSinAnotherEvent.KILL_COOLDOWN_REDUCTION * serverPlayer.getPersistentData().getInt("AnotherSummonCDKillCount")));
+        serverPlayer.getPersistentData().putLong("AnotherLastSummonTime", newCoolDownTime);
+        serverPlayer.getPersistentData().putInt("AnotherSummonCDKillCount", 0);
 
-        long currentGameTime = player.level.getGameTime();
+        long currentGameTime = serverPlayer.level.getGameTime();
         long timeToSummon = currentGameTime - newCoolDownTime;
         if (timeToSummon >= (3 * 20 * 60)) {
-            player.displayClientMessage((new TranslatableComponent("message.ash_of_sin.another.timetosummon")).setStyle(Style.EMPTY.withColor(ChatFormatting.GOLD).withBold(true)), true);
+            serverPlayer.displayClientMessage((new TranslatableComponent("message.ash_of_sin.another.timetosummon")).setStyle(Style.EMPTY.withColor(ChatFormatting.GOLD).withBold(true)), true);
         }
     }
 
@@ -164,18 +164,15 @@ public class AshOfSinAnotherEvent {
 
     @SubscribeEvent
     public static void onPlayerAttack(AttackEntityEvent event) {
-        if (event.getPlayer() instanceof Player && event.getTarget() instanceof LivingEntity target) {
-            Player player = event.getPlayer();
-            if (!player.level.isClientSide) {
-                long lastUpdateTargetTime = player.getPersistentData().getLong("lastUpdateTargetTime");
-                if (hasAnotherEnchantmentAromor(player, AshOfSin.ANOTHER.get())) {
-                    AshOfSinPlayerAttackTargetTracker.removeOwnerTarget(player.getUUID());
-                    player.getPersistentData().putLong("lastUpdateTargetTime", System.currentTimeMillis());
+        if (event.getPlayer() instanceof ServerPlayer serverPlayer && event.getTarget() instanceof LivingEntity target) {
+            long lastUpdateTargetTime = serverPlayer.getPersistentData().getLong("lastUpdateTargetTime");
+            if (hasAnotherEnchantmentAromor(serverPlayer, AshOfSin.ANOTHER.get())) {
+                AshOfSinPlayerAttackTargetTracker.removeOwnerTarget(serverPlayer.getUUID());
+                serverPlayer.getPersistentData().putLong("lastUpdateTargetTime", System.currentTimeMillis());
 
-                    if (System.currentTimeMillis() - lastUpdateTargetTime > 1500) {
-                        AshOfSinPlayerAttackTargetTracker.updateOwnerTarget(player.getUUID(), target);
-                        player.getPersistentData().putLong("lastUpdateTargetTime", System.currentTimeMillis());
-                    }
+                if (System.currentTimeMillis() - lastUpdateTargetTime > 1500) {
+                    AshOfSinPlayerAttackTargetTracker.updateOwnerTarget(serverPlayer.getUUID(), target);
+                    serverPlayer.getPersistentData().putLong("lastUpdateTargetTime", System.currentTimeMillis());
                 }
             }
         }
@@ -183,6 +180,9 @@ public class AshOfSinAnotherEvent {
 
     @SubscribeEvent
     public static void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
+        if (event.getPlayer().level.isClientSide()) {
+            return;
+        }
         AshOfSinPlayerAttackTargetTracker.removeOwnerTarget(event.getPlayer().getUUID());
     }
 }

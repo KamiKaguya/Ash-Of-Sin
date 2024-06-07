@@ -1,5 +1,7 @@
 package com.kamikaguya.ash_of_sin.events.enchantent;
 
+import com.kamikaguya.ash_of_sin.events.special.AshOfSinBindingEvent;
+import com.kamikaguya.ash_of_sin.events.unique.AshOfSinMirrorOfTheDarkNightEvent;
 import com.kamikaguya.ash_of_sin.gameasset.AshOfSinSounds;
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
 import com.kamikaguya.ash_of_sin.world.entity.Another;
@@ -43,11 +45,12 @@ public class AshOfSinChalkWallEvent {
 
         LivingEntity livingEntity = event.getEntityLiving();
         DamageSource damageSource = event.getSource();
+        LivingEntity attacker = (LivingEntity) damageSource.getEntity();
         if (damageSource.getDirectEntity() instanceof Another another && (another.getCustomName() != null) && another.getCustomName().equals(livingEntity)) {
             return;
         }
 
-        if (damageSource.getEntity() instanceof Another another && (another.getCustomName() != null) && another.getCustomName().equals(livingEntity)) {
+        if (attacker instanceof Another another && (another.getCustomName() != null) && another.getCustomName().equals(livingEntity)) {
             return;
         }
 
@@ -69,6 +72,10 @@ public class AshOfSinChalkWallEvent {
 
         int enchantmentLevel = getEnchantmentLevel(livingEntity, AshOfSin.CHALK_WALL.get());
         if (enchantmentLevel > 3) {
+            return;
+        }
+
+        if (attacker != null && AshOfSinMirrorOfTheDarkNightEvent.holdMirrorOfTheDarkNight(attacker) && attacker instanceof ServerPlayer serverPlayer && !(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
             return;
         }
 
@@ -126,15 +133,15 @@ public class AshOfSinChalkWallEvent {
             return;
         }
 
-        LivingEntity entity = event.getEntityLiving();
-        CompoundTag entityData = entity.getPersistentData();
+        LivingEntity livingEntity = event.getEntityLiving();
+        CompoundTag entityData = livingEntity.getPersistentData();
         boolean hasChalkWall = entityData.getBoolean(CHALK_WALL);
 
         if (hasChalkWall) {
             float chalkWallDuration = entityData.getFloat(CHALK_WALL_DURATION);
             if (chalkWallDuration > 0) {
-                entity.setHealth(entity.getMaxHealth() * 0.25F);
-                if (entity instanceof ServerPlayer player) {
+                livingEntity.setHealth(livingEntity.getMaxHealth() * 0.25F);
+                if (livingEntity instanceof ServerPlayer player) {
                     player.getFoodData().setFoodLevel(16);
                     if (chalkWallDuration == 9 * 20 ||
                             chalkWallDuration == 8 * 20 ||
@@ -149,15 +156,15 @@ public class AshOfSinChalkWallEvent {
                     }
                 }
 
-                if (chalkWallDuration > 6 * 20 && chalkWallDuration < 9 * 20 && entity instanceof ServerPlayer player) {
+                if (chalkWallDuration > 6 * 20 && chalkWallDuration < 9 * 20 && livingEntity instanceof ServerPlayer player) {
                     player.displayClientMessage(new TranslatableComponent("message.ash_of_sin.chalk_wall").setStyle(Style.EMPTY.withColor(ChatFormatting.GOLD).withBold(true)), true);
                 }
 
-                if (chalkWallDuration > 3 * 20 && chalkWallDuration < 6 * 20 && entity instanceof ServerPlayer player) {
+                if (chalkWallDuration > 3 * 20 && chalkWallDuration < 6 * 20 && livingEntity instanceof ServerPlayer player) {
                     player.displayClientMessage(new TranslatableComponent("message.ash_of_sin.chalk_wall").setStyle(Style.EMPTY.withColor(ChatFormatting.WHITE).withBold(true)), true);
                 }
 
-                if (chalkWallDuration < 3 * 20 && entity instanceof ServerPlayer player) {
+                if (chalkWallDuration < 3 * 20 && livingEntity instanceof ServerPlayer player) {
                     player.displayClientMessage(new TranslatableComponent("message.ash_of_sin.chalk_wall").setStyle(Style.EMPTY.withColor(ChatFormatting.RED).withBold(true)), true);
                 }
 
@@ -169,14 +176,15 @@ public class AshOfSinChalkWallEvent {
         float chalkWallDuration = entityData.getFloat(CHALK_WALL_DURATION);
 
         if (chalkWallDuration <= 0 && hasChalkWall) {
-            float absorptionHealth = entity.getMaxHealth() * 0.15F;
-            entity.setAbsorptionAmount(absorptionHealth);
+            livingEntity.removeAllEffects();
+            float absorptionHealth = livingEntity.getMaxHealth() * 0.15F;
+            livingEntity.setAbsorptionAmount(absorptionHealth);
             entityData.putBoolean(CHALK_WALL, false);
         }
 
         if (inChalkWallCD && chalkWallDuration <= 0) {
             entityData.putFloat(CHALK_WALL_DURATION, 0);
-            if (entity.getHealth() >= entity.getMaxHealth()) {
+            if (livingEntity.getHealth() >= livingEntity.getMaxHealth()) {
                 entityData.putBoolean(CHALK_WALL_CD, false);
             }
         }
