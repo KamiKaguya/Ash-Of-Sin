@@ -107,6 +107,10 @@ public class AshOfSinSculkEvent {
                             targetX + 7, targetY + 7, targetZ + 7
                     ));
                     for (LivingEntity nearbyEntity : nearbyEntities) {
+                        EntityType<?> dummy = ForgeRegistries.ENTITIES.getValue(new ResourceLocation("dummmmmmy:target_dummy"));
+                        if (livingEntityType.equals(dummy)) {
+                            return;
+                        }
                         if (livingEntityType.equals(nearbyEntity.getType())) {
                             if (!holdSculkWeapon(nearbyEntity)) {
                                 if (RANDOM.nextFloat() <= 0.25F) {

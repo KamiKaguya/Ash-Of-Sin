@@ -26,7 +26,7 @@ public class AshOfSinCustomAntiHighATKEntityEvent {
     @SubscribeEvent
     public static void onEntityUpdate(LivingEvent.LivingUpdateEvent event) {
         if (CustomAntiHighATKEntityConfig.ANTI_ON.get()) {
-            LivingEntity highATKEntity = (LivingEntity) event.getEntity();
+            LivingEntity highATKEntity = event.getEntityLiving();
             if (!(highATKEntity.level.isClientSide()) && (CustomAntiHighATKEntityConfig.isHighATKEntity(highATKEntity))) {
                 double maxATK = highATKEntity.getAttributeValue(Attributes.ATTACK_DAMAGE);
                 if (maxATK > MAX_ATK) {
