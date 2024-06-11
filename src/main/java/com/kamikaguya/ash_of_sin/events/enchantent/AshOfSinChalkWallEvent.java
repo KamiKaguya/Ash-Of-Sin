@@ -79,6 +79,10 @@ public class AshOfSinChalkWallEvent {
             return;
         }
 
+        if (attacker != null && AshOfSinMirrorOfTheDarkNightEvent.holdMirrorOfTheDarkNight(attacker) && attacker instanceof Another another && another.getOwner() instanceof ServerPlayer serverPlayer && !(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
+            return;
+        }
+
         if (enchantmentLevel > 0) {
             consumeDurabilityBasedOnEnchantmentLevel(livingEntity, AshOfSin.CHALK_WALL.get());
             float chalkWallDuration = enchantmentLevel * 3 * 20;
@@ -192,36 +196,47 @@ public class AshOfSinChalkWallEvent {
 
     @SubscribeEvent
     public static void onDied(LivingDeathEvent event) {
+        if (event.getEntityLiving().level.isClientSide()) {
+            return;
+        }
         if (!(event.getEntity() instanceof LivingEntity)) {
             return;
         }
 
         LivingEntity entity = event.getEntityLiving();
         CompoundTag entityData = entity.getPersistentData();
+        DamageSource damageSource = event.getSource();
+        LivingEntity attacker = (LivingEntity) damageSource.getEntity();
 
-        if (!(event.getEntityLiving().level.isClientSide())) {
-
-            int enchantmentLevel = getEnchantmentLevel(entity, AshOfSin.CHALK_WALL.get());
-            if (enchantmentLevel > 3) {
-                return;
-            }
-
-            boolean inChalkWallCD = entityData.getBoolean(CHALK_WALL_CD);
-
-            if ((enchantmentLevel > 0) && !(inChalkWallCD)) {
-                consumeDurabilityBasedOnEnchantmentLevel(entity, AshOfSin.CHALK_WALL.get());
-                int chalkWallDuration = enchantmentLevel * 3 * 20;
-                entityData.putFloat(CHALK_WALL_DURATION, chalkWallDuration);
-                entityData.putBoolean(CHALK_WALL, true);
-                entityData.putBoolean(CHALK_WALL_CD, true);
-                entity.removeAllEffects();
-                event.setCanceled(true);
-            }
-
-            if (inChalkWallCD) {
-                entityData.putBoolean(CHALK_WALL_CD, false);
-            }
+        if (attacker != null && AshOfSinMirrorOfTheDarkNightEvent.holdMirrorOfTheDarkNight(attacker) && attacker instanceof ServerPlayer serverPlayer && !(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
+            return;
         }
+
+        if (attacker != null && AshOfSinMirrorOfTheDarkNightEvent.holdMirrorOfTheDarkNight(attacker) && attacker instanceof Another another && another.getOwner() instanceof ServerPlayer serverPlayer && !(AshOfSinBindingEvent.mismatchingPlayerHoldUniqueWeapon(serverPlayer))) {
+            return;
+        }
+
+        int enchantmentLevel = getEnchantmentLevel(entity, AshOfSin.CHALK_WALL.get());
+        if (enchantmentLevel > 3) {
+            return;
+        }
+
+        boolean inChalkWallCD = entityData.getBoolean(CHALK_WALL_CD);
+
+        if ((enchantmentLevel > 0) && !(inChalkWallCD)) {
+            consumeDurabilityBasedOnEnchantmentLevel(entity, AshOfSin.CHALK_WALL.get());
+            int chalkWallDuration = enchantmentLevel * 3 * 20;
+            entityData.putFloat(CHALK_WALL_DURATION, chalkWallDuration);
+            entityData.putBoolean(CHALK_WALL, true);
+            entityData.putBoolean(CHALK_WALL_CD, true);
+            entity.removeAllEffects();
+            event.setCanceled(true);
+        }
+
+        if (inChalkWallCD) {
+            entityData.putBoolean(CHALK_WALL_CD, false);
+        }
+
 
         boolean hasChalkWall = entityData.getBoolean(CHALK_WALL);
         if (hasChalkWall) {
