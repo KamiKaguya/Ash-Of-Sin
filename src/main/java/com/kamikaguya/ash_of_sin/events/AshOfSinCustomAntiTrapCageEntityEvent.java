@@ -25,6 +25,9 @@ public class AshOfSinCustomAntiTrapCageEntityEvent {
     @SubscribeEvent
     public static void onEntityUpdate(LivingEvent.LivingUpdateEvent event) {
         if (CustomAntiTrapCageEntityConfig.ANTI_ON.get()) {
+            if (event.getEntityLiving().level.isClientSide()) {
+                return;
+            }
             if (!(event.getEntityLiving() instanceof ServerPlayer player)) {
                 return;
             }

@@ -18,6 +18,9 @@ public class AshOfSinCustomAntiItemEntityEvent {
     @SubscribeEvent
     public static void onEntityHurt(LivingHurtEvent event) {
         if (CustomAntiItemEntityConfig.ANTI_ON.get()) {
+            if (event.getEntityLiving().level.isClientSide()) {
+                return;
+            }
             LivingEntity livingEntity = event.getEntityLiving();
             ResourceLocation entityResourceLocation = EntityType.getKey(livingEntity.getType());
             DamageSource source = event.getSource();

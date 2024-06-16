@@ -17,8 +17,11 @@ public class AshOfSinEternalEntityEvent {
 
     @SubscribeEvent
     public static void onEntityUpdate(LivingEvent.LivingUpdateEvent event) {
+        if (event.getEntityLiving().level.isClientSide()) {
+            return;
+        }
         LivingEntity eternalEntity = (LivingEntity) event.getEntity();
-        if (!eternalEntity.level.isClientSide() && EternalEntityConfig.isEternalEntity(eternalEntity)) {
+        if (EternalEntityConfig.isEternalEntity(eternalEntity)) {
             ServerLevel serverLevel = (ServerLevel) eternalEntity.level;
             ChunkPos centerChunkPos = new ChunkPos(eternalEntity.blockPosition());
             for (int dx = -1; dx <= 1; dx++) {

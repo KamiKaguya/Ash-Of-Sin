@@ -33,6 +33,9 @@ public class AshOfSinCustomEntityEffectEvent {
 
     @SubscribeEvent
     public static void onEntityUpdate(LivingEvent.LivingUpdateEvent event) {
+        if (event.getEntityLiving().level.isClientSide()) {
+            return;
+        }
         LivingEntity livingEntity = event.getEntityLiving();
         ResourceLocation entityResourceLocation = EntityType.getKey(livingEntity.getType());
         String entityName = entityResourceLocation.toString();

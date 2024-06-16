@@ -26,6 +26,9 @@ public class AshOfSinCustomAntiHighATKEntityEvent {
     @SubscribeEvent
     public static void onEntityUpdate(LivingEvent.LivingUpdateEvent event) {
         if (CustomAntiHighATKEntityConfig.ANTI_ON.get()) {
+            if (event.getEntityLiving().level.isClientSide()) {
+                return;
+            }
             LivingEntity highATKEntity = event.getEntityLiving();
             if (!(highATKEntity.level.isClientSide()) && (CustomAntiHighATKEntityConfig.isHighATKEntity(highATKEntity))) {
                 double maxATK = highATKEntity.getAttributeValue(Attributes.ATTACK_DAMAGE);
@@ -61,20 +64,21 @@ public class AshOfSinCustomAntiHighATKEntityEvent {
     @SubscribeEvent
     public static void onEntityHurt(LivingHurtEvent event) {
         if (CustomAntiHighATKEntityConfig.ANTI_ON.get()) {
-            if (!(event.getEntity().level.isClientSide())) {
-                LivingEntity target = event.getEntityLiving();
-                Entity highATKEntity = event.getSource().getDirectEntity();
-                if (highATKEntity != null && CustomAntiHighATKEntityConfig.isHighATKEntity(highATKEntity)) {
-                    float originalDamage = event.getAmount();
-                    if (originalDamage >= MAX_ATK) {
-                        float targetMaxHealth = target.getMaxHealth();
-                        float damageAfterArmorReduction = damageAfterArmor(target, targetMaxHealth);
-                        float damageAfterArmorProtection = damageAfterArmorProtection(target.getArmorSlots(),damageAfterArmorReduction);
-                        float reducedDamage = targetMaxHealth - damageAfterArmorProtection;
-                        float destinedDeath = targetMaxHealth + reducedDamage;
-                        target.setHealth(0.1F);
-                        event.setAmount(destinedDeath);
-                    }
+            if (event.getEntityLiving().level.isClientSide()) {
+                return;
+            }
+            LivingEntity target = event.getEntityLiving();
+            Entity highATKEntity = event.getSource().getDirectEntity();
+            if (highATKEntity != null && CustomAntiHighATKEntityConfig.isHighATKEntity(highATKEntity)) {
+                float originalDamage = event.getAmount();
+                if (originalDamage >= MAX_ATK) {
+                    float targetMaxHealth = target.getMaxHealth();
+                    float damageAfterArmorReduction = damageAfterArmor(target, targetMaxHealth);
+                    float damageAfterArmorProtection = damageAfterArmorProtection(target.getArmorSlots(),damageAfterArmorReduction);
+                    float reducedDamage = targetMaxHealth - damageAfterArmorProtection;
+                    float destinedDeath = targetMaxHealth + reducedDamage;
+                    target.setHealth(0.1F);
+                    event.setAmount(destinedDeath);
                 }
             }
         }

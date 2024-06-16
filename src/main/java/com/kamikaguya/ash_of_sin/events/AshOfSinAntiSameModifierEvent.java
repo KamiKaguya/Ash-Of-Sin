@@ -36,51 +36,52 @@ public class AshOfSinAntiSameModifierEvent {
     @SubscribeEvent
     public static void onEntityUpdate(LivingEvent.LivingUpdateEvent event) {
         if (AntiSameModifierConfig.ANTI_ON.get()) {
-            if (!(event.getEntityLiving().level.isClientSide())) {
-                LivingEntity livingEntity = event.getEntityLiving();
+            if (event.getEntityLiving().level.isClientSide()) {
+                return;
+            }
+            LivingEntity livingEntity = event.getEntityLiving();
 
-                if (livingEntity == null) {
-                    return;
-                }
+            if (livingEntity == null) {
+                return;
+            }
 
-                if (livingEntity instanceof KamiKaguya) {
-                    return;
-                }
+            if (livingEntity instanceof KamiKaguya) {
+                return;
+            }
 
-                if (livingEntity instanceof Another) {
-                    return;
-                }
+            if (livingEntity instanceof Another) {
+                return;
+            }
 
-                if (livingEntity instanceof Doppelganger) {
-                    return;
-                }
+            if (livingEntity instanceof Doppelganger) {
+                return;
+            }
 
-                if (livingEntity instanceof Assassin) {
-                    return;
-                }
+            if (livingEntity instanceof Assassin) {
+                return;
+            }
 
-                if (livingEntity instanceof ServerPlayer) {
-                    return;
-                }
+            if (livingEntity instanceof ServerPlayer) {
+                return;
+            }
 
-                for (Attribute attribute : STANDARD_ATTRIBUTES) {
-                    AttributeInstance attributeInstance = livingEntity.getAttribute(attribute);
+            for (Attribute attribute : STANDARD_ATTRIBUTES) {
+                AttributeInstance attributeInstance = livingEntity.getAttribute(attribute);
 
-                    if (attributeInstance != null) {
-                        Collection<AttributeModifier> modifiers = attributeInstance.getModifiers();
+                if (attributeInstance != null) {
+                    Collection<AttributeModifier> modifiers = attributeInstance.getModifiers();
 
-                        HashSet<String> existingNames = new HashSet<>();
-                        List<AttributeModifier> modifiersToRemove = new ArrayList<>();
+                    HashSet<String> existingNames = new HashSet<>();
+                    List<AttributeModifier> modifiersToRemove = new ArrayList<>();
 
-                        for (AttributeModifier modifier : modifiers) {
-                            if (!existingNames.add(modifier.getName())) {
-                                modifiersToRemove.add(modifier);
-                            }
+                    for (AttributeModifier modifier : modifiers) {
+                        if (!existingNames.add(modifier.getName())) {
+                            modifiersToRemove.add(modifier);
                         }
+                    }
 
-                        for (AttributeModifier modifier : modifiersToRemove) {
-                            attributeInstance.removeModifier(modifier);
-                        }
+                    for (AttributeModifier modifier : modifiersToRemove) {
+                        attributeInstance.removeModifier(modifier);
                     }
                 }
             }

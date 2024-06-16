@@ -26,6 +26,9 @@ public class AshOfSinCustomEntityItemEvent {
 
     @SubscribeEvent
     public void onLivingSpawnEvent(LivingSpawnEvent event) {
+        if (event.getEntityLiving().level.isClientSide()) {
+            return;
+        }
         LivingEntity entity = event.getEntityLiving();
         List<CustomEntityItemConfig> configs = customEntityItemConfigManager.getCustomEntityItemConfig();
 

@@ -20,6 +20,9 @@ public class AshOfSinAdventureDimensionEvent {
     @SubscribeEvent
     public static void inAbsoluteSpaceTimeRealm(LivingEvent.LivingUpdateEvent event) {
         if (event.getEntityLiving() instanceof ServerPlayer player) {
+            if (event.getEntityLiving().level.isClientSide()) {
+                return;
+            }
             ResourceLocation dimension = player.level.dimension().location();
 
             boolean isExceptionPlayer = ADVENTURE_DIMENSION_ALLOW_PLAYER_ID.contains(player.getGameProfile().getName());

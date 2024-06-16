@@ -16,6 +16,9 @@ public class AshOfSinBetterAIEvent {
     @SubscribeEvent
     public static void onEntityHurt(LivingHurtEvent event) {
         if (BetterAIConfig.BETTER_AI_ON.get()) {
+            if (event.getEntityLiving().level.isClientSide()) {
+                return;
+            }
             LivingEntity livingEntity = event.getEntityLiving();
             if (livingEntity instanceof Mob) {
                 Mob mob = (Mob) event.getEntityLiving();

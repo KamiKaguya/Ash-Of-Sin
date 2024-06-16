@@ -20,6 +20,9 @@ public class AshOfSinCustomEntityAntiEffectEvent {
     @SubscribeEvent
     public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         if (CustomEntityAntiEffectConfig.ANTI_ON.get()) {
+            if (event.getEntityLiving().level.isClientSide()) {
+                return;
+            }
             LivingEntity livingEntity = event.getEntityLiving();
             ResourceLocation entityResourceLocation = EntityType.getKey(livingEntity.getType());
 
@@ -42,6 +45,9 @@ public class AshOfSinCustomEntityAntiEffectEvent {
     @SubscribeEvent
     public static void onLivingHurt(LivingHurtEvent event) {
         if (CustomEntityAntiEffectConfig.ANTI_ON.get()) {
+            if (event.getEntityLiving().level.isClientSide()) {
+                return;
+            }
             LivingEntity livingEntity = event.getEntityLiving();
             ResourceLocation entityResourceLocation = EntityType.getKey(livingEntity.getType());
 

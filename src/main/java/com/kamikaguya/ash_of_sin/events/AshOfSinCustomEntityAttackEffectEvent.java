@@ -30,36 +30,37 @@ public class AshOfSinCustomEntityAttackEffectEvent {
 
     @SubscribeEvent
     public static void onEntityHurt(LivingHurtEvent event) {
-        if (!(event.getEntityLiving().level.isClientSide())) {
-            if (event.getSource().getDirectEntity() instanceof LivingEntity attacker) {
-                LivingEntity target = event.getEntityLiving();
+        if (event.getEntityLiving().level.isClientSide()) {
+            return;
+        }
+        if (event.getSource().getDirectEntity() instanceof LivingEntity attacker) {
+            LivingEntity target = event.getEntityLiving();
 
-                if (target == null) {
-                    return;
-                }
-
-                List<CustomAttackEntityConfig> customAttackEffectConfig = customEntityAttackEffectConfig.getCustomEntityAttackEffectConfig();
-
-                for (CustomAttackEntityConfig config : customAttackEffectConfig) {
-                    if (config.getEntity().equals(attacker.getType().getRegistryName().toString())) {
-                        applyEffects(target, config.getEffect());
-                    }
-                }
+            if (target == null) {
+                return;
             }
 
-            if (event.getSource().getEntity() instanceof LivingEntity attacker) {
-                LivingEntity target = event.getEntityLiving();
+            List<CustomAttackEntityConfig> customAttackEffectConfig = customEntityAttackEffectConfig.getCustomEntityAttackEffectConfig();
 
-                if (target == null) {
-                    return;
+            for (CustomAttackEntityConfig config : customAttackEffectConfig) {
+                if (config.getEntity().equals(attacker.getType().getRegistryName().toString())) {
+                    applyEffects(target, config.getEffect());
                 }
+            }
+        }
 
-                List<CustomAttackEntityConfig> customAttackEffectConfig = customEntityAttackEffectConfig.getCustomEntityAttackEffectConfig();
+        if (event.getSource().getEntity() instanceof LivingEntity attacker) {
+            LivingEntity target = event.getEntityLiving();
 
-                for (CustomAttackEntityConfig config : customAttackEffectConfig) {
-                    if (config.getEntity().equals(attacker.getType().getRegistryName().toString())) {
-                        applyEffects(target, config.getEffect());
-                    }
+            if (target == null) {
+                return;
+            }
+
+            List<CustomAttackEntityConfig> customAttackEffectConfig = customEntityAttackEffectConfig.getCustomEntityAttackEffectConfig();
+
+            for (CustomAttackEntityConfig config : customAttackEffectConfig) {
+                if (config.getEntity().equals(attacker.getType().getRegistryName().toString())) {
+                    applyEffects(target, config.getEffect());
                 }
             }
         }
