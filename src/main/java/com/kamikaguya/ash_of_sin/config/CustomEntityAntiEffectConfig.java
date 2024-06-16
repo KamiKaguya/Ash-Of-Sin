@@ -30,6 +30,7 @@ public class CustomEntityAntiEffectConfig {
                                 "ash_of_sin:kamikaguya",
                                 "ash_of_sin:doppelganger",
                                 "ash_of_sin:assassin",
+                                "dummmmmmy:target_dummy",
                                 "goblinsanddungeons:goblin_king",
                                 "simple_mobs:corrupted_ogre",
                                 "simple_mobs:knight_4",

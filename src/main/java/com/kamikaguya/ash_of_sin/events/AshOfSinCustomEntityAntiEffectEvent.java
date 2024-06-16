@@ -30,6 +30,8 @@ public class AshOfSinCustomEntityAntiEffectEvent {
                     String effectId = effectInstance.getEffect().getRegistryName().toString();
                     if (antiEffectList.stream().anyMatch(s -> s.equals(effectId))) {
                         livingEntity.removeEffect(effectInstance.getEffect());
+                        float livingEntityMaxHealth = livingEntity.getMaxHealth();
+                        livingEntity.heal(livingEntityMaxHealth);
                     }
                 }
             }
