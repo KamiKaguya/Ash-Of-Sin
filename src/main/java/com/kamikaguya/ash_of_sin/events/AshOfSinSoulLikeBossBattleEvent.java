@@ -106,19 +106,13 @@ public class AshOfSinSoulLikeBossBattleEvent {
                     Entity ironGolem02 = source.getDirectEntity();
 
                     if ((ironGolem01 != null) && (boss.getType().equals(bossType)) && (ironGolem01.getType().equals(ironGolemType))) {
-                        if (!(boss.level.isClientSide())) {
-
-                            event.setAmount(0);
-                            ironGolem01.kill();
-                        }
+                        event.setAmount(0);
+                        ironGolem01.kill();
                     }
 
                     if ((ironGolem02 != null) && (boss.getType().equals(bossType)) && (ironGolem02.getType().equals(ironGolemType))) {
-                        if (!(boss.level.isClientSide())) {
-
-                            event.setAmount(0);
-                            ironGolem02.kill();
-                        }
+                        event.setAmount(0);
+                        ironGolem02.kill();
                     }
                 }
             }

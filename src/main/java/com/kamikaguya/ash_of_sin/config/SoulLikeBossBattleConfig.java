@@ -88,6 +88,9 @@ public class SoulLikeBossBattleConfig {
                                 "illageandspillage:spiritcaller",
                                 "illageandspillage:magispeller",
                                 "conjurer_illager:conjurer",
+                                "meetyourfight:bellringer",
+                                "meetyourfight:dame_fortuna",
+                                "meetyourfight:swampjaw",
                                 "wildbackport:warden"
                         )),
                         obj -> obj instanceof String);

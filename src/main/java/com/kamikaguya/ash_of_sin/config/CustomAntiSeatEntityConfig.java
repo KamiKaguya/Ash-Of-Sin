@@ -92,6 +92,9 @@ public class CustomAntiSeatEntityConfig {
                                 "illageandspillage:spiritcaller",
                                 "illageandspillage:magispeller",
                                 "conjurer_illager:conjurer",
+                                "meetyourfight:bellringer",
+                                "meetyourfight:dame_fortuna",
+                                "meetyourfight:swampjaw",
                                 "wildbackport:warden",
                                 "iceandfire:ice_dragon",
                                 "iceandfire:fire_dragon",
@@ -104,8 +107,7 @@ public class CustomAntiSeatEntityConfig {
                                 "hmag:crimson_slaughterer",
                                 "hmag:necrotic_reaper",
                                 "hmag:dodomeki",
-                                "hmag:imp",
-                                "wildbackport:warden"
+                                "hmag:imp"
                         )),
                         o -> o instanceof String);
         ANTI_SEAT_ENTITY_CONFIG = builder.build();

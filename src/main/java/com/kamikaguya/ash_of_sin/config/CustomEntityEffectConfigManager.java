@@ -385,6 +385,15 @@ public class CustomEntityEffectConfigManager {
                     new CustomEntityEffectConfig("conjurer_illager:conjurer", Arrays.asList(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
+                    new CustomEntityEffectConfig("meetyourfight:bellringer", Arrays.asList(
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
+                    )),
+                    new CustomEntityEffectConfig("meetyourfight:dame_fortuna", Arrays.asList(
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
+                    )),
+                    new CustomEntityEffectConfig("meetyourfight:swampjaw", Arrays.asList(
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
+                    )),
                     new CustomEntityEffectConfig("wildbackport:warden", Arrays.asList(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     ))
