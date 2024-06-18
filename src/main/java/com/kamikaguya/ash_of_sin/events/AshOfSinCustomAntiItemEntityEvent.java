@@ -16,7 +16,7 @@ import java.util.List;
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinCustomAntiItemEntityEvent {
     @SubscribeEvent
-    public static void onEntityHurt(LivingHurtEvent event) {
+    public static void onLivingHurt(LivingHurtEvent event) {
         if (CustomAntiItemEntityConfig.ANTI_ON.get()) {
             if (event.getEntityLiving().level.isClientSide()) {
                 return;

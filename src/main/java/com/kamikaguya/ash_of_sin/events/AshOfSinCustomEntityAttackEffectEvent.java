@@ -29,7 +29,7 @@ public class AshOfSinCustomEntityAttackEffectEvent {
     }
 
     @SubscribeEvent
-    public static void onEntityHurt(LivingHurtEvent event) {
+    public static void onLivingHurt(LivingHurtEvent event) {
         if (event.getEntityLiving().level.isClientSide()) {
             return;
         }

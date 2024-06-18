@@ -9,8 +9,11 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoubleBlockCombiner;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -23,7 +26,7 @@ public class AshOfSinCustomAntiTrapCageEntityEvent {
     private static final int DISTANCE = CustomAntiTrapCageEntityConfig.CHECK_DISTANCE.get();
 
     @SubscribeEvent
-    public static void onEntityUpdate(LivingEvent.LivingUpdateEvent event) {
+    public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         if (CustomAntiTrapCageEntityConfig.ANTI_ON.get()) {
             if (event.getEntityLiving().level.isClientSide()) {
                 return;

@@ -161,7 +161,7 @@ public class AshOfSinCarianEvent {
                 if (entry.getKey() instanceof ProtectionEnchantment) {
                     int protectLevel = entry.getValue();
 
-                    damageAfterArmorProtection += originalDamage * (10 / (protectLevel + 10.0f));
+                    damageAfterArmorProtection += originalDamage * (10 / ((protectLevel + 10.0f) / 2));
                     correctionDamage += originalDamage - damageAfterArmorProtection;
                 }
             }
@@ -177,7 +177,7 @@ public class AshOfSinCarianEvent {
                 if (entry.getKey() instanceof ProtectionEnchantment) {
                     int protectLevel = entry.getValue();
 
-                    damageAfterArmorProtection += originalDamage * (10 / (protectLevel + 10.0f));
+                    damageAfterArmorProtection += originalDamage * (10 / ((protectLevel + 10.0f) / 2));
                 }
             }
         }

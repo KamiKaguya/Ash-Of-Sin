@@ -87,7 +87,7 @@ public class AshOfSinSoulLikeBossBattleEvent {
     }
 
     @SubscribeEvent
-    public static void antiIronGolem(LivingHurtEvent event) {
+    public static void onLivingHurt(LivingHurtEvent event) {
         if (event.getEntityLiving().level.isClientSide() || event.getEntity().level.isClientSide()) {
             return;
         }

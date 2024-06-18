@@ -24,7 +24,7 @@ public class AshOfSinCustomAntiHighATKEntityEvent {
 
     private static final double MAX_ATK = CustomAntiHighATKEntityConfig.MAX_ATK.get();
     @SubscribeEvent
-    public static void onEntityUpdate(LivingEvent.LivingUpdateEvent event) {
+    public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         if (CustomAntiHighATKEntityConfig.ANTI_ON.get()) {
             if (event.getEntityLiving().level.isClientSide()) {
                 return;
@@ -62,7 +62,7 @@ public class AshOfSinCustomAntiHighATKEntityEvent {
     }
 
     @SubscribeEvent
-    public static void onEntityHurt(LivingHurtEvent event) {
+    public static void onLivingHurt(LivingHurtEvent event) {
         if (CustomAntiHighATKEntityConfig.ANTI_ON.get()) {
             if (event.getEntityLiving().level.isClientSide()) {
                 return;
@@ -110,7 +110,7 @@ public class AshOfSinCustomAntiHighATKEntityEvent {
                 if (entry.getKey() instanceof ProtectionEnchantment) {
                     int protectLevel = entry.getValue();
 
-                    damageAfterArmorProtection += damageAfterArmorReduction * (10 / (protectLevel + 10.0f));
+                    damageAfterArmorProtection += damageAfterArmorReduction * (10 / ((protectLevel + 10.0f) / 2));
                 }
             }
         }

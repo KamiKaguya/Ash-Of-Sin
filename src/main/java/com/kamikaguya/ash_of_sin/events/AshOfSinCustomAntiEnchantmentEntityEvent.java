@@ -20,7 +20,7 @@ import java.util.Map;
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinCustomAntiEnchantmentEntityEvent {
     @SubscribeEvent
-    public static void onEntityHurt(LivingHurtEvent event) {
+    public static void onLivingHurt(LivingHurtEvent event) {
         if (event.getEntityLiving().level.isClientSide()) {
             return;
         }

@@ -188,7 +188,7 @@ public class AbsoluteRuleEnchantment extends Enchantment {
                 if (entry.getKey() instanceof ProtectionEnchantment) {
                     int protectLevel = entry.getValue();
 
-                    damageAfterArmorProtection += baseDamage * (10 / (protectLevel + 10.0f));
+                    damageAfterArmorProtection += baseDamage * (10 / ((protectLevel + 10.0f) / 2));
                 }
             }
         }

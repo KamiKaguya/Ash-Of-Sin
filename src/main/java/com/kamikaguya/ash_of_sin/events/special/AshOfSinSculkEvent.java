@@ -24,7 +24,7 @@ public class AshOfSinSculkEvent {
     private static final Random RANDOM = new Random();
 
     @SubscribeEvent
-    public static void onHurt(LivingHurtEvent event) {
+    public static void onLivingHurt(LivingHurtEvent event) {
         if (event.getEntityLiving().level.isClientSide() || event.getEntity().level.isClientSide()) {
             return;
         }

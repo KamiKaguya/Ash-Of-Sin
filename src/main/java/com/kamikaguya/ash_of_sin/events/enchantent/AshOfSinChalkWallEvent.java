@@ -124,7 +124,7 @@ public class AshOfSinChalkWallEvent {
                 if (entry.getKey() instanceof ProtectionEnchantment) {
                     int protectLevel = entry.getValue();
 
-                    damageAfterArmorProtection = damageAfterArmorReduction * (10 / (protectLevel + 10.0f));
+                    damageAfterArmorProtection = damageAfterArmorReduction * (10 / ((protectLevel + 10.0f) / 2));
                 }
             }
         }

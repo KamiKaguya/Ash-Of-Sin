@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.Mod;
 public class AshOfSinEternalEntityEvent {
 
     @SubscribeEvent
-    public static void onEntityUpdate(LivingEvent.LivingUpdateEvent event) {
+    public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         if (event.getEntityLiving().level.isClientSide()) {
             return;
         }
