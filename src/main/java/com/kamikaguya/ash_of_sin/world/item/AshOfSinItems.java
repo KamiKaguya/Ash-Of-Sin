@@ -67,11 +67,11 @@ public class AshOfSinItems {
 
     public static final RegistryObject<Item> DESPAIR_SCYTHE = ITEMS.register("despair_scythe", () -> new DespairScytheItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
 
-    public static final RegistryObject<Item> SCULK_AXE = ITEMS.register("sculk_axe", () -> new SculkAxeItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
+    public static final RegistryObject<Item> SCULK_AXE = ITEMS.register("sculk_axe", () -> new SculkAxeItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.RARE).fireResistant()));
 
-    public static final RegistryObject<Item> SCULK_SWORD = ITEMS.register("sculk_sword", () -> new SculkSwordItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
+    public static final RegistryObject<Item> SCULK_SWORD = ITEMS.register("sculk_sword", () -> new SculkSwordItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.RARE).fireResistant()));
 
-    public static final RegistryObject<Item> SCULK_GREATSWORD = ITEMS.register("sculk_greatsword", () -> new SculkGreatswordItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
+    public static final RegistryObject<Item> SCULK_GREATSWORD = ITEMS.register("sculk_greatsword", () -> new SculkGreatswordItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.RARE).fireResistant()));
 
     private static <T extends Item> RegistryObject<T> register(final String name, final Supplier<T> item) {
         return ITEMS.register(name, item);
