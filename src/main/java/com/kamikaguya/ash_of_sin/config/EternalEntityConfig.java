@@ -26,10 +26,6 @@ public class EternalEntityConfig {
                         () -> new ArrayList<>(Arrays.asList(
                                 "ash_of_sin:kamikaguya",
                                 "ash_of_sin:another",
-                                "ash_of_sin:doppelganger",
-                                "ash_of_sin:assassin",
-                                "iceandfire:dread_knight",
-                                "iceandfire:dread_lich",
                                 "iceandfire:ice_dragon",
                                 "iceandfire:fire_dragon",
                                 "iceandfire:lightning_dragon",

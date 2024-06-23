@@ -91,7 +91,9 @@ public class SoulLikeBossBattleConfig {
                                 "meetyourfight:bellringer",
                                 "meetyourfight:dame_fortuna",
                                 "meetyourfight:swampjaw",
-                                "wildbackport:warden"
+                                "wildbackport:warden",
+                                "occ:vergil",
+                                "occ:vergil_2"
                         )),
                         obj -> obj instanceof String);
         BOSS_BATTLE_DISTANCE = builder.comment("Soul Like Boss Battle Distance")

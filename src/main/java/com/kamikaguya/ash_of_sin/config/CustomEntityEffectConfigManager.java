@@ -396,6 +396,12 @@ public class CustomEntityEffectConfigManager {
                     )),
                     new CustomEntityEffectConfig("wildbackport:warden", Arrays.asList(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
+                    )),
+                    new CustomEntityEffectConfig("occ:vergil", Arrays.asList(
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
+                    )),
+                    new CustomEntityEffectConfig("occ:vergil_2", Arrays.asList(
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     ))
             );
             String defaultConfigJson = GSON.toJson(defaultCustomEntityEffectConfig, CONFIG_TYPE);
