@@ -52,6 +52,9 @@ public class CustomEntityAntiEffectConfig {
                                 "bloodandmadness:gascoigne_beast",
                                 "bloodandmadness:micolash",
                                 "mowziesmobs:ferrous_wroughtnaut",
+                                "wildbackport:warden",
+                                "occ:vergil",
+                                "occ:vergil_2",
                                 "epiceldenring:godfrey",
                                 "epiceldenring:godfreyphasetwo",
                                 "epiceldenring:radahn",
@@ -129,8 +132,7 @@ public class CustomEntityAntiEffectConfig {
                                 "dwmg:hmag_dodomeki",
                                 "hmag:imp",
                                 "dwmg:hmag_imp",
-                                "dwmg:hmag_glaryad",
-                                "wildbackport:warden"
+                                "dwmg:hmag_glaryad"
                         )),
                         o -> o instanceof String);
         List<String> antiEffects = List.of(

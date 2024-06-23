@@ -49,6 +49,9 @@ public class SoulLikeBossBattleConfig {
                                 "bloodandmadness:gascoigne_beast",
                                 "bloodandmadness:micolash",
                                 "mowziesmobs:ferrous_wroughtnaut",
+                                "wildbackport:warden",
+                                "occ:vergil",
+                                "occ:vergil_2",
                                 "epiceldenring:godfrey",
                                 "epiceldenring:godfreyphasetwo",
                                 "epiceldenring:radahn",
@@ -90,10 +93,7 @@ public class SoulLikeBossBattleConfig {
                                 "conjurer_illager:conjurer",
                                 "meetyourfight:bellringer",
                                 "meetyourfight:dame_fortuna",
-                                "meetyourfight:swampjaw",
-                                "wildbackport:warden",
-                                "occ:vergil",
-                                "occ:vergil_2"
+                                "meetyourfight:swampjaw"
                         )),
                         obj -> obj instanceof String);
         BOSS_BATTLE_DISTANCE = builder.comment("Soul Like Boss Battle Distance")

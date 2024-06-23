@@ -247,6 +247,12 @@ public class CustomEntityEffectConfigManager {
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3),
                             new CustomEffectConfig("alexsmobs:soulsteal", "infinite", 0)
                     )),
+                    new CustomEntityEffectConfig("wildbackport:warden", Arrays.asList(
+                            new CustomEffectConfig("epicfight:stun_immunity", "infinite", 0),
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3),
+                            new CustomEffectConfig("alexsmobs:soulsteal", "infinite", 2),
+                            new CustomEffectConfig("alexsmobs:knockback_resistance", "infinite", 0)
+                    )),
                     new CustomEntityEffectConfig("epiceldenring:godfrey", Arrays.asList(
                             new CustomEffectConfig("epicfight:stun_immunity", "infinite", 0),
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3),
@@ -272,6 +278,18 @@ public class CustomEntityEffectConfigManager {
                             new CustomEffectConfig("alexsmobs:knockback_resistance", "infinite", 0)
                     )),
                     new CustomEntityEffectConfig("epiceldenring:maliketh", Arrays.asList(
+                            new CustomEffectConfig("epicfight:stun_immunity", "infinite", 0),
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3),
+                            new CustomEffectConfig("alexsmobs:soulsteal", "infinite", 2),
+                            new CustomEffectConfig("alexsmobs:knockback_resistance", "infinite", 0)
+                    )),
+                    new CustomEntityEffectConfig("occ:vergil", Arrays.asList(
+                            new CustomEffectConfig("epicfight:stun_immunity", "infinite", 0),
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3),
+                            new CustomEffectConfig("alexsmobs:soulsteal", "infinite", 2),
+                            new CustomEffectConfig("alexsmobs:knockback_resistance", "infinite", 0)
+                    )),
+                    new CustomEntityEffectConfig("occ:vergil_2", Arrays.asList(
                             new CustomEffectConfig("epicfight:stun_immunity", "infinite", 0),
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3),
                             new CustomEffectConfig("alexsmobs:soulsteal", "infinite", 2),
@@ -392,15 +410,6 @@ public class CustomEntityEffectConfigManager {
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
                     new CustomEntityEffectConfig("meetyourfight:swampjaw", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
-                    )),
-                    new CustomEntityEffectConfig("wildbackport:warden", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
-                    )),
-                    new CustomEntityEffectConfig("occ:vergil", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
-                    )),
-                    new CustomEntityEffectConfig("occ:vergil_2", Arrays.asList(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     ))
             );
