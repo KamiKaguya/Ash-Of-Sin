@@ -57,8 +57,6 @@ public class AshOfSinItems {
 
     public static final RegistryObject<Item> GOD_EATER = ITEMS.register("god_eater", () -> new GodEaterItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
 
-    public static final RegistryObject<Item> ENDER_CHASER = ITEMS.register("ender_chaser", () -> new EnderChaserItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
-
     public static final RegistryObject<Item> CALAMITY_BLADE = ITEMS.register("calamity_blade", () -> new CalamityBladeItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
 
     public static final RegistryObject<Item> CALAMITY_BLADE_THIN = ITEMS.register("calamity_blade_thin", () -> new CalamityBladeThinItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));

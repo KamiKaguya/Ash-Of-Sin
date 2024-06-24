@@ -43,8 +43,6 @@ public enum AshOfSinItemTier implements Tier {
         return Ingredient.of(Items.NETHERITE_INGOT);
     }), GOD_EATER(4, 10000, 20.0F, 17.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
-    }), ENDER_CHASER(4, 10000, 20.0F, 17.0F, 39, () -> {
-        return Ingredient.of(Items.NETHERITE_INGOT);
     }), CALAMITY_BLADE(4, 10000, 20.0F, 16.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
     }), CALAMITY_BLADE_THIN(4, 10000, 20.0F, 15.0F, 39, () -> {
