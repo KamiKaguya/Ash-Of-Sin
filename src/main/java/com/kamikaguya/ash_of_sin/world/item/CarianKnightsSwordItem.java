@@ -18,7 +18,7 @@ import java.util.List;
 
 public class CarianKnightsSwordItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
-    private List<Component> tooltipExpand;
+    public List<Component> tooltipExpand;
     public CarianKnightsSwordItem(Item.Properties build) {
         super(AshOfSinItemTier.CARIAN_KNIGHTS_SWORD, 0, -2.8F, build);
         if (AshOfSin.isPhysicalClient()) {

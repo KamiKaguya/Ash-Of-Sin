@@ -18,7 +18,7 @@ import java.util.List;
 
 public class CrescentItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
-    private List<Component> tooltipExpand;
+    public List<Component> tooltipExpand;
     public CrescentItem(Item.Properties build) {
         super(AshOfSinItemTier.CRESCENT, 0, -1.4F, build);
         if (AshOfSin.isPhysicalClient()) {

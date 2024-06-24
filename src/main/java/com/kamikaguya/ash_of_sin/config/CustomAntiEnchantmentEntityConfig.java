@@ -13,16 +13,16 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CustomAntiEnchantmentEntityConfig {
-    private static ForgeConfigSpec ANTI_ENCHANTMENT_ENTITY_CONFIG;
+    public static final ForgeConfigSpec ANTI_ENCHANTMENT_ENTITY_CONFIG;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> ANTI_ENCHANTMENT_ENTITY;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> ANTI_ENCHANTMENT;
-    private final Path configPath;
+    public final Path configPath;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
         ANTI_ENCHANTMENT_ENTITY = builder.comment("Anti-Enchantment Entity")
                 .defineList("Anti-Enchantment Entity",
-                        () -> new ArrayList<>(Arrays.asList("ash_of_sin:kamikaguya")),
+                        () -> new ArrayList<>(List.of("ash_of_sin:kamikaguya")),
                         o -> o instanceof String);
         List<String> antiEffects = List.of(
                 "ash_of_sin:absolute_rule"

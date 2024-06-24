@@ -142,10 +142,7 @@ public class AshOfSinMirrorOfTheDarkNightEvent {
         if (!(mainHand.isEmpty()) && (holdMirrorOfTheDarkNight)) {
             return true;
         }
-        if (!(offHand.isEmpty()) && (holdMirrorOfTheDarkNight)) {
-            return true;
-        }
-        return false;
+        return !(offHand.isEmpty()) && (holdMirrorOfTheDarkNight);
     }
 
     public static boolean hasProtectionEnchantmentAromor(LivingEntity livingEntity, Enchantment enchantment) {

@@ -22,7 +22,7 @@ import java.util.Random;
 import java.util.UUID;
 
 public class WrathOfGod extends MobEffect {
-    private static final UUID MODIFIER_ID = UUID.fromString("6e0c1304-ae8d-4c24-8099-d9e3f5a8e5ee");
+    public static final UUID MODIFIER_ID = UUID.fromString("6e0c1304-ae8d-4c24-8099-d9e3f5a8e5ee");
 
     public WrathOfGod() {
         super(MobEffectCategory.HARMFUL, 0xFFC0CB);
@@ -72,9 +72,9 @@ public class WrathOfGod extends MobEffect {
         super.removeAttributeModifiers(entity, attributeMap, amplifier);
     }
 
-    private static final int TOTAL_MAX_ATTEMPTS = 3939;
+    public static final int TOTAL_MAX_ATTEMPTS = 3939;
 
-    private void teleportToNether(LivingEntity entity) {
+    public void teleportToNether(LivingEntity entity) {
         if (!(entity instanceof ServerPlayer player)) {
             return;
         }
@@ -116,7 +116,7 @@ public class WrathOfGod extends MobEffect {
         player.teleportTo(nether, defaultSpawn.getX(), defaultSpawn.getY(), defaultSpawn.getZ(), entity.getYRot(), entity.getXRot());
     }
 
-    private boolean isSafeLocation(ServerLevel level, int x, int y, int z) {
+    public boolean isSafeLocation(ServerLevel level, int x, int y, int z) {
         BlockPos groundPos = new BlockPos(x, y - 1, z);
         BlockPos playerPos = new BlockPos(x, y, z);
         BlockPos abovePos = new BlockPos(x, y + 1, z);
@@ -127,7 +127,7 @@ public class WrathOfGod extends MobEffect {
         return isGroundSafe && isPlayerPosSafe;
     }
 
-    private boolean isGroundSafe(ServerLevel level, BlockPos groundPos) {
+    public boolean isGroundSafe(ServerLevel level, BlockPos groundPos) {
         BlockState state = level.getBlockState(groundPos);
         if (state.getMaterial().isSolid()) {
             boolean isNotFire = !state.is(BlockTags.FIRE);
@@ -137,7 +137,7 @@ public class WrathOfGod extends MobEffect {
         return false;
     }
 
-    private boolean isAirSafe(ServerLevel level, BlockPos pos) {
+    public boolean isAirSafe(ServerLevel level, BlockPos pos) {
         return level.getBlockState(pos).isAir();
     }
 }

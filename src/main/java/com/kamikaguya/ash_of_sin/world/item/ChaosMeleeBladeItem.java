@@ -18,7 +18,7 @@ import java.util.List;
 
 public class ChaosMeleeBladeItem extends WeaponItem {
     @OnlyIn(Dist.CLIENT)
-    private List<Component> tooltipExpand;
+    public List<Component> tooltipExpand;
     public ChaosMeleeBladeItem(Item.Properties build) {
         super(AshOfSinItemTier.CHAOS_MELEE_BLADE, 0, -2.8F, build);
         if (AshOfSin.isPhysicalClient()) {

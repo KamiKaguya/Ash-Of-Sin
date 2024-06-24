@@ -18,7 +18,7 @@ import java.util.List;
 
 public class SculkAxeItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
-    private List<Component> tooltipExpand;
+    public List<Component> tooltipExpand;
     public SculkAxeItem(Item.Properties build) {
         super(AshOfSinItemTier.SCULK_AXE, 0, -3.0F, build);
         if (AshOfSin.isPhysicalClient()) {

@@ -10,9 +10,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class AntiSameModifierConfig {
-    private static ForgeConfigSpec ANTI_SAME_MODIFIER_CONFIG;
+    public static final ForgeConfigSpec ANTI_SAME_MODIFIER_CONFIG;
     public static ForgeConfigSpec.BooleanValue ANTI_ON;
-    private final Path configPath;
+    public final Path configPath;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();

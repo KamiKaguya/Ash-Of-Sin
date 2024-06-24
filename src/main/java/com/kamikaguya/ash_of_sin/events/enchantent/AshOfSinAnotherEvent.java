@@ -49,7 +49,7 @@ public class AshOfSinAnotherEvent {
         }
     }
 
-    private static boolean hasAnotherEnchantmentAromor(Player player, Enchantment enchantment) {
+    public static boolean hasAnotherEnchantmentAromor(Player player, Enchantment enchantment) {
         Iterable<ItemStack> armors = player.getArmorSlots();
         for (ItemStack stack : armors) {
             if (EnchantmentHelper.getItemEnchantmentLevel(enchantment, stack) > 0) {
@@ -59,9 +59,9 @@ public class AshOfSinAnotherEvent {
         return false;
     }
 
-    private static final int KILL_COOLDOWN_REDUCTION = 3 * 20;
+    public static final int KILL_COOLDOWN_REDUCTION = 3 * 20;
 
-    private void summonAnother(ServerPlayer serverPlayer, LivingEntity attacker) {
+    public void summonAnother(ServerPlayer serverPlayer, LivingEntity attacker) {
 
         long currentGameTime = serverPlayer.level.getGameTime();
         long lastSummonTime = serverPlayer.getPersistentData().getLong("AnotherLastSummonTime");
@@ -145,7 +145,7 @@ public class AshOfSinAnotherEvent {
         }
     }
 
-    private void updateCoolDown(ServerPlayer serverPlayer, long lastSummonTime) {
+    public void updateCoolDown(ServerPlayer serverPlayer, long lastSummonTime) {
         long newCoolDownTime = Math.max(0, lastSummonTime - ((long) AshOfSinAnotherEvent.KILL_COOLDOWN_REDUCTION * serverPlayer.getPersistentData().getInt("AnotherSummonCDKillCount")));
         serverPlayer.getPersistentData().putLong("AnotherLastSummonTime", newCoolDownTime);
         serverPlayer.getPersistentData().putInt("AnotherSummonCDKillCount", 0);

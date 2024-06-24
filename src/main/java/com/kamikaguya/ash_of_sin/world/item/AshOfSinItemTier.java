@@ -60,14 +60,14 @@ public enum AshOfSinItemTier implements Tier {
     }), SCULK_GREATSWORD(4, 3000, 20.0F, 17.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
     });
-    private final int harvestLevel;
-    private final int maxUses;
-    private final float efficiency;
-    private final float attackDamage;
-    private final int enchantability;
-    private final LazyLoadedValue<Ingredient> repairMaterial;
+    public final int harvestLevel;
+    public final int maxUses;
+    public final float efficiency;
+    public final float attackDamage;
+    public final int enchantability;
+    public final LazyLoadedValue<Ingredient> repairMaterial;
 
-    private AshOfSinItemTier(int harvestLevelIn, int maxUsesIn, float efficiencyIn, float attackDamageIn, int enchantabilityIn, Supplier<Ingredient> repairMaterialIn) {
+    AshOfSinItemTier(int harvestLevelIn, int maxUsesIn, float efficiencyIn, float attackDamageIn, int enchantabilityIn, Supplier<Ingredient> repairMaterialIn) {
         this.harvestLevel = harvestLevelIn;
         this.maxUses = maxUsesIn;
         this.efficiency = efficiencyIn;

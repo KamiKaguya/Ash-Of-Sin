@@ -3,8 +3,8 @@ package com.kamikaguya.ash_of_sin.config;
 import java.util.List;
 
 public class CustomEntityItemConfig {
-    private List<String> entity;
-    private CustomItemConfig item;
+    public List<String> entity;
+    public CustomItemConfig item;
 
     public List<String> getEntity() {
         return entity;

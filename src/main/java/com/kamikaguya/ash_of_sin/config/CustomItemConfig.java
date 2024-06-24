@@ -3,18 +3,18 @@ package com.kamikaguya.ash_of_sin.config;
 import java.util.List;
 
 public class CustomItemConfig {
-    private List<String> helmet;
-    private List<String> helmetNBT;
-    private List<String> chestplate;
-    private List<String> chestplateNBT;
-    private List<String> leggings;
-    private List<String> leggingsNBT;
-    private List<String> boots;
-    private List<String> bootsNBT;
-    private List<String> mainhand;
-    private List<String> mainhandNBT;
-    private List<String> offhand;
-    private List<String> offhandNBT;
+    public List<String> helmet;
+    public List<String> helmetNBT;
+    public List<String> chestplate;
+    public List<String> chestplateNBT;
+    public List<String> leggings;
+    public List<String> leggingsNBT;
+    public List<String> boots;
+    public List<String> bootsNBT;
+    public List<String> mainhand;
+    public List<String> mainhandNBT;
+    public List<String> offhand;
+    public List<String> offhandNBT;
 
     public void setHelmet(List<String> helmet) {
         this.helmet = helmet;

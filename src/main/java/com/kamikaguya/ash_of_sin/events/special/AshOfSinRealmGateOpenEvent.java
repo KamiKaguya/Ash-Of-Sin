@@ -28,8 +28,7 @@ public class AshOfSinRealmGateOpenEvent {
             if (!entityData.getBoolean(key)) {
 
                 EntityType<?> entityType = ForgeRegistries.ENTITIES.getValue(new ResourceLocation("ash_of_sin:gate"));
-                if (entityType != null && entityType.create(world) instanceof Gate) {
-                    Gate gate = (Gate) entityType.create(world);
+                if (entityType != null && entityType.create(world) instanceof Gate gate) {
                     if (gate != null) {
                         gate.moveTo(deadEntity.getX(), deadEntity.getY(), deadEntity.getZ(), deadEntity.getYRot(), deadEntity.getXRot());
                         world.addFreshEntity(gate);

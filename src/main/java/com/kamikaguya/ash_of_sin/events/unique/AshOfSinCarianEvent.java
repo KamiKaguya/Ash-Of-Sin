@@ -22,7 +22,7 @@ import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinCarianEvent {
-    private static final Random RANDOM = new Random();
+    public static final Random RANDOM = new Random();
 
     @SubscribeEvent
     public static void onHurt(LivingHurtEvent event) {
@@ -72,22 +72,16 @@ public class AshOfSinCarianEvent {
         }
     }
 
-    private static boolean holdDarkMoonGreatsword(LivingEntity livingEntity) {
+    public static boolean holdDarkMoonGreatsword(LivingEntity livingEntity) {
         ItemStack mainHand = livingEntity.getMainHandItem();
         boolean holdDarkMoonGreatsword = mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "dark_moon_greatsword"));
-        if (!(mainHand.isEmpty()) && (holdDarkMoonGreatsword)) {
-            return true;
-        }
-        return false;
+        return !(mainHand.isEmpty()) && (holdDarkMoonGreatsword);
     }
 
-    private static boolean holdCarianKnightsSword(LivingEntity livingEntity) {
+    public static boolean holdCarianKnightsSword(LivingEntity livingEntity) {
         ItemStack mainHand = livingEntity.getMainHandItem();
         boolean holdCarianKnightsSword = mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "carian_knights_sword"));
-        if (!(mainHand.isEmpty()) && (holdCarianKnightsSword)) {
-            return true;
-        }
-        return false;
+        return !(mainHand.isEmpty()) && (holdCarianKnightsSword);
     }
 
     @SubscribeEvent
@@ -142,7 +136,7 @@ public class AshOfSinCarianEvent {
         }
     }
 
-    private static boolean hasProtectionEnchantmentAromor(LivingEntity livingEntity, Enchantment enchantment) {
+    public static boolean hasProtectionEnchantmentAromor(LivingEntity livingEntity, Enchantment enchantment) {
         Iterable<ItemStack> armors = livingEntity.getArmorSlots();
         for (ItemStack stack : armors) {
             if (EnchantmentHelper.getItemEnchantmentLevel(enchantment, stack) > 0) {

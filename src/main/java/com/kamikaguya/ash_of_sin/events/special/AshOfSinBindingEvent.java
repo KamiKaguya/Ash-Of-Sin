@@ -43,7 +43,8 @@ public class AshOfSinBindingEvent {
                 offHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "crescent")) ||
                 offHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "crescent_sheath")) ||
                 mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "venuzdonoa")) ||
-                mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "dark_moon_greatsword"));
+                mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "dark_moon_greatsword")) ||
+                mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "despair_scythe"));
         boolean isOP = holder.getGameProfile().getName().contains("KamiKaguya") ||
                 holder.getGameProfile().getName().contains("wangumao") ||
                 holder.getGameProfile().getName().contains("Tahora") ||

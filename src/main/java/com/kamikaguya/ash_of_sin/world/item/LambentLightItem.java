@@ -18,7 +18,7 @@ import java.util.List;
 
 public class LambentLightItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
-    private List<Component> tooltipExpand;
+    public List<Component> tooltipExpand;
     public LambentLightItem(Item.Properties build) {
         super(AshOfSinItemTier.LAMBENT_LIGHT, 0, -1.95F, build);
         if (AshOfSin.isPhysicalClient()) {

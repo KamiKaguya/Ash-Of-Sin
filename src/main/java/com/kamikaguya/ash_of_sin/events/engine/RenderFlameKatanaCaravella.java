@@ -18,10 +18,10 @@ import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
 
 @OnlyIn(Dist.CLIENT)
 public class RenderFlameKatanaCaravella extends RenderItemBase {
-    private final ItemStack sheathStack;
+    public final ItemStack sheathStack;
 
     public RenderFlameKatanaCaravella() {
-        this.sheathStack = new ItemStack((ItemLike)AshOfSinItems.FLAME_KATANA_CARAVELLA_SHEATH.get());
+        this.sheathStack = new ItemStack(AshOfSinItems.FLAME_KATANA_CARAVELLA_SHEATH.get());
     }
 
     public void renderItemInHand(ItemStack stack, LivingEntityPatch<?> entitypatch, InteractionHand hand, HumanoidArmature armature, OpenMatrix4f[] poses, MultiBufferSource buffer, PoseStack poseStack, int packedLight) {

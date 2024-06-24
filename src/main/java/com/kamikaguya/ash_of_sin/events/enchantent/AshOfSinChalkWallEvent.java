@@ -244,7 +244,7 @@ public class AshOfSinChalkWallEvent {
         }
     }
 
-    private static int getEnchantmentLevel(LivingEntity entity, Enchantment enchantment) {
+    public static int getEnchantmentLevel(LivingEntity entity, Enchantment enchantment) {
         Iterable<ItemStack> armors = entity.getArmorSlots();
         int level = 0;
         for (ItemStack stack : armors) {
@@ -253,7 +253,7 @@ public class AshOfSinChalkWallEvent {
         return level;
     }
 
-    private static void consumeDurabilityBasedOnEnchantmentLevel(LivingEntity entity, Enchantment enchantment) {
+    public static void consumeDurabilityBasedOnEnchantmentLevel(LivingEntity entity, Enchantment enchantment) {
         Iterable<ItemStack> armors = entity.getArmorSlots();
         for (ItemStack stack : armors) {
             if (!stack.isEmpty() && getSoloEnchantmentLevel(entity, enchantment, stack) > 0) {
@@ -267,7 +267,7 @@ public class AshOfSinChalkWallEvent {
         }
     }
 
-    private static int getSoloEnchantmentLevel(LivingEntity entity, Enchantment enchantment, ItemStack stack) {
+    public static int getSoloEnchantmentLevel(LivingEntity entity, Enchantment enchantment, ItemStack stack) {
         return EnchantmentHelper.getItemEnchantmentLevel(enchantment, stack);
     }
 

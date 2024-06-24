@@ -20,7 +20,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class EaItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
-    private List<Component> tooltipExpand;
+    public List<Component> tooltipExpand;
     public EaItem(Item.Properties build) {
         super(AshOfSinItemTier.EA, 0, 0F, build);
         if (AshOfSin.isPhysicalClient()) {

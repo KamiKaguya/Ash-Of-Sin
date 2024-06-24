@@ -24,11 +24,11 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinGoblinEvent {
-    private static final Map<UUID, Long> lastSpawnTimes = new ConcurrentHashMap<>();
-    private static final Map<UUID, Set<UUID>> markedGoblins = new ConcurrentHashMap<>();
-    private static final long SPAWN_COOLDOWN = 20 * 20;
-    private static final ResourceLocation goblinkingID = new ResourceLocation("goblinsanddungeons:goblin_king");
-    private static final ResourceLocation[] GOBLIN_TYPES = {
+    public static final Map<UUID, Long> lastSpawnTimes = new ConcurrentHashMap<>();
+    public static final Map<UUID, Set<UUID>> markedGoblins = new ConcurrentHashMap<>();
+    public static final long SPAWN_COOLDOWN = 20 * 20;
+    public static final ResourceLocation goblinkingID = new ResourceLocation("goblinsanddungeons:goblin_king");
+    public static final ResourceLocation[] GOBLIN_TYPES = {
             new ResourceLocation("goblinsanddungeons:gob"),
             new ResourceLocation("goblinsanddungeons:hobgob"),
             new ResourceLocation("goblinsanddungeons:goblo"),
@@ -67,7 +67,7 @@ public class AshOfSinGoblinEvent {
         }
     }
 
-    private static boolean canSpawnGoblins(ServerLevel world, ServerPlayer player) {
+    public static boolean canSpawnGoblins(ServerLevel world, ServerPlayer player) {
         AABB playerCheckBox = player.getBoundingBox().inflate(32, 16, 32);
         List<Entity> goblinKings = world.getEntitiesOfClass(Entity.class, playerCheckBox, e -> e.getType().equals(goblinkingID));
 
@@ -81,7 +81,7 @@ public class AshOfSinGoblinEvent {
         return false;
     }
 
-    private static void spawnGoblins(ServerLevel serverWorld, ServerPlayer player, Entity goblinKing) {
+    public static void spawnGoblins(ServerLevel serverWorld, ServerPlayer player, Entity goblinKing) {
         Set<UUID> spawnedGoblins = markedGoblins.computeIfAbsent(player.getUUID(), k -> new HashSet<>());
 
         for (ResourceLocation goblinTypeLocation : GOBLIN_TYPES) {
@@ -145,7 +145,7 @@ public class AshOfSinGoblinEvent {
         }
     }
 
-    private static void cleanUpGoblinTags(ServerLevel serverWorld, ServerPlayer player) {
+    public static void cleanUpGoblinTags(ServerLevel serverWorld, ServerPlayer player) {
         Set<UUID> goblinIDs = markedGoblins.getOrDefault(player.getUUID(), Collections.emptySet());
         goblinIDs.removeIf(goblinID -> {
             Entity goblinEntity = serverWorld.getEntity(goblinID);

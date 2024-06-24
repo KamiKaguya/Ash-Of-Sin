@@ -22,7 +22,7 @@ import java.util.List;
 
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinCustomEntityItemEvent {
-    private static CustomEntityItemConfigManager customEntityItemConfigManager = new CustomEntityItemConfigManager();
+    public static final CustomEntityItemConfigManager customEntityItemConfigManager = new CustomEntityItemConfigManager();
 
     @SubscribeEvent
     public void onLivingSpawnEvent(LivingSpawnEvent event) {

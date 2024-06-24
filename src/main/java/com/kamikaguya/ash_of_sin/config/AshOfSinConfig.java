@@ -48,7 +48,7 @@ public class AshOfSinConfig {
     public static ForgeConfigSpec.ConfigValue<String> Doppelganger_OFF_HAND_ITEM;
     public static ForgeConfigSpec.ConfigValue<String> Doppelganger_MAIN_HAND_ITEM_NBT;
     public static ForgeConfigSpec.ConfigValue<String> Doppelganger_OFF_HAND_ITEM_NBT;
-    private final Path configPath;
+    public final Path configPath;
 
     public static BlockPos getGateLocation() {
         String locationString = getConfigPos().get();
@@ -77,7 +77,7 @@ public class AshOfSinConfig {
         // KamiKaguya Attack Effects Settings
         builder.comment("KamiKaguya Attack Effects Settings").push("KamiKaguyaAttackEffects");
         // Default Attack Effects
-        List<String> defaultHurtEffects = Arrays.asList(
+        List<String> defaultHurtEffects = List.of(
                 "apotheosis:sundering," + (13 * 20) + ",38"
         );
         // More Attack Effects
@@ -107,7 +107,7 @@ public class AshOfSinConfig {
         builder.comment("Entities List Settings").push("entities_dead");
         ENTITY_DEAD = builder.comment("EntitiesList")
                 .defineList("EntitiesList",
-                        () -> Arrays.asList("witherstormmod:wither_storm"),
+                        () -> List.of("witherstormmod:wither_storm"),
                         o -> o instanceof String);
         builder.pop();
 
@@ -115,7 +115,7 @@ public class AshOfSinConfig {
         builder.comment("Entities Enter Realm Settings").push("enter_entities");
         ENTITY_ENTER_REALM = builder.comment("EntitiesEnterRealm")
                 .defineList("EntitiesEnterRealm",
-                        () -> Arrays.asList("ash_of_sin:kamikaguya"),
+                        () -> List.of("ash_of_sin:kamikaguya"),
                         o -> o instanceof String);
         builder.pop();
 

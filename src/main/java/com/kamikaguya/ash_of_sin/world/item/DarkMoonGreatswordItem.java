@@ -18,7 +18,7 @@ import java.util.List;
 
 public class DarkMoonGreatswordItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
-    private List<Component> tooltipExpand;
+    public List<Component> tooltipExpand;
     public DarkMoonGreatswordItem(Item.Properties build) {
         super(AshOfSinItemTier.DARK_MOON_GREATSWORD, 0, -3.05F, build);
         if (AshOfSin.isPhysicalClient()) {

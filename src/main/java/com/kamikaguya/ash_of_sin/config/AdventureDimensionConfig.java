@@ -13,10 +13,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AdventureDimensionConfig {
-    private static ForgeConfigSpec ADVENTURE_DIMENSION_CONFIG;
+    public static final ForgeConfigSpec ADVENTURE_DIMENSION_CONFIG;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> ADVENTURE_DIMENSION_ID;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> ADVENTURE_DIMENSION_ALLOW_PLAYER_ID;
-    private final Path configPath;
+    public final Path configPath;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -27,7 +27,7 @@ public class AdventureDimensionConfig {
                 );
         ADVENTURE_DIMENSION_ALLOW_PLAYER_ID = builder.comment("Exception Player ID")
                 .defineList("Exception Player ID",
-                        () -> new ArrayList<>(Arrays.asList("KamiKaguya")),
+                        () -> new ArrayList<>(List.of("KamiKaguya")),
                         o -> o instanceof String
                 );
         ADVENTURE_DIMENSION_CONFIG = builder.build();

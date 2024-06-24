@@ -65,13 +65,13 @@ public class GateRenderer extends EntityRenderer<Gate> {
 		VertexConsumer builder = buf.getBuffer(RenderType.entityCutoutNoCull(getTextureLocation(gate)));
 
 		float frameHeight = 1 / 9F;
-		int frame = (int) (gate.tickCount % 9);
+		int frame = gate.tickCount % 9;
 		renderQuad(matrix, builder, packedLight, frameHeight, frame);
 
 		matrix.popPose();
 	}
 
-	private void renderQuad(PoseStack matrix, VertexConsumer builder, int packedLight, float frameHeight, int frame) {
+	public void renderQuad(PoseStack matrix, VertexConsumer builder, int packedLight, float frameHeight, int frame) {
 		builder.vertex(matrix.last().pose(), -1, -1, 0).color(255, 192, 203, 255).uv(1, 1 - frame * frameHeight).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(packedLight).normal(matrix.last().normal(), 0, 1, 0).endVertex();
 		builder.vertex(matrix.last().pose(), -1, 1, 0).color(255, 192, 203, 255).uv(1, 8F / 9 - frame * frameHeight).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(packedLight).normal(matrix.last().normal(), 0, 1, 0).endVertex();
 		builder.vertex(matrix.last().pose(), 1, 1, 0).color(255, 192, 203, 255).uv(0, 8F / 9 - frame * frameHeight).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(packedLight).normal(matrix.last().normal(), 0, 1, 0).endVertex();
@@ -85,7 +85,7 @@ public class GateRenderer extends EntityRenderer<Gate> {
 		return d < renderDistanceSq;
 	}
 
-	private double getBlockDistanceSq(Entity entity) {
+	public double getBlockDistanceSq(Entity entity) {
 		double deltaX = entity.getX() - this.entityRenderDispatcher.camera.getPosition().x();
 		double deltaY = entity.getY() - this.entityRenderDispatcher.camera.getPosition().y();
 		double deltaZ = entity.getZ() - this.entityRenderDispatcher.camera.getPosition().z();

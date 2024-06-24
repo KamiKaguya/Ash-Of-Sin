@@ -15,53 +15,53 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CustomEntityItemConfigManager {
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-    private static final Type CONFIG_TYPE = new TypeToken<List<CustomEntityItemConfig>>() {}.getType();
-    private List<CustomEntityItemConfig> customEntityItemConfig;
-    private final Path configPath;
+    public static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+    public static final Type CONFIG_TYPE = new TypeToken<List<CustomEntityItemConfig>>() {}.getType();
+    public List<CustomEntityItemConfig> customEntityItemConfig;
+    public final Path configPath;
 
     public CustomEntityItemConfigManager() {
         this.configPath = FMLPaths.CONFIGDIR.get().resolve("ash_of_sin/custom_entity_item.json");
         loadConfig();
     }
 
-    private void initializeDefaultConfig() {
+    public void initializeDefaultConfig() {
         List<CustomEntityItemConfig> defaultConfigs = new ArrayList<>();
 
         CustomEntityItemConfig dreadKnightConfig = new CustomEntityItemConfig();
         dreadKnightConfig.setEntity(List.of("iceandfire:dread_knight"));
-        CustomItemConfig CustomItemsConfig01 = new CustomItemConfig();
-        CustomItemsConfig01.setHelmet(List.of());
-        CustomItemsConfig01.setHelmetNBT(List.of("{}"));
-        CustomItemsConfig01.setChestplate(List.of());
-        CustomItemsConfig01.setChestplateNBT(List.of("{}"));
-        CustomItemsConfig01.setLeggings(List.of());
-        CustomItemsConfig01.setLeggingsNBT(List.of("{}"));
-        CustomItemsConfig01.setBoots(List.of());
-        CustomItemsConfig01.setBootsNBT(List.of("{}"));
-        CustomItemsConfig01.setMainhand(List.of("iceandfire:dread_knight_sword"));
-        CustomItemsConfig01.setMainhandNBT(List.of("{}"));
-        CustomItemsConfig01.setOffhand(List.of("upgradednetherite:corrupt_upgraded_netherite_shield"));
-        CustomItemsConfig01.setOffhandNBT(List.of("{}"));
-        dreadKnightConfig.setItem(CustomItemsConfig01);
+        CustomItemConfig dreadKnightItemConfig = new CustomItemConfig();
+        dreadKnightItemConfig.setHelmet(List.of());
+        dreadKnightItemConfig.setHelmetNBT(List.of("{}"));
+        dreadKnightItemConfig.setChestplate(List.of());
+        dreadKnightItemConfig.setChestplateNBT(List.of("{}"));
+        dreadKnightItemConfig.setLeggings(List.of());
+        dreadKnightItemConfig.setLeggingsNBT(List.of("{}"));
+        dreadKnightItemConfig.setBoots(List.of());
+        dreadKnightItemConfig.setBootsNBT(List.of("{}"));
+        dreadKnightItemConfig.setMainhand(List.of("iceandfire:dread_knight_sword"));
+        dreadKnightItemConfig.setMainhandNBT(List.of("{}"));
+        dreadKnightItemConfig.setOffhand(List.of("upgradednetherite:corrupt_upgraded_netherite_shield"));
+        dreadKnightItemConfig.setOffhandNBT(List.of("{}"));
+        dreadKnightConfig.setItem(dreadKnightItemConfig);
         defaultConfigs.add(dreadKnightConfig);
 
         CustomEntityItemConfig dreadThrallConfig = new CustomEntityItemConfig();
         dreadThrallConfig.setEntity(List.of("iceandfire:dread_thrall"));
-        CustomItemConfig CustomItemsConfig02 = new CustomItemConfig();
-        CustomItemsConfig02.setHelmet(List.of("amethysttoolsmod:netherite_helmet_amethyst"));
-        CustomItemsConfig02.setHelmetNBT(List.of("{}"));
-        CustomItemsConfig02.setChestplate(List.of("amethysttoolsmod:netherite_chestplate_amethyst"));
-        CustomItemsConfig02.setChestplateNBT(List.of("{}"));
-        CustomItemsConfig02.setLeggings(List.of("amethysttoolsmod:netherite_leggings_amethyst"));
-        CustomItemsConfig02.setLeggingsNBT(List.of("{}"));
-        CustomItemsConfig02.setBoots(List.of("amethysttoolsmod:netherite_boots_amethyst"));
-        CustomItemsConfig02.setBootsNBT(List.of("{}"));
-        CustomItemsConfig02.setMainhand(List.of("iceandfire:dread_sword"));
-        CustomItemsConfig02.setMainhandNBT(List.of("{}"));
-        CustomItemsConfig02.setOffhand(List.of("upgradednetherite:corrupt_upgraded_netherite_shield"));
-        CustomItemsConfig02.setOffhandNBT(List.of("{}"));
-        dreadThrallConfig.setItem(CustomItemsConfig02);
+        CustomItemConfig dreadThrallItemConfig = new CustomItemConfig();
+        dreadThrallItemConfig.setHelmet(List.of("amethysttoolsmod:netherite_helmet_amethyst"));
+        dreadThrallItemConfig.setHelmetNBT(List.of("{}"));
+        dreadThrallItemConfig.setChestplate(List.of("amethysttoolsmod:netherite_chestplate_amethyst"));
+        dreadThrallItemConfig.setChestplateNBT(List.of("{}"));
+        dreadThrallItemConfig.setLeggings(List.of("amethysttoolsmod:netherite_leggings_amethyst"));
+        dreadThrallItemConfig.setLeggingsNBT(List.of("{}"));
+        dreadThrallItemConfig.setBoots(List.of("amethysttoolsmod:netherite_boots_amethyst"));
+        dreadThrallItemConfig.setBootsNBT(List.of("{}"));
+        dreadThrallItemConfig.setMainhand(List.of("iceandfire:dread_sword"));
+        dreadThrallItemConfig.setMainhandNBT(List.of("{}"));
+        dreadThrallItemConfig.setOffhand(List.of("upgradednetherite:corrupt_upgraded_netherite_shield"));
+        dreadThrallItemConfig.setOffhandNBT(List.of("{}"));
+        dreadThrallConfig.setItem(dreadThrallItemConfig);
         defaultConfigs.add(dreadThrallConfig);
 
         String defaultConfigJson = GSON.toJson(defaultConfigs, CONFIG_TYPE);

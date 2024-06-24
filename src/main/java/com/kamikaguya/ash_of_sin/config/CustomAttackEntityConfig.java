@@ -3,8 +3,8 @@ package com.kamikaguya.ash_of_sin.config;
 import java.util.List;
 
 public class CustomAttackEntityConfig {
-    private String entity;
-    private List<CustomAttackEffectConfig> effect;
+    public final String entity;
+    public final List<CustomAttackEffectConfig> effect;
 
     public CustomAttackEntityConfig(String entity, List<CustomAttackEffectConfig> effect) {
         this.entity = entity;

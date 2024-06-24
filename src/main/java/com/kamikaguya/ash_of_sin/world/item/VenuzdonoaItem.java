@@ -18,7 +18,7 @@ import java.util.List;
 
 public class VenuzdonoaItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
-    private List<Component> tooltipExpand;
+    public List<Component> tooltipExpand;
     public VenuzdonoaItem(Item.Properties build) {
         super(AshOfSinItemTier.VENUZDONOA, 0, -2.8F, build);
         if (AshOfSin.isPhysicalClient()) {

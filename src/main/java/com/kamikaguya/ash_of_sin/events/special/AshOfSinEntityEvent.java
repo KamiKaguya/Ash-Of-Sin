@@ -1,4 +1,4 @@
-package com.kamikaguya.ash_of_sin.events;
+package com.kamikaguya.ash_of_sin.events.special;
 
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
 import com.kamikaguya.ash_of_sin.world.effect.AshOfSinEffects;
@@ -30,12 +30,11 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.*;
 
-@Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinEntityEvent {
-    private static final long DAY_LENGTH_IN_TICKS = 24000L;
-    private static final long DAYS_BEFORE_SPAWN_AGAIN = 13L;
-    private static final long ASSASSIN_SPAWN_INTERVAL = DAY_LENGTH_IN_TICKS * DAYS_BEFORE_SPAWN_AGAIN;
-    private static final Map<UUID, Long> lastAssassinSpawnTimes = new HashMap<>();
+    public static final long DAY_LENGTH_IN_TICKS = 24000L;
+    public static final long DAYS_BEFORE_SPAWN_AGAIN = 13L;
+    public static final long ASSASSIN_SPAWN_INTERVAL = DAY_LENGTH_IN_TICKS * DAYS_BEFORE_SPAWN_AGAIN;
+    public static final Map<UUID, Long> lastAssassinSpawnTimes = new HashMap<>();
 
     @SubscribeEvent
     public static void onPlayerChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
@@ -60,7 +59,7 @@ public class AshOfSinEntityEvent {
         }
     }
 
-    private static void teleportPlayerToNetherSafeLocation(ServerPlayer player) {
+    public static void teleportPlayerToNetherSafeLocation(ServerPlayer player) {
         ServerLevel nether = Objects.requireNonNull(player.getServer()).getLevel(Level.NETHER);
         if (nether != null) {
             BlockPos safeLocation = findSafeLocationInNether(nether);
@@ -105,9 +104,9 @@ public class AshOfSinEntityEvent {
         }
     }
 
-    private static final int TOTAL_MAX_ATTEMPTS = 3939;
+    public static final int TOTAL_MAX_ATTEMPTS = 3939;
 
-    private static BlockPos findSafeLocationInNether(ServerLevel nether) {
+    public static BlockPos findSafeLocationInNether(ServerLevel nether) {
         BlockPos respawnPoint = nether.getSharedSpawnPos();
         Random rand = new Random();
         int minRadius = 500;
@@ -136,7 +135,7 @@ public class AshOfSinEntityEvent {
         return safeLocation;
     }
 
-    private static boolean isSafeLocation(ServerLevel level, int x, int y, int z) {
+    public static boolean isSafeLocation(ServerLevel level, int x, int y, int z) {
         if (y < 32 || y > 180) {
             return false;
         }
@@ -157,7 +156,7 @@ public class AshOfSinEntityEvent {
         return isGroundSafe && isPlayerSpaceSafe && isSolidGround && isSafeHeadroom && isSafeGround;
     }
 
-    private static BlockPos findSafeLocationAround(ServerPlayer player) {
+    public static BlockPos findSafeLocationAround(ServerPlayer player) {
         BlockPos playerPos = player.blockPosition();
         ServerLevel world = player.getLevel();
         int radius = 8;
@@ -244,7 +243,7 @@ public class AshOfSinEntityEvent {
         }
     }
 
-    private static void spawnAssassinNearPlayer(ServerLevel world, ServerPlayer player) {
+    public static void spawnAssassinNearPlayer(ServerLevel world, ServerPlayer player) {
         EntityType<Assassin> assassinType = AshOfSinEntities.ASSASSIN.get();
         Assassin assassin = assassinType.create(world);
 
@@ -257,7 +256,7 @@ public class AshOfSinEntityEvent {
         }
     }
 
-    private static BlockPos findSpawnPositionNearPlayer(ServerLevel world, ServerPlayer player) {
+    public static BlockPos findSpawnPositionNearPlayer(ServerLevel world, ServerPlayer player) {
         Random random = player.getRandom();
         for (int i = 0; i < 10; i++) {
             int x = (int)Math.floor(player.getX() - 13 + random.nextInt(42));
@@ -274,7 +273,7 @@ public class AshOfSinEntityEvent {
         return null;
     }
 
-    private static boolean canSpawnHere(LevelAccessor world, BlockPos pos) {
+    public static boolean canSpawnHere(LevelAccessor world, BlockPos pos) {
         BlockState state = world.getBlockState(pos.below());
         return state.getMaterial().isSolid() && world.isEmptyBlock(pos) && world.isEmptyBlock(pos.above());
     }

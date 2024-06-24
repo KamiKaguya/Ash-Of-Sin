@@ -18,7 +18,7 @@ import java.util.List;
 
 public class CalamityBladeThinItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
-    private List<Component> tooltipExpand;
+    public List<Component> tooltipExpand;
     public CalamityBladeThinItem(Item.Properties build) {
         super(AshOfSinItemTier.CALAMITY_BLADE_THIN, 0, -2.25F, build);
         if (AshOfSin.isPhysicalClient()) {

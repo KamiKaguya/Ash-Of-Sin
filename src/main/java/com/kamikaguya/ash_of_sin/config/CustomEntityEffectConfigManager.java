@@ -13,56 +13,56 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CustomEntityEffectConfigManager {
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    private static final Type CONFIG_TYPE = new TypeToken<List<CustomEntityEffectConfig>>() {}.getType();
-    private List<CustomEntityEffectConfig> customEntityEffectConfigManager;
-    private final Path configPath;
+    public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    public static final Type CONFIG_TYPE = new TypeToken<List<CustomEntityEffectConfig>>() {}.getType();
+    public List<CustomEntityEffectConfig> customEntityEffectConfigManager;
+    public final Path configPath;
 
     public CustomEntityEffectConfigManager() {
         this.configPath = FMLPaths.CONFIGDIR.get().resolve("ash_of_sin/custom_entity_effect.json");
         initializeDefaultConfig();
     }
 
-    private void initializeDefaultConfig() {
+    public void initializeDefaultConfig() {
         if (!Files.exists(configPath)) {
             List<CustomEntityEffectConfig> defaultCustomEntityEffectConfig = Arrays.asList(
-                    new CustomEntityEffectConfig("simple_mobs:corrupted_ogre", Arrays.asList(
+                    new CustomEntityEffectConfig("simple_mobs:corrupted_ogre", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 0)
                     )),
-                    new CustomEntityEffectConfig("simple_mobs:knight_4", Arrays.asList(
+                    new CustomEntityEffectConfig("simple_mobs:knight_4", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 1)
                     )),
-                    new CustomEntityEffectConfig("simple_mobs:nine_tails", Arrays.asList(
+                    new CustomEntityEffectConfig("simple_mobs:nine_tails", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 2)
                     )),
-                    new CustomEntityEffectConfig("simple_mobs:skeletonlord", Arrays.asList(
+                    new CustomEntityEffectConfig("simple_mobs:skeletonlord", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("simple_mobs:sentinel_knight", Arrays.asList(
+                    new CustomEntityEffectConfig("simple_mobs:sentinel_knight", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("simple_mobs:fire_giant", Arrays.asList(
+                    new CustomEntityEffectConfig("simple_mobs:fire_giant", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("minecraft:wither", Arrays.asList(
+                    new CustomEntityEffectConfig("minecraft:wither", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("minecraft:ender_dragon", Arrays.asList(
+                    new CustomEntityEffectConfig("minecraft:ender_dragon", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("cataclysm:ender_guardian", Arrays.asList(
+                    new CustomEntityEffectConfig("cataclysm:ender_guardian", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("simple_mobs:notch_boss", Arrays.asList(
+                    new CustomEntityEffectConfig("simple_mobs:notch_boss", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("simple_mobs:elemental_deity", Arrays.asList(
+                    new CustomEntityEffectConfig("simple_mobs:elemental_deity", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("simple_mobs:herobrine", Arrays.asList(
+                    new CustomEntityEffectConfig("simple_mobs:herobrine", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 4)
                     )),
-                    new CustomEntityEffectConfig("simple_mobs:dragon_lord", Arrays.asList(
+                    new CustomEntityEffectConfig("simple_mobs:dragon_lord", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 4)
                     )),
                     new CustomEntityEffectConfig("ash_of_sin:kamikaguya", Arrays.asList(
@@ -93,7 +93,7 @@ public class CustomEntityEffectConfigManager {
                             new CustomEffectConfig("alexsmobs:knockback_resistance", "infinite", 0),
                             new CustomEffectConfig("alexsmobs:poison_resistance", "infinite", 0)
                     )),
-                    new CustomEntityEffectConfig("witherstormmod:withered_symbiont", Arrays.asList(
+                    new CustomEntityEffectConfig("witherstormmod:withered_symbiont", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 5)
                     )),
                     new CustomEntityEffectConfig("hmag:ender_executor", Arrays.asList(
@@ -295,121 +295,121 @@ public class CustomEntityEffectConfigManager {
                             new CustomEffectConfig("alexsmobs:soulsteal", "infinite", 2),
                             new CustomEffectConfig("alexsmobs:knockback_resistance", "infinite", 0)
                     )),
-                    new CustomEntityEffectConfig("bloodandmadness:father_gascoigne", Arrays.asList(
+                    new CustomEntityEffectConfig("bloodandmadness:father_gascoigne", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("bloodandmadness:gascoigne_beast", Arrays.asList(
+                    new CustomEntityEffectConfig("bloodandmadness:gascoigne_beast", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("bloodandmadness:micolash", Arrays.asList(
+                    new CustomEntityEffectConfig("bloodandmadness:micolash", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("simple_mobs:ent", Arrays.asList(
+                    new CustomEntityEffectConfig("simple_mobs:ent", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("simple_mobs:samurai_4", Arrays.asList(
+                    new CustomEntityEffectConfig("simple_mobs:samurai_4", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("simple_mobs:samurai_5", Arrays.asList(
+                    new CustomEntityEffectConfig("simple_mobs:samurai_5", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("simple_mobs:martian", Arrays.asList(
+                    new CustomEntityEffectConfig("simple_mobs:martian", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("mowziesmobs:frostmaw", Arrays.asList(
+                    new CustomEntityEffectConfig("mowziesmobs:frostmaw", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("mowziesmobs:umvuthi", Arrays.asList(
+                    new CustomEntityEffectConfig("mowziesmobs:umvuthi", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("mowziesmobs:naga", Arrays.asList(
+                    new CustomEntityEffectConfig("mowziesmobs:naga", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("ba_bt:land_golem", Arrays.asList(
+                    new CustomEntityEffectConfig("ba_bt:land_golem", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("ba_bt:ocean_golem", Arrays.asList(
+                    new CustomEntityEffectConfig("ba_bt:ocean_golem", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("aquamirae:captain_cornelia", Arrays.asList(
+                    new CustomEntityEffectConfig("aquamirae:captain_cornelia", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("graveyard:lich", Arrays.asList(
+                    new CustomEntityEffectConfig("graveyard:lich", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("whisperwoods:hirschgeist", Arrays.asList(
+                    new CustomEntityEffectConfig("whisperwoods:hirschgeist", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("irons_spellbooks:dead_king", Arrays.asList(
+                    new CustomEntityEffectConfig("irons_spellbooks:dead_king", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("darkersouls:nameless_king", Arrays.asList(
+                    new CustomEntityEffectConfig("darkersouls:nameless_king", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("cataclysm:ignis", Arrays.asList(
+                    new CustomEntityEffectConfig("cataclysm:ignis", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("cataclysm:netherite_monstrosity", Arrays.asList(
+                    new CustomEntityEffectConfig("cataclysm:netherite_monstrosity", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("cataclysm:ender_golem", Arrays.asList(
+                    new CustomEntityEffectConfig("cataclysm:ender_golem", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("simple_mobs:twins_stone", Arrays.asList(
+                    new CustomEntityEffectConfig("simple_mobs:twins_stone", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("simple_mobs:first_twin", Arrays.asList(
+                    new CustomEntityEffectConfig("simple_mobs:first_twin", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("simple_mobs:second_twin", Arrays.asList(
+                    new CustomEntityEffectConfig("simple_mobs:second_twin", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("alexsmobs:void_worm", Arrays.asList(
+                    new CustomEntityEffectConfig("alexsmobs:void_worm", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("alexsmobs:void_worm_part", Arrays.asList(
+                    new CustomEntityEffectConfig("alexsmobs:void_worm_part", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("bosses_of_mass_destruction:gauntlet", Arrays.asList(
+                    new CustomEntityEffectConfig("bosses_of_mass_destruction:gauntlet", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("bosses_of_mass_destruction:lich", Arrays.asList(
+                    new CustomEntityEffectConfig("bosses_of_mass_destruction:lich", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("bosses_of_mass_destruction:obsidilith", Arrays.asList(
+                    new CustomEntityEffectConfig("bosses_of_mass_destruction:obsidilith", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("bosses_of_mass_destruction:void_blossom", Arrays.asList(
+                    new CustomEntityEffectConfig("bosses_of_mass_destruction:void_blossom", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("blue_skies:arachnarch", Arrays.asList(
+                    new CustomEntityEffectConfig("blue_skies:arachnarch", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("blue_skies:alchemist", Arrays.asList(
+                    new CustomEntityEffectConfig("blue_skies:alchemist", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("blue_skies:summoner", Arrays.asList(
+                    new CustomEntityEffectConfig("blue_skies:summoner", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("blue_skies:starlit_crusher", Arrays.asList(
+                    new CustomEntityEffectConfig("blue_skies:starlit_crusher", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("illageandspillage:spiritcaller", Arrays.asList(
+                    new CustomEntityEffectConfig("illageandspillage:spiritcaller", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("illageandspillage:magispeller", Arrays.asList(
+                    new CustomEntityEffectConfig("illageandspillage:magispeller", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("conjurer_illager:conjurer", Arrays.asList(
+                    new CustomEntityEffectConfig("conjurer_illager:conjurer", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("meetyourfight:bellringer", Arrays.asList(
+                    new CustomEntityEffectConfig("meetyourfight:bellringer", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("meetyourfight:dame_fortuna", Arrays.asList(
+                    new CustomEntityEffectConfig("meetyourfight:dame_fortuna", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("meetyourfight:swampjaw", Arrays.asList(
+                    new CustomEntityEffectConfig("meetyourfight:swampjaw", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     ))
             );

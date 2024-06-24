@@ -18,7 +18,7 @@ import java.util.List;
 
 public class GodEaterItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
-    private List<Component> tooltipExpand;
+    public List<Component> tooltipExpand;
     public GodEaterItem(Item.Properties build) {
         super(AshOfSinItemTier.GOD_EATER, 0, -2.7F, build);
         if (AshOfSin.isPhysicalClient()) {

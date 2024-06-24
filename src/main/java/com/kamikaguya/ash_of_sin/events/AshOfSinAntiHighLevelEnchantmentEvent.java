@@ -16,7 +16,7 @@ import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinAntiHighLevelEnchantmentEvent {
-    private static final AntiHighLevelEnchantmentConfig config = new AntiHighLevelEnchantmentConfig();
+    public static final AntiHighLevelEnchantmentConfig config = new AntiHighLevelEnchantmentConfig();
 
     static {
         config.loadConfig();
@@ -36,7 +36,7 @@ public class AshOfSinAntiHighLevelEnchantmentEvent {
         checkAndCancelIfExceedMaxLevel(sacrificeEnchantments, maxEnchantmentLevels, event);
     }
 
-    private static void checkAndCancelIfExceedMaxLevel(Map<Enchantment, Integer> enchantments, Map<String, Integer> maxEnchantmentLevels, AnvilUpdateEvent event) {
+    public static void checkAndCancelIfExceedMaxLevel(Map<Enchantment, Integer> enchantments, Map<String, Integer> maxEnchantmentLevels, AnvilUpdateEvent event) {
         boolean shouldCancel = false;
         for (Map.Entry<Enchantment, Integer> entry : enchantments.entrySet()) {
             String registryName = entry.getKey().getRegistryName().toString();
@@ -51,7 +51,7 @@ public class AshOfSinAntiHighLevelEnchantmentEvent {
         }
     }
 
-    private static Map<String, Integer> loadConfigFrom(List<AntiHighLevelEnchantmentLevelConfig> configList) {
+    public static Map<String, Integer> loadConfigFrom(List<AntiHighLevelEnchantmentLevelConfig> configList) {
         Map<String, Integer> configMap = new HashMap<>();
         for (AntiHighLevelEnchantmentLevelConfig configItem : configList) {
             configMap.put(configItem.getEnchantment(), configItem.getLevel());

@@ -31,8 +31,7 @@ public class AshOfSinCustomAntiEnchantmentEntityEvent {
         List<? extends String> antiEnchantmentEntityList = CustomAntiEnchantmentEntityConfig.ANTI_ENCHANTMENT_ENTITY.get();
         List<? extends String> antiEnchantmentList = CustomAntiEnchantmentEntityConfig.ANTI_ENCHANTMENT.get();
 
-        if (antiEnchantmentEntityList.contains(entityResourceLocation.toString()) && source.getEntity() instanceof LivingEntity) {
-            LivingEntity attacker = (LivingEntity) source.getEntity();
+        if (antiEnchantmentEntityList.contains(entityResourceLocation.toString()) && source.getEntity() instanceof LivingEntity attacker) {
 
             if (isItemEnchanted(attacker.getMainHandItem(), antiEnchantmentList) || isItemEnchanted(attacker.getOffhandItem(), antiEnchantmentList)) {
                 event.setAmount(0);
@@ -40,7 +39,7 @@ public class AshOfSinCustomAntiEnchantmentEntityEvent {
         }
     }
 
-    private static boolean isItemEnchanted(ItemStack item, List<? extends String> antiEnchantmentList) {
+    public static boolean isItemEnchanted(ItemStack item, List<? extends String> antiEnchantmentList) {
         if(item.isEmpty()) return false;
 
         Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(item);

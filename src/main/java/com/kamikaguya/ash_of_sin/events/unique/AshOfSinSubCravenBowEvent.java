@@ -16,7 +16,7 @@ import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinSubCravenBowEvent {
-    private static final Random RANDOM = new Random();
+    public static final Random RANDOM = new Random();
 
     @SubscribeEvent
     public void onHurt(LivingHurtEvent event) {
@@ -45,11 +45,8 @@ public class AshOfSinSubCravenBowEvent {
         }
     }
 
-    private static boolean holdSubCravenBow(LivingEntity livingEntity) {
+    public static boolean holdSubCravenBow(LivingEntity livingEntity) {
         ItemStack mainHand = livingEntity.getMainHandItem();
-        if (!(mainHand.isEmpty()) && (mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "sub_craven_bow")))) {
-            return true;
-        }
-        return false;
+        return !(mainHand.isEmpty()) && (mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "sub_craven_bow")));
     }
 }

@@ -22,7 +22,7 @@ import java.util.Map;
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinCustomAntiHighATKEntityEvent {
 
-    private static final double MAX_ATK = CustomAntiHighATKEntityConfig.MAX_ATK.get();
+    public static final double MAX_ATK = CustomAntiHighATKEntityConfig.MAX_ATK.get();
     @SubscribeEvent
     public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         if (CustomAntiHighATKEntityConfig.ANTI_ON.get()) {

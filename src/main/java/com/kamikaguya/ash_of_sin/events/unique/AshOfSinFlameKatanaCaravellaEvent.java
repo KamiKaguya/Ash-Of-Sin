@@ -40,12 +40,9 @@ public class AshOfSinFlameKatanaCaravellaEvent {
         }
     }
 
-    private static boolean holdFlameKatanaCaravella(LivingEntity livingEntity) {
+    public static boolean holdFlameKatanaCaravella(LivingEntity livingEntity) {
         ItemStack mainHand = livingEntity.getMainHandItem();
         boolean holdFlameKatanaCaravella = mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "flame_katana_caravella"));
-        if (!(mainHand.isEmpty()) && (holdFlameKatanaCaravella)) {
-            return true;
-        }
-        return false;
+        return !(mainHand.isEmpty()) && (holdFlameKatanaCaravella);
     }
 }

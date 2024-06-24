@@ -40,7 +40,7 @@ public class AshOfSinEternalEntityEvent {
         }
     }
 
-    private static void preventDespawn(Entity eternalEntity) {
+    public static void preventDespawn(Entity eternalEntity) {
         if (eternalEntity instanceof Mob){
             ((Mob) eternalEntity).setPersistenceRequired();
         }

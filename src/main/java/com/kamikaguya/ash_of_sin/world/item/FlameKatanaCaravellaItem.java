@@ -18,7 +18,7 @@ import java.util.List;
 
 public class FlameKatanaCaravellaItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
-    private List<Component> tooltipExpand;
+    public List<Component> tooltipExpand;
     public FlameKatanaCaravellaItem(Item.Properties build) {
         super(AshOfSinItemTier.FLAME_KATANA_CARAVELLA, 0, -1.8F, build);
         if (AshOfSin.isPhysicalClient()) {

@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinCustomEntityEffectEvent {
-    private static final CustomEntityEffectConfigManager customEntityEffectConfigManager = new CustomEntityEffectConfigManager();
+    public static final CustomEntityEffectConfigManager customEntityEffectConfigManager = new CustomEntityEffectConfigManager();
     static {
         customEntityEffectConfigManager.loadConfig();
     }

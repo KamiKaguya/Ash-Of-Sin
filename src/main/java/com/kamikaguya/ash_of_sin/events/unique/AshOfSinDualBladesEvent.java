@@ -55,13 +55,10 @@ public class AshOfSinDualBladesEvent {
         }
     }
 
-    private static boolean holdElucidatorOrDarkRepulser(ServerPlayer serverPlayer) {
+    public static boolean holdElucidatorOrDarkRepulser(ServerPlayer serverPlayer) {
         ItemStack mainHand = serverPlayer.getMainHandItem();
         boolean holdElucidatorOrDarkRepulser = mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "elucidator")) ||
                 mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "dark_repulser"));
-        if (!(mainHand.isEmpty()) && (holdElucidatorOrDarkRepulser)) {
-            return true;
-        }
-        return false;
+        return !(mainHand.isEmpty()) && (holdElucidatorOrDarkRepulser);
     }
 }

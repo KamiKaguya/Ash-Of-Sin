@@ -29,9 +29,9 @@ import java.util.List;
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinSoulLikeBossBattleEvent {
 
-    private static final boolean SOUL_LIKE_BOSS_BATTLE_ON = SoulLikeBossBattleConfig.SOUL_LIKE_BOSS_BATTLE_ON.get();
-    private static final int DISTANCE = SoulLikeBossBattleConfig.BOSS_BATTLE_DISTANCE.get();
-    private static final boolean ANTI_ON = SoulLikeBossBattleConfig.ANTI_IRON_GOLEM.get();
+    public static final boolean SOUL_LIKE_BOSS_BATTLE_ON = SoulLikeBossBattleConfig.SOUL_LIKE_BOSS_BATTLE_ON.get();
+    public static final int DISTANCE = SoulLikeBossBattleConfig.BOSS_BATTLE_DISTANCE.get();
+    public static final boolean ANTI_ON = SoulLikeBossBattleConfig.ANTI_IRON_GOLEM.get();
 
     @SubscribeEvent
     public static void onPlayerDeath(LivingDeathEvent event) {
@@ -77,7 +77,7 @@ public class AshOfSinSoulLikeBossBattleEvent {
         }
     }
 
-    private static boolean allNearbyPlayerDied(Level world, LivingEntity boss, ServerPlayer player) {
+    public static boolean allNearbyPlayerDied(Level world, LivingEntity boss, ServerPlayer player) {
         List<ServerPlayer> nearbyPlayers = world.getEntitiesOfClass(ServerPlayer.class, new AABB(
                 boss.getX() - DISTANCE, boss.getY() - 8, boss.getZ() - DISTANCE,
                 boss.getX() + DISTANCE, boss.getY() + 8, boss.getZ() + DISTANCE

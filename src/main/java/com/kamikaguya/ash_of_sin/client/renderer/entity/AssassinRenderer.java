@@ -25,7 +25,7 @@ public class AssassinRenderer extends HumanoidMobRenderer<Assassin, HumanoidMode
         return d < renderDistanceSq;
     }
 
-    private double getBlockDistanceSq(Entity entity) {
+    public double getBlockDistanceSq(Entity entity) {
         double deltaX = entity.getX() - this.entityRenderDispatcher.camera.getPosition().x();
         double deltaY = entity.getY() - this.entityRenderDispatcher.camera.getPosition().y();
         double deltaZ = entity.getZ() - this.entityRenderDispatcher.camera.getPosition().z();

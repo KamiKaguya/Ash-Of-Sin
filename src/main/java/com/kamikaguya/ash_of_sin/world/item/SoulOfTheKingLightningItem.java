@@ -18,7 +18,7 @@ import java.util.List;
 
 public class SoulOfTheKingLightningItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
-    private List<Component> tooltipExpand;
+    public List<Component> tooltipExpand;
     public SoulOfTheKingLightningItem(Item.Properties build) {
         super(AshOfSinItemTier.SOUL_OF_THE_KING_LIGHTNING, 0, -2.2F, build);
         if (AshOfSin.isPhysicalClient()) {

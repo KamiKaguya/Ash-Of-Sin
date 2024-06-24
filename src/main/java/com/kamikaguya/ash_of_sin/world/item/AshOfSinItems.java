@@ -73,7 +73,7 @@ public class AshOfSinItems {
 
     public static final RegistryObject<Item> SCULK_GREATSWORD = ITEMS.register("sculk_greatsword", () -> new SculkGreatswordItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.RARE).fireResistant()));
 
-    private static <T extends Item> RegistryObject<T> register(final String name, final Supplier<T> item) {
+    public static <T extends Item> RegistryObject<T> register(final String name, final Supplier<T> item) {
         return ITEMS.register(name, item);
     }
 }

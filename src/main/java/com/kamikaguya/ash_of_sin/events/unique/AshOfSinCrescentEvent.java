@@ -43,13 +43,10 @@ public class AshOfSinCrescentEvent {
         }
     }
 
-    private static boolean holdCrescent(LivingEntity livingEntity) {
+    public static boolean holdCrescent(LivingEntity livingEntity) {
         ItemStack mainHand = livingEntity.getMainHandItem();
         boolean holdCrescent = mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "crescent"));
-        if (!(mainHand.isEmpty()) && (holdCrescent)) {
-            return true;
-        }
-        return false;
+        return !(mainHand.isEmpty()) && (holdCrescent);
     }
 
     @SubscribeEvent

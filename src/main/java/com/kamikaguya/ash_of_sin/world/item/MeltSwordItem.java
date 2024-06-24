@@ -18,7 +18,7 @@ import java.util.List;
 
 public class MeltSwordItem extends WeaponItem {
     @OnlyIn(Dist.CLIENT)
-    private List<Component> tooltipExpand;
+    public List<Component> tooltipExpand;
     public MeltSwordItem(Item.Properties build) {
         super(AshOfSinItemTier.MELT_SWORD, 0, -2.8F, build);
         if (AshOfSin.isPhysicalClient()) {

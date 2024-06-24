@@ -35,14 +35,14 @@ import java.util.*;
 
 public class KamiKaguya extends PathfinderMob {
 
-    private ItemStack mainHandItemStack;
-    private ItemStack offHandItemStack;
-    private boolean isInSecondPhase;
-    private boolean isSummonedEntityAlive;
-    private Entity summonedEntity;
-    private final Set<UUID> attackersUUIDs = new HashSet<>();
-    private static final Map<UUID, Doppelganger> doppelgangers = new HashMap<>();
-    private static void storeDoppelganger(ServerPlayer originalPlayer, Doppelganger doppelganger) {
+    public ItemStack mainHandItemStack;
+    public ItemStack offHandItemStack;
+    public boolean isInSecondPhase;
+    public boolean isSummonedEntityAlive;
+    public Entity summonedEntity;
+    public final Set<UUID> attackersUUIDs = new HashSet<>();
+    public static final Map<UUID, Doppelganger> doppelgangers = new HashMap<>();
+    public static void storeDoppelganger(ServerPlayer originalPlayer, Doppelganger doppelganger) {
         doppelgangers.put(originalPlayer.getUUID(), doppelganger);
     }
     public static Doppelganger getStoredDoppelganger(UUID uuid) {
@@ -56,8 +56,7 @@ public class KamiKaguya extends PathfinderMob {
             this.initEntityInventory();
             this.updateResistanceBuff();
 
-            if (!level.isClientSide() && level instanceof ServerLevel) {
-                ServerLevel serverLevel = (ServerLevel) level;
+            if (!level.isClientSide() && level instanceof ServerLevel serverLevel) {
                 Component joinMessage = new TranslatableComponent("message.ash_of_sin.kamikaguya.join");
                 serverLevel.getServer().getPlayerList().broadcastMessage(joinMessage, ChatType.SYSTEM, Util.NIL_UUID);
             }
@@ -77,7 +76,7 @@ public class KamiKaguya extends PathfinderMob {
                 .add(Attributes.LUCK, 3939.0D);
     }
 
-    private void initEntityInventory() {
+    public void initEntityInventory() {
         applyItemNBT();
 
         this.setItemSlot(EquipmentSlot.MAINHAND, this.mainHandItemStack);
@@ -98,7 +97,7 @@ public class KamiKaguya extends PathfinderMob {
         this.offHandItemStack = offHand;
     }
 
-    private CompoundTag parseStringToNBT(String jsonString) {
+    public CompoundTag parseStringToNBT(String jsonString) {
         try {
             return TagParser.parseTag(jsonString);
         } catch (CommandSyntaxException e) {
@@ -122,10 +121,10 @@ public class KamiKaguya extends PathfinderMob {
     }
 
     public class HurtByTargetGoal extends TargetGoal {
-        private final KamiKaguya kamiKaguya;
-        private LivingEntity target;
-        private final double distance;
-        private int timestamp;
+        public final KamiKaguya kamiKaguya;
+        public LivingEntity target;
+        public final double distance;
+        public int timestamp;
 
         public HurtByTargetGoal(KamiKaguya kamiKaguya, double distance) {
             super(kamiKaguya, true);
@@ -213,8 +212,7 @@ public class KamiKaguya extends PathfinderMob {
     @Override
     public boolean doHurtTarget(Entity entity) {
         boolean success = super.doHurtTarget(entity);
-        if (success && entity instanceof LivingEntity) {
-            LivingEntity livingEntity = (LivingEntity) entity;
+        if (success && entity instanceof LivingEntity livingEntity) {
 
             for (String effectString : AshOfSinConfig.EFFECT_LIST.get()) {
                 String[] parts = effectString.split(",");
@@ -285,20 +283,20 @@ public class KamiKaguya extends PathfinderMob {
         }
     }
 
-    private void enterSecondPhase() {
+    public void enterSecondPhase() {
         isInSecondPhase = true;
         updateResistanceBuff();
         summonEntity();
         summonDoppelgangers();
     }
 
-    private void removeSlowness() {
+    public void removeSlowness() {
         MobEffect slownessEffect = MobEffects.MOVEMENT_SLOWDOWN;
 
         this.removeEffect(slownessEffect);
     }
 
-    private void updateResistanceBuff() {
+    public void updateResistanceBuff() {
         MobEffect resistanceEffect = MobEffects.DAMAGE_RESISTANCE;
 
         this.removeEffect(resistanceEffect);
@@ -309,7 +307,7 @@ public class KamiKaguya extends PathfinderMob {
         this.addEffect(effectInstance);
     }
 
-    private void summonEntity() {
+    public void summonEntity() {
         EntityType<?> entityTypeToSummon = ForgeRegistries.ENTITIES.getValue(
                 new ResourceLocation(AshOfSinConfig.ENTITY_SUMMON_ID.get())
         );
@@ -330,14 +328,12 @@ public class KamiKaguya extends PathfinderMob {
         }
     }
 
-    private void summonDoppelgangers() {
-        if (!this.level.isClientSide && this.level instanceof ServerLevel) {
-            ServerLevel serverLevel = (ServerLevel) this.level;
+    public void summonDoppelgangers() {
+        if (!this.level.isClientSide && this.level instanceof ServerLevel serverLevel) {
 
             for (UUID attackerUUID : attackersUUIDs) {
                 Entity originalEntity = serverLevel.getEntity(attackerUUID);
-                if (originalEntity instanceof ServerPlayer) {
-                    ServerPlayer originalPlayer = (ServerPlayer) originalEntity;
+                if (originalEntity instanceof ServerPlayer originalPlayer) {
 
                     MobEffectInstance wrathOfGodEffect = new MobEffectInstance(AshOfSinEffects.WRATH_OF_GOD.get(), Integer.MAX_VALUE);
                     originalPlayer.addEffect(wrathOfGodEffect);
@@ -366,7 +362,7 @@ public class KamiKaguya extends PathfinderMob {
         }
     }
 
-    private boolean isDoppelgangersDead() {
+    public boolean isDoppelgangersDead() {
         for (UUID uuid : attackersUUIDs) {
             Entity entity = ((ServerLevel) this.level).getEntity(uuid);
             if (entity instanceof Doppelganger && entity.isAlive()) {

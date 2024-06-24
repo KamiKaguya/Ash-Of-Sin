@@ -13,11 +13,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CustomEntityAntiEffectConfig {
-    private static ForgeConfigSpec ENTITY_ANTI_EFFECT_CONFIG;
+    public static final ForgeConfigSpec ENTITY_ANTI_EFFECT_CONFIG;
     public static ForgeConfigSpec.BooleanValue ANTI_ON;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> ANTI_EFFECT_ENTITY;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> ANTI_EFFECT;
-    private final Path configPath;
+    public final Path configPath;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();

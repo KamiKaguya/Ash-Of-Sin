@@ -18,7 +18,7 @@ import java.util.List;
 
 public class FrostmourneItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
-    private List<Component> tooltipExpand;
+    public List<Component> tooltipExpand;
     public FrostmourneItem(Item.Properties build) {
         super(AshOfSinItemTier.FROSTMOURNE, 0, -3.05F, build);
         if (AshOfSin.isPhysicalClient()) {

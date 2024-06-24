@@ -14,11 +14,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CustomAntiHighATKEntityConfig {
-    private static ForgeConfigSpec ANTI_HIGH_ATK_ENTITY_CONFIG;
+    public static final ForgeConfigSpec ANTI_HIGH_ATK_ENTITY_CONFIG;
     public static ForgeConfigSpec.BooleanValue ANTI_ON;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> ANTI_HIGH_ATK_ENTITY;
     public static ForgeConfigSpec.ConfigValue<Double> MAX_ATK;
-    private final Path configPath;
+    public final Path configPath;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();

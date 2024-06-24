@@ -22,8 +22,7 @@ public interface AbsoluteSpaceTimeRealmEntity {
             boolean isFellowSummon;
             label28: {
                 isFellowSummon = entity == this.getOwner() || entity.isAlliedTo(this.getOwner());
-                if (entity instanceof OwnableEntity) {
-                    OwnableEntity ownableEntity = (OwnableEntity)entity;
+                if (entity instanceof OwnableEntity ownableEntity) {
                     if (ownableEntity.getOwner() == this.getOwner()) {
                         var10000 = true;
                         break label28;
@@ -44,8 +43,7 @@ public interface AbsoluteSpaceTimeRealmEntity {
             Component deathMessage = entity.getCombatTracker().getDeathMessage();
             if (!level.isClientSide && level.getGameRules().getBoolean(GameRules.RULE_SHOWDEATHMESSAGES)) {
                 LivingEntity var5 = this.getOwner();
-                if (var5 instanceof ServerPlayer) {
-                    ServerPlayer player = (ServerPlayer)var5;
+                if (var5 instanceof ServerPlayer player) {
                     player.sendMessage(deathMessage, Util.NIL_UUID);
                 }
             }

@@ -50,11 +50,9 @@ public class VenuzdonoaEnchantent extends Enchantment {
 
     @Override
     public void doPostAttack(LivingEntity attacker, Entity target, int enchantmentLevel) {
-        if (enchantmentLevel > 1 || !(target instanceof LivingEntity livingTarget) || !(attacker instanceof ServerPlayer)) {
+        if (enchantmentLevel > 1 || !(target instanceof LivingEntity livingTarget) || !(attacker instanceof ServerPlayer PlayerAttacker)) {
             return;
         }
-
-        ServerPlayer PlayerAttacker = (ServerPlayer) attacker;
 
         ItemStack mainHandWeapon = PlayerAttacker.getItemBySlot(EquipmentSlot.MAINHAND);
         ItemStack offHandWeapon = PlayerAttacker.getItemBySlot(EquipmentSlot.OFFHAND);
@@ -90,7 +88,7 @@ public class VenuzdonoaEnchantent extends Enchantment {
         livingTarget.hurt(DamageSource.playerAttack(PlayerAttacker).setMagic(), venuzdonoaDamage);
     }
 
-    private float getAttackDamage(ItemStack weapon, EquipmentSlot slot) {
+    public float getAttackDamage(ItemStack weapon, EquipmentSlot slot) {
         Multimap<Attribute, AttributeModifier> attributeModifiers = weapon.getAttributeModifiers(slot);
         Collection<AttributeModifier> attackDamageModifiers = attributeModifiers.get(Attributes.ATTACK_DAMAGE);
         float baseDamage = 0;
@@ -110,7 +108,7 @@ public class VenuzdonoaEnchantent extends Enchantment {
                 if (entry.getKey() instanceof ProtectionEnchantment) {
                     int protectLevel = entry.getValue();
 
-                    damageAfterArmorProtection += baseDamage * (10 / (protectLevel + 10.0f));
+                    damageAfterArmorProtection += baseDamage * (10 / ((protectLevel + 10.0f) / 2));
                 }
             }
         }

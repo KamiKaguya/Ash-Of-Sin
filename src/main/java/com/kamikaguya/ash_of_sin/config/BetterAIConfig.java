@@ -10,9 +10,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class BetterAIConfig {
-    private static ForgeConfigSpec BETTER_AI_CONFIG;
+    public static final ForgeConfigSpec BETTER_AI_CONFIG;
     public static ForgeConfigSpec.BooleanValue BETTER_AI_ON;
-    private final Path configPath;
+    public final Path configPath;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();

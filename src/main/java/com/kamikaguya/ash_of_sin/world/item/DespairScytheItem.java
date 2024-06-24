@@ -18,7 +18,7 @@ import java.util.List;
 
 public class DespairScytheItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
-    private List<Component> tooltipExpand;
+    public List<Component> tooltipExpand;
     public DespairScytheItem(Item.Properties build) {
         super(AshOfSinItemTier.DESPAIR_SCYTHE, 0, -2.1F, build);
         if (AshOfSin.isPhysicalClient()) {

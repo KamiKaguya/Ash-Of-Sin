@@ -15,9 +15,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class EternalEntityConfig {
-    private static ForgeConfigSpec ETERNAL_ENTITY_CONFIG;
+    public static final ForgeConfigSpec ETERNAL_ENTITY_CONFIG;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> ETERNAL_ENTITY;
-    private final Path configPath;
+    public final Path configPath;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();

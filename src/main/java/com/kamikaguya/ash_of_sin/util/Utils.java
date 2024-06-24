@@ -33,9 +33,8 @@ public class Utils {
 
         boolean flag = DamageSources.applyDamage(target, f, damageSource);
         if (flag) {
-            if (f1 > 0.0F && target instanceof LivingEntity) {
-                LivingEntity livingTarget = (LivingEntity)target;
-                ((LivingEntity)target).knockback((double)(f1 * 0.5F), (double) Mth.sin(attacker.getYRot() * 0.017453292F), (double)(-Mth.cos(attacker.getYRot() * 0.017453292F)));
+            if (f1 > 0.0F && target instanceof LivingEntity livingTarget) {
+                ((LivingEntity)target).knockback(f1 * 0.5F, Mth.sin(attacker.getYRot() * 0.017453292F), -Mth.cos(attacker.getYRot() * 0.017453292F));
                 attacker.setDeltaMovement(attacker.getDeltaMovement().multiply(0.6, 1.0, 0.6));
                 livingTarget.setLastHurtByMob(attacker);
             }

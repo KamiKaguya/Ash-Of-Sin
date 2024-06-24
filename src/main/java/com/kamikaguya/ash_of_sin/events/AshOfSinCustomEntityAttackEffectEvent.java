@@ -23,7 +23,7 @@ import java.util.List;
 
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinCustomEntityAttackEffectEvent {
-    private static final CustomEntityAttackEffectConfig customEntityAttackEffectConfig = new CustomEntityAttackEffectConfig();
+    public static final CustomEntityAttackEffectConfig customEntityAttackEffectConfig = new CustomEntityAttackEffectConfig();
     static {
         customEntityAttackEffectConfig.loadConfig();
     }
@@ -66,7 +66,7 @@ public class AshOfSinCustomEntityAttackEffectEvent {
         }
     }
 
-    private static void applyEffects(LivingEntity target, List<CustomAttackEffectConfig> effects) {
+    public static void applyEffects(LivingEntity target, List<CustomAttackEffectConfig> effects) {
         for (CustomAttackEffectConfig attackEffectConfig : effects) {
             MobEffect attackEffect = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation(attackEffectConfig.getEffect()));
             if (attackEffect != null) {

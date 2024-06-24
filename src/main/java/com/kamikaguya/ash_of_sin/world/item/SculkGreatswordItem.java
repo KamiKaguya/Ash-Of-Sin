@@ -18,7 +18,7 @@ import java.util.List;
 
 public class SculkGreatswordItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
-    private List<Component> tooltipExpand;
+    public List<Component> tooltipExpand;
     public SculkGreatswordItem(Item.Properties build) {
         super(AshOfSinItemTier.SCULK_GREATSWORD, 0, -3.05F, build);
         if (AshOfSin.isPhysicalClient()) {

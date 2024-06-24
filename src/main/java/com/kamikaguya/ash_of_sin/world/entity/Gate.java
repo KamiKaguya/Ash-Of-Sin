@@ -114,7 +114,7 @@ public class Gate extends Entity {
         }
     }
 
-    private boolean isEntityAllowedThroughGateway(Entity entity) {
+    public boolean isEntityAllowedThroughGateway(Entity entity) {
         if (!entity.getPersistentData().getBoolean("Teleported") || entity.tickCount % 20 == 0) {
             if (entity instanceof Player) {
                 return true;
@@ -126,7 +126,7 @@ public class Gate extends Entity {
         return false;
     }
 
-    private void teleportEntityToDimension(Entity entity) {
+    public void teleportEntityToDimension(Entity entity) {
         ServerLevel currentLevel = (ServerLevel) entity.level;
 
         ResourceKey<Level> targetDimensionKey = currentLevel.dimension().equals(ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation("ash_of_sin:absolute_space_time_realm")))
@@ -165,7 +165,7 @@ public class Gate extends Entity {
         }
     }
 
-    private boolean isGatePresentInDimension(ServerLevel targetLevel) {
+    public boolean isGatePresentInDimension(ServerLevel targetLevel) {
         for (Entity entity : targetLevel.getAllEntities()) {
             if (entity instanceof Gate) {
                 return true;

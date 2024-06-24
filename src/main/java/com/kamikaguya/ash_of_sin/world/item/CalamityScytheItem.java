@@ -18,7 +18,7 @@ import java.util.List;
 
 public class CalamityScytheItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
-    private List<Component> tooltipExpand;
+    public List<Component> tooltipExpand;
     public CalamityScytheItem(Item.Properties build) {
         super(AshOfSinItemTier.CALAMITY_SCYTHE, 0, -2.1F, build);
         if (AshOfSin.isPhysicalClient()) {

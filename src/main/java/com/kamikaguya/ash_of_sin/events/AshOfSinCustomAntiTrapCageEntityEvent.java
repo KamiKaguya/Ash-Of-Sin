@@ -20,7 +20,7 @@ import java.util.List;
 
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinCustomAntiTrapCageEntityEvent {
-    private static final int DISTANCE = CustomAntiTrapCageEntityConfig.CHECK_DISTANCE.get();
+    public static final int DISTANCE = CustomAntiTrapCageEntityConfig.CHECK_DISTANCE.get();
 
     @SubscribeEvent
     public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
@@ -61,7 +61,7 @@ public class AshOfSinCustomAntiTrapCageEntityEvent {
         }
     }
 
-    private static void breakTrapCageIfInDistance(Level world, LivingEntity entity) {
+    public static void breakTrapCageIfInDistance(Level world, LivingEntity entity) {
         Block trapCageBlock = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("untamedwilds:trap_cage"));
         if (trapCageBlock == null) {
             return;

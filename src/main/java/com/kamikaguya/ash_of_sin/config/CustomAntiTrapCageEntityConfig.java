@@ -14,11 +14,11 @@ import java.util.List;
 
 
 public class CustomAntiTrapCageEntityConfig {
-    private static ForgeConfigSpec ANTI_TRAP_CAGE_ENTITY_CONFIG;
+    public static final ForgeConfigSpec ANTI_TRAP_CAGE_ENTITY_CONFIG;
     public static ForgeConfigSpec.BooleanValue ANTI_ON;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> ANTI_TRAP_CAGE_ENTITY;
     public static ForgeConfigSpec.ConfigValue<Integer> CHECK_DISTANCE;
-    private final Path configPath;
+    public final Path configPath;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -53,6 +53,9 @@ public class CustomAntiTrapCageEntityConfig {
                                 "bloodandmadness:gascoigne_beast",
                                 "bloodandmadness:micolash",
                                 "mowziesmobs:ferrous_wroughtnaut",
+                                "wildbackport:warden",
+                                "occ:vergil",
+                                "occ:vergil_2",
                                 "epiceldenring:godfrey",
                                 "epiceldenring:godfreyphasetwo",
                                 "epiceldenring:radahn",
@@ -95,7 +98,6 @@ public class CustomAntiTrapCageEntityConfig {
                                 "meetyourfight:bellringer",
                                 "meetyourfight:dame_fortuna",
                                 "meetyourfight:swampjaw",
-                                "wildbackport:warden",
                                 "iceandfire:ice_dragon",
                                 "iceandfire:fire_dragon",
                                 "iceandfire:lightning_dragon",

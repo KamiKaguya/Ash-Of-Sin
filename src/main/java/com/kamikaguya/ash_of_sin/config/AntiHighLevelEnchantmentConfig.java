@@ -17,17 +17,17 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AntiHighLevelEnchantmentConfig {
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    private static final Type CONFIG_TYPE = new TypeToken<List<AntiHighLevelEnchantmentLevelConfig>>() {}.getType();
-    private List<AntiHighLevelEnchantmentLevelConfig> antiHighLevelEnchantmentConfig;
-    private final Path configPath;
+    public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    public static final Type CONFIG_TYPE = new TypeToken<List<AntiHighLevelEnchantmentLevelConfig>>() {}.getType();
+    public List<AntiHighLevelEnchantmentLevelConfig> antiHighLevelEnchantmentConfig;
+    public final Path configPath;
 
     public AntiHighLevelEnchantmentConfig() {
         this.configPath = FMLPaths.CONFIGDIR.get().resolve("ash_of_sin/anti_high_level_enchantment.json");
         initializeDefaultConfig();
     }
 
-    private void initializeDefaultConfig() {
+    public void initializeDefaultConfig() {
         if (!Files.exists(configPath)) {
             List<AntiHighLevelEnchantmentLevelConfig> defaultAntiHighLevelEnchantmentConfig = Arrays.asList(
                     new AntiHighLevelEnchantmentLevelConfig("ash_of_sin:absolute_rule", 21),

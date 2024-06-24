@@ -31,8 +31,8 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 public class Doppelganger extends PathfinderMob {
-    private Set<UUID> attackersUUIDs;
-    private ServerPlayer copiedPlayer;
+    public Set<UUID> attackersUUIDs;
+    public ServerPlayer copiedPlayer;
 
     public Doppelganger(EntityType<? extends Doppelganger> entityType, Level level) {
 
@@ -58,7 +58,7 @@ public class Doppelganger extends PathfinderMob {
         applyGlowingEffect();
     }
 
-    private void copyPlayerData(ServerPlayer player) {
+    public void copyPlayerData(ServerPlayer player) {
         this.setCustomName(player.getName());
         ItemStack headStack = player.getInventory().player.getItemBySlot(EquipmentSlot.HEAD);
         if (!headStack.isEmpty()) {
@@ -124,12 +124,12 @@ public class Doppelganger extends PathfinderMob {
         return false;
     }
 
-    private boolean isDamageImmune(DamageSource source) {
+    public boolean isDamageImmune(DamageSource source) {
         return source == DamageSource.OUT_OF_WORLD ||
                 source.isCreativePlayer();
     }
 
-    private void applyGlowingEffect() {
+    public void applyGlowingEffect() {
         MobEffectInstance glowingEffect = new MobEffectInstance(MobEffects.GLOWING, Integer.MAX_VALUE, 38);
         this.addEffect(glowingEffect);
     }
@@ -153,8 +153,8 @@ public class Doppelganger extends PathfinderMob {
         return true;
     }
 
-    private static class TargetGoal extends Goal {
-        private final Doppelganger doppelganger;
+    public static class TargetGoal extends Goal {
+        public final Doppelganger doppelganger;
 
         public TargetGoal(Doppelganger doppelganger) {
             this.doppelganger = doppelganger;
@@ -172,10 +172,10 @@ public class Doppelganger extends PathfinderMob {
         }
     }
 
-    private static class AggressiveTargetGoal extends Goal {
-        private final Doppelganger doppelganger;
-        private final double range;
-        private LivingEntity target;
+    public static class AggressiveTargetGoal extends Goal {
+        public final Doppelganger doppelganger;
+        public final double range;
+        public LivingEntity target;
 
         public AggressiveTargetGoal(Doppelganger doppelganger, double range) {
             this.doppelganger = doppelganger;
@@ -219,7 +219,7 @@ public class Doppelganger extends PathfinderMob {
         }
     }
 
-    private void teleportAnotherToPlayer(Doppelganger doppelganger, @Nullable ServerPlayer player) {
+    public void teleportAnotherToPlayer(Doppelganger doppelganger, @Nullable ServerPlayer player) {
         if (player != null && doppelganger.distanceToSqr(player) > 16 * 16) {
             doppelganger.teleportTo(player.getX(), player.getY(), player.getZ());
         }

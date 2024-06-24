@@ -1,9 +1,9 @@
 package com.kamikaguya.ash_of_sin.config;
 
 public class CustomAttackEffectConfig {
-    private String effect;
-    private int duration;
-    private int amplifier;
+    public final String effect;
+    public final int duration;
+    public final int amplifier;
 
     public CustomAttackEffectConfig(String effect, int duration, int amplifier) {
         this.effect = effect;

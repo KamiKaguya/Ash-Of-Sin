@@ -14,8 +14,8 @@ import java.util.List;
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinAdventureDimensionEvent {
 
-    private static final List<? extends String> ADVENTURE_DIMENSION_ID = AdventureDimensionConfig.ADVENTURE_DIMENSION_ID.get();
-    private static final List<? extends String> ADVENTURE_DIMENSION_ALLOW_PLAYER_ID = AdventureDimensionConfig.ADVENTURE_DIMENSION_ALLOW_PLAYER_ID.get();
+    public static final List<? extends String> ADVENTURE_DIMENSION_ID = AdventureDimensionConfig.ADVENTURE_DIMENSION_ID.get();
+    public static final List<? extends String> ADVENTURE_DIMENSION_ALLOW_PLAYER_ID = AdventureDimensionConfig.ADVENTURE_DIMENSION_ALLOW_PLAYER_ID.get();
 
     @SubscribeEvent
     public static void inAdventureDimension(LivingEvent.LivingUpdateEvent event) {

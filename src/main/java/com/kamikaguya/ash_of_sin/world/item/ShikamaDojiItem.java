@@ -18,7 +18,7 @@ import java.util.List;
 
 public class ShikamaDojiItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
-    private List<Component> tooltipExpand;
+    public List<Component> tooltipExpand;
     public ShikamaDojiItem(Item.Properties build) {
         super(AshOfSinItemTier.SHIKAMA_DOJI, 0, -2.1F, build);
         if (AshOfSin.isPhysicalClient()) {

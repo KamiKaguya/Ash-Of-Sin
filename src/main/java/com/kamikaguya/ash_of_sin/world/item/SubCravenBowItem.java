@@ -18,7 +18,7 @@ import java.util.List;
 
 public class SubCravenBowItem extends BowItem {
     @OnlyIn(Dist.CLIENT)
-    private List<Component> tooltipExpand;
+    public List<Component> tooltipExpand;
     public SubCravenBowItem(Properties build) {
         super(build);
         if (AshOfSin.isPhysicalClient()) {

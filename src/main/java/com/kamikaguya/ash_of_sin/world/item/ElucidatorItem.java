@@ -18,7 +18,7 @@ import java.util.List;
 
 public class ElucidatorItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
-    private List<Component> tooltipExpand;
+    public List<Component> tooltipExpand;
     public ElucidatorItem(Item.Properties build) {
         super(AshOfSinItemTier.ELUCIDATOR, 0, -1.9F, build);
         if (AshOfSin.isPhysicalClient()) {

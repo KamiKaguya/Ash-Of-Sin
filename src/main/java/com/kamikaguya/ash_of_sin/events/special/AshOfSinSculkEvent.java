@@ -21,7 +21,7 @@ import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinSculkEvent {
-    private static final Random RANDOM = new Random();
+    public static final Random RANDOM = new Random();
 
     @SubscribeEvent
     public static void onLivingHurt(LivingHurtEvent event) {
@@ -55,13 +55,10 @@ public class AshOfSinSculkEvent {
         }
     }
 
-    private static boolean holdSculkWeapon(LivingEntity livingEntity) {
+    public static boolean holdSculkWeapon(LivingEntity livingEntity) {
         ItemStack mainHand = livingEntity.getMainHandItem();
         boolean hasSculkWeapon = (mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "sculk_axe"))) || (mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "sculk_sword"))) || (mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "sculk_greatsword")));
-        if (!(mainHand.isEmpty()) && (hasSculkWeapon)) {
-            return true;
-        }
-        return false;
+        return !(mainHand.isEmpty()) && (hasSculkWeapon);
     }
 
     @SubscribeEvent
@@ -82,21 +79,21 @@ public class AshOfSinSculkEvent {
         }
     }
 
-    private static void diffuseDarkness(LivingEntity target, LivingEntity attacker, float sculkDamege) {
-        MobEffect darkness = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("wildbackport", "darkness"));
-        if (darkness != null) {
+    public static void diffuseDarkness(LivingEntity target, LivingEntity attacker, float sculkDamege) {
+        MobEffect darknessEffect = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("wildbackport", "darkness"));
+        if (darknessEffect != null) {
             boolean alreadyPlungedIntoDarkness = target.getActiveEffects().stream()
-                    .anyMatch(existingEffect -> existingEffect.getEffect().equals(darkness) && existingEffect.getAmplifier() >= 0);
+                    .anyMatch(existingEffect -> existingEffect.getEffect().equals(darknessEffect) && existingEffect.getAmplifier() >= 0);
             boolean alreadyPlungedIntoDeepestDarkness = target.getActiveEffects().stream()
-                    .anyMatch(existingEffect -> existingEffect.getEffect().equals(darkness) && existingEffect.getAmplifier() == 2);
+                    .anyMatch(existingEffect -> existingEffect.getEffect().equals(darknessEffect) && existingEffect.getAmplifier() == 2);
             if (!alreadyPlungedIntoDarkness) {
-                MobEffectInstance darknessEffect = new MobEffectInstance(darkness, 33 * 20, 0);
-                target.addEffect(darknessEffect);
+                MobEffectInstance darkness = new MobEffectInstance(darknessEffect, 33 * 20, 0);
+                target.addEffect(darkness);
             } else {
-                int amplifier = target.getEffect(darkness).getAmplifier();
+                int amplifier = target.getEffect(darknessEffect).getAmplifier();
                 if (!alreadyPlungedIntoDeepestDarkness) {
-                    MobEffectInstance darknessEffect = new MobEffectInstance(darkness, 33 * 20, amplifier + 1);
-                    target.addEffect(darknessEffect);
+                    MobEffectInstance darkness = new MobEffectInstance(darknessEffect, 33 * 20, amplifier + 1);
+                    target.addEffect(darkness);
                 } else {
                     EntityType<?> livingEntityType = target.getType();
                     double targetX = target.getX();
@@ -120,8 +117,8 @@ public class AshOfSinSculkEvent {
                                     float sonicBoomDamage = sculkDamege * 2.0F;
                                     nearbyEntity.hurt(DamageSource.mobAttack(attacker).setMagic(), sonicBoomDamage);
                                 }
-                                MobEffectInstance darknessEffect = new MobEffectInstance(darkness, 33 * 20, 2);
-                                nearbyEntity.addEffect(darknessEffect);
+                                MobEffectInstance darkness = new MobEffectInstance(darknessEffect, 33 * 20, 2);
+                                nearbyEntity.addEffect(darkness);
                                 SoundEvent sonicBoomSound = ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("wildbackport:entity.warden.sonic_boom"));
                                 if (sonicBoomSound != null) {
                                     nearbyEntity.level.playSound(null, nearbyEntity.getOnPos(), sonicBoomSound, SoundSource.NEUTRAL, 1.0f, 1.0f);

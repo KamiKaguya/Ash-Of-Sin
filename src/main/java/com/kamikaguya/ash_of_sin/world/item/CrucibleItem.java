@@ -18,7 +18,7 @@ import java.util.List;
 
 public class CrucibleItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
-    private List<Component> tooltipExpand;
+    public List<Component> tooltipExpand;
     public CrucibleItem(Item.Properties build) {
         super(AshOfSinItemTier.CRUCIBLE, 0, -2.8F, build);
         if (AshOfSin.isPhysicalClient()) {

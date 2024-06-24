@@ -30,12 +30,12 @@ import java.util.List;
 import java.util.UUID;
 
 public class Another extends PathfinderMob implements AbsoluteSpaceTimeRealmEntity {
-    private static double MAX_HEALTH = 20.0;
-    private static double MOVEMENT_SPEED = 0.1;
-    private static double ATTACK_DAMAGE = 1.0;
-    private static double ATTACK_SPEED = 4.0;
+    public static final double MAX_HEALTH = 20.0;
+    public static final double MOVEMENT_SPEED = 0.1;
+    public static final double ATTACK_DAMAGE = 1.0;
+    public static final double ATTACK_SPEED = 4.0;
     protected LivingEntity cachedOwner;
-    private UUID ownerUUID;
+    public UUID ownerUUID;
 
     public Another(EntityType<? extends Another> entitytype, Level level) {
         super(entitytype, level);
@@ -101,7 +101,7 @@ public class Another extends PathfinderMob implements AbsoluteSpaceTimeRealmEnti
         this.setDropChance(EquipmentSlot.OFFHAND,0);
     }
 
-    private static final List<Attribute> ATTRIBUTES = new ArrayList<>();
+    public static final List<Attribute> ATTRIBUTES = new ArrayList<>();
 
     static {
         ATTRIBUTES.add(Attributes.ATTACK_DAMAGE);
@@ -186,7 +186,7 @@ public class Another extends PathfinderMob implements AbsoluteSpaceTimeRealmEnti
         return this.ownerUUID;
     }
 
-    private void hasRegenerationBuff() {
+    public void hasRegenerationBuff() {
         if (hasEffect(effect01)) {
             return;
         }
@@ -283,12 +283,12 @@ public class Another extends PathfinderMob implements AbsoluteSpaceTimeRealmEnti
         this.goalSelector.addGoal(4, new AnotherFollowOwnerGoal(this, 1.0D, 3.0F, 64.0F));
     }
 
-    private class AnotherFollowOwnerGoal extends Goal {
-        private final Another another;
-        private Player owner;
-        private final double speed;
-        private final float minDist;
-        private final float maxDist;
+    public class AnotherFollowOwnerGoal extends Goal {
+        public final Another another;
+        public Player owner;
+        public final double speed;
+        public final float minDist;
+        public final float maxDist;
 
         @Override
         public boolean canUse() {
@@ -356,8 +356,8 @@ public class Another extends PathfinderMob implements AbsoluteSpaceTimeRealmEnti
     }
 
     public static class AnotherOwnerAttackTargetGoal extends TargetGoal {
-        private final Another another;
-        private int timestamp;
+        public final Another another;
+        public int timestamp;
 
         public AnotherOwnerAttackTargetGoal(Another another) {
             super(another, false);
@@ -390,10 +390,10 @@ public class Another extends PathfinderMob implements AbsoluteSpaceTimeRealmEnti
         }
     }
 
-    private static class AnotherOwnerHurtByTargetGoal extends TargetGoal {
-        private final Another another;
-        private LivingEntity attacker;
-        private int timestamp;
+    public static class AnotherOwnerHurtByTargetGoal extends TargetGoal {
+        public final Another another;
+        public LivingEntity attacker;
+        public int timestamp;
 
         public AnotherOwnerHurtByTargetGoal(Another another) {
             super(another, true);
@@ -433,10 +433,10 @@ public class Another extends PathfinderMob implements AbsoluteSpaceTimeRealmEnti
 
     }
 
-    private static class AnotherHurtByTargetGoal extends TargetGoal {
-        private final Another another;
-        private LivingEntity attacker;
-        private int timestamp;
+    public static class AnotherHurtByTargetGoal extends TargetGoal {
+        public final Another another;
+        public LivingEntity attacker;
+        public int timestamp;
 
         public AnotherHurtByTargetGoal(Another another) {
             super(another, true);
@@ -476,7 +476,7 @@ public class Another extends PathfinderMob implements AbsoluteSpaceTimeRealmEnti
 
     }
 
-    private void teleportAnotherToPlayer(Another another, ServerPlayer player) {
+    public void teleportAnotherToPlayer(Another another, ServerPlayer player) {
         if (player != null && another.distanceToSqr(player) > 64 * 64) {
             another.teleportTo(player.getX(), player.getY(), player.getZ());
         }

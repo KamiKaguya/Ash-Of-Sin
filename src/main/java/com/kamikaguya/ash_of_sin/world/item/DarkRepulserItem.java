@@ -18,7 +18,7 @@ import java.util.List;
 
 public class DarkRepulserItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
-    private List<Component> tooltipExpand;
+    public List<Component> tooltipExpand;
     public DarkRepulserItem(Item.Properties build) {
         super(AshOfSinItemTier.DARK_REPULSER, 0, -1.95F, build);
         if (AshOfSin.isPhysicalClient()) {

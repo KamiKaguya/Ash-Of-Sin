@@ -26,8 +26,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 public class Assassin extends PathfinderMob  {
-    private ItemStack mainHandItemStack;
-    private ItemStack offHandItemStack;
+    public ItemStack mainHandItemStack;
+    public ItemStack offHandItemStack;
 
     public Assassin(EntityType<? extends Assassin> entityType, Level level) {
 
@@ -49,7 +49,7 @@ public class Assassin extends PathfinderMob  {
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D);
     }
 
-    private void EntityInventory() {
+    public void EntityInventory() {
         applyItemNBT();
 
         this.setItemSlot(EquipmentSlot.MAINHAND, this.mainHandItemStack);
@@ -72,7 +72,7 @@ public class Assassin extends PathfinderMob  {
         this.offHandItemStack = offHand;
     }
 
-    private CompoundTag parseStringToNBT(String jsonString) {
+    public CompoundTag parseStringToNBT(String jsonString) {
         try {
             return TagParser.parseTag(jsonString);
         } catch (CommandSyntaxException e) {
@@ -104,8 +104,8 @@ public class Assassin extends PathfinderMob  {
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
     }
     public static class PersistentNearestAttackableTargetGoal<T extends LivingEntity> extends NearestAttackableTargetGoal<T> {
-        private final PathfinderMob mob;
-        private final double distance;
+        public final PathfinderMob mob;
+        public final double distance;
 
         public PersistentNearestAttackableTargetGoal(PathfinderMob mob, Class<T> targetClass, int targetChance, double distance) {
             super(mob, targetClass, targetChance, true, false, null);

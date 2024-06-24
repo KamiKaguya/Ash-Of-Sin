@@ -46,22 +46,22 @@ import com.kamikaguya.ash_of_sin.client.renderer.entity.AssassinRenderer;
 public class AshOfSin {
 
     public static final String MODID = "ash_of_sin";
-    private final AshOfSinConfig ashOfSinConfig = new AshOfSinConfig();
-    private final CustomAntiEnchantmentEntityConfig customAntiEnchantmentEntityConfig = new CustomAntiEnchantmentEntityConfig();
-    private final CustomAntiSeatEntityConfig customAntiSeatEntityConfig = new CustomAntiSeatEntityConfig();
-    private final CustomAntiItemEntityConfig customAntiItemEntityConfig = new CustomAntiItemEntityConfig();
-    private final CustomEntityAntiEffectConfig customEntityAntiEffectConfig = new CustomEntityAntiEffectConfig();
-    private final CustomAntiHighATKEntityConfig customAntiHighATKEntityConfig = new CustomAntiHighATKEntityConfig();
-    private final CustomAntiTrapCageEntityConfig customAntiTrapCageEntityConfig = new CustomAntiTrapCageEntityConfig();
-    private final CustomEntityEffectConfigManager customEntityEffectConfigManager = new CustomEntityEffectConfigManager();
-    private final CustomEntityItemConfigManager customEntityItemConfigManager = new CustomEntityItemConfigManager();
-    private final CustomEntityAttackEffectConfig customEntityAttackEffectConfig = new CustomEntityAttackEffectConfig();
-    private final AntiHighLevelEnchantmentConfig antiHighLevelEnchantmentConfig = new AntiHighLevelEnchantmentConfig();
-    private final EternalEntityConfig eternalEntityConfig = new EternalEntityConfig();
-    private final SoulLikeBossBattleConfig soulLikeBossBattleConfig = new SoulLikeBossBattleConfig();
-    private final BetterAIConfig betterAIConfig = new BetterAIConfig();
-    private final AntiSameModifierConfig antiSameModifierConfig = new AntiSameModifierConfig();
-    private final AdventureDimensionConfig adventureDimensionConfig = new AdventureDimensionConfig();
+    public final AshOfSinConfig ashOfSinConfig = new AshOfSinConfig();
+    public final CustomAntiEnchantmentEntityConfig customAntiEnchantmentEntityConfig = new CustomAntiEnchantmentEntityConfig();
+    public final CustomAntiSeatEntityConfig customAntiSeatEntityConfig = new CustomAntiSeatEntityConfig();
+    public final CustomAntiItemEntityConfig customAntiItemEntityConfig = new CustomAntiItemEntityConfig();
+    public final CustomEntityAntiEffectConfig customEntityAntiEffectConfig = new CustomEntityAntiEffectConfig();
+    public final CustomAntiHighATKEntityConfig customAntiHighATKEntityConfig = new CustomAntiHighATKEntityConfig();
+    public final CustomAntiTrapCageEntityConfig customAntiTrapCageEntityConfig = new CustomAntiTrapCageEntityConfig();
+    public final CustomEntityEffectConfigManager customEntityEffectConfigManager = new CustomEntityEffectConfigManager();
+    public final CustomEntityItemConfigManager customEntityItemConfigManager = new CustomEntityItemConfigManager();
+    public final CustomEntityAttackEffectConfig customEntityAttackEffectConfig = new CustomEntityAttackEffectConfig();
+    public final AntiHighLevelEnchantmentConfig antiHighLevelEnchantmentConfig = new AntiHighLevelEnchantmentConfig();
+    public final EternalEntityConfig eternalEntityConfig = new EternalEntityConfig();
+    public final SoulLikeBossBattleConfig soulLikeBossBattleConfig = new SoulLikeBossBattleConfig();
+    public final BetterAIConfig betterAIConfig = new BetterAIConfig();
+    public final AntiSameModifierConfig antiSameModifierConfig = new AntiSameModifierConfig();
+    public final AdventureDimensionConfig adventureDimensionConfig = new AdventureDimensionConfig();
     public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, AshOfSin.MODID);
     public static final RegistryObject<MobEffect> WRATH_OF_GOD = MOB_EFFECTS.register("wrath_of_god", WrathOfGod::new);
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, AshOfSin.MODID);
@@ -111,6 +111,7 @@ public class AshOfSin {
         MinecraftForge.EVENT_BUS.register(new AshOfSinShikamaDojiEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinFlameKatanaCaravellaEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinDualBladesEvent());
+        MinecraftForge.EVENT_BUS.register(new AshOfSinDespairScytheEvent());
 
         MinecraftForge.EVENT_BUS.register(new AshOfSinCustomAntiEnchantmentEntityEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinCustomAntiSeatEntityEvent());
@@ -131,7 +132,7 @@ public class AshOfSin {
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    private void setup(final FMLCommonSetupEvent event) {
+    public void setup(final FMLCommonSetupEvent event) {
         ashOfSinConfig.loadConfig();
         customAntiEnchantmentEntityConfig.loadConfig();
         customAntiSeatEntityConfig.loadConfig();
@@ -153,7 +154,7 @@ public class AshOfSin {
         });
     }
 
-    private void doClientStuff(final FMLClientSetupEvent event) {
+    public void doClientStuff(final FMLClientSetupEvent event) {
         EntityRenderers.register(AshOfSinEntities.KAMIKAGUYA.get(), KamiKaguyaRenderer::new);
         EntityRenderers.register(AshOfSinEntities.GATE.get(), GateRenderer::new);
         EntityRenderers.register(AshOfSinEntities.DOPPELGANGER.get(), DoppelgangerRenderer::new);
@@ -165,11 +166,11 @@ public class AshOfSin {
         return FMLEnvironment.dist == Dist.CLIENT;
     }
 
-    private void setupClient(final FMLClientSetupEvent event) {
+    public void setupClient(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> PROXY.clientInit());
     }
 
-    private void setupComplete(final FMLLoadCompleteEvent event) {
+    public void setupComplete(final FMLLoadCompleteEvent event) {
         PROXY.postInit();
     }
 }

@@ -15,7 +15,7 @@ import java.util.List;
 
 public class MirrorOfTheDarkNightItem extends ShieldItem {
     @OnlyIn(Dist.CLIENT)
-    private List<Component> tooltipExpand;
+    public List<Component> tooltipExpand;
     public MirrorOfTheDarkNightItem(Properties build) {
         super(build);
         if (AshOfSin.isPhysicalClient()) {

@@ -20,7 +20,7 @@ import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinShikamaDojiEvent {
-    private static final Random RANDOM = new Random();
+    public static final Random RANDOM = new Random();
 
     @SubscribeEvent
     public static void onHurt(LivingHurtEvent event) {
@@ -43,13 +43,10 @@ public class AshOfSinShikamaDojiEvent {
         }
     }
 
-    private static boolean holdShikamaDoji(ServerPlayer serverPlayer) {
+    public static boolean holdShikamaDoji(ServerPlayer serverPlayer) {
         ItemStack mainHand = serverPlayer.getMainHandItem();
         boolean holdShikamaDoji = mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "shikama_doji"));
-        if (!(mainHand.isEmpty()) && (holdShikamaDoji)) {
-            return true;
-        }
-        return false;
+        return !(mainHand.isEmpty()) && (holdShikamaDoji);
     }
 
     @SubscribeEvent
@@ -57,11 +54,10 @@ public class AshOfSinShikamaDojiEvent {
         if (event.getEntityLiving().level.isClientSide() || event.getEntity().level.isClientSide()) {
             return;
         }
-        if (!(event.getEntityLiving() instanceof ServerPlayer) || !(event.getEntity() instanceof ServerPlayer)) {
+        if (!(event.getEntityLiving() instanceof ServerPlayer serverPlayer) || !(event.getEntity() instanceof ServerPlayer)) {
             return;
         }
 
-        ServerPlayer serverPlayer = (ServerPlayer) event.getEntityLiving();
         MobEffect bleed = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("apotheosis","bleeding"));
         if (holdShikamaDoji(serverPlayer)) {
             if (bleed != null) {
@@ -70,24 +66,24 @@ public class AshOfSinShikamaDojiEvent {
         }
     }
 
-    private static void bloodSoaked(LivingEntity target) {
-        MobEffect bleed = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("apotheosis","bleeding"));
-        if (bleed != null) {
+    public static void bloodSoaked(LivingEntity target) {
+        MobEffect bleedEffect = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("apotheosis","bleeding"));
+        if (bleedEffect != null) {
             boolean alreadyBloodSoaked = target.getActiveEffects().stream()
-                    .anyMatch(existingEffect -> existingEffect.getEffect().equals(bleed) && existingEffect.getAmplifier() >= 0);
+                    .anyMatch(existingEffect -> existingEffect.getEffect().equals(bleedEffect) && existingEffect.getAmplifier() >= 0);
             boolean alreadyGrievousBodilyHarm = target.getActiveEffects().stream()
-                    .anyMatch(existingEffect -> existingEffect.getEffect().equals(bleed) && existingEffect.getAmplifier() == 2);
+                    .anyMatch(existingEffect -> existingEffect.getEffect().equals(bleedEffect) && existingEffect.getAmplifier() == 2);
             if (!alreadyBloodSoaked) {
-                MobEffectInstance bleedEffect = new MobEffectInstance(bleed, 13 * 20, 0);
-                target.addEffect(bleedEffect);
+                MobEffectInstance bleed = new MobEffectInstance(bleedEffect, 13 * 20, 0);
+                target.addEffect(bleed);
             } else {
-                int amplifier = target.getEffect(bleed).getAmplifier();
+                int amplifier = target.getEffect(bleedEffect).getAmplifier();
                 if (!alreadyGrievousBodilyHarm) {
-                    MobEffectInstance bleedEffect = new MobEffectInstance(bleed, 13 * 20, amplifier + 1);
-                    target.addEffect(bleedEffect);
+                    MobEffectInstance bleed = new MobEffectInstance(bleedEffect, 13 * 20, amplifier + 1);
+                    target.addEffect(bleed);
                 } else {
-                    MobEffectInstance bleedEffect = new MobEffectInstance(bleed, 60 * 20, 2);
-                    target.addEffect(bleedEffect);
+                    MobEffectInstance bleed = new MobEffectInstance(bleedEffect, 60 * 20, 2);
+                    target.addEffect(bleed);
                     if (RANDOM.nextFloat() <= 0.15F) {
                         MobEffect sunderingEffect = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("apotheosis","sundering"));
                         MobEffectInstance sundering = new MobEffectInstance(sunderingEffect, 7 * 20, 0);

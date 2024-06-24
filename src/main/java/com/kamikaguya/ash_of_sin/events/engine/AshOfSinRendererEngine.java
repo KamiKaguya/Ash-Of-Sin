@@ -33,6 +33,6 @@ public class AshOfSinRendererEngine {
 
     @SubscribeEvent
     public static void registerItemRenderer(PatchedRenderersEvent.Add event) {
-        event.addItemRenderer((Item)AshOfSinItems.FLAME_KATANA_CARAVELLA.get(), new RenderFlameKatanaCaravella());
+        event.addItemRenderer(AshOfSinItems.FLAME_KATANA_CARAVELLA.get(), new RenderFlameKatanaCaravella());
     }
 }

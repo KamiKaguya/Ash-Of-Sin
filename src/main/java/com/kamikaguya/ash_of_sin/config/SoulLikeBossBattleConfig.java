@@ -13,13 +13,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SoulLikeBossBattleConfig {
-    private static ForgeConfigSpec SOUL_LIKE_BOSS_BATTLE_CONFIG;
+    public static final ForgeConfigSpec SOUL_LIKE_BOSS_BATTLE_CONFIG;
     public static ForgeConfigSpec.BooleanValue SOUL_LIKE_BOSS_BATTLE_ON;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> SOUL_LIKE_BOSS_BATTLE_ENTITY;
     public static ForgeConfigSpec.ConfigValue<Integer> BOSS_BATTLE_DISTANCE;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> IRON_GOLEM;
     public static ForgeConfigSpec.ConfigValue<Boolean> ANTI_IRON_GOLEM;
-    private final Path configPath;
+    public final Path configPath;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -102,8 +102,8 @@ public class SoulLikeBossBattleConfig {
         IRON_GOLEM = builder.comment("Iron Golem Entity")
                 .comment("Iron Golem entity id.")
                 .defineList("Iron Golem Entity",
-                        () -> new ArrayList<>(Arrays.asList(
-                        "minecraft:iron_golem"
+                        () -> new ArrayList<>(List.of(
+                                "minecraft:iron_golem"
                         )),
                         obj -> obj instanceof String);
         ANTI_IRON_GOLEM = builder.comment("Anti-Iron Golem")

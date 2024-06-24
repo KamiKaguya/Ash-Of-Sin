@@ -132,7 +132,7 @@ public class AbsoluteRuleEnchantment extends Enchantment {
         }
     }
 
-    private float getAttackDamage(ItemStack weapon, EquipmentSlot slot) {
+    public float getAttackDamage(ItemStack weapon, EquipmentSlot slot) {
         Multimap<Attribute, AttributeModifier> attributeModifiers = weapon.getAttributeModifiers(slot);
         Collection<AttributeModifier> attackDamageModifiers = attributeModifiers.get(Attributes.ATTACK_DAMAGE);
         float baseDamage = 0;
@@ -195,7 +195,7 @@ public class AbsoluteRuleEnchantment extends Enchantment {
         return damageAfterArmorProtection;
     }
 
-    private void applySunderingEffectToTarget(LivingEntity target, int level) {
+    public void applySunderingEffectToTarget(LivingEntity target, int level) {
         MobEffectInstance effectInstance = getSunderingEffectInstance(level);
         if (effectInstance != null) {
             target.addEffect(effectInstance);

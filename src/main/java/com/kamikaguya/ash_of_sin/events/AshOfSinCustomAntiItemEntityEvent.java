@@ -28,8 +28,7 @@ public class AshOfSinCustomAntiItemEntityEvent {
             List<? extends String> antiItemEntityList = CustomAntiItemEntityConfig.ANTI_ITEM_ENTITY.get();
             List<? extends String> antiItemList = CustomAntiItemEntityConfig.ANTI_ITEM.get();
 
-            if (antiItemEntityList.contains(entityResourceLocation.toString()) && source.getEntity() instanceof LivingEntity) {
-                LivingEntity attacker = (LivingEntity) source.getEntity();
+            if (antiItemEntityList.contains(entityResourceLocation.toString()) && source.getEntity() instanceof LivingEntity attacker) {
 
                 ItemStack mainHandItem = attacker.getMainHandItem();
                 ItemStack offHandItem = attacker.getOffhandItem();

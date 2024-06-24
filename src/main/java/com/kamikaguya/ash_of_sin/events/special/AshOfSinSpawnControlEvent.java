@@ -15,10 +15,9 @@ import net.minecraftforge.fml.common.Mod;
 public class AshOfSinSpawnControlEvent {
     @SubscribeEvent
     public static void onEntitySpawn(LivingSpawnEvent.CheckSpawn event) {
-        if (!(event.getWorld() instanceof ServerLevel)) {
+        if (!(event.getWorld() instanceof ServerLevel serverLevel)) {
             return;
         }
-        ServerLevel serverLevel = (ServerLevel) event.getWorld();
 
         ResourceKey<Level> currentDimensionKey = serverLevel.dimension();
 

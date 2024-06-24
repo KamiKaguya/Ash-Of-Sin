@@ -18,7 +18,7 @@ import java.util.List;
 
 public class EnderChaserItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
-    private List<Component> tooltipExpand;
+    public List<Component> tooltipExpand;
     public EnderChaserItem(Item.Properties build) {
         super(AshOfSinItemTier.ENDER_CHASER, 0, -2.65F, build);
         if (AshOfSin.isPhysicalClient()) {
