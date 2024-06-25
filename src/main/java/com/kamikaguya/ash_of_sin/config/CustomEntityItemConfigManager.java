@@ -31,13 +31,13 @@ public class CustomEntityItemConfigManager {
         CustomEntityItemConfig dreadKnightConfig = new CustomEntityItemConfig();
         dreadKnightConfig.setEntity(List.of("iceandfire:dread_knight"));
         CustomItemConfig dreadKnightItemConfig = new CustomItemConfig();
-        dreadKnightItemConfig.setHelmet(List.of());
+        dreadKnightItemConfig.setHelmet(List.of(""));
         dreadKnightItemConfig.setHelmetNBT(List.of("{}"));
-        dreadKnightItemConfig.setChestplate(List.of());
+        dreadKnightItemConfig.setChestplate(List.of(""));
         dreadKnightItemConfig.setChestplateNBT(List.of("{}"));
-        dreadKnightItemConfig.setLeggings(List.of());
+        dreadKnightItemConfig.setLeggings(List.of(""));
         dreadKnightItemConfig.setLeggingsNBT(List.of("{}"));
-        dreadKnightItemConfig.setBoots(List.of());
+        dreadKnightItemConfig.setBoots(List.of(""));
         dreadKnightItemConfig.setBootsNBT(List.of("{}"));
         dreadKnightItemConfig.setMainhand(List.of("iceandfire:dread_knight_sword"));
         dreadKnightItemConfig.setMainhandNBT(List.of("{}"));
