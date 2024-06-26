@@ -89,12 +89,10 @@ public class AshOfSin {
         ENCHANTMENTS.register(bus);
         AshOfSinSounds.SOUNDS.register(bus);
         MinecraftForge.EVENT_BUS.register(new AshOfSinRegisterCommandsEvent());
-        MinecraftForge.EVENT_BUS.register(new AshOfSinEntityEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinRealmGateOpenEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinSounds());
         MinecraftForge.EVENT_BUS.register(new AshOfSinAbsoluteSpaceTimeRealmEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinSpawnControlEvent());
-        MinecraftForge.EVENT_BUS.register(new AshOfSinGoblinEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinSculkEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinBindingEvent());
 
