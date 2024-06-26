@@ -1,6 +1,5 @@
 package com.kamikaguya.ash_of_sin.events.special;
 
-import com.kamikaguya.ash_of_sin.main.AshOfSin;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -14,7 +13,6 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.server.ServerLifecycleHooks;
 
@@ -22,7 +20,6 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 
-@Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinGoblinEvent {
     public static final Map<UUID, Long> lastSpawnTimes = new ConcurrentHashMap<>();
     public static final Map<UUID, Set<UUID>> markedGoblins = new ConcurrentHashMap<>();
