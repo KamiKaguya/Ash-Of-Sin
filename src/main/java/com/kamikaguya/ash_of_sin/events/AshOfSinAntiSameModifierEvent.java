@@ -2,15 +2,24 @@ package com.kamikaguya.ash_of_sin.events;
 
 import com.kamikaguya.ash_of_sin.config.AntiSameModifierConfig;
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
-import com.kamikaguya.ash_of_sin.world.entity.*;
+import com.kamikaguya.ash_of_sin.world.entity.Another;
+import com.kamikaguya.ash_of_sin.world.entity.Assassin;
+import com.kamikaguya.ash_of_sin.world.entity.Doppelganger;
+import com.kamikaguya.ash_of_sin.world.entity.KamiKaguya;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.*;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinAntiSameModifierEvent {

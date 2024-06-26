@@ -1,11 +1,10 @@
 package com.kamikaguya.ash_of_sin.events.special;
 
-import com.kamikaguya.ash_of_sin.main.AshOfSin;
 import com.kamikaguya.ash_of_sin.world.effect.AshOfSinEffects;
 import com.kamikaguya.ash_of_sin.world.entity.AshOfSinEntities;
 import com.kamikaguya.ash_of_sin.world.entity.Assassin;
-import com.kamikaguya.ash_of_sin.world.entity.KamiKaguya;
 import com.kamikaguya.ash_of_sin.world.entity.Doppelganger;
+import com.kamikaguya.ash_of_sin.world.entity.KamiKaguya;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
@@ -26,7 +25,6 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
-import net.minecraftforge.fml.common.Mod;
 
 import java.util.*;
 

@@ -1,11 +1,10 @@
 package com.kamikaguya.ash_of_sin.tracker;
 
+import net.minecraft.world.entity.LivingEntity;
+
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
-
-import net.minecraft.world.entity.LivingEntity;
-
 import java.util.UUID;
 
 public class AshOfSinPlayerAttackTargetTracker {

@@ -1,8 +1,6 @@
 package com.kamikaguya.ash_of_sin.events.special;
 
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
-import com.kamikaguya.ash_of_sin.world.entity.Another;
-import com.kamikaguya.ash_of_sin.world.entity.KamiKaguya;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;

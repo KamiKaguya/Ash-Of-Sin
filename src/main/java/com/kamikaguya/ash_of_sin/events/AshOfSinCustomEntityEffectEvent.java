@@ -4,12 +4,9 @@ import com.kamikaguya.ash_of_sin.config.CustomEffectConfig;
 import com.kamikaguya.ash_of_sin.config.CustomEntityEffectConfig;
 import com.kamikaguya.ash_of_sin.config.CustomEntityEffectConfigManager;
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
-import com.mojang.blaze3d.shaders.Effect;
-import net.minecraft.client.renderer.EffectInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -17,12 +14,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinCustomEntityEffectEvent {

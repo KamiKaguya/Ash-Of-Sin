@@ -1,7 +1,7 @@
 package com.kamikaguya.ash_of_sin.events;
 
-import com.kamikaguya.ash_of_sin.main.AshOfSin;
 import com.kamikaguya.ash_of_sin.config.EternalEntityConfig;
+import com.kamikaguya.ash_of_sin.main.AshOfSin;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;

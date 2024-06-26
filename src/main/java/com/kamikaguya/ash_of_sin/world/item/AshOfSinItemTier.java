@@ -1,11 +1,11 @@
 package com.kamikaguya.ash_of_sin.world.item;
 
-import java.util.function.Supplier;
-
 import net.minecraft.util.LazyLoadedValue;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
+
+import java.util.function.Supplier;
 
 @SuppressWarnings("deprecation")
 public enum AshOfSinItemTier implements Tier {

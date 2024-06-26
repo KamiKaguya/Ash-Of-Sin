@@ -1,15 +1,9 @@
 package com.kamikaguya.ash_of_sin.events.engine;
 
-import com.kamikaguya.ash_of_sin.client.renderer.entity.KamiKaguyaRenderer;
-import com.kamikaguya.ash_of_sin.client.renderer.entity.GateRenderer;
-import com.kamikaguya.ash_of_sin.client.renderer.entity.DoppelgangerRenderer;
-import com.kamikaguya.ash_of_sin.client.renderer.entity.AnotherRenderer;
-import com.kamikaguya.ash_of_sin.client.renderer.entity.AssassinRenderer;
-
+import com.kamikaguya.ash_of_sin.client.renderer.entity.*;
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
 import com.kamikaguya.ash_of_sin.world.entity.AshOfSinEntities;
 import com.kamikaguya.ash_of_sin.world.item.AshOfSinItems;
-import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

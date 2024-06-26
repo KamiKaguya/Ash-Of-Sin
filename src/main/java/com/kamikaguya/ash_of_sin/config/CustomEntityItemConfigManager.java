@@ -6,12 +6,11 @@ import com.google.gson.reflect.TypeToken;
 import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.io.BufferedReader;
-import java.lang.reflect.Type;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CustomEntityItemConfigManager {

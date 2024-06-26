@@ -1,8 +1,8 @@
 package com.kamikaguya.ash_of_sin.events;
 
-import com.kamikaguya.ash_of_sin.main.AshOfSin;
 import com.kamikaguya.ash_of_sin.config.AntiHighLevelEnchantmentConfig;
 import com.kamikaguya.ash_of_sin.config.AntiHighLevelEnchantmentLevelConfig;
+import com.kamikaguya.ash_of_sin.main.AshOfSin;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;

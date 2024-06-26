@@ -1,19 +1,17 @@
 package com.kamikaguya.ash_of_sin.events;
 
 import com.kamikaguya.ash_of_sin.config.CustomEntityItemConfig;
-import com.kamikaguya.ash_of_sin.config.CustomItemConfig;
 import com.kamikaguya.ash_of_sin.config.CustomEntityItemConfigManager;
+import com.kamikaguya.ash_of_sin.config.CustomItemConfig;
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.TagParser;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.TagParser;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;

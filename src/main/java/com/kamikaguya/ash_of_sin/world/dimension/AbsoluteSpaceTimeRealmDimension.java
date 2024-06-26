@@ -4,8 +4,8 @@ import com.kamikaguya.ash_of_sin.main.AshOfSin;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.dimension.DimensionType;
 
 public class AbsoluteSpaceTimeRealmDimension {
         public static final ResourceKey<Level> ABSOLUTE_SPACE_TIME_REALM = ResourceKey.create(Registry.DIMENSION_REGISTRY,

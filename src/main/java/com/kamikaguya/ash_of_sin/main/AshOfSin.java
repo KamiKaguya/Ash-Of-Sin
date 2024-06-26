@@ -1,7 +1,8 @@
 package com.kamikaguya.ash_of_sin.main;
 
-import com.kamikaguya.ash_of_sin.client.ClientProxy;
 import com.kamikaguya.ash_of_sin.CommonProxy;
+import com.kamikaguya.ash_of_sin.client.ClientProxy;
+import com.kamikaguya.ash_of_sin.client.renderer.entity.*;
 import com.kamikaguya.ash_of_sin.config.*;
 import com.kamikaguya.ash_of_sin.events.*;
 import com.kamikaguya.ash_of_sin.events.enchantent.AshOfSinAnotherEvent;
@@ -9,37 +10,33 @@ import com.kamikaguya.ash_of_sin.events.enchantent.AshOfSinChalkWallEvent;
 import com.kamikaguya.ash_of_sin.events.special.*;
 import com.kamikaguya.ash_of_sin.events.unique.*;
 import com.kamikaguya.ash_of_sin.gameasset.AshOfSinSounds;
-import com.kamikaguya.ash_of_sin.world.dimension.AbsoluteSpaceTimeRealmDimension;
 import com.kamikaguya.ash_of_sin.world.biome.AshOfSinBiomes;
+import com.kamikaguya.ash_of_sin.world.dimension.AbsoluteSpaceTimeRealmDimension;
 import com.kamikaguya.ash_of_sin.world.effect.WrathOfGod;
-import com.kamikaguya.ash_of_sin.world.enchantment.*;
+import com.kamikaguya.ash_of_sin.world.enchantment.AbsoluteRuleEnchantment;
+import com.kamikaguya.ash_of_sin.world.enchantment.AnotherEnchantment;
+import com.kamikaguya.ash_of_sin.world.enchantment.ChalkWallEnchantment;
+import com.kamikaguya.ash_of_sin.world.enchantment.VenuzdonoaEnchantent;
+import com.kamikaguya.ash_of_sin.world.entity.AshOfSinEntities;
+import com.kamikaguya.ash_of_sin.world.item.AshOfSinItems;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-
-import com.kamikaguya.ash_of_sin.world.entity.AshOfSinEntities;
-import com.kamikaguya.ash_of_sin.world.item.AshOfSinItems;
-import com.kamikaguya.ash_of_sin.client.renderer.entity.KamiKaguyaRenderer;
-import com.kamikaguya.ash_of_sin.client.renderer.entity.GateRenderer;
-import com.kamikaguya.ash_of_sin.client.renderer.entity.DoppelgangerRenderer;
-import com.kamikaguya.ash_of_sin.client.renderer.entity.AnotherRenderer;
-import com.kamikaguya.ash_of_sin.client.renderer.entity.AssassinRenderer;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod("ash_of_sin")

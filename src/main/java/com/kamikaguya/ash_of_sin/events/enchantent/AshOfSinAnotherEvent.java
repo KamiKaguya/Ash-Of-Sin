@@ -4,7 +4,6 @@ import com.kamikaguya.ash_of_sin.main.AshOfSin;
 import com.kamikaguya.ash_of_sin.tracker.AshOfSinPlayerAttackTargetTracker;
 import com.kamikaguya.ash_of_sin.world.entity.Another;
 import com.kamikaguya.ash_of_sin.world.entity.AshOfSinEntities;
-import com.kamikaguya.ash_of_sin.world.item.AshOfSinItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TranslatableComponent;

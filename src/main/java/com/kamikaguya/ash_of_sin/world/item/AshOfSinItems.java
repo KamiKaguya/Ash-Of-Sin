@@ -2,7 +2,6 @@ package com.kamikaguya.ash_of_sin.world.item;
 
 import com.google.common.base.Supplier;
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
-
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraftforge.registries.DeferredRegister;
