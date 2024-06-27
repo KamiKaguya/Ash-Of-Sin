@@ -129,7 +129,7 @@ public class AshOfSinBindingEvent {
         boolean isMC___xiaochen = holder.getGameProfile().getName().contains("MC___xiaochen");
         if (!(mainHand.isEmpty()) && (yamato)) {
             if (!isOP) {
-                return !ishhhh;
+                return !isMC___xiaochen;
             }
         }
 
