@@ -42,7 +42,8 @@ public class AshOfSinBindingEvent {
                 offHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "crescent_sheath")) ||
                 mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "venuzdonoa")) ||
                 mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "dark_moon_greatsword")) ||
-                mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "despair_scythe"));
+                mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "despair_scythe")) ||
+                mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "yamato_katana"));
         boolean isOP = holder.getGameProfile().getName().contains("KamiKaguya") ||
                 holder.getGameProfile().getName().contains("wangumao") ||
                 holder.getGameProfile().getName().contains("Tahora") ||
@@ -121,6 +122,15 @@ public class AshOfSinBindingEvent {
         }
         if (!(offHand.isEmpty()) && (kirito)) {
             return !isOP;
+        }
+
+        boolean yamato = mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "yamato")) ||
+                mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "yamato_sheath"));
+        boolean isMC___xiaochen = holder.getGameProfile().getName().contains("MC___xiaochen");
+        if (!(mainHand.isEmpty()) && (yamato)) {
+            if (!isOP) {
+                return !ishhhh;
+            }
         }
 
         return false;
