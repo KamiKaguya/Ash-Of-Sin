@@ -29,11 +29,17 @@ public enum AshOfSinItemTier implements Tier {
         return Ingredient.of(Items.NETHERITE_INGOT);
     }), SOUL_OF_THE_KING_LIGHTNING(4, 10000, 39.0F, 15.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
+    }), YAMATO(4, 10000, 39.0F, 17.0F, 39, () -> {
+        return Ingredient.of(Items.NETHERITE_INGOT);
+    }), YAMATO_KATANA(4, 10000, 39.0F, 17.0F, 39, () -> {
+        return Ingredient.of(Items.NETHERITE_INGOT);
     }), ELUCIDATOR(4, 10000, 20.0F, 17.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
     }), DARK_REPULSER(4, 10000, 20.0F, 16.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
     }), LAMBENT_LIGHT(4, 10000, 20.0F, 16.0F, 39, () -> {
+        return Ingredient.of(Items.NETHERITE_INGOT);
+    }), ARCHWIZARD_STAFF(4, 10000, 39.0F, 16.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
     }), FROSTMOURNE(4, 10000, 20.0F, 24.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);

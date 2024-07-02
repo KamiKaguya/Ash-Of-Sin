@@ -3,35 +3,35 @@
 	{
 		"common":
 		{
-			"armor_negation":30.0,
+			"armor_negation":35.0,
 			"impact":1.3,
 			"max_strikes":4,
 			"damage_bonus": 2.0
 		},
 		"sao_single_sword":
 		{
-			"armor_negation":30.0,
+			"armor_negation":35.0,
 			"impact":1.3,
 			"max_strikes":4,
 			"damage_bonus": 2.0
 		},
 		"sao_dual_sword":
 		{
-			"armor_negation":30.0,
+			"armor_negation":35.0,
 			"impact":1.3,
 			"max_strikes":4,
 			"damage_bonus": 0
 		},
 		"sao_dual_sword_locked":
 		{
-			"armor_negation":30.0,
+			"armor_negation":35.0,
 			"impact":1.3,
 			"max_strikes":4,
 			"damage_bonus": 2.0
 		},
 		"sao_rapier":
 		{
-			"armor_negation":50.0,
+			"armor_negation":55.0,
 			"impact":1.3,
 			"max_strikes":4,
 			"damage_bonus": 2.0

@@ -104,7 +104,6 @@ public class CustomAntiSeatEntityConfig {
                                 "iceandfire:ice_dragon",
                                 "iceandfire:fire_dragon",
                                 "iceandfire:lightning_dragon",
-                                "iceandfire:dread_knight",
                                 "iceandfire:dread_lich",
                                 "hmag:ender_executor",
                                 "hmag:banshee",

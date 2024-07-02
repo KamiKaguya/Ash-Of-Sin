@@ -28,5 +28,6 @@ public class AshOfSinRendererEngine {
     @SubscribeEvent
     public static void registerItemRenderer(PatchedRenderersEvent.Add event) {
         event.addItemRenderer(AshOfSinItems.FLAME_KATANA_CARAVELLA.get(), new RenderFlameKatanaCaravella());
+        event.addItemRenderer(AshOfSinItems.YAMATO.get(), new RenderYamato());
     }
 }
