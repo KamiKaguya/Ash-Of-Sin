@@ -14,7 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 public class KamiKaguyaRenderer extends HumanoidMobRenderer<KamiKaguya, PlayerModel<KamiKaguya>>
 {
     public KamiKaguyaRenderer(EntityRendererProvider.Context context) {
-        super(context, new AnimatedPlayerModel<>(context.bakeLayer(ModelLayers.PLAYER), false), 0.5f);
+        super(context, new AnimatedPlayerModel<>(context.bakeLayer(ModelLayers.PLAYER_SLIM), false), 0.5f);
         addLayer(new HumanoidArmorLayer<>(this, new HumanoidModel<>(context.bakeLayer(ModelLayers.PLAYER_INNER_ARMOR)), new HumanoidModel<>(context.bakeLayer(ModelLayers.PLAYER_OUTER_ARMOR))));
         addLayer(new ItemInHandLayer<>(this));
         addLayer(new ArrowLayer<>(context, this));
