@@ -15,7 +15,7 @@ public class KamiKaguyaRenderer extends HumanoidMobRenderer<KamiKaguya, PlayerMo
 {
     public KamiKaguyaRenderer(EntityRendererProvider.Context context) {
         super(context, new AnimatedPlayerModel<>(context.bakeLayer(ModelLayers.PLAYER_SLIM), false), 0.5f);
-        addLayer(new HumanoidArmorLayer<>(this, new HumanoidModel<>(context.bakeLayer(ModelLayers.PLAYER_INNER_ARMOR)), new HumanoidModel<>(context.bakeLayer(ModelLayers.PLAYER_OUTER_ARMOR))));
+        addLayer(new HumanoidArmorLayer<>(this, new HumanoidModel<>(context.bakeLayer(ModelLayers.PLAYER_SLIM_INNER_ARMOR)), new HumanoidModel<>(context.bakeLayer(ModelLayers.PLAYER_SLIM_OUTER_ARMOR))));
         addLayer(new ItemInHandLayer<>(this));
         addLayer(new ArrowLayer<>(context, this));
         addLayer(new CustomHeadLayer<>(this, context.getModelSet()));
