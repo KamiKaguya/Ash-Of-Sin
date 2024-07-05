@@ -2,7 +2,6 @@ package com.kamikaguya.ash_of_sin.main;
 
 import com.kamikaguya.ash_of_sin.CommonProxy;
 import com.kamikaguya.ash_of_sin.client.ClientProxy;
-import com.kamikaguya.ash_of_sin.client.renderer.entity.*;
 import com.kamikaguya.ash_of_sin.config.*;
 import com.kamikaguya.ash_of_sin.events.*;
 import com.kamikaguya.ash_of_sin.events.enchantent.AshOfSinAnotherEvent;
@@ -19,7 +18,6 @@ import com.kamikaguya.ash_of_sin.world.enchantment.ChalkWallEnchantment;
 import com.kamikaguya.ash_of_sin.world.enchantment.VenuzdonoaEnchantent;
 import com.kamikaguya.ash_of_sin.world.entity.AshOfSinEntities;
 import com.kamikaguya.ash_of_sin.world.item.AshOfSinItems;
-import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
@@ -149,13 +147,7 @@ public class AshOfSin {
         });
     }
 
-    public void doClientStuff(final FMLClientSetupEvent event) {
-        EntityRenderers.register(AshOfSinEntities.KAMIKAGUYA.get(), KamiKaguyaRenderer::new);
-        EntityRenderers.register(AshOfSinEntities.GATE.get(), GateRenderer::new);
-        EntityRenderers.register(AshOfSinEntities.DOPPELGANGER.get(), DoppelgangerRenderer::new);
-        EntityRenderers.register(AshOfSinEntities.ANOTHER.get(), AnotherRenderer::new);
-        EntityRenderers.register(AshOfSinEntities.ASSASSIN.get(), AssassinRenderer::new);
-    }
+    public void doClientStuff(final FMLClientSetupEvent event) {}
 
     public static boolean isPhysicalClient() {
         return FMLEnvironment.dist == Dist.CLIENT;

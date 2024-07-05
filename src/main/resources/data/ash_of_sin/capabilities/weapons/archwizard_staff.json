@@ -1,0 +1,12 @@
+{
+	"attributes":
+	{
+		"two_hand":
+		{
+			"armor_negation":5.0,
+			"impact":4.0,
+			"max_strikes":3
+		}
+	},
+	"type":"staff"
+}
