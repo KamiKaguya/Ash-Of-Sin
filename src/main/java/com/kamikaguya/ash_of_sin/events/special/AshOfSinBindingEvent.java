@@ -133,6 +133,14 @@ public class AshOfSinBindingEvent {
             }
         }
 
+        boolean calamityBladeThin = mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "calamity_blade_thin"));
+        boolean isDoremySweet_DS = holder.getGameProfile().getName().contains("DoremySweet_DS");
+        if (!(mainHand.isEmpty()) && (calamityBladeThin)) {
+            if (!isOP) {
+                return !isDoremySweet_DS;
+            }
+        }
+
         return false;
     }
 }
