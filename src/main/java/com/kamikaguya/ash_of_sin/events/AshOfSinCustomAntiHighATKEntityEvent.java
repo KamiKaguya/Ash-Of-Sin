@@ -2,17 +2,13 @@ package com.kamikaguya.ash_of_sin.events;
 
 import com.kamikaguya.ash_of_sin.config.CustomAntiHighATKEntityConfig;
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.ProtectionEnchantment;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -23,43 +19,6 @@ import java.util.Map;
 public class AshOfSinCustomAntiHighATKEntityEvent {
 
     public static final double MAX_ATK = CustomAntiHighATKEntityConfig.MAX_ATK.get();
-    @SubscribeEvent
-    public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        if (CustomAntiHighATKEntityConfig.ANTI_ON.get()) {
-            if (event.getEntityLiving().level.isClientSide()) {
-                return;
-            }
-            LivingEntity highATKEntity = event.getEntityLiving();
-            if (!(highATKEntity.level.isClientSide()) && (CustomAntiHighATKEntityConfig.isHighATKEntity(highATKEntity))) {
-                double maxATK = highATKEntity.getAttributeValue(Attributes.ATTACK_DAMAGE);
-                if (maxATK > MAX_ATK) {
-                    setMaxAttackDamage(highATKEntity, MAX_ATK);
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void onEntityJoinWorld(EntityJoinWorldEvent event) {
-        if (CustomAntiHighATKEntityConfig.ANTI_ON.get()) {
-            if (!(event.getWorld().isClientSide()) && (event.getWorld() instanceof ServerLevel)) {
-                if (event.getEntity() instanceof LivingEntity highATKEntity && CustomAntiHighATKEntityConfig.isHighATKEntity(highATKEntity)) {
-                    double maxATK = highATKEntity.getAttributeValue(Attributes.ATTACK_DAMAGE);
-                    if (maxATK > MAX_ATK) {
-                        setMaxAttackDamage(highATKEntity, MAX_ATK);
-                    }
-                }
-            }
-        }
-    }
-
-    public static void setMaxAttackDamage(LivingEntity entity, double maxATK){
-        AttributeInstance highATK = entity.getAttributes().getInstance(Attributes.ATTACK_DAMAGE);
-        if(highATK != null){
-            highATK.removeModifiers();
-            highATK.setBaseValue(maxATK);
-        }
-    }
 
     @SubscribeEvent
     public static void onLivingHurt(LivingHurtEvent event) {
