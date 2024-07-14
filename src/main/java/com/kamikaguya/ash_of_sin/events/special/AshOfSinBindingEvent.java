@@ -141,6 +141,14 @@ public class AshOfSinBindingEvent {
             }
         }
 
+        boolean calamityScythe = mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "calamity_scythe"));
+        boolean isLunatic_Trancer = holder.getGameProfile().getName().contains("Lunatic_Trancer");
+        if (!(mainHand.isEmpty()) && (calamityBladeThin)) {
+            if (!isOP) {
+                return !isLunatic_Trancer;
+            }
+        }
+
         return false;
     }
 }
