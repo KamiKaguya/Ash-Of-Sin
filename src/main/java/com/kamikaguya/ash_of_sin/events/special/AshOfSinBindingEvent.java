@@ -94,7 +94,7 @@ public class AshOfSinBindingEvent {
             }
         }
 
-        boolean flameKatanaCaravella = mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "flame_katana_caravella")) ||
+        boolean wenWeapon = mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "flame_katana_caravella")) ||
                 mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "flame_katana_caravella_sheath")) ||
                 offHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "flame_katana_caravella_sheath")) ||
                 mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "soul_of_the_king_fire")) ||
@@ -102,12 +102,12 @@ public class AshOfSinBindingEvent {
                 mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "soul_of_the_king_lightning")) ||
                 offHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "soul_of_the_king_lightning"));
         boolean isWenH_ = holder.getGameProfile().getName().contains("WenH_");
-        if (!(mainHand.isEmpty()) && (flameKatanaCaravella)) {
+        if (!(mainHand.isEmpty()) && (wenWeapon)) {
             if (!isOP) {
                 return !isWenH_;
             }
         }
-        if (!(offHand.isEmpty()) && (flameKatanaCaravella)) {
+        if (!(offHand.isEmpty()) && (wenWeapon)) {
             if (!isOP) {
                 return !isWenH_;
             }
@@ -143,9 +143,17 @@ public class AshOfSinBindingEvent {
 
         boolean calamityScythe = mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "calamity_scythe"));
         boolean isLunatic_Trancer = holder.getGameProfile().getName().contains("Lunatic_Trancer");
-        if (!(mainHand.isEmpty()) && (calamityBladeThin)) {
+        if (!(mainHand.isEmpty()) && (calamityScythe)) {
             if (!isOP) {
                 return !isLunatic_Trancer;
+            }
+        }
+
+        boolean sanguineGazeUnion = mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "sanguine_gaze_union"));
+        boolean isis_a_pigeon = holder.getGameProfile().getName().contains("is_a_pigeon");
+        if (!(mainHand.isEmpty()) && (sanguineGazeUnion)) {
+            if (!isOP) {
+                return !isis_a_pigeon;
             }
         }
 

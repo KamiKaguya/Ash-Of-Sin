@@ -48,6 +48,8 @@ public class AshOfSinItems {
 
     public static final RegistryObject<Item> YAMATO_KATANA = ITEMS.register("yamato_katana", () -> new YamatoKatanaItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
 
+    public static final RegistryObject<Item> SANGUINE_GAZE_UNION = ITEMS.register("sanguine_gaze_union", () -> new SanguineGazeUnionItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
+
     public static final RegistryObject<Item> ELUCIDATOR = ITEMS.register("elucidator", () -> new ElucidatorItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
 
     public static final RegistryObject<Item> DARK_REPULSER = ITEMS.register("dark_repulser", () -> new DarkRepulserItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
