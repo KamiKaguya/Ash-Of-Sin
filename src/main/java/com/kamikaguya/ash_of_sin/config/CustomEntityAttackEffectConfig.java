@@ -28,13 +28,13 @@ public class CustomEntityAttackEffectConfig {
         if (!Files.exists(configPath)) {
             List<CustomAttackEntityConfig> defaultCustomAttackEntityConfig = Arrays.asList(
                     new CustomAttackEntityConfig("iceandfire:ice_dragon", List.of(
-                            new CustomAttackEffectConfig("apotheosis:sundering", 99, 1)
+                            new CustomAttackEffectConfig("apotheosis:sundering", 60, 2)
                     )),
                     new CustomAttackEntityConfig("iceandfire:fire_dragon", List.of(
-                            new CustomAttackEffectConfig("apotheosis:sundering", 99, 1)
+                            new CustomAttackEffectConfig("apotheosis:sundering", 60, 2)
                     )),
                     new CustomAttackEntityConfig("iceandfire:lightning_dragon", List.of(
-                            new CustomAttackEffectConfig("apotheosis:sundering", 99, 1)
+                            new CustomAttackEffectConfig("apotheosis:sundering", 60, 2)
                     ))
             );
             String defaultConfigJson = GSON.toJson(defaultCustomAttackEntityConfig, CONFIG_TYPE);

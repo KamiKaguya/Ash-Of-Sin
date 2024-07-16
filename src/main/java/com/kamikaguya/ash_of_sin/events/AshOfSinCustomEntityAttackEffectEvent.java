@@ -70,7 +70,7 @@ public class AshOfSinCustomEntityAttackEffectEvent {
                 if (!hasStrongerEffect) {
                     int duration = attackEffectConfig.getDuration();
                     int amplifier = attackEffectConfig.getAmplifier();
-                    MobEffectInstance effectInstance = new MobEffectInstance(attackEffect, duration, amplifier);
+                    MobEffectInstance effectInstance = new MobEffectInstance(attackEffect, duration * 20, amplifier);
                     target.addEffect(effectInstance);
                 }
             }
