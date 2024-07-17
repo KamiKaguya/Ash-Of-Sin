@@ -77,6 +77,15 @@ public class CustomEntityAttackEffectConfig {
                     )),
                     new CustomAttackEntityConfig("dwmg:hmag_dodomeki", Arrays.asList(
                             new CustomAttackEffectConfig("apotheosis:sundering", 15, 1)
+                    )),
+                    new CustomAttackEntityConfig("witherstormmod:wither_storm", Arrays.asList(
+                            new CustomAttackEffectConfig("apotheosis:sundering", 180, 2)
+                    )),
+                    new CustomAttackEntityConfig("witherstormmod:withered_symbiont", Arrays.asList(
+                            new CustomAttackEffectConfig("apotheosis:sundering", 180, 2)
+                    )),
+                    new CustomAttackEntityConfig("witherstormmod:tentacle", Arrays.asList(
+                            new CustomAttackEffectConfig("apotheosis:sundering", 180, 2)
                     ))
             );
             String defaultConfigJson = GSON.toJson(defaultCustomAttackEntityConfig, CONFIG_TYPE);
