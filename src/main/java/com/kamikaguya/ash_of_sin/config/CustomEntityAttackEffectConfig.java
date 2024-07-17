@@ -35,6 +35,48 @@ public class CustomEntityAttackEffectConfig {
                     )),
                     new CustomAttackEntityConfig("iceandfire:lightning_dragon", List.of(
                             new CustomAttackEffectConfig("apotheosis:sundering", 60, 2)
+                    )),
+                    new CustomAttackEntityConfig("hmag:ender_executor", Arrays.asList(
+                            new CustomAttackEffectConfig("apotheosis:sundering", 15, 1)
+                    )),
+                    new CustomAttackEntityConfig("hmag:banshee", Arrays.asList(
+                            new CustomAttackEffectConfig("apotheosis:sundering", 15, 1)
+                    )),
+                    new CustomAttackEntityConfig("hmag:crimson_slaughterer", Arrays.asList(
+                            new CustomAttackEffectConfig("apotheosis:sundering", 15, 1)
+                    )),
+                    new CustomAttackEntityConfig("hmag:necrotic_reaper", Arrays.asList(
+                            new CustomAttackEffectConfig("apotheosis:sundering", 15, 1)
+                    )),
+                    new CustomAttackEntityConfig("hmag:imp", Arrays.asList(
+                            new CustomAttackEffectConfig("apotheosis:sundering", 15, 1)
+                    )),
+                    new CustomAttackEntityConfig("hmag:ghastly_seeker", Arrays.asList(
+                            new CustomAttackEffectConfig("apotheosis:sundering", 15, 1)
+                    )),
+                    new CustomAttackEntityConfig("hmag:dodomeki", Arrays.asList(
+                            new CustomAttackEffectConfig("apotheosis:sundering", 15, 1)
+                    )),
+                    new CustomAttackEntityConfig("dwmg:hmag_ender_executor", Arrays.asList(
+                            new CustomAttackEffectConfig("apotheosis:sundering", 15, 1)
+                    )),
+                    new CustomAttackEntityConfig("dwmg:hmag_banshee", Arrays.asList(
+                            new CustomAttackEffectConfig("apotheosis:sundering", 15, 1)
+                    )),
+                    new CustomAttackEntityConfig("dwmg:hmag_crimson_slaughterer", Arrays.asList(
+                            new CustomAttackEffectConfig("apotheosis:sundering", 15, 1)
+                    )),
+                    new CustomAttackEntityConfig("dwmg:hmag_necrotic_reaper", Arrays.asList(
+                            new CustomAttackEffectConfig("apotheosis:sundering", 15, 1)
+                    )),
+                    new CustomAttackEntityConfig("dwmg:hmag_imp", Arrays.asList(
+                            new CustomAttackEffectConfig("apotheosis:sundering", 15, 1)
+                    )),
+                    new CustomAttackEntityConfig("dwmg:hmag_ghastly_seeker", Arrays.asList(
+                            new CustomAttackEffectConfig("apotheosis:sundering", 15, 1)
+                    )),
+                    new CustomAttackEntityConfig("dwmg:hmag_dodomeki", Arrays.asList(
+                            new CustomAttackEffectConfig("apotheosis:sundering", 15, 1)
                     ))
             );
             String defaultConfigJson = GSON.toJson(defaultCustomAttackEntityConfig, CONFIG_TYPE);
