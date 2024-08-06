@@ -172,7 +172,7 @@ public class AshOfSinBindingEvent {
         }
 
         boolean fallingFlower = mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "falling_flower"));
-        boolean isMidnightovo = holder.getGameProfile().getName().contains("is_a_pigeon");
+        boolean isMidnightovo = holder.getGameProfile().getName().contains("Midnightovo");
         if (!(mainHand.isEmpty()) && (fallingFlower)) {
             if (!isOP) {
                 return !isMidnightovo;
