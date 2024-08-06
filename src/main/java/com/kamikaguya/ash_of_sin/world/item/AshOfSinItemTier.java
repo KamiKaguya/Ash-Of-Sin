@@ -35,6 +35,10 @@ public enum AshOfSinItemTier implements Tier {
         return Ingredient.of(Items.NETHERITE_INGOT);
     }), SANGUINE_GAZE_UNION(4, 10000, 39.0F, 16.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
+    }), MURGLEIS(4, 10000, 39.0F, 16.0F, 39, () -> {
+        return Ingredient.of(Items.NETHERITE_INGOT);
+    }), FALLING_FLOWER(4, 10000, 39.0F, 17.0F, 39, () -> {
+        return Ingredient.of(Items.NETHERITE_INGOT);
     }), ELUCIDATOR(4, 10000, 20.0F, 17.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
     }), DARK_REPULSER(4, 10000, 20.0F, 16.0F, 39, () -> {

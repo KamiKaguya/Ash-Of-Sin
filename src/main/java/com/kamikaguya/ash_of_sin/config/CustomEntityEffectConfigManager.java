@@ -356,9 +356,6 @@ public class CustomEntityEffectConfigManager {
                     new CustomEntityEffectConfig("graveyard:lich", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
-                    new CustomEntityEffectConfig("whisperwoods:hirschgeist", List.of(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
-                    )),
                     new CustomEntityEffectConfig("irons_spellbooks:dead_king", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
@@ -429,6 +426,27 @@ public class CustomEntityEffectConfigManager {
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
                     new CustomEntityEffectConfig("meetyourfight:swampjaw", List.of(
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
+                    )),
+                    new CustomEntityEffectConfig("soulsweapons:accursed_lord_boss", List.of(
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
+                    )),
+                    new CustomEntityEffectConfig("soulsweapons:chaos_monarch", List.of(
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
+                    )),
+                    new CustomEntityEffectConfig("soulsweapons:day_stalker", List.of(
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
+                    )),
+                    new CustomEntityEffectConfig("soulsweapons:draugr_boss", List.of(
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
+                    )),
+                    new CustomEntityEffectConfig("soulsweapons:night_prowler", List.of(
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
+                    )),
+                    new CustomEntityEffectConfig("soulsweapons:night_shade", List.of(
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
+                    )),
+                    new CustomEntityEffectConfig("soulsweapons:returning_knight", List.of(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     ))
             );

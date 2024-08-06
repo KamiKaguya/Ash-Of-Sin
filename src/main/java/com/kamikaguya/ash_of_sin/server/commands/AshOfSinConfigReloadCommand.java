@@ -213,7 +213,7 @@ public class AshOfSinConfigReloadCommand {
     public static final AntiSameModifierConfig antiSameModifierConfig = new AntiSameModifierConfig();
     public static final AdventureDimensionConfig adventureDimensionConfig = new AdventureDimensionConfig();
 
-    public static int reloadConfig( CommandSourceStack source) {
+    public static int reloadConfig(CommandSourceStack source) {
         if (source.hasPermission(4)) {
             ashOfSinConfig.loadConfig();
             customAntiEnchantmentEntityConfig.loadConfig();
@@ -239,7 +239,7 @@ public class AshOfSinConfigReloadCommand {
         }
     }
 
-    public static int reloadMainConfig( CommandSourceStack source) {
+    public static int reloadMainConfig(CommandSourceStack source) {
         if (source.hasPermission(4)) {
             ashOfSinConfig.loadConfig();
             source.sendSuccess(new TextComponent("罪业余烬主配置文件已重新加载。"), false);
@@ -250,7 +250,7 @@ public class AshOfSinConfigReloadCommand {
         }
     }
 
-    public static int reloadCustomAntiEnchantmentEntityConfig( CommandSourceStack source) {
+    public static int reloadCustomAntiEnchantmentEntityConfig(CommandSourceStack source) {
         if (source.hasPermission(4)) {
             customAntiEnchantmentEntityConfig.loadConfig();
             source.sendSuccess(new TextComponent("罪业余烬自定义反附魔实体配置文件已重新加载。"), false);
@@ -261,7 +261,7 @@ public class AshOfSinConfigReloadCommand {
         }
     }
 
-    public static int reloadCustomAntiSeatEntityConfig( CommandSourceStack source) {
+    public static int reloadCustomAntiSeatEntityConfig(CommandSourceStack source) {
         if (source.hasPermission(4)) {
             customAntiSeatEntityConfig.loadConfig();
             source.sendSuccess(new TextComponent("罪业余烬自定义反坐垫实体配置文件已重新加载。"), false);
@@ -272,7 +272,7 @@ public class AshOfSinConfigReloadCommand {
         }
     }
 
-    public static int reloadCustomAntiItemEntityConfig( CommandSourceStack source) {
+    public static int reloadCustomAntiItemEntityConfig(CommandSourceStack source) {
         if (source.hasPermission(4)) {
             customAntiItemEntityConfig.loadConfig();
             source.sendSuccess(new TextComponent("罪业余烬自定义反物品实体配置文件已重新加载。"), false);
@@ -283,7 +283,7 @@ public class AshOfSinConfigReloadCommand {
         }
     }
 
-    public static int reloadCustomEntityAntiEffectConfig( CommandSourceStack source) {
+    public static int reloadCustomEntityAntiEffectConfig(CommandSourceStack source) {
         if (source.hasPermission(4)) {
             customEntityAntiEffectConfig.loadConfig();
             source.sendSuccess(new TextComponent("罪业余烬自定义实体反状态效果配置文件已重新加载。"), false);
@@ -294,7 +294,7 @@ public class AshOfSinConfigReloadCommand {
         }
     }
 
-    public static int reloadCustomEntityEffectConfig( CommandSourceStack source) {
+    public static int reloadCustomEntityEffectConfig(CommandSourceStack source) {
         if (source.hasPermission(4)) {
             customEntityEffectConfigManager.loadConfig();
             source.sendSuccess(new TextComponent("罪业余烬自定义实体状态效果配置文件已重新加载。"), false);
@@ -305,7 +305,7 @@ public class AshOfSinConfigReloadCommand {
         }
     }
 
-    public static int reloadCustomEntityItemConfig( CommandSourceStack source) {
+    public static int reloadCustomEntityItemConfig(CommandSourceStack source) {
         if (source.hasPermission(4)) {
             customEntityItemConfigManager.loadConfig();
             source.sendSuccess(new TextComponent("罪业余烬自定义实体物品配置文件已重新加载。"), false);
@@ -316,7 +316,7 @@ public class AshOfSinConfigReloadCommand {
         }
     }
 
-    public static int reloadCustomEntityAttackEffectConfig( CommandSourceStack source) {
+    public static int reloadCustomEntityAttackEffectConfig(CommandSourceStack source) {
         if (source.hasPermission(4)) {
             customEntityAttackEffectConfig.loadConfig();
             source.sendSuccess(new TextComponent("罪业余烬自定义实体攻击状态效果配置文件已重新加载。"), false);
@@ -327,7 +327,7 @@ public class AshOfSinConfigReloadCommand {
         }
     }
 
-    public static int reloadAntiHighLevelEnchantmentConfig( CommandSourceStack source) {
+    public static int reloadAntiHighLevelEnchantmentConfig(CommandSourceStack source) {
         if (source.hasPermission(4)) {
             antiHighLevelEnchantmentConfig.loadConfig();
             source.sendSuccess(new TextComponent("罪业余烬反高等级附魔配置文件已重新加载。"), false);
@@ -338,7 +338,7 @@ public class AshOfSinConfigReloadCommand {
         }
     }
 
-    public static int reloadEternalEntityConfig( CommandSourceStack source) {
+    public static int reloadEternalEntityConfig(CommandSourceStack source) {
         if (source.hasPermission(4)) {
             eternalEntityConfig.loadConfig();
             source.sendSuccess(new TextComponent("罪业余烬永恒实体配置文件已重新加载。"), false);
@@ -349,7 +349,7 @@ public class AshOfSinConfigReloadCommand {
         }
     }
 
-    public static int reloadSoulLikeBossBattleConfig( CommandSourceStack source) {
+    public static int reloadSoulLikeBossBattleConfig(CommandSourceStack source) {
         if (source.hasPermission(4)) {
             soulLikeBossBattleConfig.loadConfig();
             source.sendSuccess(new TextComponent("罪业余烬类魂BOSS战配置文件已重新加载。"), false);
@@ -360,7 +360,7 @@ public class AshOfSinConfigReloadCommand {
         }
     }
 
-    public static int reloadCustomAntiHighATKEntityConfig( CommandSourceStack source) {
+    public static int reloadCustomAntiHighATKEntityConfig(CommandSourceStack source) {
         if (source.hasPermission(4)) {
             customAntiHighATKEntityConfig.loadConfig();
             source.sendSuccess(new TextComponent("罪业余烬反高攻击力实体配置文件已重新加载。"), false);
@@ -371,7 +371,7 @@ public class AshOfSinConfigReloadCommand {
         }
     }
 
-    public static int reloadBetterAIConfig( CommandSourceStack source) {
+    public static int reloadBetterAIConfig(CommandSourceStack source) {
         if (source.hasPermission(4)) {
             betterAIConfig.loadConfig();
             source.sendSuccess(new TextComponent("罪业余烬更好的AI配置文件已重新加载。"), false);
@@ -382,7 +382,7 @@ public class AshOfSinConfigReloadCommand {
         }
     }
 
-    public static int reloadCustomAntiTrapCageEntityConfig( CommandSourceStack source) {
+    public static int reloadCustomAntiTrapCageEntityConfig(CommandSourceStack source) {
         if (source.hasPermission(4)) {
             customAntiTrapCageEntityConfig.loadConfig();
             source.sendSuccess(new TextComponent("罪业余烬自定义反捕捉笼实体配置文件已重新加载。"), false);
@@ -393,7 +393,7 @@ public class AshOfSinConfigReloadCommand {
         }
     }
 
-    public static int reloadAntiSameModifierConfig( CommandSourceStack source) {
+    public static int reloadAntiSameModifierConfig(CommandSourceStack source) {
         if (source.hasPermission(4)) {
             antiSameModifierConfig.loadConfig();
             source.sendSuccess(new TextComponent("罪业余烬反重复修饰符配置文件已重新加载。"), false);
@@ -404,7 +404,7 @@ public class AshOfSinConfigReloadCommand {
         }
     }
 
-    public static int reloadAdventureDimensionConfig( CommandSourceStack source) {
+    public static int reloadAdventureDimensionConfig(CommandSourceStack source) {
         if (source.hasPermission(4)) {
             adventureDimensionConfig.loadConfig();
             source.sendSuccess(new TextComponent("罪业余烬冒险维度配置文件已重新加载。"), false);

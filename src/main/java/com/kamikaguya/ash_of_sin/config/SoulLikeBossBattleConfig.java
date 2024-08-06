@@ -73,7 +73,6 @@ public class SoulLikeBossBattleConfig {
                                 "ba_bt:ocean_golem",
                                 "aquamirae:captain_cornelia",
                                 "graveyard:lich",
-                                "whisperwoods:hirschgeist",
                                 "irons_spellbooks:dead_king",
                                 "darkersouls:nameless_king",
                                 "cataclysm:ignis",
@@ -96,7 +95,14 @@ public class SoulLikeBossBattleConfig {
                                 "conjurer_illager:conjurer",
                                 "meetyourfight:bellringer",
                                 "meetyourfight:dame_fortuna",
-                                "meetyourfight:swampjaw"
+                                "meetyourfight:swampjaw",
+                                "soulsweapons:accursed_lord_boss",
+                                "soulsweapons:chaos_monarch",
+                                "soulsweapons:day_stalker",
+                                "soulsweapons:draugr_boss",
+                                "soulsweapons:night_prowler",
+                                "soulsweapons:night_shade",
+                                "soulsweapons:returning_knight"
                         )),
                         obj -> obj instanceof String);
         BOSS_BATTLE_DISTANCE = builder.comment("Soul Like Boss Battle Distance")

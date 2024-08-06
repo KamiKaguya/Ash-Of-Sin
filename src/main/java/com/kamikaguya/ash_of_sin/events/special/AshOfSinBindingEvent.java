@@ -157,6 +157,28 @@ public class AshOfSinBindingEvent {
             }
         }
 
+        boolean murgleis = mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "murgleis")) ||
+                offHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "murgleis"));
+        boolean isMagasame = holder.getGameProfile().getName().contains("Magasame");
+        if (!(mainHand.isEmpty()) && (murgleis)) {
+            if (!isOP) {
+                return !isMagasame;
+            }
+        }
+        if (!(offHand.isEmpty()) && (murgleis)) {
+            if (!isOP) {
+                return !isMagasame;
+            }
+        }
+
+        boolean fallingFlower = mainHand.getItem().getRegistryName().equals(new ResourceLocation(AshOfSin.MODID, "falling_flower"));
+        boolean isMidnightovo = holder.getGameProfile().getName().contains("is_a_pigeon");
+        if (!(mainHand.isEmpty()) && (fallingFlower)) {
+            if (!isOP) {
+                return !isMidnightovo;
+            }
+        }
+
         return false;
     }
 }
