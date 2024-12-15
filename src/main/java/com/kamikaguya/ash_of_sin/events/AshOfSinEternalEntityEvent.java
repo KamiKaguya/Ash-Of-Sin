@@ -8,17 +8,16 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.level.ChunkPos;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.List;
+
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinEternalEntityEvent {
-
-    public static final String ETERNAL_ENTITY = EternalEntityConfig.ETERNAL_ENTITY.get().toString();
 
     @SubscribeEvent
     public static void onLivingTick(LivingEvent.LivingTickEvent event) {
@@ -26,13 +25,12 @@ public class AshOfSinEternalEntityEvent {
             return;
         }
         LivingEntity eternalEntity = event.getEntity();
-        EntityType<?> highATKEntityType = ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(ETERNAL_ENTITY));
-        if (eternalEntity.getType().equals(highATKEntityType) || eternalEntity.getCustomName().equals(ETERNAL_ENTITY)) {
-            ServerLevel serverLevel = (ServerLevel) eternalEntity.level;
-            ChunkPos centerChunkPos = new ChunkPos(eternalEntity.blockPosition());
-            for (int dx = -1; dx <= 1; dx++) {
-                for (int dz = -1; dz <= 1; dz++) {
-                    serverLevel.setChunkForced(centerChunkPos.x + dx, centerChunkPos.z + dz, true);
+        List<String> eternalEntityList = EternalEntityConfig.ETERNAL_ENTITY.get().stream().map(s -> (String) s).toList();
+        for (String eternalEntityID : eternalEntityList) {
+            EntityType<?> eternalEntityType = ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(eternalEntityID));
+            if (eternalEntity.getType().equals(eternalEntityType)) {
+                if (eternalEntity.level instanceof ServerLevel serverLevel) {
+                    serverLevel.getChunkSource().addEntity(eternalEntity);
                 }
             }
         }
@@ -40,12 +38,17 @@ public class AshOfSinEternalEntityEvent {
 
     @SubscribeEvent
     public static void onEntityJoinLevel(EntityJoinLevelEvent event) {
-        if (!event.getLevel().isClientSide() && event.getLevel() instanceof ServerLevel) {
-            LivingEntity eternalEntity = (LivingEntity) event.getEntity();
-            EntityType<?> highATKEntityType = ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(ETERNAL_ENTITY));
-            if (eternalEntity.getType().equals(highATKEntityType) || eternalEntity.getCustomName().equals(ETERNAL_ENTITY)) {
+        if (event.getEntity().level.isClientSide()) {
+            return;
+        }
+        if (event.getEntity() instanceof LivingEntity eternalEntity) {
+        List<String> eternalEntityList = EternalEntityConfig.ETERNAL_ENTITY.get().stream().map(s -> (String) s).toList();
+        for (String eternalEntityID : eternalEntityList) {
+            EntityType<?> eternalEntityType = ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(eternalEntityID));
+            if (eternalEntity.getType().equals(eternalEntityType)) {
                 preventDespawn(eternalEntity);
             }
+        }
         }
     }
 

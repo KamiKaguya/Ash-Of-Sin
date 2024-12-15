@@ -21,7 +21,6 @@ public class CrescentItem extends WeaponItem{
         super(AshOfSinItemTier.CRESCENT, 0, -1.4F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(Component.translatable(""));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".crescent.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".crescent.tooltip"));
         }

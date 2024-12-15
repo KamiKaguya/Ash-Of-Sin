@@ -21,7 +21,6 @@ public class FlameKatanaCaravellaItem extends WeaponItem{
         super(AshOfSinItemTier.FLAME_KATANA_CARAVELLA, 0, -1.8F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(Component.translatable(""));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".flame_katana_caravella.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".flame_katana_caravella.tooltip"));
         }

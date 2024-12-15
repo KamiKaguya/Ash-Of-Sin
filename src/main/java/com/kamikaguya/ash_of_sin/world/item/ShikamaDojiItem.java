@@ -21,7 +21,6 @@ public class ShikamaDojiItem extends WeaponItem{
         super(AshOfSinItemTier.SHIKAMA_DOJI, 0, -2.1F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(Component.translatable(""));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".shikama_doji.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".shikama_doji.tooltip"));
         }

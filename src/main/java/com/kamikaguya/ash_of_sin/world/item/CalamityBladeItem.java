@@ -21,7 +21,6 @@ public class CalamityBladeItem extends WeaponItem{
         super(AshOfSinItemTier.CALAMITY_BLADE, 0, -2.4F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(Component.translatable(""));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".calamity_blade.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".calamity_blade.tooltip"));
         }

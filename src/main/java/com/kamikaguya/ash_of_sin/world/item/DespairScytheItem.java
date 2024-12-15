@@ -21,7 +21,6 @@ public class DespairScytheItem extends WeaponItem{
         super(AshOfSinItemTier.DESPAIR_SCYTHE, 0, -2.1F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(Component.translatable(""));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".despair_scythe.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".despair_scythe.tooltip"));
         }

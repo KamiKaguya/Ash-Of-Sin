@@ -21,7 +21,6 @@ public class SanguineGazeUnionItem extends WeaponItem{
         super(AshOfSinItemTier.SANGUINE_GAZE_UNION, 0, -2.1F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(Component.translatable(""));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".sanguine_gaze_union.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".sanguine_gaze_union.tooltip"));
         }

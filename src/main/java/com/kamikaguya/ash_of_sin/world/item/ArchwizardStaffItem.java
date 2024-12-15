@@ -21,7 +21,6 @@ public class ArchwizardStaffItem extends WeaponItem{
         super(AshOfSinItemTier.ARCHWIZARD_STAFF, 0, -1.4F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(Component.translatable(""));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".archwizard_staff.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".archwizard_staff.tooltip"));
         }

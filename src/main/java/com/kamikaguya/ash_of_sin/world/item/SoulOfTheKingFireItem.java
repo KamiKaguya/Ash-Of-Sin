@@ -21,7 +21,6 @@ public class SoulOfTheKingFireItem extends WeaponItem{
         super(AshOfSinItemTier.SOUL_OF_THE_KING_FIRE, 0, -2.2F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(Component.translatable(""));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".soul_of_the_king_fire.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".soul_of_the_king_fire.tooltip"));
         }

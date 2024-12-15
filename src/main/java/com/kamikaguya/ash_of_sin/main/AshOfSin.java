@@ -9,8 +9,6 @@ import com.kamikaguya.ash_of_sin.events.enchantent.AshOfSinChalkWallEvent;
 import com.kamikaguya.ash_of_sin.events.special.*;
 import com.kamikaguya.ash_of_sin.events.unique.*;
 import com.kamikaguya.ash_of_sin.gameasset.AshOfSinSounds;
-import com.kamikaguya.ash_of_sin.world.biome.AshOfSinBiomes;
-import com.kamikaguya.ash_of_sin.world.dimension.AbsoluteSpaceTimeRealmDimension;
 import com.kamikaguya.ash_of_sin.world.enchantment.AbsoluteRuleEnchantment;
 import com.kamikaguya.ash_of_sin.world.enchantment.AnotherEnchantment;
 import com.kamikaguya.ash_of_sin.world.enchantment.ChalkWallEnchantment;
@@ -18,7 +16,6 @@ import com.kamikaguya.ash_of_sin.world.entity.AshOfSinEntities;
 import com.kamikaguya.ash_of_sin.world.item.AshOfSinItems;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -54,8 +51,6 @@ public class AshOfSin {
     public final BetterAIConfig betterAIConfig = new BetterAIConfig();
     public final AntiSameModifierConfig antiSameModifierConfig = new AntiSameModifierConfig();
     public final AdventureDimensionConfig adventureDimensionConfig = new AdventureDimensionConfig();
-    public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, AshOfSin.MODID);
-    public static final RegistryObject<Biome> ABSOLUTE_SPACE_TIME_REALM = BIOMES.register("absolute_space_time_realm", AshOfSinBiomes::absoluteSpaceTimeRealm);
     public static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, MODID);
     public static final RegistryObject<Enchantment> ABSOLUTE_RULE = ENCHANTMENTS.register("absolute_rule", () ->
             new AbsoluteRuleEnchantment(Enchantment.Rarity.VERY_RARE, EnchantmentCategory.WEAPON));
@@ -74,14 +69,10 @@ public class AshOfSin {
 
         AshOfSinItems.ITEMS.register(bus);
         AshOfSinEntities.ENTITY_TYPES.register(bus);
-        AbsoluteSpaceTimeRealmDimension.register();
-        BIOMES.register(bus);
         ENCHANTMENTS.register(bus);
         AshOfSinSounds.SOUNDS.register(bus);
         MinecraftForge.EVENT_BUS.register(new AshOfSinRealmGateOpenEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinSounds());
-        MinecraftForge.EVENT_BUS.register(new AshOfSinAbsoluteSpaceTimeRealmEvent());
-        MinecraftForge.EVENT_BUS.register(new AshOfSinSpawnControlEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinSculkEvent());
 
         MinecraftForge.EVENT_BUS.register(new AshOfSinAnotherEvent());

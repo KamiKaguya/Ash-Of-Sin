@@ -21,7 +21,6 @@ public class MeltSwordItem extends WeaponItem {
         super(AshOfSinItemTier.MELT_SWORD, 0, -2.8F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(Component.translatable(""));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".melt_sword.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".melt_sword.tooltip"));
         }

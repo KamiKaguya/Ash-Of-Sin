@@ -21,7 +21,6 @@ public class DarkMoonGreatswordItem extends WeaponItem{
         super(AshOfSinItemTier.DARK_MOON_GREATSWORD, 0, -3.05F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(Component.translatable(""));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".dark_moon_greatsword.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".dark_moon_greatsword.tooltip"));
         }

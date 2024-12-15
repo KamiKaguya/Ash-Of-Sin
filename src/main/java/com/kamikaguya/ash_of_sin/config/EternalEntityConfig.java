@@ -20,8 +20,8 @@ public class EternalEntityConfig {
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
-        ETERNAL_ENTITY = builder.comment("Eternal Entity")
-                .defineList("Eternal Entity",
+        ETERNAL_ENTITY = builder.comment("Eternal Entity ID")
+                .defineList("Eternal Entity ID",
                         () -> new ArrayList<>(Arrays.asList(
                                 "ash_of_sin:kamikaguya",
                                 "ash_of_sin:another",

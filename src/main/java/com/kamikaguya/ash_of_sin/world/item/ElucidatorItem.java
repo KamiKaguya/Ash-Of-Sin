@@ -21,7 +21,6 @@ public class ElucidatorItem extends WeaponItem{
         super(AshOfSinItemTier.ELUCIDATOR, 0, -1.9F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(Component.translatable(""));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".elucidator.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".elucidator.tooltip"));
         }

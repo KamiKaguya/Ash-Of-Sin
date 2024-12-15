@@ -21,7 +21,6 @@ public class DarkRepulserItem extends WeaponItem{
         super(AshOfSinItemTier.DARK_REPULSER, 0, -1.95F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(Component.translatable(""));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".dark_repulser.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".dark_repulser.tooltip"));
         }

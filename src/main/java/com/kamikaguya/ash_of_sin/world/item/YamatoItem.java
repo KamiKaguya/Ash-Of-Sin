@@ -21,7 +21,6 @@ public class YamatoItem extends WeaponItem{
         super(AshOfSinItemTier.YAMATO, 0, -1.85F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(Component.translatable(""));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".yamato.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".yamato.tooltip"));
         }

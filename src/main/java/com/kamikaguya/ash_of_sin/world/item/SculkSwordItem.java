@@ -21,7 +21,6 @@ public class SculkSwordItem extends WeaponItem{
         super(AshOfSinItemTier.SCULK_SWORD, 0, -2.8F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(Component.translatable(""));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".sculk_sword.tooltip.sculk"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".sculk_sword.tooltip"));
         }

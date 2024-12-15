@@ -21,7 +21,6 @@ public class LambentLightItem extends WeaponItem{
         super(AshOfSinItemTier.LAMBENT_LIGHT, 0, -1.95F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(Component.translatable(""));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".lambent_light.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".lambent_light.tooltip"));
         }

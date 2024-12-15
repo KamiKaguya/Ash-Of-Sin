@@ -21,7 +21,6 @@ public class MirrorOfTheDarkNightItem extends ShieldItem {
         super(build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(Component.translatable(""));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".mirror_of_the_dark_night.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".mirror_of_the_dark_night.tooltip"));
         }

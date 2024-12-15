@@ -80,7 +80,7 @@ public class AshOfSinSoulLikeBossBattleEvent {
 
     @SubscribeEvent
     public static void onLivingHurt(LivingHurtEvent event) {
-        if (event.getEntity().level.isClientSide() || event.getEntity().level.isClientSide()) {
+        if (event.getEntity().level.isClientSide()) {
             return;
         }
         if (SOUL_LIKE_BOSS_BATTLE_ON && ANTI_ON) {

@@ -21,7 +21,6 @@ public class GodEaterItem extends WeaponItem{
         super(AshOfSinItemTier.GOD_EATER, 0, -2.7F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(Component.translatable(""));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".god_eater.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".god_eater.tooltip"));
         }

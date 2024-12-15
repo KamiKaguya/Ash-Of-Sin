@@ -21,7 +21,6 @@ public class FrostmourneItem extends WeaponItem{
         super(AshOfSinItemTier.FROSTMOURNE, 0, -3.05F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(Component.translatable(""));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".frostmourne.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".frostmourne.tooltip"));
         }

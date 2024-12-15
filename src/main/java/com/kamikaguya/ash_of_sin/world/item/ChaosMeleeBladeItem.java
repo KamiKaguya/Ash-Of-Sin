@@ -21,7 +21,6 @@ public class ChaosMeleeBladeItem extends WeaponItem {
         super(AshOfSinItemTier.CHAOS_MELEE_BLADE, 0, -2.8F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(Component.translatable(""));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".chaos_melee_blade.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".chaos_melee_blade.tooltip"));
         }
