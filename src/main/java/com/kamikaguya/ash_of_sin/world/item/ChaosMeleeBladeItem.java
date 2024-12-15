@@ -29,7 +29,7 @@ public class ChaosMeleeBladeItem extends WeaponItem {
 
     @Override
     public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
-        return toRepair.getItem() == Items.AMETHYST_SHARD;
+        return toRepair.getItem() == Items.NETHERITE_INGOT;
     }
 
     @Override
