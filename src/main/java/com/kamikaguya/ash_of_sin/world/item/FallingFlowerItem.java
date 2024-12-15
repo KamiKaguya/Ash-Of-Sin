@@ -2,8 +2,6 @@ package com.kamikaguya.ash_of_sin.world.item;
 
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -23,9 +21,9 @@ public class FallingFlowerItem extends WeaponItem {
         super(AshOfSinItemTier.FALLING_FLOWER, 0, -2.8F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(new TextComponent(""));
-            this.tooltipExpand.add(new TranslatableComponent("item." + AshOfSin.MODID + ".falling_flower.tooltip.unique"));
-            this.tooltipExpand.add(new TranslatableComponent("item." + AshOfSin.MODID + ".falling_flower.tooltip"));
+            this.tooltipExpand.add(Component.translatable(""));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".falling_flower.tooltip.unique"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".falling_flower.tooltip"));
         }
     }
 

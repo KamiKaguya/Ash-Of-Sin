@@ -11,7 +11,7 @@ public class AbsoluteSpaceTimeRealmDimension {
         public static final ResourceKey<Level> ABSOLUTE_SPACE_TIME_REALM = ResourceKey.create(Registry.DIMENSION_REGISTRY,
                 new ResourceLocation(AshOfSin.MODID, "absolute_space_time_realm"));
         public static final ResourceKey<DimensionType> ABSOLUTE_SPACE_TIME_REALM_TYPE =
-            ResourceKey.create(Registry.DIMENSION_TYPE_REGISTRY, ABSOLUTE_SPACE_TIME_REALM.getRegistryName());
+            ResourceKey.create(Registry.DIMENSION_TYPE_REGISTRY, ABSOLUTE_SPACE_TIME_REALM.registry());
 
         public static void register() {
                 System.out.println("Registering Absolute Space Time Realm for " + AshOfSin.MODID);

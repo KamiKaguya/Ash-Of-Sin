@@ -169,13 +169,19 @@ public class AbsoluteRuleEnchantment extends Enchantment {
         return baseDamage - damageAfterArmorReduction;
     }
 
-    public float damageAfterArmorReduction(float armorValue, float toughnessValue, float baseDamage) {
+    public static float damageAfterArmorReduction(float armorValue, float toughnessValue, float baseDamage) {
         float damageAfterArmorReduction;
-        if (baseDamage <= 1.6 * armorValue + 0.2 * toughnessValue) {
-            damageAfterArmorReduction = (1 / (6.25f * toughnessValue + 50f)) * baseDamage * baseDamage
-                    + (1f - armorValue / 25f) * baseDamage;
+        float damageAfterToughnessReduction;
+        if (toughnessValue == 0) {
+            damageAfterArmorReduction = (baseDamage * Math.max(10 / (10 + armorValue), 0.2f));
         } else {
-            damageAfterArmorReduction = (1f - armorValue / 125f) * baseDamage;
+            if (baseDamage > (40 / (toughnessValue + 1))) {
+                damageAfterToughnessReduction = baseDamage - ((40 / (toughnessValue + 1)) / 2);
+                damageAfterArmorReduction = (damageAfterToughnessReduction * Math.max(10 / (10 + armorValue), 0.2f));
+            } else {
+                damageAfterToughnessReduction = baseDamage - (40 / (toughnessValue + 1));
+                damageAfterArmorReduction = (damageAfterToughnessReduction * Math.max(10 / (10 + armorValue), 0.2f));
+            }
         }
         return damageAfterArmorReduction;
     }
@@ -188,7 +194,7 @@ public class AbsoluteRuleEnchantment extends Enchantment {
                 if (entry.getKey() instanceof ProtectionEnchantment) {
                     int protectLevel = entry.getValue();
 
-                    damageAfterArmorProtection += baseDamage * (10 / ((protectLevel + 10.0f) / 2));
+                    damageAfterArmorProtection += baseDamage * (10 / (10.0f + protectLevel));
                 }
             }
         }

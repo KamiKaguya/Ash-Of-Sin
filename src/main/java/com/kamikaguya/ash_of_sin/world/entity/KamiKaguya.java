@@ -10,10 +10,12 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.TagParser;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientboundSystemChatPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -56,8 +58,9 @@ public class KamiKaguya extends PathfinderMob {
             this.updateResistanceBuff();
 
             if (!level.isClientSide() && level instanceof ServerLevel serverLevel) {
-                Component joinMessage = new TranslatableComponent("message.ash_of_sin.kamikaguya.join");
-                serverLevel.getServer().getPlayerList().broadcastMessage(joinMessage, ChatType.SYSTEM, Util.NIL_UUID);
+                Component joinMessage = Component.translatable("message.ash_of_sin.kamikaguya.join");
+                Packet<?> messagePacket = new ClientboundSystemChatPacket(joinMessage, true);
+                serverLevel.getServer().getPlayerList().broadcastAll(messagePacket);
             }
         }
     }
@@ -307,7 +310,7 @@ public class KamiKaguya extends PathfinderMob {
     }
 
     public void summonEntity() {
-        EntityType<?> entityTypeToSummon = ForgeRegistries.ENTITIES.getValue(
+        EntityType<?> entityTypeToSummon = ForgeRegistries.ENTITY_TYPES.getValue(
                 new ResourceLocation(AshOfSinConfig.ENTITY_SUMMON_ID.get())
         );
 

@@ -2,8 +2,6 @@ package com.kamikaguya.ash_of_sin.world.item;
 
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -23,9 +21,9 @@ public class YamatoKatanaItem extends WeaponItem{
         super(AshOfSinItemTier.YAMATO_KATANA, 0, -1.85F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(new TextComponent(""));
-            this.tooltipExpand.add(new TranslatableComponent("item." + AshOfSin.MODID + ".yamato_katana.tooltip.unique"));
-            this.tooltipExpand.add(new TranslatableComponent("item." + AshOfSin.MODID + ".yamato_katana.tooltip"));
+            this.tooltipExpand.add(Component.translatable(""));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".yamato_katana.tooltip.unique"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".yamato_katana.tooltip"));
         }
     }
 

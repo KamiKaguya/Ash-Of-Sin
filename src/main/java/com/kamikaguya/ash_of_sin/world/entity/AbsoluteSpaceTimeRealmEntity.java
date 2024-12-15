@@ -1,6 +1,5 @@
 package com.kamikaguya.ash_of_sin.world.entity;
 
-import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -42,7 +41,7 @@ public interface AbsoluteSpaceTimeRealmEntity {
             if (!level.isClientSide && level.getGameRules().getBoolean(GameRules.RULE_SHOWDEATHMESSAGES)) {
                 LivingEntity var5 = this.getOwner();
                 if (var5 instanceof ServerPlayer player) {
-                    player.sendMessage(deathMessage, Util.NIL_UUID);
+                    player.sendSystemMessage(deathMessage);
                 }
             }
         }

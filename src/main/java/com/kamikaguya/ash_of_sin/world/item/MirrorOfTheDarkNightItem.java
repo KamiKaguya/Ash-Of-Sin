@@ -2,8 +2,6 @@ package com.kamikaguya.ash_of_sin.world.item;
 
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ShieldItem;
@@ -23,9 +21,9 @@ public class MirrorOfTheDarkNightItem extends ShieldItem {
         super(build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(new TextComponent(""));
-            this.tooltipExpand.add(new TranslatableComponent("item." + AshOfSin.MODID + ".mirror_of_the_dark_night.tooltip.unique"));
-            this.tooltipExpand.add(new TranslatableComponent("item." + AshOfSin.MODID + ".mirror_of_the_dark_night.tooltip"));
+            this.tooltipExpand.add(Component.translatable(""));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".mirror_of_the_dark_night.tooltip.unique"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".mirror_of_the_dark_night.tooltip"));
         }
     }
 

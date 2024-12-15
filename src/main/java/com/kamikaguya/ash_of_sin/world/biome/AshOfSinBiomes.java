@@ -1,25 +1,15 @@
 package com.kamikaguya.ash_of_sin.world.biome;
 
-import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.world.level.biome.*;
 
 public class AshOfSinBiomes {
 
-    public static Biome createBiome() {
-        BiomeGenerationSettings plainsGenSettings = BuiltinRegistries.BIOME.get(Biomes.PLAINS).getGenerationSettings();
+    private static Biome biome(Biome.Precipitation precipitation, float temperature, float downfall, int waterColor, int waterFogColor)
+    {
+        return biome(precipitation, temperature, downfall, 4159204, 329011);
+    }
 
-        BiomeSpecialEffects plainsEffects = BuiltinRegistries.BIOME.get(Biomes.PLAINS).getSpecialEffects();
-
-        MobSpawnSettings.Builder mobSpawnSettingsBuilder = new MobSpawnSettings.Builder();
-
-        return (new Biome.BiomeBuilder())
-                .temperature(BuiltinRegistries.BIOME.get(Biomes.PLAINS).getBaseTemperature())
-                .downfall(BuiltinRegistries.BIOME.get(Biomes.PLAINS).getDownfall())
-                .precipitation(BuiltinRegistries.BIOME.get(Biomes.PLAINS).getPrecipitation())
-                .biomeCategory(Biome.BiomeCategory.PLAINS)
-                .specialEffects(plainsEffects)
-                .mobSpawnSettings(mobSpawnSettingsBuilder.build())
-                .generationSettings(plainsGenSettings)
-                .build();
+    public static Biome absoluteSpaceTimeRealm() {
+        return biome(Biome.Precipitation.RAIN, 0.2F, 0.5F, 0xA89557, 0xC67F5B);
     }
 }

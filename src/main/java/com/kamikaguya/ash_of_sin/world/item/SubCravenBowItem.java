@@ -2,8 +2,6 @@ package com.kamikaguya.ash_of_sin.world.item;
 
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -23,9 +21,9 @@ public class SubCravenBowItem extends BowItem {
         super(build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(new TextComponent(""));
-            this.tooltipExpand.add(new TranslatableComponent("item." + AshOfSin.MODID + ".sub_craven_bow.tooltip.unique"));
-            this.tooltipExpand.add(new TranslatableComponent("item." + AshOfSin.MODID + ".sub_craven_bow.tooltip"));
+            this.tooltipExpand.add(Component.translatable(""));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".sub_craven_bow.tooltip.unique"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".sub_craven_bow.tooltip"));
         }
     }
 
