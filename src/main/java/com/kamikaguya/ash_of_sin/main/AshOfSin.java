@@ -81,7 +81,6 @@ public class AshOfSin {
         BIOMES.register(bus);
         ENCHANTMENTS.register(bus);
         AshOfSinSounds.SOUNDS.register(bus);
-        MinecraftForge.EVENT_BUS.register(new AshOfSinRegisterCommandsEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinRealmGateOpenEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinSounds());
         MinecraftForge.EVENT_BUS.register(new AshOfSinAbsoluteSpaceTimeRealmEvent());
