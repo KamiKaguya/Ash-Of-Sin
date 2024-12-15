@@ -1,0 +1,41 @@
+package com.kamikaguya.ash_of_sin.events;
+
+import com.kamikaguya.ash_of_sin.config.AdventureDimensionConfig;
+import com.kamikaguya.ash_of_sin.main.AshOfSin;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.GameType;
+import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+
+import java.util.List;
+
+@Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+public class AshOfSinAdventureDimensionEvent {
+
+    public static final List<? extends String> ADVENTURE_DIMENSION_ID = AdventureDimensionConfig.ADVENTURE_DIMENSION_ID.get();
+    public static final List<? extends String> ADVENTURE_DIMENSION_ALLOW_PLAYER_ID = AdventureDimensionConfig.ADVENTURE_DIMENSION_ALLOW_PLAYER_ID.get();
+
+    @SubscribeEvent
+    public static void inAdventureDimension(LivingEvent.LivingTickEvent event) {
+        if (event.getEntity().level.isClientSide()) {
+            return;
+        }
+        if (event.getEntity() instanceof ServerPlayer player) {
+            ResourceLocation dimension = player.level.dimension().location();
+
+            boolean isExceptionPlayer = ADVENTURE_DIMENSION_ALLOW_PLAYER_ID.contains(player.getGameProfile().getName());
+
+            if(ADVENTURE_DIMENSION_ID.contains(dimension.toString()) && player.gameMode.getGameModeForPlayer() != GameType.CREATIVE && !(isExceptionPlayer)) {
+                player.setGameMode(GameType.ADVENTURE);
+                player.getPersistentData().putBoolean("InAdventureDimension", true);
+            } else if(!(ADVENTURE_DIMENSION_ID.contains(dimension.toString()))) {
+                if(player.getPersistentData().getBoolean("InAdventureDimension")) {
+                    player.setGameMode(GameType.SURVIVAL);
+                    player.getPersistentData().remove("InAdventureDimension");
+                }
+            }
+        }
+    }
+}
