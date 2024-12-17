@@ -26,10 +26,10 @@ public class CustomAntiItemEntityConfig {
                 .define("Anti On", true);
         ANTI_ITEM_ENTITY = builder.comment("Anti-Item Entity")
                 .defineList("Anti-Item Entity",
-                        () -> new ArrayList<>(Arrays.asList("ash_of_sin:kamikaguya", "iceandfire:ice_dragon", "iceandfire:fire_dragon", "iceandfire:lightning_dragon", "dwmg:hmag_zombie_girl", "dwmg:hmag_husk_girl", "dwmg:hmag_drowned_girl", "dwmg:hmag_skeleton_girl", "dwmg:hmag_wither_skeleton_girl", "dwmg:hmag_stray_girl", "dwmg:hmag_creeper_girl", "dwmg:hmag_creeper_girl", "hmag:ender_executor", "dwmg:hmag_ender_executor", "dwmg:hmag_kobold", "dwmg:hmag_melty_monster", "dwmg:hmag_cursed_doll", "dwmg:hmag_jack_frost", "dwmg:hmag_hornet", "dwmg:hmag_dullahan", "hmag:banshee", "dwmg:hmag_banshee", "dwmg:hmag_alraune", "hmag:ghastly_seeker", "dwmg:hmag_ghastly_seeker", "dwmg:hmag_redcap", "dwmg:hmag_slime_girl", "hmag:crimson_slaughterer", "dwmg:hmag_crimson_slaughterer", "dwmg:hmag_snow_canine", "dwmg:hmag_harpy", "hmag:necrotic_reaper", "dwmg:hmag_necrotic_reaper", "hmag:dodomeki", "dwmg:hmag_dodomeki", "hmag:imp", "dwmg:hmag_imp", "dwmg:hmag_glaryad")),
+                        () -> new ArrayList<>(Arrays.asList("ash_of_sin:kamikaguya", "iceandfire:ice_dragon", "iceandfire:fire_dragon", "iceandfire:lightning_dragon")),
                         o -> o instanceof String);
         List<String> antiItems = List.of(
-                "dawncraft:slayers_blade"
+                "minecraft:bedrock"
         );
         ANTI_ITEM = builder.comment("Anti-Item ID")
                 .defineList("Anti-Item ID",

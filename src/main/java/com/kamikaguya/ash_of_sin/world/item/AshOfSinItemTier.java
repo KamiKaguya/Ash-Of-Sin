@@ -11,63 +11,101 @@ import java.util.function.Supplier;
 public enum AshOfSinItemTier implements Tier {
     CRESCENT(4, 10000, 1.0F, 14.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_BLOCK);
-    }), VENUZDONOA(4, 100000000, 39.0F, 38.0F, 39, () -> {
+    }),
+    CRESCENT_DAGGER(4, 10000, 1.0F, 14.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_BLOCK);
-    }), DARK_MOON_GREATSWORD(4, 10000, 39.0F, 38.0F, 39, () -> {
+    }),
+    VENUZDONOA(4, 100000000, 39.0F, 38.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_BLOCK);
-    }), CARIAN_KNIGHTS_SWORD(4, 10000, 39.0F, 17.0F, 39, () -> {
+    }),
+    DARK_MOON_GREATSWORD(4, 10000, 39.0F, 38.0F, 39, () -> {
+        return Ingredient.of(Items.NETHERITE_BLOCK);
+    }),
+    CARIAN_KNIGHTS_SWORD(4, 10000, 39.0F, 17.0F, 39, () -> {
         return Ingredient.of(Items.IRON_INGOT);
-    }), EA(4, 100000000, 39.0F, 16.0F, 39, () -> {
+    }),
+    EA(4, 100000000, 39.0F, 16.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_BLOCK);
-    }), CHAOS_MELEE_BLADE(4, 10000, 39.0F, 17.0F, 39, () -> {
+    }),
+    CHAOS_MELEE_BLADE(4, 10000, 39.0F, 17.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
-    }), SHIKAMA_DOJI(4, 10000, 39.0F, 16.0F, 39, () -> {
+    }),
+    SHIKAMA_DOJI(4, 10000, 39.0F, 16.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
-    }), FLAME_KATANA_CARAVELLA(4, 10000, 39.0F, 15.0F, 39, () -> {
+    }),
+    FLAME_KATANA_CARAVELLA(4, 10000, 39.0F, 15.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
-    }), SOUL_OF_THE_KING_FIRE(4, 10000, 39.0F, 15.0F, 39, () -> {
+    }),
+    SOUL_OF_THE_KING_FIRE(4, 10000, 39.0F, 15.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
-    }), SOUL_OF_THE_KING_LIGHTNING(4, 10000, 39.0F, 15.0F, 39, () -> {
+    }),
+    SOUL_OF_THE_KING_LIGHTNING(4, 10000, 39.0F, 15.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
-    }), YAMATO(4, 10000, 39.0F, 17.0F, 39, () -> {
+    }),
+    YAMATO(4, 10000, 39.0F, 15.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
-    }), YAMATO_KATANA(4, 10000, 39.0F, 17.0F, 39, () -> {
+    }),
+    YAMATO_KATANA(4, 10000, 39.0F, 15.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
-    }), SANGUINE_GAZE_UNION(4, 10000, 39.0F, 16.0F, 39, () -> {
+    }),
+    SANGUINE_GAZE_UNION(4, 10000, 39.0F, 16.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
-    }), MURGLEIS(4, 10000, 39.0F, 16.0F, 39, () -> {
+    }),
+    MURGLEIS(4, 10000, 39.0F, 16.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
-    }), FALLING_FLOWER(4, 10000, 39.0F, 17.0F, 39, () -> {
+    }),
+    FALLING_FLOWER(4, 10000, 39.0F, 17.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
-    }), ELUCIDATOR(4, 10000, 20.0F, 17.0F, 39, () -> {
+    }),
+    MURASAME(4, 10000, 39.0F, 15.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
-    }), DARK_REPULSER(4, 10000, 20.0F, 16.0F, 39, () -> {
+    }),
+    MURASAME_KATANA(4, 10000, 39.0F, 15.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
-    }), LAMBENT_LIGHT(4, 10000, 20.0F, 16.0F, 39, () -> {
+    }),
+    ELUCIDATOR(4, 10000, 20.0F, 17.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
-    }), ARCHWIZARD_STAFF(4, 10000, 39.0F, 16.0F, 39, () -> {
+    }),
+    DARK_REPULSER(4, 10000, 20.0F, 16.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
-    }), FROSTMOURNE(4, 10000, 20.0F, 24.0F, 39, () -> {
+    }),
+    LAMBENT_LIGHT(4, 10000, 20.0F, 16.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
-    }), CRUCIBLE(4, 10000, 20.0F, 17.0F, 39, () -> {
+    }),
+    ARCHWIZARD_STAFF(4, 10000, 39.0F, 16.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
-    }), MELT_SWORD(4, 10000, 20.0F, 17.0F, 39, () -> {
+    }),
+    FROSTMOURNE(4, 10000, 20.0F, 24.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
-    }), GOD_EATER(4, 10000, 20.0F, 17.0F, 39, () -> {
+    }),
+    CRUCIBLE(4, 10000, 20.0F, 17.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
-    }), CALAMITY_BLADE(4, 10000, 20.0F, 16.0F, 39, () -> {
+    }),
+    MELT_SWORD(4, 10000, 20.0F, 17.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
-    }), CALAMITY_BLADE_THIN(4, 10000, 20.0F, 15.0F, 39, () -> {
+    }),
+    GOD_EATER(4, 10000, 20.0F, 17.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
-    }), CALAMITY_SCYTHE(4, 10000, 20.0F, 16.0F, 39, () -> {
+    }),
+    CALAMITY_BLADE(4, 10000, 20.0F, 16.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
-    }), DESPAIR_SCYTHE(4, 10000, 20.0F, 16.0F, 39, () -> {
+    }),
+    CALAMITY_BLADE_THIN(4, 10000, 20.0F, 15.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
-    }), SCULK_AXE(4, 3000, 20.0F, 10.0F, 39, () -> {
+    }),
+    CALAMITY_SCYTHE(4, 10000, 20.0F, 16.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
-    }), SCULK_SWORD(4, 3000, 20.0F, 9.0F, 39, () -> {
+    }),
+    DESPAIR_SCYTHE(4, 10000, 20.0F, 16.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
-    }), SCULK_GREATSWORD(4, 3000, 20.0F, 17.0F, 39, () -> {
+    }),
+    SCULK_AXE(4, 3000, 20.0F, 10.0F, 39, () -> {
+        return Ingredient.of(Items.NETHERITE_INGOT);
+    }),
+    SCULK_SWORD(4, 3000, 20.0F, 9.0F, 39, () -> {
+        return Ingredient.of(Items.NETHERITE_INGOT);
+    }),
+    SCULK_GREATSWORD(4, 3000, 20.0F, 17.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
     });
     public final int harvestLevel;

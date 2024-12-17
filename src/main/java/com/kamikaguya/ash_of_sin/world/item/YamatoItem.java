@@ -18,7 +18,7 @@ public class YamatoItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
     public List<Component> tooltipExpand;
     public YamatoItem(Item.Properties build) {
-        super(AshOfSinItemTier.YAMATO, 0, -1.85F, build);
+        super(AshOfSinItemTier.YAMATO, 0, -1.8F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".yamato.tooltip.unique"));

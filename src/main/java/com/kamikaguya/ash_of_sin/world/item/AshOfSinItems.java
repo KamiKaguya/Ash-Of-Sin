@@ -18,6 +18,8 @@ public class AshOfSinItems {
 
     public static final RegistryObject<Item> CRESCENT = ITEMS.register("crescent", () -> new CrescentItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
 
+    public static final RegistryObject<Item> CRESCENT_DAGGER = ITEMS.register("crescent_dagger", () -> new CrescentDaggerItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
+
     public static final RegistryObject<Item> CRESCENT_SHEATH = ITEMS.register("crescent_sheath", () -> new Item(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
 
     public static final RegistryObject<Item> VENUZDONOA = ITEMS.register("venuzdonoa", () -> new VenuzdonoaItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
@@ -44,22 +46,27 @@ public class AshOfSinItems {
 
     public static final RegistryObject<Item> YAMATO = ITEMS.register("yamato", () -> new YamatoItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
 
-    public static final RegistryObject<Item> YAMATO_SHEATH = ITEMS.register("yamato_sheath", () -> new Item(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
-
     public static final RegistryObject<Item> YAMATO_KATANA = ITEMS.register("yamato_katana", () -> new YamatoKatanaItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
+
+    public static final RegistryObject<Item> YAMATO_SHEATH = ITEMS.register("yamato_sheath", () -> new Item(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
 
     public static final RegistryObject<Item> SANGUINE_GAZE_UNION = ITEMS.register("sanguine_gaze_union", () -> new SanguineGazeUnionItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
 
     public static final RegistryObject<Item> MURGLEIS = ITEMS.register("murgleis", () -> new MurgleisItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
 
     public static final RegistryObject<Item> FALLING_FLOWER = ITEMS.register("falling_flower", () -> new FallingFlowerItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
+
+    public static final RegistryObject<Item> MURASAME = ITEMS.register("murasame", () -> new MurasameItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
+
+    public static final RegistryObject<Item> MURASAME_KATANA = ITEMS.register("murasame_katana", () -> new MurasameKatanaItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
+
+    public static final RegistryObject<Item> MURASAME_SHEATH = ITEMS.register("murasame_sheath", () -> new Item(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
+
     public static final RegistryObject<Item> ELUCIDATOR = ITEMS.register("elucidator", () -> new ElucidatorItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
 
     public static final RegistryObject<Item> DARK_REPULSER = ITEMS.register("dark_repulser", () -> new DarkRepulserItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
 
     public static final RegistryObject<Item> LAMBENT_LIGHT = ITEMS.register("lambent_light", () -> new LambentLightItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
-
-    public static final RegistryObject<Item> ARCHWIZARD_STAFF = ITEMS.register("archwizard_staff", () -> new ArchwizardStaffItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
 
     public static final RegistryObject<Item> FROSTMOURNE = ITEMS.register("frostmourne", () -> new FrostmourneItem(new Item.Properties().tab(AshOfSinCreativeModeTabs.ITEMS).rarity(Rarity.EPIC).fireResistant()));
 

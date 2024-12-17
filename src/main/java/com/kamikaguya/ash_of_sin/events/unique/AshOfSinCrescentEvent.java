@@ -42,8 +42,10 @@ public class AshOfSinCrescentEvent {
 
     public static boolean holdCrescent(LivingEntity livingEntity) {
         ItemStack mainHand = livingEntity.getMainHandItem();
-        boolean holdCrescent = ForgeRegistries.ITEMS.getKey(mainHand.getItem()).equals(new ResourceLocation(AshOfSin.MODID, "crescent"));
-        return !(mainHand.isEmpty()) && (holdCrescent);
+        ItemStack offHand = livingEntity.getOffhandItem();
+        boolean holdCrescent = ForgeRegistries.ITEMS.getKey(mainHand.getItem()).equals(new ResourceLocation(AshOfSin.MODID, "crescent")) ||
+                ForgeRegistries.ITEMS.getKey(offHand.getItem()).equals(new ResourceLocation(AshOfSin.MODID, "crescent"));
+        return !(mainHand.isEmpty()) && offHand.isEmpty() && (holdCrescent);
     }
 
     @SubscribeEvent
@@ -59,16 +61,22 @@ public class AshOfSinCrescentEvent {
         if (livingEntity instanceof ServerPlayer serverPlayer) {
             if (holdCrescent(serverPlayer)) {
                 MobEffect paralysis = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("tensura", "paralysis"));
-                serverPlayer.removeEffect(MobEffects.POISON);
+                MobEffect fatalPoison = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("tensura", "fatal_poison"));
+                MobEffect poison = MobEffects.POISON;
                 serverPlayer.removeEffect(paralysis);
+                serverPlayer.removeEffect(fatalPoison);
+                serverPlayer.removeEffect(poison);
             }
         }
         if (livingEntity instanceof Another another) {
             if (holdCrescent(another)) {
                 if (another.getOwner() instanceof ServerPlayer serverPlayer) {
                     MobEffect paralysis = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("tensura", "paralysis"));
-                    another.removeEffect(MobEffects.POISON);
+                    MobEffect fatalPoison = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("tensura", "fatal_poison"));
+                    MobEffect poison = MobEffects.POISON;
                     another.removeEffect(paralysis);
+                    serverPlayer.removeEffect(fatalPoison);
+                    serverPlayer.removeEffect(poison);
                 }
             }
         }
@@ -76,7 +84,7 @@ public class AshOfSinCrescentEvent {
 
     public static void skillHydraDevour(ServerPlayer attacker) {
         MobEffect paralysis = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("tensura", "paralysis"));
-        MobEffect poison = MobEffects.POISON;
+        MobEffect fatalPoison = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("tensura", "fatal_poison"));
         double attackerX = attacker.getX();
         double attackerY = attacker.getY();
         double attackerZ = attacker.getZ();
@@ -88,8 +96,8 @@ public class AshOfSinCrescentEvent {
             if (nearbyEntity == attacker || nearbyEntity instanceof Another another && another.getOwner() == attacker) {
                     return;
             }
-            nearbyEntity.addEffect(new MobEffectInstance(paralysis, 30 * 20, 2));
-            nearbyEntity.addEffect(new MobEffectInstance(poison, 30 * 20, 2));
+            nearbyEntity.addEffect(new MobEffectInstance(paralysis, 30 * 20, 4));
+            nearbyEntity.addEffect(new MobEffectInstance(fatalPoison, 30 * 20, 4));
         }
     }
 }

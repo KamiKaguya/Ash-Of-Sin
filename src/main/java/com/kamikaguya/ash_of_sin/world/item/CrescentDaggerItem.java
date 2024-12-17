@@ -2,7 +2,6 @@ package com.kamikaguya.ash_of_sin.world.item;
 
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
@@ -14,21 +13,21 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArchwizardStaffItem extends WeaponItem{
+public class CrescentDaggerItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
     public List<Component> tooltipExpand;
-    public ArchwizardStaffItem(Item.Properties build) {
-        super(AshOfSinItemTier.ARCHWIZARD_STAFF, 0, -1.4F, build);
+    public CrescentDaggerItem(Properties build) {
+        super(AshOfSinItemTier.CRESCENT, 0, -1.4F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".archwizard_staff.tooltip.unique"));
-            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".archwizard_staff.tooltip"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".crescent_dagger.tooltip.unique"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".crescent_dagger.tooltip"));
         }
     }
 
     @Override
     public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
-        return toRepair.getItem() == Items.NETHERITE_INGOT;
+        return toRepair.getItem() == Items.NETHERITE_BLOCK;
     }
 
     @Override

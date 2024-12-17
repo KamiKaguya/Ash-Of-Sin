@@ -86,6 +86,7 @@ public class AshOfSin {
         MinecraftForge.EVENT_BUS.register(new AshOfSinFlameKatanaCaravellaEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinDualBladesEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinDespairScytheEvent());
+        MinecraftForge.EVENT_BUS.register(new AshOfSinMurasameEvent());
 
         MinecraftForge.EVENT_BUS.register(new AshOfSinCustomAntiEnchantmentEntityEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinCustomAntiSeatEntityEvent());

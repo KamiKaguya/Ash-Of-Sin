@@ -14,15 +14,15 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FallingFlowerItem extends WeaponItem {
+public class MurasameItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
     public List<Component> tooltipExpand;
-    public FallingFlowerItem(Item.Properties build) {
-        super(AshOfSinItemTier.FALLING_FLOWER, 0, -1.8F, build);
+    public MurasameItem(Item.Properties build) {
+        super(AshOfSinItemTier.MURASAME, 0, -1.8F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".falling_flower.tooltip.unique"));
-            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".falling_flower.tooltip"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".murasame.tooltip.unique"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".murasame.tooltip"));
         }
     }
 
