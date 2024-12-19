@@ -10,6 +10,7 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
@@ -41,50 +42,52 @@ public class AshOfSinChalkWallEvent {
             return;
         }
 
-        LivingEntity livingEntity = event.getEntity();
+        Entity entity = event.getEntity();
         DamageSource damageSource = event.getSource();
-        LivingEntity attacker = (LivingEntity) damageSource.getEntity();
-        if (damageSource.getDirectEntity() instanceof Another another && (another.getCustomName() != null) && another.getCustomName().equals(livingEntity)) {
-            return;
-        }
 
-        if (attacker instanceof Another another && (another.getCustomName() != null) && another.getCustomName().equals(livingEntity)) {
-            return;
-        }
+        if (entity instanceof LivingEntity livingEntity) {
+            if (damageSource.getDirectEntity() instanceof Another another && (another.getCustomName() != null) && another.getCustomName().equals(livingEntity)) {
+                return;
+            }
 
-        CompoundTag livingEntityData = livingEntity.getPersistentData();
-        boolean inChalkWallCD = livingEntityData.getBoolean(CHALK_WALL_CD);
+            if (damageSource.getEntity() instanceof Another another && (another.getCustomName() != null) && another.getCustomName().equals(livingEntity)) {
+                return;
+            }
 
-        if (inChalkWallCD) {
-            return;
-        }
+            CompoundTag livingEntityData = livingEntity.getPersistentData();
+            boolean inChalkWallCD = livingEntityData.getBoolean(CHALK_WALL_CD);
 
-        float originalDamage = event.getAmount();
-        float damageAfterArmorReduction = damageAfterArmor(livingEntity, originalDamage);
-        float damageAfterArmorProtection = damageAfterArmorProtection(livingEntity.getArmorSlots(),damageAfterArmorReduction);
-        boolean isTriggered = livingEntity.getHealth() <= livingEntity.getMaxHealth() * 0.05
-                || damageAfterArmorProtection >= livingEntity.getHealth();
-        if (!isTriggered) {
-            return;
-        }
+            if (inChalkWallCD) {
+                return;
+            }
 
-        int enchantmentLevel = getEnchantmentLevel(livingEntity, AshOfSin.CHALK_WALL.get());
-        if (enchantmentLevel > 3) {
-            return;
-        }
+            float originalDamage = event.getAmount();
+            float damageAfterArmorReduction = damageAfterArmor(livingEntity, originalDamage);
+            float damageAfterArmorProtection = damageAfterArmorProtection(livingEntity.getArmorSlots(), damageAfterArmorReduction);
+            boolean isTriggered = livingEntity.getHealth() <= livingEntity.getMaxHealth() * 0.05
+                    || damageAfterArmorProtection >= livingEntity.getHealth();
+            if (!isTriggered) {
+                return;
+            }
 
-        if (enchantmentLevel > 0) {
-            consumeDurabilityBasedOnEnchantmentLevel(livingEntity, AshOfSin.CHALK_WALL.get());
-            float chalkWallDuration = enchantmentLevel * 3 * 20;
-            livingEntityData.putFloat(CHALK_WALL_DURATION, chalkWallDuration);
-            livingEntityData.putBoolean(CHALK_WALL, true);
-            livingEntityData.putBoolean(CHALK_WALL_CD, true);
-            livingEntity.removeAllEffects();
-        }
+            int enchantmentLevel = getEnchantmentLevel(livingEntity, AshOfSin.CHALK_WALL.get());
+            if (enchantmentLevel > 3) {
+                return;
+            }
 
-        boolean hasChalkWall = livingEntityData.getBoolean(CHALK_WALL);
-        if (hasChalkWall) {
-            event.setAmount(0);
+            if (enchantmentLevel > 0) {
+                consumeDurabilityBasedOnEnchantmentLevel(livingEntity, AshOfSin.CHALK_WALL.get());
+                float chalkWallDuration = enchantmentLevel * 3 * 20;
+                livingEntityData.putFloat(CHALK_WALL_DURATION, chalkWallDuration);
+                livingEntityData.putBoolean(CHALK_WALL, true);
+                livingEntityData.putBoolean(CHALK_WALL_CD, true);
+                livingEntity.removeAllEffects();
+            }
+
+            boolean hasChalkWall = livingEntityData.getBoolean(CHALK_WALL);
+            if (hasChalkWall) {
+                event.setAmount(0);
+            }
         }
     }
 

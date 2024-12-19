@@ -96,7 +96,7 @@ public class AshOfSin {
         MinecraftForge.EVENT_BUS.register(new AshOfSinCustomEntityItemEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinCustomEntityAttackEffectEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinAntiHighLevelEnchantmentEvent());
-        MinecraftForge.EVENT_BUS.register(new AshOfSinEternalEntityEvent());
+
         MinecraftForge.EVENT_BUS.register(new AshOfSinSoulLikeBossBattleEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinCustomAntiHighATKEntityEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinAntiSameModifierEvent());

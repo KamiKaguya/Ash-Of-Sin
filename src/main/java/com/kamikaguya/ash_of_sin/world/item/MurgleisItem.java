@@ -18,7 +18,7 @@ public class MurgleisItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
     public List<Component> tooltipExpand;
     public MurgleisItem(Item.Properties build) {
-        super(AshOfSinItemTier.MURGLEIS, 0, -1.95F, build);
+        super(AshOfSinItemTier.MURGLEIS, 0, -2F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".murgleis.tooltip.unique"));

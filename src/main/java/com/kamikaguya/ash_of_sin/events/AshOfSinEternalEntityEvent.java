@@ -16,7 +16,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinEternalEntityEvent {
 
     @SubscribeEvent
@@ -30,7 +29,7 @@ public class AshOfSinEternalEntityEvent {
             EntityType<?> eternalEntityType = ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(eternalEntityID));
             if (eternalEntity.getType().equals(eternalEntityType)) {
                 if (eternalEntity.level instanceof ServerLevel serverLevel) {
-                    serverLevel.getChunkSource().addEntity(eternalEntity);
+                    return;
                 }
             }
         }
@@ -42,13 +41,13 @@ public class AshOfSinEternalEntityEvent {
             return;
         }
         if (event.getEntity() instanceof LivingEntity eternalEntity) {
-        List<String> eternalEntityList = EternalEntityConfig.ETERNAL_ENTITY.get().stream().map(s -> (String) s).toList();
-        for (String eternalEntityID : eternalEntityList) {
-            EntityType<?> eternalEntityType = ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(eternalEntityID));
-            if (eternalEntity.getType().equals(eternalEntityType)) {
-                preventDespawn(eternalEntity);
+            List<String> eternalEntityList = EternalEntityConfig.ETERNAL_ENTITY.get().stream().map(s -> (String) s).toList();
+            for (String eternalEntityID : eternalEntityList) {
+                EntityType<?> eternalEntityType = ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(eternalEntityID));
+                if (eternalEntity.getType().equals(eternalEntityType)) {
+                    preventDespawn(eternalEntity);
+                }
             }
-        }
         }
     }
 

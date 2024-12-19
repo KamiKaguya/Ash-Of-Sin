@@ -51,10 +51,10 @@ public enum AshOfSinItemTier implements Tier {
     SANGUINE_GAZE_UNION(4, 10000, 39.0F, 16.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
     }),
-    MURGLEIS(4, 10000, 39.0F, 16.0F, 39, () -> {
+    MURGLEIS(4, 10000, 39.0F, 14.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
     }),
-    FALLING_FLOWER(4, 10000, 39.0F, 17.0F, 39, () -> {
+    FALLING_FLOWER(4, 10000, 39.0F, 15.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
     }),
     MURASAME(4, 10000, 39.0F, 15.0F, 39, () -> {

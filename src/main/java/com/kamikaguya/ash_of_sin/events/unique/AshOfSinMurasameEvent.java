@@ -44,6 +44,6 @@ public class AshOfSinMurasameEvent {
 
     public static void instaKill(LivingEntity livingEntity) {
         MobEffect infection = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("tensura", "infection"));
-        livingEntity.addEffect(new MobEffectInstance(infection, 30 * 20, 0));
+        livingEntity.addEffect(new MobEffectInstance(infection, 30 * 20, 12));
     }
 }
