@@ -31,7 +31,35 @@ public class CustomAntiHighATKEntityConfig {
         ANTI_HIGH_ATK_ENTITY = builder.comment("Anti-High ATK Entity")
                 .comment("Anti-High ATK entity id.")
                 .defineList("Anti-High ATK Entity",
-                        () -> new ArrayList<>(Arrays.asList("dwmg:hmag_zombie_girl", "dwmg:hmag_husk_girl", "dwmg:hmag_drowned_girl", "dwmg:hmag_skeleton_girl", "dwmg:hmag_wither_skeleton_girl", "dwmg:hmag_stray_girl", "dwmg:hmag_creeper_girl", "dwmg:hmag_creeper_girl", "dwmg:hmag_ender_executor", "dwmg:hmag_kobold", "dwmg:hmag_melty_monster", "dwmg:hmag_cursed_doll", "dwmg:hmag_jack_frost", "dwmg:hmag_hornet", "dwmg:hmag_dullahan", "dwmg:hmag_banshee", "dwmg:hmag_alraune", "dwmg:hmag_ghastly_seeker", "dwmg:hmag_redcap", "dwmg:hmag_slime_girl", "dwmg:hmag_crimson_slaughterer", "dwmg:hmag_snow_canine", "dwmg:hmag_harpy", "dwmg:hmag_necrotic_reaper", "dwmg:hmag_dodomeki", "dwmg:hmag_imp", "dwmg:hmag_glaryad")),
+                        () -> new ArrayList<>(Arrays.asList(
+                                "dwmg:hmag_zombie_girl",
+                                "dwmg:hmag_husk_girl",
+                                "dwmg:hmag_drowned_girl",
+                                "dwmg:hmag_skeleton_girl",
+                                "dwmg:hmag_wither_skeleton_girl",
+                                "dwmg:hmag_stray_girl",
+                                "dwmg:hmag_creeper_girl",
+                                "dwmg:hmag_creeper_girl",
+                                "dwmg:hmag_ender_executor",
+                                "dwmg:hmag_kobold",
+                                "dwmg:hmag_melty_monster",
+                                "dwmg:hmag_cursed_doll",
+                                "dwmg:hmag_jack_frost",
+                                "dwmg:hmag_hornet",
+                                "dwmg:hmag_dullahan",
+                                "dwmg:hmag_banshee",
+                                "dwmg:hmag_alraune",
+                                "dwmg:hmag_ghastly_seeker",
+                                "dwmg:hmag_redcap",
+                                "dwmg:hmag_slime_girl",
+                                "dwmg:hmag_crimson_slaughterer",
+                                "dwmg:hmag_snow_canine",
+                                "dwmg:hmag_harpy",
+                                "dwmg:hmag_necrotic_reaper",
+                                "dwmg:hmag_dodomeki",
+                                "dwmg:hmag_imp",
+                                "dwmg:hmag_glaryad"
+                        )),
                         o -> o instanceof String);
         MAX_ATK = builder.comment("Max ATK")
                 .comment("Limit of allowed ATK.")

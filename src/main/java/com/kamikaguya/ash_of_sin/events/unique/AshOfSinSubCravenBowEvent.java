@@ -44,6 +44,7 @@ public class AshOfSinSubCravenBowEvent {
 
     public static boolean holdSubCravenBow(LivingEntity livingEntity) {
         ItemStack mainHand = livingEntity.getMainHandItem();
-        return !(mainHand.isEmpty()) && (ForgeRegistries.ITEMS.getKey(mainHand.getItem()).equals(new ResourceLocation(AshOfSin.MODID, "sub_craven_bow")));
+        boolean holdSubCravenBow = ForgeRegistries.ITEMS.getKey(mainHand.getItem()).equals(new ResourceLocation(AshOfSin.MODID, "sub_craven_bow"));
+        return !(mainHand.isEmpty()) && (holdSubCravenBow);
     }
 }

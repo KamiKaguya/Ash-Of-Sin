@@ -16,7 +16,6 @@ public class AshOfSinConfig {
     public static ForgeConfigSpec COMMON_CONFIG;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> EFFECT_LIST;
     public static ForgeConfigSpec.ConfigValue<String> ENTITY_SUMMON_ID;
-    public static ForgeConfigSpec.ConfigValue<String> ENTITY_SUMMON_NBT;
     public static ForgeConfigSpec.ConfigValue<String> KAMIKAGUYA_MAIN_HAND_ITEM;
     public static ForgeConfigSpec.ConfigValue<String> KAMIKAGUYA_OFF_HAND_ITEM;
     public static ForgeConfigSpec.ConfigValue<String> KAMIKAGUYA_MAIN_HAND_ITEM_NBT;
@@ -33,15 +32,6 @@ public class AshOfSinConfig {
     public static ForgeConfigSpec.ConfigValue<String> getConfigPos() {
         return REALM_GATE_LOCATION;
     }
-    public static ForgeConfigSpec.IntValue CHUNK_LOAD_RADIUS;
-    public static ForgeConfigSpec.ConfigValue<String> Assassin_MAIN_HAND_ITEM;
-    public static ForgeConfigSpec.ConfigValue<String> Assassin_OFF_HAND_ITEM;
-    public static ForgeConfigSpec.ConfigValue<String> Assassin_MAIN_HAND_ITEM_NBT;
-    public static ForgeConfigSpec.ConfigValue<String> Assassin_OFF_HAND_ITEM_NBT;
-    public static ForgeConfigSpec.ConfigValue<String> Doppelganger_MAIN_HAND_ITEM;
-    public static ForgeConfigSpec.ConfigValue<String> Doppelganger_OFF_HAND_ITEM;
-    public static ForgeConfigSpec.ConfigValue<String> Doppelganger_MAIN_HAND_ITEM_NBT;
-    public static ForgeConfigSpec.ConfigValue<String> Doppelganger_OFF_HAND_ITEM_NBT;
     public final Path configPath;
 
     public static BlockPos getGateLocation() {
@@ -84,7 +74,6 @@ public class AshOfSinConfig {
         // KamiKaguya Summon Entity Settings
         builder.comment("KamiKaguya Summon Entity Settings").push("KamiKaguyaSummon");
         ENTITY_SUMMON_ID = builder.comment("entitySummonId").define("entitySummonId", "cataclysm:ignis");
-        ENTITY_SUMMON_NBT = builder.comment("entitySummonNBT").define("entitySummonNBT", "{}");
         builder.pop();
 
         // KamiKaguya Hand Items Settings
@@ -118,33 +107,10 @@ public class AshOfSinConfig {
         REALM_GATE_LOCATION = builder.comment("Location").define("location", "0,321,0");
         builder.pop();
 
-        // Chunk Load Radius Settings
-        builder.comment("chunk pre-loading Radius Settings").push("chunk_radius_loading");
-        CHUNK_LOAD_RADIUS = builder
-                .comment("Radius of chunks to load. Minimum is 1, maximum is 256.")
-                .defineInRange("Radius", 8, 1, 256);
-        builder.pop();
-
         // Sundering Effect Settings
         builder.comment("Sundering Effect Settings").push("SunderingEffect");
         SUNDERING_EFFECT_STRING = builder.comment("Format: 'EffectID,DurationInSeconds,EffectLevel'")
                 .define("SunderingEffectString", "apotheosis:sundering,0,-1");
-        builder.pop();
-
-        // Assassin Hand Items Settings
-        builder.comment("Assassin Hand Items Settings").push("AssassinHandItems");
-        Assassin_MAIN_HAND_ITEM = builder.comment("Main hand item for Assassin").define("mainHandItem", "wom:ender_blaster");
-        Assassin_OFF_HAND_ITEM = builder.comment("Off hand item for Assassin").define("offHandItem", "wom:ender_blaster");
-        Assassin_MAIN_HAND_ITEM_NBT = builder.comment("Main hand item NBT for Assassin").define("mainHandItemNBT", "{Enchantments:[{id:\"difficultraids:critical_burst\",lvl:5},{id:\"difficultraids:critical_strike\",lvl:10},{id:\"modification_of_critical_hit:critchance\",lvl:5},{id:\"modification_of_critical_hit:criteffect\",lvl:3},{id:\"minecraft:sweeping\",lvl:1},{id:\"lightmanscurrency:money_mending\",lvl:1}],affix_data:{affixes:{\"apotheosis:festive\":1.0f,\"apotheosis:graceful\":1.0f,\"apotheosis:intricate\":1.0f,\"apotheosis:lacerating\":1.0f,\"apotheosis:socket\":5.0f,\"apotheosis:thunderstruck\":1.0f,\"apotheosis:violent\":1.0f,\"apotheosis:weakeninged\":1.0f},rarity:\"mythic\"},\"quark:RuneAttached\":1b,\"quark:RuneColor\":{Count:1b,id:\"quark:purple_rune\"}}");
-        Assassin_OFF_HAND_ITEM_NBT = builder.comment("Off hand item NBT for Assassin").define("offHandItemNBT", "{Enchantments:[{id:\"difficultraids:critical_burst\",lvl:5},{id:\"difficultraids:critical_strike\",lvl:10},{id:\"modification_of_critical_hit:critchance\",lvl:5},{id:\"modification_of_critical_hit:criteffect\",lvl:3},{id:\"minecraft:sweeping\",lvl:1},{id:\"lightmanscurrency:money_mending\",lvl:1}],affix_data:{affixes:{\"apotheosis:festive\":1.0f,\"apotheosis:graceful\":1.0f,\"apotheosis:intricate\":1.0f,\"apotheosis:lacerating\":1.0f,\"apotheosis:socket\":5.0f,\"apotheosis:thunderstruck\":1.0f,\"apotheosis:violent\":1.0f,\"apotheosis:weakeninged\":1.0f},rarity:\"mythic\"},\"quark:RuneAttached\":1b,\"quark:RuneColor\":{Count:1b,id:\"quark:purple_rune\"}}");
-        builder.pop();
-
-        // Doppelganger Hand Items Settings
-        builder.comment("Doppelganger Hand Items Settings").push("DoppelgangerHandItems");
-        Doppelganger_MAIN_HAND_ITEM = builder.comment("Main hand item for Doppelganger").define("mainHandItem", "wom:herrscher");
-        Doppelganger_OFF_HAND_ITEM = builder.comment("Off hand item for Doppelganger").define("offHandItem", "wom:gesetz");
-        Doppelganger_MAIN_HAND_ITEM_NBT = builder.comment("Main hand item NBT for Doppelganger").define("mainHandItemNBT", "{}");
-        Doppelganger_OFF_HAND_ITEM_NBT = builder.comment("Off hand item NBT for Doppelganger").define("offHandItemNBT", "{}");
         builder.pop();
 
         COMMON_CONFIG = builder.build();

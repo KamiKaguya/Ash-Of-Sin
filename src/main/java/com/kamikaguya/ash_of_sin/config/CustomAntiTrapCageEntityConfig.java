@@ -28,8 +28,7 @@ public class CustomAntiTrapCageEntityConfig {
         ANTI_TRAP_CAGE_ENTITY = builder.comment("Anti-Trap_Cage Entity")
                 .defineList("Anti-Trap_Cage Entity",
                         () -> new ArrayList<>(Arrays.asList(
-                                "ash_of_sin:kamikaguya",
-                                "ash_of_sin:another"
+                                "ash_of_sin:kamikaguya"
                         )),
                         o -> o instanceof String);
         CHECK_DISTANCE = builder.comment("Check Distance")

@@ -26,7 +26,11 @@ public class CustomAntiItemEntityConfig {
                 .define("Anti On", true);
         ANTI_ITEM_ENTITY = builder.comment("Anti-Item Entity")
                 .defineList("Anti-Item Entity",
-                        () -> new ArrayList<>(Arrays.asList("ash_of_sin:kamikaguya", "iceandfire:ice_dragon", "iceandfire:fire_dragon", "iceandfire:lightning_dragon")),
+                        () -> new ArrayList<>(Arrays.asList("ash_of_sin:kamikaguya",
+                                "iceandfire:ice_dragon",
+                                "iceandfire:fire_dragon",
+                                "iceandfire:lightning_dragon"
+                        )),
                         o -> o instanceof String);
         List<String> antiItems = List.of(
                 "minecraft:bedrock"

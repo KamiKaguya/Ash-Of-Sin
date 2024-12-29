@@ -45,7 +45,7 @@ public class AshOfSinCrescentEvent {
         ItemStack offHand = livingEntity.getOffhandItem();
         boolean holdCrescent = ForgeRegistries.ITEMS.getKey(mainHand.getItem()).equals(new ResourceLocation(AshOfSin.MODID, "crescent")) ||
                 ForgeRegistries.ITEMS.getKey(offHand.getItem()).equals(new ResourceLocation(AshOfSin.MODID, "crescent"));
-        return !(mainHand.isEmpty()) && offHand.isEmpty() && (holdCrescent);
+        return (!(mainHand.isEmpty()) || !(offHand.isEmpty())) && (holdCrescent);
     }
 
     @SubscribeEvent

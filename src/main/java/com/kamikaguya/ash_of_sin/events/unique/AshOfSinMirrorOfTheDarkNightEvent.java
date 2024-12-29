@@ -127,10 +127,7 @@ public class AshOfSinMirrorOfTheDarkNightEvent {
         ItemStack offHand = livingEntity.getOffhandItem();
         boolean holdMirrorOfTheDarkNight = ForgeRegistries.ITEMS.getKey(mainHand.getItem()).equals(new ResourceLocation(AshOfSin.MODID, "mirror_of_the_dark_night")) ||
                 ForgeRegistries.ITEMS.getKey(offHand.getItem()).equals(new ResourceLocation(AshOfSin.MODID, "mirror_of_the_dark_night"));
-        if (!(mainHand.isEmpty()) && (holdMirrorOfTheDarkNight)) {
-            return true;
-        }
-        return !(offHand.isEmpty()) && (holdMirrorOfTheDarkNight);
+        return (!(offHand.isEmpty()) || !(mainHand.isEmpty())) && (holdMirrorOfTheDarkNight);
     }
 
     public static boolean hasProtectionEnchantmentAromor(LivingEntity livingEntity, Enchantment enchantment) {

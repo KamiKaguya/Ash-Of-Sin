@@ -30,6 +30,9 @@ public class AshOfSinAnotherEvent {
 
     @SubscribeEvent
     public void onPlayerHurt(LivingHurtEvent event) {
+        if (event.getEntity().level.isClientSide()) {
+            return;
+        }
         if (!(event.getEntity() instanceof ServerPlayer serverPlayer)) {
             return;
         }
@@ -43,7 +46,7 @@ public class AshOfSinAnotherEvent {
         DamageSource damageSource = event.getSource();
         Entity sourceEntity = damageSource.getEntity();
         if (sourceEntity instanceof LivingEntity attacker) {
-            if ( hasAnotherEnchantmentAromor(serverPlayer, AshOfSin.ANOTHER.get())) {
+            if (hasAnotherEnchantmentAromor(serverPlayer, AshOfSin.ANOTHER.get())) {
                 summonAnother(serverPlayer, attacker);
             }
         }
@@ -84,63 +87,64 @@ public class AshOfSinAnotherEvent {
 
     @SubscribeEvent
     public void onEntityDeath(LivingDeathEvent event) {
-        if (!(event.getEntity().level.isClientSide())) {
-            LivingEntity livingEntity = event.getEntity();
-            DamageSource damageSource = event.getSource();
-            Entity directEntity = damageSource.getDirectEntity();
+        if (event.getEntity().level.isClientSide()) {
+            return;
+        }
+        LivingEntity livingEntity = event.getEntity();
+        DamageSource damageSource = event.getSource();
+        Entity directEntity = damageSource.getDirectEntity();
 
-             if ((livingEntity != null) && !(livingEntity instanceof ServerPlayer) && (directEntity instanceof ServerPlayer killer)) {
-                if (hasAnotherEnchantmentAromor(killer, AshOfSin.ANOTHER.get())) {
-                    int killCount = killer.getPersistentData().getInt("AnotherSummonCDKillCount") + 1;
-                    killer.getPersistentData().putInt("AnotherSummonCDKillCount", killCount);
-                    long lastSummonTime = killer.getPersistentData().getLong("AnotherLastSummonTime");
-                    updateCoolDown(killer, lastSummonTime);
-                }
+        if ((livingEntity != null) && !(livingEntity instanceof ServerPlayer) && (directEntity instanceof ServerPlayer killer)) {
+            if (hasAnotherEnchantmentAromor(killer, AshOfSin.ANOTHER.get())) {
+                int killCount = killer.getPersistentData().getInt("AnotherSummonCDKillCount") + 1;
+                killer.getPersistentData().putInt("AnotherSummonCDKillCount", killCount);
+                long lastSummonTime = killer.getPersistentData().getLong("AnotherLastSummonTime");
+                updateCoolDown(killer, lastSummonTime);
             }
-            if ((livingEntity != null) && !(livingEntity instanceof ServerPlayer) && (directEntity instanceof Another killer)) {
-                ServerPlayer owner = (ServerPlayer) killer.level.getPlayerByUUID(killer.getOwnerUUID());
-                if (owner != null && killer.getOwnerUUID().equals(owner.getUUID()) && (hasAnotherEnchantmentAromor(owner, AshOfSin.ANOTHER.get()))) {
-                    int killCount = owner.getPersistentData().getInt("AnotherSummonCDKillCount") + 1;
-                    owner.getPersistentData().putInt("AnotherSummonCDKillCount", killCount);
-                    long lastSummonTime = owner.getPersistentData().getLong("AnotherLastSummonTime");
-                    updateCoolDown(owner, lastSummonTime);
-                }
+        }
+        if ((livingEntity != null) && !(livingEntity instanceof ServerPlayer) && (directEntity instanceof Another killer)) {
+            ServerPlayer owner = (ServerPlayer) killer.level.getPlayerByUUID(killer.getOwnerUUID());
+            if (owner != null && killer.getOwnerUUID().equals(owner.getUUID()) && (hasAnotherEnchantmentAromor(owner, AshOfSin.ANOTHER.get()))) {
+                int killCount = owner.getPersistentData().getInt("AnotherSummonCDKillCount") + 1;
+                owner.getPersistentData().putInt("AnotherSummonCDKillCount", killCount);
+                long lastSummonTime = owner.getPersistentData().getLong("AnotherLastSummonTime");
+                updateCoolDown(owner, lastSummonTime);
             }
+        }
 
-            if ((livingEntity instanceof ServerPlayer) && (directEntity instanceof ServerPlayer killer)) {
-                if (hasAnotherEnchantmentAromor(killer, AshOfSin.ANOTHER.get())) {
-                    int killCount = killer.getPersistentData().getInt("AnotherSummonCDKillCount") + 60;
-                    killer.getPersistentData().putInt("AnotherSummonCDKillCount", killCount);
-                    long lastSummonTime = killer.getPersistentData().getLong("AnotherLastSummonTime");
-                    updateCoolDown(killer, lastSummonTime);
-                }
+        if ((livingEntity instanceof ServerPlayer) && (directEntity instanceof ServerPlayer killer)) {
+            if (hasAnotherEnchantmentAromor(killer, AshOfSin.ANOTHER.get())) {
+                int killCount = killer.getPersistentData().getInt("AnotherSummonCDKillCount") + 60;
+                killer.getPersistentData().putInt("AnotherSummonCDKillCount", killCount);
+                long lastSummonTime = killer.getPersistentData().getLong("AnotherLastSummonTime");
+                updateCoolDown(killer, lastSummonTime);
             }
-            if ((livingEntity instanceof ServerPlayer) && (directEntity instanceof Another killer)) {
-                ServerPlayer owner = (ServerPlayer) killer.level.getPlayerByUUID(killer.getOwnerUUID());
-                if (owner != null && killer.getOwnerUUID().equals(owner.getUUID()) && (hasAnotherEnchantmentAromor(owner, AshOfSin.ANOTHER.get()))) {
-                    int killCount = owner.getPersistentData().getInt("AnotherSummonCDKillCount") + 60;
-                    owner.getPersistentData().putInt("AnotherSummonCDKillCount", killCount);
-                    long lastSummonTime = owner.getPersistentData().getLong("AnotherLastSummonTime");
-                    updateCoolDown(owner, lastSummonTime);
-                }
+        }
+        if ((livingEntity instanceof ServerPlayer) && (directEntity instanceof Another killer)) {
+            ServerPlayer owner = (ServerPlayer) killer.level.getPlayerByUUID(killer.getOwnerUUID());
+            if (owner != null && killer.getOwnerUUID().equals(owner.getUUID()) && (hasAnotherEnchantmentAromor(owner, AshOfSin.ANOTHER.get()))) {
+                int killCount = owner.getPersistentData().getInt("AnotherSummonCDKillCount") + 60;
+                owner.getPersistentData().putInt("AnotherSummonCDKillCount", killCount);
+                long lastSummonTime = owner.getPersistentData().getLong("AnotherLastSummonTime");
+                updateCoolDown(owner, lastSummonTime);
             }
+        }
 
-            if ((livingEntity instanceof Another) && (directEntity instanceof ServerPlayer killer)) {
-                if (hasAnotherEnchantmentAromor(killer, AshOfSin.ANOTHER.get())) {
-                    int killCount = killer.getPersistentData().getInt("AnotherSummonCDKillCount") + 60;
-                    killer.getPersistentData().putInt("AnotherSummonCDKillCount", killCount);
-                    long lastSummonTime = killer.getPersistentData().getLong("AnotherLastSummonTime");
-                    updateCoolDown(killer, lastSummonTime);
-                }
+        if ((livingEntity instanceof Another) && (directEntity instanceof ServerPlayer killer)) {
+            if (hasAnotherEnchantmentAromor(killer, AshOfSin.ANOTHER.get())) {
+                int killCount = killer.getPersistentData().getInt("AnotherSummonCDKillCount") + 60;
+                killer.getPersistentData().putInt("AnotherSummonCDKillCount", killCount);
+                long lastSummonTime = killer.getPersistentData().getLong("AnotherLastSummonTime");
+                updateCoolDown(killer, lastSummonTime);
             }
-            if ((livingEntity instanceof Another) && (directEntity instanceof Another killer)) {
-                ServerPlayer owner = (ServerPlayer) killer.level.getPlayerByUUID(killer.getOwnerUUID());
-                if (owner != null && killer.getOwnerUUID().equals(owner.getUUID()) && (hasAnotherEnchantmentAromor(owner, AshOfSin.ANOTHER.get()))) {
-                    int killCount = owner.getPersistentData().getInt("AnotherSummonCDKillCount") + 60;
-                    owner.getPersistentData().putInt("AnotherSummonCDKillCount", killCount);
-                    long lastSummonTime = owner.getPersistentData().getLong("AnotherLastSummonTime");
-                    updateCoolDown(owner, lastSummonTime);
-                }
+        }
+        if ((livingEntity instanceof Another) && (directEntity instanceof Another killer)) {
+            ServerPlayer owner = (ServerPlayer) killer.level.getPlayerByUUID(killer.getOwnerUUID());
+            if (owner != null && killer.getOwnerUUID().equals(owner.getUUID()) && (hasAnotherEnchantmentAromor(owner, AshOfSin.ANOTHER.get()))) {
+                int killCount = owner.getPersistentData().getInt("AnotherSummonCDKillCount") + 60;
+                owner.getPersistentData().putInt("AnotherSummonCDKillCount", killCount);
+                long lastSummonTime = owner.getPersistentData().getLong("AnotherLastSummonTime");
+                updateCoolDown(owner, lastSummonTime);
             }
         }
     }

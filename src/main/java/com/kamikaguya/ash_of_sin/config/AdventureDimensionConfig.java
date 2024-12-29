@@ -22,12 +22,16 @@ public class AdventureDimensionConfig {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
         ADVENTURE_DIMENSION_ID = builder.comment("Adventure Dimension ID")
                 .defineList("Adventure Dimension ID",
-                        () -> new ArrayList<>(Arrays.asList("tensura:labyrinth")),
+                        () -> new ArrayList<>(Arrays.asList(
+                                "tensura:labyrinth"
+                        )),
                         o -> o instanceof String
                 );
         ADVENTURE_DIMENSION_ALLOW_PLAYER_ID = builder.comment("Exception Player ID")
                 .defineList("Exception Player ID",
-                        () -> new ArrayList<>(List.of("KamiKaguya")),
+                        () -> new ArrayList<>(List.of(
+                                "KamiKaguya"
+                        )),
                         o -> o instanceof String
                 );
         ADVENTURE_DIMENSION_CONFIG = builder.build();

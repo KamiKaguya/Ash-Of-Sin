@@ -21,7 +21,9 @@ public class CustomAntiEnchantmentEntityConfig {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
         ANTI_ENCHANTMENT_ENTITY = builder.comment("Anti-Enchantment Entity")
                 .defineList("Anti-Enchantment Entity",
-                        () -> new ArrayList<>(List.of("ash_of_sin:kamikaguya")),
+                        () -> new ArrayList<>(List.of(
+                                "ash_of_sin:kamikaguya"
+                        )),
                         o -> o instanceof String);
         List<String> antiEffects = List.of(
                 "ash_of_sin:absolute_rule"
