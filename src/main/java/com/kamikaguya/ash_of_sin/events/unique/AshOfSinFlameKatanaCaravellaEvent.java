@@ -24,8 +24,7 @@ public class AshOfSinFlameKatanaCaravellaEvent {
         }
 
         LivingEntity target = event.getEntity();
-        DamageSource damageSource = event.getSource();
-        Entity entity = damageSource.getEntity();
+        Entity entity = event.getSource().getEntity();
         if (entity instanceof LivingEntity attacker) {
             if (holdFlameKatanaCaravella(attacker)) {
                 float originalDamage = event.getAmount();

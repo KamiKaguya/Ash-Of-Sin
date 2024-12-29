@@ -31,8 +31,7 @@ public class AshOfSinCrescentEvent {
             return;
         }
 
-        DamageSource damageSource = event.getSource();
-        Entity attacker = damageSource.getEntity();
+        Entity attacker = event.getSource().getEntity();
         if (attacker instanceof ServerPlayer serverPlayer) {
             if (holdCrescent(serverPlayer)) {
                 skillHydraDevour(serverPlayer);

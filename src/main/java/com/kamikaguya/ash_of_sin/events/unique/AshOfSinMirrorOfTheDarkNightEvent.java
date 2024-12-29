@@ -39,16 +39,32 @@ public class AshOfSinMirrorOfTheDarkNightEvent {
             return;
         }
 
-        DamageSource damageSource = event.getSource();
-        LivingEntity livingEntity = event.getEntity();
-        if (livingEntity instanceof ServerPlayer serverPlayer) {
+        Entity entity = event.getSource().getEntity();
+        LivingEntity player = event.getEntity();
+        if (player instanceof ServerPlayer serverPlayer) {
             if (holdMirrorOfTheDarkNight(serverPlayer)) {
                 float originalDamage = event.getAmount();
                 float afterReductionDamage = originalDamage * 0.9F;
                 event.setAmount(afterReductionDamage);
             }
         }
-        if (livingEntity instanceof Another another) {
+        if (player instanceof Another another) {
+            if (holdMirrorOfTheDarkNight(another)) {
+                if (another.getOwner() instanceof ServerPlayer) {
+                    float originalDamage = event.getAmount();
+                    float afterReductionDamage = originalDamage * 0.9F;
+                    event.setAmount(afterReductionDamage);
+                }
+            }
+        }
+        if (entity instanceof ServerPlayer serverPlayer) {
+            if (holdMirrorOfTheDarkNight(serverPlayer)) {
+                float originalDamage = event.getAmount();
+                float afterReductionDamage = originalDamage * 0.9F;
+                event.setAmount(afterReductionDamage);
+            }
+        }
+        if (entity instanceof Another another) {
             if (holdMirrorOfTheDarkNight(another)) {
                 if (another.getOwner() instanceof ServerPlayer) {
                     float originalDamage = event.getAmount();

@@ -35,8 +35,7 @@ public class AshOfSinCarianEvent {
         }
 
         LivingEntity target = event.getEntity();
-        DamageSource damageSource = event.getSource();
-        Entity entity = damageSource.getEntity();
+        Entity entity = event.getSource().getEntity();
         if (entity instanceof LivingEntity attacker) {
             if (holdDarkMoonGreatsword(attacker)) {
                 float originalDamage = event.getAmount();

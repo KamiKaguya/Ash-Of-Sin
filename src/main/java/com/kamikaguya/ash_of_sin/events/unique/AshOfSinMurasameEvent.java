@@ -25,8 +25,7 @@ public class AshOfSinMurasameEvent {
             return;
         }
 
-        DamageSource damageSource = event.getSource();
-        Entity attacker = damageSource.getEntity();
+        Entity attacker = event.getSource().getEntity();
         LivingEntity target = event.getEntity();
         if (attacker instanceof ServerPlayer serverPlayer) {
             if (holdMurasame(serverPlayer)) {

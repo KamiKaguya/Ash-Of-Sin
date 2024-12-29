@@ -27,8 +27,7 @@ public class AshOfSinDespairScytheEvent {
         }
 
         LivingEntity target = event.getEntity();
-        DamageSource damageSource = event.getSource();
-        Entity attacker = damageSource.getEntity();
+        Entity attacker = event.getSource().getEntity();
         if (attacker instanceof ServerPlayer serverPlayer) {
             if (holdDespairScythe(serverPlayer)) {
                 diffuseDespair(target);
