@@ -23,6 +23,7 @@ public class SoulOfTheKingLightningItem extends WeaponItem{
             this.tooltipExpand = new ArrayList<Component>();
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".soul_of_the_king_lightning.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".soul_of_the_king_lightning.tooltip"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".soul_of_the_king_lightning.tooltip.owner"));
         }
     }
 

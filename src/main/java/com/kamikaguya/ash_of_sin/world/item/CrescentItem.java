@@ -23,6 +23,7 @@ public class CrescentItem extends WeaponItem{
             this.tooltipExpand = new ArrayList<Component>();
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".crescent.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".crescent.tooltip"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".crescent.tooltip.owner"));
         }
     }
 

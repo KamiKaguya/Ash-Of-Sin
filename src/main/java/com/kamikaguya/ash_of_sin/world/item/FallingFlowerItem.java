@@ -23,6 +23,7 @@ public class FallingFlowerItem extends WeaponItem {
             this.tooltipExpand = new ArrayList<Component>();
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".falling_flower.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".falling_flower.tooltip"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".falling_flower.tooltip.owner"));
         }
     }
 

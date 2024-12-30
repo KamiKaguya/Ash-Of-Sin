@@ -23,6 +23,7 @@ public class CalamityBladeItem extends WeaponItem{
             this.tooltipExpand = new ArrayList<Component>();
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".calamity_blade.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".calamity_blade.tooltip"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".calamity_blade.tooltip.owner"));
         }
     }
 

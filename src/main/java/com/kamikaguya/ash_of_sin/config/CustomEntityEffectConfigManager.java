@@ -61,24 +61,16 @@ public class CustomEntityEffectConfigManager {
                             new CustomEffectConfig("alexsmobs:knockback_resistance", "infinite", 0)
                     )),
                     new CustomEntityEffectConfig("iceandfire:dread_scuttler", Arrays.asList(
-                            new CustomEffectConfig("minecraft:haste", "infinite", 2),
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3),
-                            new CustomEffectConfig("alexsmobs:soulsteal", "infinite", 2)
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
                     new CustomEntityEffectConfig("iceandfire:dread_beast", Arrays.asList(
-                            new CustomEffectConfig("minecraft:haste", "infinite", 0),
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3),
-                            new CustomEffectConfig("alexsmobs:soulsteal", "infinite", 2)
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
                     new CustomEntityEffectConfig("iceandfire:dread_ghoul", Arrays.asList(
-                            new CustomEffectConfig("minecraft:haste", "infinite", 0),
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3),
-                            new CustomEffectConfig("alexsmobs:soulsteal", "infinite", 0)
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
                     new CustomEntityEffectConfig("iceandfire:dread_thrall", Arrays.asList(
-                            new CustomEffectConfig("minecraft:haste", "infinite", 0),
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3),
-                            new CustomEffectConfig("alexsmobs:soulsteal", "infinite", 0)
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
                     new CustomEntityEffectConfig("aquamirae:captain_cornelia", Arrays.asList(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
@@ -133,6 +125,17 @@ public class CustomEntityEffectConfigManager {
                     )),
                     new CustomEntityEffectConfig("bosses_of_mass_destruction:void_blossom", Arrays.asList(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
+                    )),
+                    new CustomEntityEffectConfig("eeeabsmobs:nameless_guardian", Arrays.asList(
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
+                    )),
+                    new CustomEntityEffectConfig("eeeabsmobs:corpse_warlock", Arrays.asList(
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3),
+                            new CustomEffectConfig("alexsmobs:knockback_resistance", "infinite", 0)
+                    )),
+                    new CustomEntityEffectConfig("eeeabsmobs:guling_sentinel_heavy", Arrays.asList(
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3),
+                            new CustomEffectConfig("alexsmobs:knockback_resistance", "infinite", 0)
                     ))
             );
             String defaultConfigJson = GSON.toJson(defaultCustomEntityEffectConfig, CONFIG_TYPE);

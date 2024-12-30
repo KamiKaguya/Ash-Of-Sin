@@ -23,6 +23,7 @@ public class CarianKnightsSwordItem extends WeaponItem{
             this.tooltipExpand = new ArrayList<Component>();
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".carian_knights_sword.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".carian_knights_sword.tooltip"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".carian_knights_sword.tooltip.owner"));
         }
     }
 

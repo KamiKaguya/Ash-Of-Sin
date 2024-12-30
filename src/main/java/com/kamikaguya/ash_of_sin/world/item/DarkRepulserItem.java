@@ -23,6 +23,7 @@ public class DarkRepulserItem extends WeaponItem{
             this.tooltipExpand = new ArrayList<Component>();
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".dark_repulser.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".dark_repulser.tooltip"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".dark_repulser.tooltip.owner"));
         }
     }
 

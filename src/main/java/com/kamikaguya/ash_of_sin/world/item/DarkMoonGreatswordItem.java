@@ -23,6 +23,7 @@ public class DarkMoonGreatswordItem extends WeaponItem{
             this.tooltipExpand = new ArrayList<Component>();
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".dark_moon_greatsword.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".dark_moon_greatsword.tooltip"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".dark_moon_greatsword.tooltip.owner"));
         }
     }
 

@@ -21,9 +21,9 @@ public class EaItem extends WeaponItem{
         super(AshOfSinItemTier.EA, 0, 0F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component> ();
-            
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".ea.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".ea.tooltip"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".ea.tooltip.owner"));
         }
     }
 

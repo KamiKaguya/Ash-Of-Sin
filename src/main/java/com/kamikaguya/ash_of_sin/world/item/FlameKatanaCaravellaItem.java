@@ -23,6 +23,7 @@ public class FlameKatanaCaravellaItem extends WeaponItem{
             this.tooltipExpand = new ArrayList<Component>();
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".flame_katana_caravella.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".flame_katana_caravella.tooltip"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".flame_katana_caravella.tooltip.owner"));
         }
     }
 

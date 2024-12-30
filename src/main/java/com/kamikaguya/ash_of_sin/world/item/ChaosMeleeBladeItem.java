@@ -23,6 +23,7 @@ public class ChaosMeleeBladeItem extends WeaponItem {
             this.tooltipExpand = new ArrayList<Component>();
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".chaos_melee_blade.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".chaos_melee_blade.tooltip"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".chaos_melee_blade.tooltip.owner"));
         }
     }
 

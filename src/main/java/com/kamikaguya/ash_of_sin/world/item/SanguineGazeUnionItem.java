@@ -23,6 +23,7 @@ public class SanguineGazeUnionItem extends WeaponItem{
             this.tooltipExpand = new ArrayList<Component>();
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".sanguine_gaze_union.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".sanguine_gaze_union.tooltip"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".sanguine_gaze_union.tooltip.owner"));
         }
     }
 

@@ -70,10 +70,14 @@ public class CustomAntiSeatEntityConfig {
                                 "aquamirae:captain_cornelia",
                                 "irons_spellbooks:dead_king",
                                 "graveyard:lich",
+                                "eeeabsmobs:nameless_guardian",
+                                "eeeabsmobs:corpse_warlock",
+                                "eeeabsmobs:guling_sentinel_heavy",
                                 "iceandfire:ice_dragon",
                                 "iceandfire:fire_dragon",
                                 "iceandfire:lightning_dragon",
-                                "iceandfire:dread_lich"
+                                "iceandfire:dread_lich",
+                                "iceandfire:dread_knight"
                         )),
                         o -> o instanceof String);
         ANTI_SEAT_ENTITY_CONFIG = builder.build();

@@ -32,6 +32,7 @@ public class SoulLikeBossBattleConfig {
                         () -> new ArrayList<>(Arrays.asList(
                                 "minecraft:wither",
                                 "minecraft:ender_dragon",
+                                "minecraft:warden",
                                 "tensura:hinata_sakaguchi",
                                 "tensura:charybdis",
                                 "tensura:akash",
@@ -57,7 +58,8 @@ public class SoulLikeBossBattleConfig {
                                 "bosses_of_mass_destruction:void_blossom",
                                 "aquamirae:captain_cornelia",
                                 "irons_spellbooks:dead_king",
-                                "graveyard:lich"
+                                "graveyard:lich",
+                                "graveyard:nameless_guardian"
                         )),
                         obj -> obj instanceof String);
         BOSS_BATTLE_DISTANCE = builder.comment("Soul Like Boss Battle Distance")

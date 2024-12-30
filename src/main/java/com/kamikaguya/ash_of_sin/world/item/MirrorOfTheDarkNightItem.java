@@ -23,6 +23,7 @@ public class MirrorOfTheDarkNightItem extends ShieldItem {
             this.tooltipExpand = new ArrayList<Component>();
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".mirror_of_the_dark_night.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".mirror_of_the_dark_night.tooltip"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".mirror_of_the_dark_night.tooltip.owner"));
         }
     }
 

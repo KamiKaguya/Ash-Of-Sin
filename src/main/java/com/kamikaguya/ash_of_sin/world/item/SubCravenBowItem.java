@@ -23,6 +23,7 @@ public class SubCravenBowItem extends BowItem {
             this.tooltipExpand = new ArrayList<Component>();
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".sub_craven_bow.tooltip.unique"));
             this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".sub_craven_bow.tooltip"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".sub_craven_bow.tooltip.owner"));
         }
     }
 
