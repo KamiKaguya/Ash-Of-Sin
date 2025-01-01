@@ -136,6 +136,21 @@ public class CustomEntityEffectConfigManager {
                     new CustomEntityEffectConfig("eeeabsmobs:guling_sentinel_heavy", Arrays.asList(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3),
                             new CustomEffectConfig("alexsmobs:knockback_resistance", "infinite", 0)
+                    )),
+                    new CustomEntityEffectConfig("mowziesmobs:ferrous_wroughtnaut", Arrays.asList(
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
+                    )),
+                    new CustomEntityEffectConfig("mowziesmobs:frostmaw", Arrays.asList(
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3),
+                            new CustomEffectConfig("alexsmobs:knockback_resistance", "infinite", 0)
+                    )),
+                    new CustomEntityEffectConfig("mowziesmobs:umvuthi", Arrays.asList(
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3),
+                            new CustomEffectConfig("alexsmobs:knockback_resistance", "infinite", 0)
+                    )),
+                    new CustomEntityEffectConfig("mowziesmobs:naga", Arrays.asList(
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3),
+                            new CustomEffectConfig("alexsmobs:knockback_resistance", "infinite", 0)
                     ))
             );
             String defaultConfigJson = GSON.toJson(defaultCustomEntityEffectConfig, CONFIG_TYPE);

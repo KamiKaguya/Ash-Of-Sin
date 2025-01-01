@@ -59,7 +59,11 @@ public class SoulLikeBossBattleConfig {
                                 "aquamirae:captain_cornelia",
                                 "irons_spellbooks:dead_king",
                                 "graveyard:lich",
-                                "graveyard:nameless_guardian"
+                                "eeeabsmobs:nameless_guardian",
+                                "mowziesmobs:ferrous_wroughtnaut",
+                                "mowziesmobs:frostmaw",
+                                "mowziesmobs:umvuthi",
+                                "mowziesmobs:naga"
                         )),
                         obj -> obj instanceof String);
         BOSS_BATTLE_DISTANCE = builder.comment("Soul Like Boss Battle Distance")

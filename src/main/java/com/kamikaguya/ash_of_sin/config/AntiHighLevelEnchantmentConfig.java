@@ -29,7 +29,9 @@ public class AntiHighLevelEnchantmentConfig {
             List<AntiHighLevelEnchantmentLevelConfig> defaultAntiHighLevelEnchantmentConfig = Arrays.asList(
                     new AntiHighLevelEnchantmentLevelConfig("ash_of_sin:absolute_rule", 21),
                     new AntiHighLevelEnchantmentLevelConfig("ash_of_sin:another", 2),
-                    new AntiHighLevelEnchantmentLevelConfig("ash_of_sin:chalk_wall", 4)
+                    new AntiHighLevelEnchantmentLevelConfig("ash_of_sin:chalk_wall", 4),
+                    new AntiHighLevelEnchantmentLevelConfig("minecraft:blast_protection", 4),
+                    new AntiHighLevelEnchantmentLevelConfig("apotheosis:berserkers_fury", 4)
             );
             String defaultConfigJson = GSON.toJson(defaultAntiHighLevelEnchantmentConfig, CONFIG_TYPE);
             try {
