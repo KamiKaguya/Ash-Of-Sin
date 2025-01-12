@@ -71,13 +71,28 @@ public class AshOfSinChalkWallEvent {
             }
 
             int enchantmentLevel = getEnchantmentLevel(livingEntity, AshOfSin.CHALK_WALL.get());
-            if (enchantmentLevel > 3) {
-                return;
+
+            if (enchantmentLevel == 1) {
+                consumeDurabilityBasedOnEnchantmentLevel(livingEntity, AshOfSin.CHALK_WALL.get());
+                float chalkWallDuration = 1 * 3 * 20;
+                livingEntityData.putFloat(CHALK_WALL_DURATION, chalkWallDuration);
+                livingEntityData.putBoolean(CHALK_WALL, true);
+                livingEntityData.putBoolean(CHALK_WALL_CD, true);
+                livingEntity.removeAllEffects();
             }
 
-            if (enchantmentLevel > 0) {
+            if (enchantmentLevel == 2) {
                 consumeDurabilityBasedOnEnchantmentLevel(livingEntity, AshOfSin.CHALK_WALL.get());
-                float chalkWallDuration = enchantmentLevel * 3 * 20;
+                float chalkWallDuration = 2 * 3 * 20;
+                livingEntityData.putFloat(CHALK_WALL_DURATION, chalkWallDuration);
+                livingEntityData.putBoolean(CHALK_WALL, true);
+                livingEntityData.putBoolean(CHALK_WALL_CD, true);
+                livingEntity.removeAllEffects();
+            }
+
+            if (enchantmentLevel == 3) {
+                consumeDurabilityBasedOnEnchantmentLevel(livingEntity, AshOfSin.CHALK_WALL.get());
+                float chalkWallDuration = 3 * 3 * 20;
                 livingEntityData.putFloat(CHALK_WALL_DURATION, chalkWallDuration);
                 livingEntityData.putBoolean(CHALK_WALL, true);
                 livingEntityData.putBoolean(CHALK_WALL_CD, true);
@@ -206,15 +221,32 @@ public class AshOfSinChalkWallEvent {
         CompoundTag entityData = entity.getPersistentData();
 
         int enchantmentLevel = getEnchantmentLevel(entity, AshOfSin.CHALK_WALL.get());
-        if (enchantmentLevel > 3) {
-            return;
-        }
 
         boolean inChalkWallCD = entityData.getBoolean(CHALK_WALL_CD);
 
-        if ((enchantmentLevel > 0) && !(inChalkWallCD)) {
+        if ((enchantmentLevel == 1) && !(inChalkWallCD)) {
             consumeDurabilityBasedOnEnchantmentLevel(entity, AshOfSin.CHALK_WALL.get());
-            int chalkWallDuration = enchantmentLevel * 3 * 20;
+            int chalkWallDuration = 1 * 3 * 20;
+            entityData.putFloat(CHALK_WALL_DURATION, chalkWallDuration);
+            entityData.putBoolean(CHALK_WALL, true);
+            entityData.putBoolean(CHALK_WALL_CD, true);
+            entity.removeAllEffects();
+            event.setCanceled(true);
+        }
+
+        if ((enchantmentLevel == 2) && !(inChalkWallCD)) {
+            consumeDurabilityBasedOnEnchantmentLevel(entity, AshOfSin.CHALK_WALL.get());
+            int chalkWallDuration = 2 * 3 * 20;
+            entityData.putFloat(CHALK_WALL_DURATION, chalkWallDuration);
+            entityData.putBoolean(CHALK_WALL, true);
+            entityData.putBoolean(CHALK_WALL_CD, true);
+            entity.removeAllEffects();
+            event.setCanceled(true);
+        }
+
+        if ((enchantmentLevel == 3) && !(inChalkWallCD)) {
+            consumeDurabilityBasedOnEnchantmentLevel(entity, AshOfSin.CHALK_WALL.get());
+            int chalkWallDuration = 3 * 3 * 20;
             entityData.putFloat(CHALK_WALL_DURATION, chalkWallDuration);
             entityData.putBoolean(CHALK_WALL, true);
             entityData.putBoolean(CHALK_WALL_CD, true);

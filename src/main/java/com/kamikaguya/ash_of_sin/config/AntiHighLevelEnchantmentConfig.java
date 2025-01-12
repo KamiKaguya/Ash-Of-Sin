@@ -31,7 +31,8 @@ public class AntiHighLevelEnchantmentConfig {
                     new AntiHighLevelEnchantmentLevelConfig("ash_of_sin:another", 2),
                     new AntiHighLevelEnchantmentLevelConfig("ash_of_sin:chalk_wall", 4),
                     new AntiHighLevelEnchantmentLevelConfig("minecraft:blast_protection", 4),
-                    new AntiHighLevelEnchantmentLevelConfig("apotheosis:berserkers_fury", 4)
+                    new AntiHighLevelEnchantmentLevelConfig("apotheosis:berserkers_fury", 4),
+                    new AntiHighLevelEnchantmentLevelConfig("tensura:dead_end_rainbow", 1)
             );
             String defaultConfigJson = GSON.toJson(defaultAntiHighLevelEnchantmentConfig, CONFIG_TYPE);
             try {

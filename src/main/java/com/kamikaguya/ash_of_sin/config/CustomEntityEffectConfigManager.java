@@ -34,6 +34,12 @@ public class CustomEntityEffectConfigManager {
                     new CustomEntityEffectConfig("minecraft:warden", Arrays.asList(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
+                    new CustomEntityEffectConfig("minecraft:wither", Arrays.asList(
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
+                    )),
+                    new CustomEntityEffectConfig("minecraft:ender_dragon", Arrays.asList(
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
+                    )),
                     new CustomEntityEffectConfig("iceandfire:ice_dragon", Arrays.asList(
                             new CustomEffectConfig("minecraft:haste", "infinite", 6),
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3),
