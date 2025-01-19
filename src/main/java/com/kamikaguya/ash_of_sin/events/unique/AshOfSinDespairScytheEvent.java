@@ -42,11 +42,12 @@ public class AshOfSinDespairScytheEvent {
     }
 
     public static void diffuseDespair(LivingEntity target) {
+        MobEffect blindnessEffect = MobEffects.BLINDNESS;
         MobEffect darknessEffect  = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("minecraft", "darkness"));
         MobEffect fragilityEffect = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("tensura","fragility"));
-        MobEffect blindnessEffect = MobEffects.BLINDNESS;
+        MobEffect sunderingEffect = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("apotheosis","sundering"));
         MobEffect witherEffect = MobEffects.WITHER;
-        if (darknessEffect != null && fragilityEffect != null) {
+        if (darknessEffect != null && fragilityEffect != null && sunderingEffect != null) {
             boolean alreadyBlindness = target.getActiveEffects().stream()
                     .anyMatch(existingEffect -> existingEffect.getEffect().equals(blindnessEffect) && existingEffect.getAmplifier() >= 0);
             boolean alreadyDeepBlindness = target.getActiveEffects().stream()
@@ -55,10 +56,14 @@ public class AshOfSinDespairScytheEvent {
                     .anyMatch(existingEffect -> existingEffect.getEffect().equals(darknessEffect) && existingEffect.getAmplifier() >= 0);
             boolean alreadyDeepDarkness = target.getActiveEffects().stream()
                     .anyMatch(existingEffect -> existingEffect.getEffect().equals(darknessEffect) && existingEffect.getAmplifier() == 2);
-            boolean alreadyfragility = target.getActiveEffects().stream()
+            boolean alreadyFragility = target.getActiveEffects().stream()
                     .anyMatch(existingEffect -> existingEffect.getEffect().equals(fragilityEffect) && existingEffect.getAmplifier() >= 0);
-            boolean alreadyDeepfragility = target.getActiveEffects().stream()
+            boolean alreadyDeepFragility = target.getActiveEffects().stream()
                     .anyMatch(existingEffect -> existingEffect.getEffect().equals(fragilityEffect) && existingEffect.getAmplifier() == 2);
+            boolean alreadySundering = target.getActiveEffects().stream()
+                    .anyMatch(existingEffect -> existingEffect.getEffect().equals(sunderingEffect) && existingEffect.getAmplifier() >= 0);
+            boolean alreadyDeepSundering = target.getActiveEffects().stream()
+                    .anyMatch(existingEffect -> existingEffect.getEffect().equals(sunderingEffect) && existingEffect.getAmplifier() == 2);
 
             if (!alreadyBlindness) {
                 MobEffectInstance blindness = new MobEffectInstance(blindnessEffect, 66 * 20, 0);
@@ -88,12 +93,12 @@ public class AshOfSinDespairScytheEvent {
                 }
             }
 
-            if (!alreadyfragility) {
+            if (!alreadyFragility) {
                 MobEffectInstance fragility = new MobEffectInstance(fragilityEffect, 66 * 20, 0);
                 target.addEffect(fragility);
             } else {
                 int amplifier = target.getEffect(fragilityEffect).getAmplifier();
-                if (!alreadyDeepfragility) {
+                if (!alreadyDeepFragility) {
                     MobEffectInstance fragility = new MobEffectInstance(fragilityEffect, 66 * 20, amplifier + 1);
                     target.addEffect(fragility);
                 } else {
@@ -102,7 +107,21 @@ public class AshOfSinDespairScytheEvent {
                 }
             }
 
-            boolean alreadyDespair = alreadyDeepDarkness || alreadyDeepfragility;
+            if (!alreadySundering) {
+                MobEffectInstance sundering = new MobEffectInstance(sunderingEffect, 66 * 20, 0);
+                target.addEffect(sundering);
+            } else {
+                int amplifier = target.getEffect(sunderingEffect).getAmplifier();
+                if (!alreadyDeepSundering) {
+                    MobEffectInstance fragility = new MobEffectInstance(sunderingEffect, 66 * 20, amplifier + 1);
+                    target.addEffect(fragility);
+                } else {
+                    MobEffectInstance fragility = new MobEffectInstance(sunderingEffect, 66 * 20, 2);
+                    target.addEffect(fragility);
+                }
+            }
+
+            boolean alreadyDespair = alreadyDeepDarkness & alreadyDeepFragility & alreadyDeepDarkness & alreadyDeepSundering;
             if (alreadyDespair) {
                 MobEffectInstance wither = new MobEffectInstance(witherEffect, 66 * 20, 12);
                 target.addEffect(wither);

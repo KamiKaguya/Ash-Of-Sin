@@ -31,7 +31,7 @@ public class AshOfSinFlameKatanaCaravellaEvent {
                 float flameDamage = originalDamage * 0.2F;
                 if (attacker instanceof ServerPlayer) {
                     target.hurt(DamageSource.LAVA, flameDamage);
-                    target.setSecondsOnFire(15);
+                    target.setSecondsOnFire(30);
                 }
             }
         }

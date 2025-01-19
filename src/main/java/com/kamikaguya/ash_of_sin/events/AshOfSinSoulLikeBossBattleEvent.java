@@ -8,6 +8,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -32,6 +33,10 @@ public class AshOfSinSoulLikeBossBattleEvent {
         }
         if (SOUL_LIKE_BOSS_BATTLE_ON) {
             if (!(event.getEntity() instanceof ServerPlayer player)) {
+                return;
+            }
+
+            if (player.gameMode.getGameModeForPlayer() != GameType.SURVIVAL) {
                 return;
             }
 
@@ -75,7 +80,9 @@ public class AshOfSinSoulLikeBossBattleEvent {
                 boss.getX() + DISTANCE, boss.getY() + 8, boss.getZ() + DISTANCE
         ));
 
-        return nearbyPlayers.stream().allMatch(ServerPlayer::isDeadOrDying);
+        return nearbyPlayers.stream()
+                .filter(p -> p.gameMode.getGameModeForPlayer() == GameType.SURVIVAL)
+                .allMatch(ServerPlayer::isDeadOrDying);
     }
 
     @SubscribeEvent
