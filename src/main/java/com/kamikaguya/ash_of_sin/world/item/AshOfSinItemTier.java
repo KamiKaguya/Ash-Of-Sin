@@ -63,7 +63,7 @@ public enum AshOfSinItemTier implements Tier {
     MURASAME_KATANA(4, 10000, 39.0F, 15.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
     }),
-    ABYSSAL_PREDATOR(4, 10000, 39.0F, 15.0F, 39, () -> {
+    ABYSS_PREDATOR(4, 10000, 39.0F, 15.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
     }),
     ELUCIDATOR(4, 10000, 20.0F, 17.0F, 39, () -> {

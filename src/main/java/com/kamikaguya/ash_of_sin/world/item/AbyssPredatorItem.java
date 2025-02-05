@@ -13,16 +13,16 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AbyssalPredatorItem extends WeaponItem{
+public class AbyssPredatorItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
     public List<Component> tooltipExpand;
-    public AbyssalPredatorItem(Properties build) {
-        super(AshOfSinItemTier.ABYSSAL_PREDATOR, 0, -2.25F, build);
+    public AbyssPredatorItem(Properties build) {
+        super(AshOfSinItemTier.ABYSS_PREDATOR, 0, -2.25F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".abyssal_predator.tooltip.unique"));
-            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".abyssal_predator.tooltip"));
-            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".abyssal_predator.tooltip.owner"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".abyss_predator.tooltip.unique"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".abyss_predator.tooltip"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".abyss_predator.tooltip.owner"));
         }
     }
 
