@@ -32,7 +32,6 @@ public class SoulLikeBossBattleConfig {
                         () -> new ArrayList<>(Arrays.asList(
                                 "minecraft:wither",
                                 "minecraft:ender_dragon",
-                                "minecraft:warden",
                                 "tensura:hinata_sakaguchi",
                                 "tensura:charybdis",
                                 "tensura:akash",
@@ -63,7 +62,8 @@ public class SoulLikeBossBattleConfig {
                                 "mowziesmobs:ferrous_wroughtnaut",
                                 "mowziesmobs:frostmaw",
                                 "mowziesmobs:umvuthi",
-                                "mowziesmobs:naga"
+                                "witherstormmod:withered_symbiont",
+                                "witherstormmod:wither_storm"
                         )),
                         obj -> obj instanceof String);
         BOSS_BATTLE_DISTANCE = builder.comment("Soul Like Boss Battle Distance")

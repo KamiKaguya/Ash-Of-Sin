@@ -79,6 +79,7 @@ public class AshOfSinChalkWallEvent {
                 livingEntityData.putBoolean(CHALK_WALL, true);
                 livingEntityData.putBoolean(CHALK_WALL_CD, true);
                 livingEntity.removeAllEffects();
+                livingEntity.setInvulnerable(true);
             }
 
             if (enchantmentLevel == 2) {
@@ -88,6 +89,7 @@ public class AshOfSinChalkWallEvent {
                 livingEntityData.putBoolean(CHALK_WALL, true);
                 livingEntityData.putBoolean(CHALK_WALL_CD, true);
                 livingEntity.removeAllEffects();
+                livingEntity.setInvulnerable(true);
             }
 
             if (enchantmentLevel == 3) {
@@ -97,6 +99,7 @@ public class AshOfSinChalkWallEvent {
                 livingEntityData.putBoolean(CHALK_WALL, true);
                 livingEntityData.putBoolean(CHALK_WALL_CD, true);
                 livingEntity.removeAllEffects();
+                livingEntity.setInvulnerable(true);
             }
 
             boolean hasChalkWall = livingEntityData.getBoolean(CHALK_WALL);
@@ -195,6 +198,7 @@ public class AshOfSinChalkWallEvent {
 
         if (chalkWallDuration <= 0 && hasChalkWall) {
             livingEntity.removeAllEffects();
+            livingEntity.setInvulnerable(false);
             float absorptionHealth = livingEntity.getMaxHealth() * 0.15F;
             livingEntity.setAbsorptionAmount(absorptionHealth);
             entityData.putBoolean(CHALK_WALL, false);
@@ -202,8 +206,12 @@ public class AshOfSinChalkWallEvent {
 
         if (inChalkWallCD && chalkWallDuration <= 0) {
             entityData.putFloat(CHALK_WALL_DURATION, 0);
-            if (livingEntity.getHealth() >= livingEntity.getMaxHealth()) {
-                entityData.putBoolean(CHALK_WALL_CD, false);
+            if (livingEntity.getHealth() >= livingEntity.getMaxHealth() ) {
+                if (livingEntity instanceof ServerPlayer player && player.getFoodData().getFoodLevel() >= 20) {
+                    entityData.putBoolean(CHALK_WALL_CD, false);
+                } else if (livingEntity.getAbsorptionAmount() == 0){
+                    entityData.putBoolean(CHALK_WALL_CD, false);
+                }
             }
         }
     }

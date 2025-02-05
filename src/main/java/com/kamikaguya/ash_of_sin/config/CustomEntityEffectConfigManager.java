@@ -31,40 +31,29 @@ public class CustomEntityEffectConfigManager {
                             new CustomEffectConfig("epicfight:stun_immunity", "infinite", 0),
                             new CustomEffectConfig("alexsmobs:soulsteal", "infinite", 6)
                     )),
-                    new CustomEntityEffectConfig("minecraft:warden", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
-                    )),
                     new CustomEntityEffectConfig("minecraft:wither", Arrays.asList(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
                     new CustomEntityEffectConfig("minecraft:ender_dragon", Arrays.asList(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
+                    new CustomEntityEffectConfig("minecraft:warden", Arrays.asList(
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
+                    )),
                     new CustomEntityEffectConfig("iceandfire:ice_dragon", Arrays.asList(
-                            new CustomEffectConfig("minecraft:haste", "infinite", 6),
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3),
-                            new CustomEffectConfig("alexsmobs:soulsteal", "infinite", 6),
-                            new CustomEffectConfig("alexsmobs:knockback_resistance", "infinite", 0)
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
                     new CustomEntityEffectConfig("iceandfire:fire_dragon", Arrays.asList(
-                            new CustomEffectConfig("minecraft:haste", "infinite", 6),
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3),
-                            new CustomEffectConfig("alexsmobs:soulsteal", "infinite", 6),
-                            new CustomEffectConfig("alexsmobs:knockback_resistance", "infinite", 0)
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
                     new CustomEntityEffectConfig("iceandfire:lightning_dragon", Arrays.asList(
-                            new CustomEffectConfig("minecraft:haste", "infinite", 6),
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3),
-                            new CustomEffectConfig("alexsmobs:soulsteal", "infinite", 6),
-                            new CustomEffectConfig("alexsmobs:knockback_resistance", "infinite", 0)
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
                     new CustomEntityEffectConfig("iceandfire:dread_knight", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3),
-                            new CustomEffectConfig("alexsmobs:knockback_resistance", "infinite", 0)
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
                     new CustomEntityEffectConfig("iceandfire:dread_lich", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3),
-                            new CustomEffectConfig("alexsmobs:knockback_resistance", "infinite", 0)
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
                     new CustomEntityEffectConfig("iceandfire:dread_scuttler", Arrays.asList(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
@@ -136,27 +125,28 @@ public class CustomEntityEffectConfigManager {
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
                     new CustomEntityEffectConfig("eeeabsmobs:corpse_warlock", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3),
-                            new CustomEffectConfig("alexsmobs:knockback_resistance", "infinite", 0)
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
                     new CustomEntityEffectConfig("eeeabsmobs:guling_sentinel_heavy", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3),
-                            new CustomEffectConfig("alexsmobs:knockback_resistance", "infinite", 0)
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
                     new CustomEntityEffectConfig("mowziesmobs:ferrous_wroughtnaut", Arrays.asList(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
                     new CustomEntityEffectConfig("mowziesmobs:frostmaw", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3),
-                            new CustomEffectConfig("alexsmobs:knockback_resistance", "infinite", 0)
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
                     new CustomEntityEffectConfig("mowziesmobs:umvuthi", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3),
-                            new CustomEffectConfig("alexsmobs:knockback_resistance", "infinite", 0)
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     )),
                     new CustomEntityEffectConfig("mowziesmobs:naga", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3),
-                            new CustomEffectConfig("alexsmobs:knockback_resistance", "infinite", 0)
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
+                    )),
+                    new CustomEntityEffectConfig("witherstormmod:withered_symbiont", Arrays.asList(
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
+                    )),
+                    new CustomEntityEffectConfig("witherstormmod:wither_storm", Arrays.asList(
+                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     ))
             );
             String defaultConfigJson = GSON.toJson(defaultCustomEntityEffectConfig, CONFIG_TYPE);

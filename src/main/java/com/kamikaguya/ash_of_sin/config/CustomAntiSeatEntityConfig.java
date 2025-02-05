@@ -81,7 +81,9 @@ public class CustomAntiSeatEntityConfig {
                                 "iceandfire:fire_dragon",
                                 "iceandfire:lightning_dragon",
                                 "iceandfire:dread_lich",
-                                "iceandfire:dread_knight"
+                                "iceandfire:dread_knight",
+                                "witherstormmod:withered_symbiont",
+                                "witherstormmod:wither_storm"
                         )),
                         o -> o instanceof String);
         ANTI_SEAT_ENTITY_CONFIG = builder.build();

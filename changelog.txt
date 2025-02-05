@@ -1,36 +1,8 @@
 1.19.2 Changelog
 43.4
 ====
- - 43.4.12 Bump CoreMods to 5.2.4 (#10269)
- - 43.4.11 Allow mipmap lowering to be disabled (#10250)
- - 43.4.10 Add optional fix of use item duration, disabled by default (#10244)
- - 43.4.9  Backport some Vanilla 1.21 `ResourceLocation` methods (#10239)
-           Co-authored-by: Paint_Ninja <PaintNinja@users.noreply.github.com>
- - 43.4.8  Deprecate `@ObjectHolder`, add a couple of fast-paths (#10226)
-           Co-authored-by: Paint_Ninja <PaintNinja@users.noreply.github.com>
- - 43.4.7  Disable clean on TeamCity (#10260)
- - 43.4.6  Bump JNA to 5.12.1 (#10186)
- - 43.4.5  Bump CoreMods to 5.2 (#10132)
-           Full Changelog: https://gist.github.com/Jonathing/c3ad28b2a048ac839a7baba5417ee870
-           The key features are:
-           - ES6 language support
-           - Thoroughly updated ASMAPI, with full documentation
-           - Bug fixes (some optional for backwards-compatibility)
-           - Partial internal code cleanup
-           - Request CoreMods to not apply fix for ASMAPI.findFirstInstructionBefore by default
-           Related dependency bumps:
-           - Updated ASM to 9.7.1
-           - Updated Nashorn to 15.4
-           - Updated Log4J to 2.19.0 (included with installer)
- - 43.4.4  Cleanup FML Bindings (backport of #10004 to 1.19.2) (#10105)
- - 43.4.3  Optionally supply FMLJavaModLoadingContext as a param to mod constructors (backport of #10074 to 1.19.2) (#10106)
-           Co-authored-by: RealMangoRage <andrew333awesome@outlook.com>
- - 43.4.2  Fixed falling block entities not rendering as moving blocks (#10006) (#10020)
-           Co-authored-by: Ven <tudurap.com@gmail.com>
- - 43.4.1  Choose default JarJar mod file type based on parent JAR (#10025)
-           Co-authored-by: thedarkcolour <30441001+thedarkcolour@users.noreply.github.com>
- - 43.4.0  1.19.2 RB 4
-           https://forums.minecraftforge.net/topic/149548-forge-434-minecraft-1192/
+ - 43.4.0 1.19.2 RB 4
+          https://forums.minecraftforge.net/topic/149548-forge-434-minecraft-1192/
 
 43.3
 ====

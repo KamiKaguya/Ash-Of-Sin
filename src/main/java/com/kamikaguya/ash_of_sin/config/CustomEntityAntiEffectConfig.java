@@ -79,7 +79,9 @@ public class CustomEntityAntiEffectConfig {
                                 "iceandfire:lightning_dragon",
                                 "iceandfire:dread_knight",
                                 "iceandfire:dread_lich",
-                                "dummmmmmy:target_dummy"
+                                "dummmmmmy:target_dummy",
+                                "witherstormmod:withered_symbiont",
+                                "witherstormmod:wither_storm"
                         )),
                         o -> o instanceof String);
         List<String> antiEffects = List.of(
