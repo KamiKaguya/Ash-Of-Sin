@@ -62,7 +62,7 @@ public class AshOfSinConfig {
         builder.comment("KamiKaguya Attack Effects Settings").push("KamiKaguyaAttackEffects");
         // Default Attack Effects
         List<String> defaultHurtEffects = List.of(
-                "tensura:black_burn," + (13 * 20) + ",6"
+                "apotheosis:sundering," + (13 * 20) + ",6"
         );
         // More Attack Effects
         EFFECT_LIST = builder.comment("'EffectID,Duration,Amplifier'")

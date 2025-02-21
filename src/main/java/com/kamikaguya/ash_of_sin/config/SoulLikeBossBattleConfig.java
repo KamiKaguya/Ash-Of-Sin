@@ -61,9 +61,7 @@ public class SoulLikeBossBattleConfig {
                                 "eeeabsmobs:nameless_guardian",
                                 "mowziesmobs:ferrous_wroughtnaut",
                                 "mowziesmobs:frostmaw",
-                                "mowziesmobs:umvuthi",
-                                "witherstormmod:withered_symbiont",
-                                "witherstormmod:wither_storm"
+                                "mowziesmobs:umvuthi"
                         )),
                         obj -> obj instanceof String);
         BOSS_BATTLE_DISTANCE = builder.comment("Soul Like Boss Battle Distance")

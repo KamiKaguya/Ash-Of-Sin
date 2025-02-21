@@ -141,12 +141,6 @@ public class CustomEntityEffectConfigManager {
                     )),
                     new CustomEntityEffectConfig("mowziesmobs:naga", Arrays.asList(
                             new CustomEffectConfig("minecraft:resistance", "infinite", 3)
-                    )),
-                    new CustomEntityEffectConfig("witherstormmod:withered_symbiont", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
-                    )),
-                    new CustomEntityEffectConfig("witherstormmod:wither_storm", Arrays.asList(
-                            new CustomEffectConfig("minecraft:resistance", "infinite", 3)
                     ))
             );
             String defaultConfigJson = GSON.toJson(defaultCustomEntityEffectConfig, CONFIG_TYPE);

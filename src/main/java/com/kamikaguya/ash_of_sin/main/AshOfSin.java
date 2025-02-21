@@ -40,7 +40,6 @@ public class AshOfSin {
     public final CustomAntiSeatEntityConfig customAntiSeatEntityConfig = new CustomAntiSeatEntityConfig();
     public final CustomAntiItemEntityConfig customAntiItemEntityConfig = new CustomAntiItemEntityConfig();
     public final CustomEntityAntiEffectConfig customEntityAntiEffectConfig = new CustomEntityAntiEffectConfig();
-    public final CustomAntiHighATKEntityConfig customAntiHighATKEntityConfig = new CustomAntiHighATKEntityConfig();
     public final CustomAntiTrapCageEntityConfig customAntiTrapCageEntityConfig = new CustomAntiTrapCageEntityConfig();
     public final CustomEntityEffectConfigManager customEntityEffectConfigManager = new CustomEntityEffectConfigManager();
     public final CustomEntityItemConfigManager customEntityItemConfigManager = new CustomEntityItemConfigManager();
@@ -98,7 +97,6 @@ public class AshOfSin {
         MinecraftForge.EVENT_BUS.register(new AshOfSinAntiHighLevelEnchantmentEvent());
 
         MinecraftForge.EVENT_BUS.register(new AshOfSinSoulLikeBossBattleEvent());
-        MinecraftForge.EVENT_BUS.register(new AshOfSinCustomAntiHighATKEntityEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinAntiSameModifierEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinBetterAIEvent());
         MinecraftForge.EVENT_BUS.register(new AshOfSinCustomAntiTrapCageEntityEvent());
@@ -113,7 +111,6 @@ public class AshOfSin {
         customAntiSeatEntityConfig.loadConfig();
         customAntiItemEntityConfig.loadConfig();
         customEntityAntiEffectConfig.loadConfig();
-        customAntiHighATKEntityConfig.loadConfig();
         customAntiTrapCageEntityConfig.loadConfig();
         customEntityEffectConfigManager.loadConfig();
         customEntityItemConfigManager.loadConfig();
