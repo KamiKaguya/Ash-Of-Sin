@@ -7,7 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 
 public class AshOfSinCreativeModeTab {
-    public static final CreativeModeTab WEAPONS = new CreativeModeTab("weapons") {
+    public static final CreativeModeTab WEAPONS = new CreativeModeTab("ash_of_sin.weapons") {
         public ItemStack makeIcon() {
             return new ItemStack((ItemLike) AshOfSinItems.MIRROR_OF_THE_DARK_NIGHT.get());
         }
