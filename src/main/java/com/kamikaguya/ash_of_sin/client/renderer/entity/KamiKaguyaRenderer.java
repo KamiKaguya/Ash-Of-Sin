@@ -2,7 +2,8 @@ package com.kamikaguya.ash_of_sin.client.renderer.entity;
 
 
 import com.kamikaguya.ash_of_sin.client.renderer.AnimatedPlayerModel;
-import com.kamikaguya.ash_of_sin.world.entity.KamiKaguya;
+import com.kamikaguya.ash_of_sin.main.AshOfSin;
+import com.kamikaguya.ash_of_sin.entity.KamiKaguya;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelLayers;
@@ -24,8 +25,7 @@ public class KamiKaguyaRenderer extends HumanoidMobRenderer<KamiKaguya, PlayerMo
         addLayer(new BeeStingerLayer<>(this));
     }
 
-    public ResourceLocation getTextureLocation(KamiKaguya entity)
-    {
-        return new ResourceLocation("ash_of_sin:textures/entity/kamikaguya.png");
+    public ResourceLocation getTextureLocation(KamiKaguya entity) {
+        return new ResourceLocation(AshOfSin.MODID, "textures/entity/kamikaguya.png");
     }
 }

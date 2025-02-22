@@ -1,8 +1,8 @@
 package com.kamikaguya.ash_of_sin.client;
 
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
-import com.kamikaguya.ash_of_sin.world.item.AshOfSinItems;
-import com.kamikaguya.ash_of_sin.world.item.SubCravenBowItem;
+import com.kamikaguya.ash_of_sin.register.items.AshOfSinItems;
+import com.kamikaguya.ash_of_sin.item.SubCravenBowItem;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.resources.ResourceLocation;

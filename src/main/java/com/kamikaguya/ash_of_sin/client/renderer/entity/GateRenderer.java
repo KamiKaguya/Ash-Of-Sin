@@ -1,7 +1,7 @@
 package com.kamikaguya.ash_of_sin.client.renderer.entity;
 
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
-import com.kamikaguya.ash_of_sin.world.entity.Gate;
+import com.kamikaguya.ash_of_sin.entity.Gate;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -21,18 +21,14 @@ import net.minecraft.world.phys.Vec3;
 
 public class GateRenderer extends EntityRenderer<Gate> {
 
-	public static final ResourceLocation TEXTURE = new ResourceLocation(AshOfSin.MODID, "textures/entity/gate.png");
-
 	public GateRenderer(EntityRendererProvider.Context mgr) {
 		super(mgr);
 	}
 
-	@Override
 	public ResourceLocation getTextureLocation(Gate entity) {
-		return TEXTURE;
+		return new ResourceLocation(AshOfSin.MODID, "textures/entity/gate.png");
 	}
 
-	@Override
 	public void render(Gate gate, float yaw, float partialTicks, PoseStack matrix, MultiBufferSource buf, int packedLight) {
 		matrix.pushPose();
 
@@ -75,7 +71,6 @@ public class GateRenderer extends EntityRenderer<Gate> {
 		builder.vertex(matrix.last().pose(), 1, -1, 0).color(255, 192, 203, 255).uv(0, 1 - frame * frameHeight).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(packedLight).normal(matrix.last().normal(), 0, 1, 0).endVertex();
 	}
 
-	@Override
 	public boolean shouldRender(Gate Entity, Frustum frustum, double x, double y, double z) {
 		double d = this.getBlockDistanceSq(Entity);
 		double renderDistanceSq = 256 * 256;
