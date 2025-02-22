@@ -21,10 +21,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -52,7 +49,7 @@ public class AshOfSinSculkEvent {
         DamageSource damageSource = event.getSource();
         Entity attacker = damageSource.getEntity();
         if (attacker instanceof LivingEntity livingEntity) {
-            if (RANDOM.nextFloat() < 0.15F && holdSculkWeapon(livingEntity)) {
+            if (RANDOM.nextFloat() < 0.25F && holdSculkWeapon(livingEntity)) {
                 float originalDamage = event.getAmount();
                 if (RANDOM.nextFloat() > 0.75F) {
                     float sculkDamage = originalDamage * 1.25F;
@@ -121,7 +118,7 @@ public class AshOfSinSculkEvent {
     }
 
     private static void processDarknessSpread(LivingEntity target, LivingEntity attacker, float damage) {
-        // 提前过滤虚拟实体
+        // 提前过滤训练人偶实体
         if (isTargetDummy(target)) return;
 
         // 获取范围内实体
@@ -138,23 +135,185 @@ public class AshOfSinSculkEvent {
         return ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation("dummmmmmy:target_dummy")) == entity.getType();
     }
 
-    private static void applySonicEffect(LivingEntity entity, LivingEntity attacker, float baseDamage) {
-        // 概率计算伤害倍率
-        float damageMultiplier = ThreadLocalRandom.current().nextFloat() <= 0.25F ? 1.25F : 2.0F;
-        entity.hurt(DamageSource.mobAttack(attacker).setMagic(), baseDamage * damageMultiplier);
+    private static void applySonicEffect(LivingEntity source, LivingEntity attacker, float baseDamage) {
+        // 25%概率广域链式音爆
+        if (RANDOM.nextFloat() > 0.75F) {
+            return;
+        }
 
-        // 添加效果和粒子
-        entity.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 33*20, 2));
-        spawnSonicParticles(entity);
+        // 获取链式传递参数
+        final int MAX_CHAIN = 7; // 最大连锁次数
+        final double CHAIN_RANGE = 7.0; // 连锁范围
+        final float DAMAGE_DECAY = 0.7f; // 每次连锁伤害衰减
+
+        float currentDamage = baseDamage;
+        // 创建已影响实体集合防止循环
+        Set<UUID> affectedEntities = new HashSet<>();
+        Queue<LivingEntity> entityQueue = new LinkedList<>();
+
+        // 先对原始目标应用基础效果&使用队列实现广度优先传播
+        applySingleTargetEffect(attacker, source, currentDamage);
+        affectedEntities.add(source.getUUID());
+        entityQueue.add(source);
+
+        for (int chainCount = 0; !entityQueue.isEmpty() && chainCount < MAX_CHAIN; chainCount++) {
+            int levelSize = entityQueue.size();
+            int processedCount = 0;
+
+            while (processedCount++ < levelSize && !entityQueue.isEmpty()) {
+                LivingEntity origin = entityQueue.poll();
+                if (origin == null) continue;
+
+                // 获取范围内可连锁目标
+                List<LivingEntity> chainTargets = origin.level.getEntitiesOfClass(
+                        LivingEntity.class,
+                        new AABB(origin.blockPosition()).inflate(CHAIN_RANGE),
+                        e -> !affectedEntities.contains(e.getUUID()) &&
+                                !holdSculkWeapon(e) &&
+                                e.isAlive()
+                );
+
+                if (chainTargets.isEmpty()) {
+                    // 生成单体强化特效
+                    if (chainCount == 0) {
+                        // 首次连锁失败时强化特效
+                        spawnIntensifiedEffect(origin);
+                    }
+                    continue;
+                }
+
+                // 寻找最近目标
+                Optional<LivingEntity> nearest = chainTargets.stream()
+                        .min(Comparator.comparingDouble(e -> e.distanceToSqr(origin)));
+
+                LivingEntity nextTarget = nearest.get();
+                affectedEntities.add(nextTarget.getUUID());
+                entityQueue.add(nextTarget);
+
+                // 应用链式音爆效果
+                applyChainEffect(attacker, origin, nextTarget, currentDamage);
+                currentDamage *= DAMAGE_DECAY; // 伤害衰减
+            }
+        }
     }
 
-    private static void spawnSonicParticles(LivingEntity entity) {
+    private static void applySingleTargetEffect(LivingEntity attacker, LivingEntity target, float baseDamage) {
+        // 概率伤害倍率
+        float damageMultiplier = ThreadLocalRandom.current().nextFloat() <= 0.25F ? 1.25F : 2.0F;
+        target.hurt(DamageSource.mobAttack(attacker).setMagic(), baseDamage * damageMultiplier);
+        target.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 33*20, 2));
+
+        // 单体特效
+        if (target.level instanceof ServerLevel serverLevel) {
+            Vec3 center = target.position().add(0, 1.5, 0);
+
+            // 环形粒子
+            for (int i = 0; i < 24; i++) {
+                double angle = i * Math.PI * 2 / 24;
+                Vec3 pos = center.add(
+                        Math.cos(angle) * 1.2,
+                        Math.sin(System.currentTimeMillis()%2000/1000.0*Math.PI)*0.5, // 动态高度
+                        Math.sin(angle) * 1.2
+                );
+                serverLevel.sendParticles(
+                        ParticleTypes.SONIC_BOOM,
+                        pos.x, pos.y, pos.z,
+                        3, 0.2, 0.2, 0.2, 0.1
+                );
+            }
+
+            // 中心聚爆特效
+            serverLevel.sendParticles(
+                    ParticleTypes.ELECTRIC_SPARK,
+                    center.x, center.y, center.z,
+                    15, 0.5, 0.5, 0.5, 0.2
+            );
+
+            // 单体音效
+            serverLevel.playSound(
+                    null, center.x, center.y, center.z,
+                    SoundEvents.WARDEN_SONIC_BOOM,
+                    SoundSource.PLAYERS,
+                    3.0F, 0.8F
+            );
+        }
+    }
+
+    private static void spawnIntensifiedEffect(LivingEntity entity) {
         if (entity.level instanceof ServerLevel serverLevel) {
-            Vec3 pos = entity.position();
-            serverLevel.sendParticles(ParticleTypes.SONIC_BOOM, pos.x, pos.y, pos.z,
-                    1, 0, 0, 0, 0);
-            serverLevel.playSound(null, pos.x, pos.y, pos.z,
-                    SoundEvents.WARDEN_SONIC_BOOM, SoundSource.PLAYERS, 5.0F, 1.0F);
+            Vec3 pos = entity.position().add(0, 1, 0);
+
+            // 垂直能量柱
+            for (int y = 0; y < 5; y++) {
+                serverLevel.sendParticles(
+                        ParticleTypes.SCULK_CHARGE_POP,
+                        pos.x, pos.y + y*0.8, pos.z,
+                        15, 0.3, 0.5, 0.3, 0.2
+                );
+            }
+
+            // 音爆
+            serverLevel.sendParticles(
+                    ParticleTypes.SONIC_BOOM,
+                    pos.x, pos.y + 1, pos.z,
+                    8, 1.0, 0.5, 1.0, 0
+            );
+
+            // 强化音效
+            serverLevel.playSound(
+                    null, pos.x, pos.y, pos.z,
+                    SoundEvents.RESPAWN_ANCHOR_DEPLETE,
+                    SoundSource.PLAYERS,
+                    2.0F, 0.5F
+            );
+        }
+    }
+
+    private static void applyChainEffect(LivingEntity attacker, LivingEntity from, LivingEntity to, float baseDamage) {
+        // 概率伤害倍率
+        float damageMultiplier = ThreadLocalRandom.current().nextFloat() <= 0.25F ? 1.25F : 2.0F;
+        to.hurt(DamageSource.mobAttack(attacker).setMagic(), baseDamage * damageMultiplier);
+        to.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 33*20, 2));
+
+        // 生成链式音爆粒子
+        if (from.level instanceof ServerLevel serverLevel) {
+            // 计算粒子路径
+            Vec3 start = from.getEyePosition(1.0f);
+            Vec3 end = to.getEyePosition(1.0f);
+            Vec3 direction = end.subtract(start);
+            double distance = direction.length();
+            direction = direction.normalize();
+
+            // 生成连接线粒子
+            for (double d = 0; d < distance; d += 0.5) {
+                Vec3 pos = start.add(direction.scale(d));
+                serverLevel.sendParticles(
+                        ParticleTypes.ELECTRIC_SPARK,
+                        pos.x, pos.y + 0.2, pos.z,
+                        1, 0, 0, 0, 0
+                );
+            }
+
+            // 生成端点特效
+            serverLevel.sendParticles(
+                    ParticleTypes.SONIC_BOOM,
+                    start.x, start.y + 0.5, start.z,
+                    3, 0.2, 0.2, 0.2, 0
+            );
+            serverLevel.sendParticles(
+                    ParticleTypes.SONIC_BOOM,
+                    end.x, end.y + 0.5, end.z,
+                    3, 0.2, 0.2, 0.2, 0
+            );
+
+            // 播放音爆音效
+            serverLevel.playSound(
+                    null,
+                    start.x, start.y, start.z,
+                    SoundEvents.WARDEN_SONIC_BOOM,
+                    SoundSource.PLAYERS,
+                    2.0F, 1.8F - 0.2F * (float)(distance / 10)
+            );
         }
     }
 }
