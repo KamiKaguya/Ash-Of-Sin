@@ -13,15 +13,15 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SculkSwordItem extends WeaponItem{
+public class SculkCleaverItem extends WeaponItem{
     @OnlyIn(Dist.CLIENT)
     public List<Component> tooltipExpand;
-    public SculkSwordItem(Properties build) {
-        super(AshOfSinItemTier.SCULK_SWORD, 0, -2.4F, build);
+    public SculkCleaverItem(Properties build) {
+        super(AshOfSinItemTier.SCULK_CLEAVER, 0, -2.4F, build);
         if (AshOfSin.isPhysicalClient()) {
             this.tooltipExpand = new ArrayList<Component>();
-            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".sculk_sword.tooltip.sculk"));
-            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".sculk_sword.tooltip"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".sculk_cleaver.tooltip.sculk"));
+            this.tooltipExpand.add(Component.translatable("item." + AshOfSin.MODID + ".sculk_cleaver.tooltip"));
         }
     }
 

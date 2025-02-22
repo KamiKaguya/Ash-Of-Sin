@@ -1,17 +1,20 @@
 package com.kamikaguya.ash_of_sin.events.special;
 
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,10 +22,21 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
+import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinSculkEvent {
+    private static final Set<ResourceLocation> SCULK_WEAPONS = Set.of(
+            new ResourceLocation(AshOfSin.MODID, "sculk_axe"),
+            new ResourceLocation(AshOfSin.MODID, "sculk_longsword"),
+            new ResourceLocation(AshOfSin.MODID, "sculk_greatsword"),
+            new ResourceLocation(AshOfSin.MODID, "sculk_cleaver"),
+            new ResourceLocation(AshOfSin.MODID, "sculk_scythe"),
+            new ResourceLocation(AshOfSin.MODID, "sculk_sword")
+    );
     public static final Random RANDOM = new Random();
 
     @SubscribeEvent
@@ -49,18 +63,14 @@ public class AshOfSinSculkEvent {
                     diffuseDarkness(target, livingEntity, sculkDamage);
                     event.setAmount(sculkDamage);
                 }
-                SoundEvent darknessSound = ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("minecraft:block.sculk_shrieker.shriek"));
-                if (darknessSound != null) {
-                    target.level.playSound(null, target.getOnPos(), darknessSound, SoundSource.NEUTRAL, 1.0f, 1.0f);
-                }
+                target.level.playSound(null, target.getOnPos(), SoundEvents.SCULK_SHRIEKER_SHRIEK, SoundSource.PLAYERS, 1.0f, 1.0f);
             }
         }
     }
 
-    public static boolean holdSculkWeapon(LivingEntity livingEntity) {
-        ItemStack mainHand = livingEntity.getMainHandItem();
-        boolean hasSculkWeapon = (ForgeRegistries.ITEMS.getKey(mainHand.getItem()).equals(new ResourceLocation(AshOfSin.MODID, "sculk_axe"))) || (ForgeRegistries.ITEMS.getKey(mainHand.getItem()).equals(new ResourceLocation(AshOfSin.MODID, "sculk_sword"))) || (ForgeRegistries.ITEMS.getKey(mainHand.getItem()).equals(new ResourceLocation(AshOfSin.MODID, "sculk_greatsword")));
-        return !(mainHand.isEmpty()) && (hasSculkWeapon);
+    public static boolean holdSculkWeapon(LivingEntity entity) {
+        ItemStack mainHand = entity.getMainHandItem();
+        return !mainHand.isEmpty() && SCULK_WEAPONS.contains(ForgeRegistries.ITEMS.getKey(mainHand.getItem()));
     }
 
     @SubscribeEvent
@@ -73,63 +83,78 @@ public class AshOfSinSculkEvent {
         }
 
         LivingEntity livingEntity = event.getEntity();
-        MobEffect darkness = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("minecraft", "darkness"));
         if (holdSculkWeapon(livingEntity)) {
-            if (darkness != null) {
-                livingEntity.removeEffect(darkness);
-            }
+            livingEntity.removeEffect(MobEffects.DARKNESS);
         }
     }
 
-    public static void diffuseDarkness(LivingEntity target, LivingEntity attacker, float sculkDamege) {
-        MobEffect darknessEffect = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("minecraft", "darkness"));
-        if (darknessEffect != null) {
-            boolean alreadyPlungedIntoDarkness = target.getActiveEffects().stream()
-                    .anyMatch(existingEffect -> existingEffect.getEffect().equals(darknessEffect) && existingEffect.getAmplifier() >= 0);
-            boolean alreadyPlungedIntoDeepestDarkness = target.getActiveEffects().stream()
-                    .anyMatch(existingEffect -> existingEffect.getEffect().equals(darknessEffect) && existingEffect.getAmplifier() == 2);
-            if (!alreadyPlungedIntoDarkness) {
-                MobEffectInstance darkness = new MobEffectInstance(darknessEffect, 33 * 20, 0);
-                target.addEffect(darkness);
-            } else {
-                int amplifier = target.getEffect(darknessEffect).getAmplifier();
-                if (!alreadyPlungedIntoDeepestDarkness) {
-                    MobEffectInstance darkness = new MobEffectInstance(darknessEffect, 33 * 20, amplifier + 1);
-                    target.addEffect(darkness);
-                } else {
-                    EntityType<?> livingEntityType = target.getType();
-                    double targetX = target.getX();
-                    double targetY = target.getY();
-                    double targetZ = target.getZ();
-                    List<LivingEntity> nearbyEntities = target.level.getEntitiesOfClass(LivingEntity.class, new AABB(
-                            targetX - 7, targetY - 7, targetZ - 7,
-                            targetX + 7, targetY + 7, targetZ + 7
-                    ));
-                    for (LivingEntity nearbyEntity : nearbyEntities) {
-                        EntityType<?> dummy = ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation("dummmmmmy:target_dummy"));
-                        if (livingEntityType.equals(dummy)) {
-                            return;
-                        }
-                        if (livingEntityType.equals(nearbyEntity.getType())) {
-                            if (!holdSculkWeapon(nearbyEntity)) {
-                                if (RANDOM.nextFloat() <= 0.25F) {
-                                    float sonicBoomDamage = sculkDamege * 1.25F;
-                                    nearbyEntity.hurt(DamageSource.mobAttack(attacker).setMagic(), sonicBoomDamage);
-                                } else {
-                                    float sonicBoomDamage = sculkDamege * 2.0F;
-                                    nearbyEntity.hurt(DamageSource.mobAttack(attacker).setMagic(), sonicBoomDamage);
-                                }
-                                MobEffectInstance darkness = new MobEffectInstance(darknessEffect, 33 * 20, 2);
-                                nearbyEntity.addEffect(darkness);
-                                SoundEvent sonicBoomSound = ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("minecraft:entity.warden.sonic_boom"));
-                                if (sonicBoomSound != null) {
-                                    nearbyEntity.level.playSound(null, nearbyEntity.getOnPos(), sonicBoomSound, SoundSource.NEUTRAL, 1.0f, 1.0f);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+    public static void diffuseDarkness(LivingEntity target, LivingEntity attacker, float sculkDamage) {
+        // 预计算基础参数
+        final int DURATION = 33 * 20;
+        final MobEffect DARKNESS = MobEffects.DARKNESS;
+
+        // 安全获取效果实例
+        Optional<MobEffectInstance> darknessEffect = Optional.ofNullable(target.getEffect(DARKNESS));
+
+        // 判断效果状态
+        boolean hasAnyDarkness = darknessEffect.isPresent();
+        boolean hasMaxLevel = darknessEffect
+                .map(e -> e.getAmplifier() >= 2)
+                .orElse(false);
+
+        if (!hasAnyDarkness) {
+            target.addEffect(new MobEffectInstance(DARKNESS, DURATION, 0));
+            return;
+        }
+
+        if (!hasMaxLevel) {
+            int newAmplifier = darknessEffect
+                    .map(MobEffectInstance::getAmplifier)
+                    .map(a -> a + 1)
+                    .orElse(0);
+            target.addEffect(new MobEffectInstance(DARKNESS, DURATION, newAmplifier));
+            return;
+        }
+
+        // 处理满级黑暗扩散
+        processDarknessSpread(target, attacker, sculkDamage);
+    }
+
+    private static void processDarknessSpread(LivingEntity target, LivingEntity attacker, float damage) {
+        // 提前过滤虚拟实体
+        if (isTargetDummy(target)) return;
+
+        // 获取范围内实体
+        AABB area = new AABB(target.blockPosition()).inflate(7);
+        List<LivingEntity> entities = target.level.getEntitiesOfClass(LivingEntity.class, area);
+
+        entities.stream()
+                .filter(e -> e.getType() == target.getType())
+                .filter(e -> !holdSculkWeapon(e))
+                .forEach(e -> applySonicEffect(e, attacker, damage));
+    }
+
+    private static boolean isTargetDummy(LivingEntity entity) {
+        return ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation("dummmmmmy:target_dummy")) == entity.getType();
+    }
+
+    private static void applySonicEffect(LivingEntity entity, LivingEntity attacker, float baseDamage) {
+        // 概率计算伤害倍率
+        float damageMultiplier = ThreadLocalRandom.current().nextFloat() <= 0.25F ? 1.25F : 2.0F;
+        entity.hurt(DamageSource.mobAttack(attacker).setMagic(), baseDamage * damageMultiplier);
+
+        // 添加效果和粒子
+        entity.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 33*20, 2));
+        spawnSonicParticles(entity);
+    }
+
+    private static void spawnSonicParticles(LivingEntity entity) {
+        if (entity.level instanceof ServerLevel serverLevel) {
+            Vec3 pos = entity.position();
+            serverLevel.sendParticles(ParticleTypes.SONIC_BOOM, pos.x, pos.y, pos.z,
+                    1, 0, 0, 0, 0);
+            serverLevel.playSound(null, pos.x, pos.y, pos.z,
+                    SoundEvents.WARDEN_SONIC_BOOM, SoundSource.PLAYERS, 5.0F, 1.0F);
         }
     }
 }

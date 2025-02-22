@@ -102,10 +102,19 @@ public enum AshOfSinItemTier implements Tier {
     SCULK_AXE(4, 3000, 20.0F, 10.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
     }),
-    SCULK_SWORD(4, 3000, 20.0F, 9.0F, 39, () -> {
+    SCULK_LONGSWORD(4, 3000, 20.0F, 9.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
     }),
     SCULK_GREATSWORD(4, 3000, 20.0F, 17.0F, 39, () -> {
+        return Ingredient.of(Items.NETHERITE_INGOT);
+    }),
+    SCULK_CLEAVER(4, 10000, 20.0F, 16.0F, 39, () -> {
+        return Ingredient.of(Items.NETHERITE_INGOT);
+    }),
+    SCULK_SCYTHE(4, 10000, 20.0F, 16.0F, 39, () -> {
+        return Ingredient.of(Items.NETHERITE_INGOT);
+    }),
+    SCULK_SWORD(4, 10000, 20.0F, 16.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
     });
     public final int harvestLevel;
