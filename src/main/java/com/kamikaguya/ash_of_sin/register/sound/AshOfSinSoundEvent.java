@@ -20,9 +20,7 @@ public class AshOfSinSoundEvent {
     }
 
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
-        return registry.register(name, () -> {
-            return new SoundEvent(new ResourceLocation(AshOfSin.MODID, name));
-        });
+        return registry.register(name, () -> new SoundEvent(new ResourceLocation(AshOfSin.MODID, name)));
     }
 
     public static void register(IEventBus modEventBus) {

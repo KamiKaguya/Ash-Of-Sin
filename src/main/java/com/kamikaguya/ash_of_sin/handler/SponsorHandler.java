@@ -25,7 +25,7 @@ public class SponsorHandler {
             "Midnightovo", "Wh1t3zZ__", "Skadi_sukida", "Kirino_Sae",
             "Mkiuna", "lokmjikmk", "kizunaaiLOVER", "Ayase02", "hanqing666",
             "Kumamori_Kurumi", "Ruuuuuuuubbish", "Ink_TR", "9tail_fox",
-            "yeming", "19811117", "ZhenLii_", "DeaDKIng"
+            "yeming", "19811117", "ZhenLii_", "DeaDKIng", "Snow"
     );
 
     @SubscribeEvent
