@@ -6,16 +6,20 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.registries.ForgeRegistries;
 import yesman.epicfight.api.utils.math.MathUtils;
 import yesman.epicfight.api.utils.math.OpenMatrix4f;
 import yesman.epicfight.client.renderer.patched.item.RenderItemBase;
 import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
+
+import java.util.Objects;
 
 @OnlyIn(Dist.CLIENT)
 public class RenderYamato extends RenderItemBase {
@@ -23,7 +27,12 @@ public class RenderYamato extends RenderItemBase {
 
     public RenderYamato(JsonElement jsonElement) {
         super(jsonElement);
-        this.sheathStack = new ItemStack(AshOfSinItemRegistry.YAMATO_SHEATH.get());
+
+        if (jsonElement.getAsJsonObject().has("sheath")) {
+            this.sheathStack = new ItemStack(Objects.requireNonNull(ForgeRegistries.ITEMS.getValue(ResourceLocation.parse(jsonElement.getAsJsonObject().get("sheath").getAsString()))));
+        } else {
+            this.sheathStack = new ItemStack(AshOfSinItemRegistry.YAMATO_SHEATH.get());
+        }
     }
 
     public void renderItemInHand(ItemStack stack, LivingEntityPatch<?> entitypatch, InteractionHand hand, OpenMatrix4f[] poses, MultiBufferSource buffer, PoseStack poseStack, int packedLight, float partialTicks) {
