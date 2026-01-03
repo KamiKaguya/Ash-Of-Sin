@@ -21,8 +21,8 @@ public class AshOfSinRendererEngine {
 
     @SubscribeEvent
     public static void registerItemRenderer(PatchedRenderersEvent.RegisterItemRenderer event) {
-        event.addItemRenderer(ResourceLocation.tryBuild(AshOfSin.MODID, AshOfSinItemRegistry.FLAME_KATANA_CARAVELLA.getId().getNamespace()), RenderFlameKatanaCaravella::new);
-        event.addItemRenderer(ResourceLocation.tryBuild(AshOfSin.MODID, AshOfSinItemRegistry.YAMATO.getId().getNamespace()), RenderYamato::new);
-        event.addItemRenderer(ResourceLocation.tryBuild(AshOfSin.MODID, AshOfSinItemRegistry.MURASAME.getId().getNamespace()), RenderMurasame::new);
+        event.addItemRenderer(ResourceLocation.tryBuild("ash_of_sin", "flame_katana_caravella"), RenderFlameKatanaCaravella::new);
+        event.addItemRenderer(ResourceLocation.tryBuild("ash_of_sin", "yamato"), RenderYamato::new);
+        event.addItemRenderer(ResourceLocation.tryBuild("ash_of_sin", "murasame"), RenderMurasame::new);
     }
 }

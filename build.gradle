@@ -100,7 +100,7 @@ minecraft {
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
-            arg "-mixin.config=ash_of_sin.mixins.json"
+//            arg "-mixin.config=ash_of_sin.mixins.json"
 
             mods {
                 ash_of_sin {
@@ -143,8 +143,8 @@ sourceSets.main.resources {
 }
 
 mixin {
-    add sourceSets.main, 'ash_of_sin.refmap.json'
-    config 'ash_of_sin.mixins.json'
+//    add sourceSets.main, 'ash_of_sin.refmap.json'
+//    config 'ash_of_sin.mixins.json'
 }
 
 repositories {
