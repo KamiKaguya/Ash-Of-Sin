@@ -5428,7 +5428,7 @@
 	"display": {
 		"thirdperson_righthand": {
 			"rotation": [0, -90, 0],
-			"translation": [0, -1, -2.5],
+			"translation": [0, -14.75, -5],
 			"scale": [3, 3, 1.8]
 		},
 		"thirdperson_lefthand": {
@@ -5469,7 +5469,6 @@
 			"name": "revenants_gravescepter",
 			"origin": [4.375, 8, 15.9375],
 			"color": 0,
-			"nbt": "{}",
 			"children": [
 				0,
 				1,
@@ -5636,7 +5635,6 @@
 					"name": "group",
 					"origin": [-3.625, 0, 7.9375],
 					"color": 0,
-					"nbt": "{}",
 					"children": [
 						161,
 						162,

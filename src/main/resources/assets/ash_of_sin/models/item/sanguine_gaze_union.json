@@ -9290,7 +9290,7 @@
 	"display": {
 		"thirdperson_righthand": {
 			"rotation": [0, -90, 0],
-			"translation": [0.6962, 6.9536, 0.6955],
+			"translation": [0.6962, -5.2964, 0.6955],
 			"scale": [3, 3, 1.8]
 		},
 		"thirdperson_lefthand": {
