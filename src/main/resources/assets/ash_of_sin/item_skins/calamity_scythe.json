@@ -1,8 +1,8 @@
 {
     "trail": {
 		"color": [200, 200, 200],
-    	"begin_pos": [0.0, 0.3, -1.6],
-    	"end_pos": [0.0, 0.7, -2.4],
+		"begin_pos": [0.0, 0.0, 0.1],
+		"end_pos": [0.0, 0.0, -0.9],
     	"lifetime": 6,
 		"interpolations": 10,
 		"texture_path": "ash_of_sin:textures/particle/sanguine_gaze_union/weapon_trail/basic.png",
