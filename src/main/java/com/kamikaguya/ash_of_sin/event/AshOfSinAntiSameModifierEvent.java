@@ -1,0 +1,80 @@
+package com.kamikaguya.ash_of_sin.event;
+
+import com.kamikaguya.ash_of_sin.config.AntiSameModifierConfig;
+import com.kamikaguya.ash_of_sin.main.AshOfSin;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+
+@Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+public class AshOfSinAntiSameModifierEvent {
+
+    public static final List<Attribute> STANDARD_ATTRIBUTES = new ArrayList<>();
+
+    static {
+        STANDARD_ATTRIBUTES.add(Attributes.ATTACK_DAMAGE);
+        STANDARD_ATTRIBUTES.add(Attributes.FOLLOW_RANGE);
+        STANDARD_ATTRIBUTES.add(Attributes.ARMOR);
+        STANDARD_ATTRIBUTES.add(Attributes.ARMOR_TOUGHNESS);
+        STANDARD_ATTRIBUTES.add(Attributes.KNOCKBACK_RESISTANCE);
+        STANDARD_ATTRIBUTES.add(Attributes.SPAWN_REINFORCEMENTS_CHANCE);
+        STANDARD_ATTRIBUTES.add(Attributes.ATTACK_KNOCKBACK);
+        STANDARD_ATTRIBUTES.add(Attributes.ATTACK_SPEED);
+        STANDARD_ATTRIBUTES.add(Attributes.FLYING_SPEED);
+        STANDARD_ATTRIBUTES.add(Attributes.JUMP_STRENGTH);
+        STANDARD_ATTRIBUTES.add(Attributes.LUCK);
+        STANDARD_ATTRIBUTES.add(Attributes.MAX_HEALTH);
+        STANDARD_ATTRIBUTES.add(Attributes.MOVEMENT_SPEED);
+    }
+
+    @SubscribeEvent
+    public static void onEntityUpdate(LivingEvent.LivingTickEvent event) {
+        if (AntiSameModifierConfig.ANTI_ON.get()) {
+            if (event.getEntity().level().isClientSide()) {
+                return;
+            }
+
+            LivingEntity livingEntity = event.getEntity();
+
+            if (livingEntity == null) {
+                return;
+            }
+
+            if (livingEntity instanceof ServerPlayer) {
+                return;
+            }
+
+            for (Attribute attribute : STANDARD_ATTRIBUTES) {
+                AttributeInstance attributeInstance = livingEntity.getAttribute(attribute);
+
+                if (attributeInstance != null) {
+                    Collection<AttributeModifier> modifiers = attributeInstance.getModifiers();
+
+                    HashSet<String> existingNames = new HashSet<>();
+                    List<AttributeModifier> modifiersToRemove = new ArrayList<>();
+
+                    for (AttributeModifier modifier : modifiers) {
+                        if (!existingNames.add(modifier.getName())) {
+                            modifiersToRemove.add(modifier);
+                        }
+                    }
+
+                    for (AttributeModifier modifier : modifiersToRemove) {
+                        attributeInstance.removeModifier(modifier);
+                    }
+                }
+            }
+        }
+    }
+}
