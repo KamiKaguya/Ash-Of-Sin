@@ -1,4 +1,6 @@
 {
+	"renderer": "ash_of_sin:flame_katana_caravella",
+	"sheath": "ash_of_sin:flame_katana_caravella_sheath",
     "trail": {
     	"color": [165, 8, 46],
     	"begin_pos": [0.0, 0.0, -0.2],

@@ -1,12 +1,15 @@
 {
-    "type": "minecraft:smithing",
-    "base": {
-        "item": "tensura:netherite_katana"
-    },
+    "type": "minecraft:smithing_transform",
     "addition": {
-        "item" : "minecraft:sculk_catalyst"
+        "item": "minecraft:sculk_catalyst"
+    },
+    "base": {
+        "item": "minecraft:netherite_sword"
     },
     "result": {
         "item": "ash_of_sin:sculk_cleaver"
+    },
+    "template": {
+        "item": "efn:deepdark_heart"
     }
 }

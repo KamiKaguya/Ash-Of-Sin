@@ -1,4 +1,6 @@
 {
+	"renderer": "ash_of_sin:murasame",
+	"sheath": "ash_of_sin:murasame_sheath",
     "trail": {
     	"color": [165, 8, 46],
     	"begin_pos": [0.0, 0.0, -0.2],

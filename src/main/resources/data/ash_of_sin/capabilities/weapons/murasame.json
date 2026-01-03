@@ -3,10 +3,10 @@
 	{
 		"common":
 		{
-			"armor_negation":5.0,
-			"impact":1.6,
-			"max_strikes":2
+			"armor_negation":30.0,
+			"impact":2.0,
+			"max_strikes":5
 		}
 	},
-    "type":"wom:satsujin"
+    "type":"efn:bloodlust"
 }

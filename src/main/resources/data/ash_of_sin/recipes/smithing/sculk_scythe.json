@@ -1,12 +1,15 @@
 {
-    "type": "minecraft:smithing",
-    "base": {
-        "item": "tensura:netherite_scythe"
-    },
+    "type": "minecraft:smithing_transform",
     "addition": {
-        "item" : "minecraft:sculk_catalyst"
+        "item": "minecraft:sculk_catalyst"
+    },
+    "base": {
+        "item": "epicfight:netherite_spear"
     },
     "result": {
         "item": "ash_of_sin:sculk_scythe"
+    },
+    "template": {
+        "item": "efn:deepdark_heart"
     }
 }

@@ -126,15 +126,6 @@ public class AshOfSinItemRegistry {
             new DespairScytheItem(new Item.Properties().fireResistant())
     );
 
-    public static final RegistryObject<Item> SCULK_AXE = ITEMS.register("sculk_axe", () ->
-            new SculkAxeItem(new Item.Properties().fireResistant())
-    );
-    public static final RegistryObject<Item> SCULK_LONGSWORD = ITEMS.register("sculk_longsword", () ->
-            new SculkLongSwordItem(new Item.Properties().fireResistant())
-    );
-    public static final RegistryObject<Item> SCULK_GREATSWORD = ITEMS.register("sculk_greatsword", () ->
-            new SculkGreatswordItem(new Item.Properties().fireResistant())
-    );
     public static final RegistryObject<Item> SCULK_CLEAVER = ITEMS.register("sculk_cleaver", () ->
             new SculkCleaverItem(new Item.Properties().fireResistant())
     );
@@ -187,9 +178,6 @@ public class AshOfSinItemRegistry {
                         tabData.accept(CALAMITY_BLADE_THIN.get());
                         tabData.accept(CALAMITY_SCYTHE.get());
                         tabData.accept(DESPAIR_SCYTHE.get());
-                        tabData.accept(SCULK_AXE.get());
-                        tabData.accept(SCULK_LONGSWORD.get());
-                        tabData.accept(SCULK_GREATSWORD.get());
                         tabData.accept(SCULK_CLEAVER.get());
                         tabData.accept(SCULK_SCYTHE.get());
                         tabData.accept(SCULK_SWORD.get());

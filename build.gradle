@@ -148,24 +148,34 @@ mixin {
 }
 
 repositories {
-    flatDir {
-        dirs 'libs'
+
+    repositories {
+        maven { url = "https://maven.bawnorton.com/releases" }
+
+        // Mirror
+        maven { url = "https://maven.enjarai.dev/mirrors" }
     }
 
     maven {
-        name = "Curse Maven"
-        url = "https://www.cursemaven.com"
+        url "https://cursemaven.com"
         content {
             includeGroup "curse.maven"
         }
     }
 
     maven {
-        url = "https://api.modrinth.com/maven"
-        content {
-            includeGroup "maven.modrinth"
-        }
+        name "create maven"
+        url "https://maven.createmod.net"
     }
+
+    maven { // Registrate
+        url "https://maven.tterrag.com/"
+    }
+
+    flatDir {
+        dir 'libs'
+    }
+    mavenCentral()
 }
 
 dependencies {
@@ -177,8 +187,10 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
 //    implementation fg.deobf("curse.maven:epic-fight-mod-405076:7345469")
+    implementation fg.deobf("libs:epicfight:forge-20.14.4-1.20.1-sources")
     implementation fg.deobf("curse.maven:epic-fight-mod-405076:7345468")
-    implementation fg.deobf("curse.maven:epicfight-nightfall-1307848:7391941")
+//    implementation fg.deobf("curse.maven:epicfight-nightfall-1307848:7391941")
+    implementation fg.deobf("libs:EpicFight-Nightfall:3.0-all")
     implementation fg.deobf("curse.maven:weapons-of-miracles-epicfight-918614:7363591")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'

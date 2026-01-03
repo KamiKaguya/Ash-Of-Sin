@@ -1,12 +1,15 @@
 {
-    "type": "minecraft:smithing",
-    "base": {
-        "item": "tensura:netherite_kodachi"
-    },
+    "type": "minecraft:smithing_transform",
     "addition": {
-        "item" : "minecraft:sculk_catalyst"
+        "item": "minecraft:sculk_catalyst"
+    },
+    "base": {
+        "item": "magistuarmory:netherite_estoc"
     },
     "result": {
         "item": "ash_of_sin:sculk_sword"
+    },
+    "template": {
+        "item": "efn:deepdark_heart"
     }
 }

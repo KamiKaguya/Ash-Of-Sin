@@ -3,10 +3,10 @@
 	{
 		"common":
 		{
-			"armor_negation":15.0,
-			"impact":3.25,
-			"max_strikes":2
+			"armor_negation":20.0,
+			"impact":3.1,
+			"max_strikes":3
 		}
 	},
-	"type":"epicfight:longsword"
+	"type":"efn:pioneer"
 }

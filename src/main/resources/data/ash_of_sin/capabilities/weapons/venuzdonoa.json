@@ -4,8 +4,9 @@
 		"common":
 		{
 			"armor_negation":100.0,
-			"impact":3.4
+			"impact":5.0,
+			"max_strikes":5
 		}
 	},
-	"type":"epicfight:longsword"
+	"type":"efn:kusabimaru"
 }
