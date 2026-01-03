@@ -12,7 +12,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-@Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class AshOfSinItemRegistry {
     public static DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, AshOfSin.MODID);
     
@@ -152,7 +151,47 @@ public class AshOfSinItemRegistry {
                     .title(Component.translatable("itemGroup.ash_of_sin.weapons"))
                     .icon(() -> new ItemStack(MIRROR_OF_THE_DARK_NIGHT.get()))
                     .displayItems((parameters, tabData) -> {
-                                tabData.accept(MIRROR_OF_THE_DARK_NIGHT.get());
-                            }
-                    ).build());
+                        tabData.accept(MIRROR_OF_THE_DARK_NIGHT.get());
+                        tabData.accept(CRESCENT.get());
+                        tabData.accept(CRESCENT_DAGGER.get());
+                        tabData.accept(VENUZDONOA.get());
+                        tabData.accept(DARK_MOON_GREATSWORD.get());
+                        tabData.accept(CARIAN_KNIGHTS_SWORD.get());
+                        tabData.accept(EA.get());
+                        tabData.accept(CHAOS_MELEE_BLADE.get());
+                        tabData.accept(SUB_CRAVEN_BOW.get());
+                        tabData.accept(SHIKAMA_DOJI.get());
+                        tabData.accept(FLAME_KATANA_CARAVELLA.get());
+                        tabData.accept(SOUL_OF_THE_KING_FIRE.get());
+                        tabData.accept(SOUL_OF_THE_KING_LIGHTNING.get());
+                        tabData.accept(YAMATO.get());
+                        tabData.accept(YAMATO_KATANA.get());
+                        tabData.accept(SANGUINE_GAZE_UNION.get());
+                        tabData.accept(MURGLEIS.get());
+                        tabData.accept(FALLING_FLOWER.get());
+                        tabData.accept(MURASAME.get());
+                        tabData.accept(MURASAME_KATANA.get());
+                        tabData.accept(ABYSS_PREDATOR.get());
+                        tabData.accept(CRESCENT_SHEATH.get());
+                        tabData.accept(FLAME_KATANA_CARAVELLA_SHEATH.get());
+                        tabData.accept(YAMATO_SHEATH.get());
+                        tabData.accept(MURASAME_SHEATH.get());
+                        tabData.accept(ELUCIDATOR.get());
+                        tabData.accept(DARK_REPULSER.get());
+                        tabData.accept(LAMBENT_LIGHT.get());
+                        tabData.accept(FROSTMOURNE.get());
+                        tabData.accept(CRUCIBLE.get());
+                        tabData.accept(MELT_SWORD.get());
+                        tabData.accept(GOD_EATER.get());
+                        tabData.accept(CALAMITY_BLADE.get());
+                        tabData.accept(CALAMITY_BLADE_THIN.get());
+                        tabData.accept(CALAMITY_SCYTHE.get());
+                        tabData.accept(DESPAIR_SCYTHE.get());
+                        tabData.accept(SCULK_AXE.get());
+                        tabData.accept(SCULK_LONGSWORD.get());
+                        tabData.accept(SCULK_GREATSWORD.get());
+                        tabData.accept(SCULK_CLEAVER.get());
+                        tabData.accept(SCULK_SCYTHE.get());
+                        tabData.accept(SCULK_SWORD.get());
+                    }).build());
 }
