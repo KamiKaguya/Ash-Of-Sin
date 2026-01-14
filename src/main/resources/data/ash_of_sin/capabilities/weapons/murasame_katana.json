@@ -4,8 +4,8 @@
 		"common":
 		{
 			"armor_negation":5.0,
-			"impact":1.6,
-			"max_strikes":3
+			"impact":1.2,
+			"max_strikes":2
 		}
 	},
 	"type":"wom:satsujin"

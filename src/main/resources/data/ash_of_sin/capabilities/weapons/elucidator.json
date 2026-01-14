@@ -3,9 +3,9 @@
 	{
 		"common":
 		{
-			"armor_negation":35.0,
+			"armor_negation":15.0,
 			"impact":1.3,
-			"max_strikes":4
+			"max_strikes":1
 		}
 	},
 	"type":"epicfight:sword"

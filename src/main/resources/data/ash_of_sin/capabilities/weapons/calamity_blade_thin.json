@@ -4,8 +4,8 @@
 		"common":
 		{
 			"armor_negation":5.0,
-			"impact":1.8,
-			"max_strikes":4
+			"impact":1.4,
+			"max_strikes":7
 		}
 	},
 	"type":"wom:ruine"

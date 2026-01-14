@@ -3,9 +3,9 @@
 	{
 		"common":
 		{
-			"armor_negation":50.0,
-			"max_strikes":5,
-			"impact":2.0
+			"armor_negation":15.0,
+			"max_strikes":1,
+			"impact":0.7
 		}
 	},
 	"type":"efn:shortsword"
