@@ -76,6 +76,9 @@ public class AshOfSinCrescentEvent {
                 attackerX + 7, attackerY + 7, attackerZ + 7
         ));
         for (LivingEntity nearbyEntity : nearbyEntities) {
+            if (nearbyEntity == attacker) {
+                return;
+            }
             nearbyEntity.addEffect(new MobEffectInstance(paralysis, 30 * 20, 4));
             nearbyEntity.addEffect(new MobEffectInstance(poison, 30 * 20, 4));
         }
