@@ -65,7 +65,7 @@ public class AshOfSinMirrorOfTheDarkNightEvent {
 
         targetData.putBoolean(DEVOUR_DAMAGE, true);
         try {
-            target.hurt(AshOfSinDamageSources.devour(serverPlayer), Float.MAX_VALUE);
+            target.hurt(AshOfSinDamageSources.devour(serverPlayer), maxHealth * 2.0F);
         } finally {
             targetData.remove(DEVOUR_DAMAGE);
         }
