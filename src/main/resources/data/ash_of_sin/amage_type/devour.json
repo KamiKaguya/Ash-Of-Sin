@@ -1,0 +1,7 @@
+{
+  "message_id": "devour",
+  "exhaustion": 0.1,
+  "scaling": "alwaysr",
+  "effects": "thorns",
+  "death_message_type": "default"
+}
