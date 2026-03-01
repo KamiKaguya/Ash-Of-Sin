@@ -3,6 +3,7 @@ package com.kamikaguya.ash_of_sin.event.unique;
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
 import com.kamikaguya.ash_of_sin.register.sound.AshOfSinSoundEvent;
 import com.kamikaguya.ash_of_sin.world.damagesource.AshOfSinDamageSources;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -11,119 +12,79 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.item.enchantment.ProtectionEnchantment;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.ShieldBlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.Map;
-
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinMirrorOfTheDarkNightEvent {
+
+    private static final String DEVOUR_DAMAGE = "devour_damage";
+
     @SubscribeEvent
     public static void skillShielderMindset(LivingHurtEvent event) {
         if (event.getEntity().level().isClientSide()) {
             return;
         }
-        if (!(event.getEntity() instanceof LivingEntity)) {
-            return;
-        }
-
-        Entity entity = event.getSource().getEntity();
-        LivingEntity player = event.getEntity();
-        if (player instanceof ServerPlayer serverPlayer) {
-            if (holdMirrorOfTheDarkNight(serverPlayer)) {
-                float originalDamage = event.getAmount();
-                float afterReductionDamage = originalDamage * 0.9F;
-                event.setAmount(afterReductionDamage);
-            }
-        }
-
-        if (entity instanceof ServerPlayer serverPlayer) {
-            if (holdMirrorOfTheDarkNight(serverPlayer)) {
-                float originalDamage = event.getAmount();
-                float afterReductionDamage = originalDamage * 0.9F;
-                event.setAmount(afterReductionDamage);
-            }
+        LivingEntity entity = event.getEntity();
+        if (!(entity instanceof LivingEntity)) return;
+        if (entity instanceof ServerPlayer player && holdMirrorOfTheDarkNight(player)) {
+            float originalDamage = event.getAmount();
+            event.setAmount(originalDamage * 0.9F);
         }
     }
 
     @SubscribeEvent
     public static void skillDevour(ShieldBlockEvent event) {
-        if (event.getEntity().level().isClientSide() || event.getEntity().level().isClientSide()) {
-            return;
-        }
-        if (!(event.getEntity() instanceof LivingEntity) || !(event.getEntity() instanceof LivingEntity)) {
-            return;
-        }
+        if (event.getEntity().level().isClientSide()) return;
 
-        Entity targetEntity = event.getDamageSource().getEntity();
-        LivingEntity livingEntity = event.getEntity();
-        if (targetEntity instanceof LivingEntity target) {
-            if (livingEntity instanceof ServerPlayer serverPlayer) {
-                if (holdMirrorOfTheDarkNight(serverPlayer)) {
-                    serverPlayer.getCooldowns().removeCooldown(Items.SHIELD);
-                    float devourOriginalDamage = target.getMaxHealth();
-                    if (hasProtectionEnchantmentAromor(target, Enchantments.ALL_DAMAGE_PROTECTION)) {
-                        target.setHealth(0.1f);
-                        float devourCorrectionDamage = damageAfterTargetArmorProtection(target.getArmorSlots(), devourOriginalDamage);
-                        target.hurt(AshOfSinDamageSources.devour(serverPlayer), devourCorrectionDamage);
-                        serverPlayer.level().playSound(null, serverPlayer.getOnPos(), AshOfSinSoundEvent.SKILL_DEVOUR.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
-                        serverPlayer.heal(devourCorrectionDamage);
-                        serverPlayer.getFoodData().setFoodLevel(20);
-                    } else {
-                        target.setHealth(0.1f);
-                        target.hurt(AshOfSinDamageSources.devour(serverPlayer), devourOriginalDamage);
-                        serverPlayer.level().playSound(null, serverPlayer.getOnPos(), AshOfSinSoundEvent.SKILL_DEVOUR.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
-                        serverPlayer.heal(devourOriginalDamage);
-                        serverPlayer.getFoodData().setFoodLevel(20);
-                    }
-                }
+        if (!(event.getEntity() instanceof ServerPlayer serverPlayer)) return;
+        if (!holdMirrorOfTheDarkNight(serverPlayer)) return;
+
+        Entity attacker = event.getDamageSource().getEntity();
+        if (!(attacker instanceof LivingEntity target)) {
+            if (attacker instanceof Arrow arrow) {
+                arrow.kill();
             }
+            return;
         }
 
-        if (targetEntity instanceof Arrow arrow) {
-            arrow.kill();
+        CompoundTag targetData = target.getPersistentData();
+        if (targetData.contains(DEVOUR_DAMAGE)) {
+            targetData.remove(DEVOUR_DAMAGE);
+            return;
         }
+
+        serverPlayer.getCooldowns().removeCooldown(Items.SHIELD);
+
+        float maxHealth = target.getMaxHealth();
+
+        target.setHealth(0.1f);
+
+        targetData.putBoolean(DEVOUR_DAMAGE, true);
+        try {
+            target.hurt(AshOfSinDamageSources.devour(serverPlayer), Float.MAX_VALUE);
+        } finally {
+            targetData.remove(DEVOUR_DAMAGE);
+        }
+
+        serverPlayer.level().playSound(null, serverPlayer.getOnPos(),
+                AshOfSinSoundEvent.SKILL_DEVOUR.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
+
+        serverPlayer.heal(maxHealth);
+        serverPlayer.getFoodData().setFoodLevel(20);
     }
 
     public static boolean holdMirrorOfTheDarkNight(LivingEntity livingEntity) {
         ItemStack mainHand = livingEntity.getMainHandItem();
         ItemStack offHand = livingEntity.getOffhandItem();
-        boolean holdMirrorOfTheDarkNight = ForgeRegistries.ITEMS.getKey(mainHand.getItem()).equals(new ResourceLocation(AshOfSin.MODID, "mirror_of_the_dark_night")) ||
-                ForgeRegistries.ITEMS.getKey(offHand.getItem()).equals(new ResourceLocation(AshOfSin.MODID, "mirror_of_the_dark_night"));
-        return (!(offHand.isEmpty()) || !(mainHand.isEmpty())) && (holdMirrorOfTheDarkNight);
-    }
+        ResourceLocation mirrorId = new ResourceLocation(AshOfSin.MODID, "mirror_of_the_dark_night");
 
-    public static boolean hasProtectionEnchantmentAromor(LivingEntity livingEntity, Enchantment enchantment) {
-        Iterable<ItemStack> armors = livingEntity.getArmorSlots();
-        for (ItemStack stack : armors) {
-            if (EnchantmentHelper.getItemEnchantmentLevel(enchantment, stack) > 0) {
-                return true;
-            }
-        }
-        return false;
-    }
+        boolean mainHandValid = !mainHand.isEmpty() && ForgeRegistries.ITEMS.getKey(mainHand.getItem()).equals(mirrorId);
+        boolean offHandValid = !offHand.isEmpty() && ForgeRegistries.ITEMS.getKey(offHand.getItem()).equals(mirrorId);
 
-    public static float damageAfterTargetArmorProtection(Iterable<ItemStack> armorItems, float originalDamage) {
-        float damageAfterArmorProtection = 0;
-        float correctionDamage = 0;
-        for (ItemStack armorItem : armorItems) {
-            Map<Enchantment, Integer> enchants = EnchantmentHelper.getEnchantments(armorItem);
-            for (Map.Entry<Enchantment, Integer> entry : enchants.entrySet()) {
-                if (entry.getKey() instanceof ProtectionEnchantment) {
-                    int protectLevel = entry.getValue();
-
-                    damageAfterArmorProtection += originalDamage * (10 / (10.0f + protectLevel));
-                    correctionDamage += originalDamage - damageAfterArmorProtection;
-                }
-            }
-        }
-        return correctionDamage;
+        return mainHandValid || offHandValid;
     }
 }

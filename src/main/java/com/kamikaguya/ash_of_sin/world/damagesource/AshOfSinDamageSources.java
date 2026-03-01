@@ -11,7 +11,7 @@ public final class AshOfSinDamageSources {
     private AshOfSinDamageSources() {}
 
     public static AshOfSinDamageSource devour(LivingEntity owner) {
-        return new AshOfSinDamageSource(getDamageTypeHolder(owner, AshOfSinDamageTypes.DEVOUR), owner, owner, null);
+        return new AshOfSinDamageSource(getDamageTypeHolder(owner, AshOfSinDamageTypes.DEVOUR), owner, owner, owner.position());
     }
 
     private static Holder<DamageType> getDamageTypeHolder(Entity entity, ResourceKey<DamageType> damageTypeKey) {

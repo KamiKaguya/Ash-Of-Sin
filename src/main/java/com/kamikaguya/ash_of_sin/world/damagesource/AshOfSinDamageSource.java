@@ -14,18 +14,26 @@ import java.util.Set;
 
 public class AshOfSinDamageSource extends DamageSource {
     private final Set<TagKey<DamageType>> runtimeTags = new HashSet<>();
-    private Vec3 initialPosition;
 
     private float baseArmorNegation;
     private float baseImpact;
     private boolean basicAttack;
 
     public AshOfSinDamageSource(DamageSource damageSource) {
-        this(damageSource.typeHolder(), damageSource.getDirectEntity(), damageSource.getEntity(), damageSource.getSourcePosition());
+        this(damageSource.typeHolder(),
+                damageSource.getDirectEntity(),
+                damageSource.getEntity(),
+                damageSource.getSourcePosition());
+
+        if (damageSource instanceof AshOfSinDamageSource ashSource) {
+            this.baseArmorNegation = ashSource.baseArmorNegation;
+            this.baseImpact = ashSource.baseImpact;
+            this.basicAttack = ashSource.basicAttack;
+            this.runtimeTags.addAll(ashSource.runtimeTags);
+        }
     }
     public AshOfSinDamageSource(Holder<DamageType> damageType, @Nullable Entity directEntity, @Nullable Entity causingEntity, @Nullable Vec3 initialPosition) {
         super(damageType, directEntity, causingEntity, initialPosition);
-        this.initialPosition = initialPosition;
     }
 
     public AshOfSinDamageSource setBaseArmorNegation(float f) {
@@ -44,15 +52,6 @@ public class AshOfSinDamageSource extends DamageSource {
 
     public float getBaseImpact() {
         return this.baseImpact;
-    }
-
-    public AshOfSinDamageSource setInitialPosition(Vec3 initialPosition) {
-        this.initialPosition = initialPosition;
-        return this;
-    }
-
-    public Vec3 getInitialPosition() {
-        return initialPosition;
     }
 
     public AshOfSinDamageSource setBasicAttack(boolean basicAttack) {

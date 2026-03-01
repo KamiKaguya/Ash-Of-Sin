@@ -1,61 +1,78 @@
 package com.kamikaguya.ash_of_sin.event.unique;
 
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.item.enchantment.ProtectionEnchantment;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.Map;
 import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinCarianEvent {
+
     public static final Random RANDOM = new Random();
+    private static final Enchantment FREEZING_ENCHANTMENT = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation("fromtheshadows", "freezing"));
 
     @SubscribeEvent
-    public static void onHurt(LivingHurtEvent event) {
+    public static void carian(LivingHurtEvent event) {
         if (event.getEntity().level().isClientSide()) {
             return;
         }
-        if (!(event.getEntity() instanceof LivingEntity)) {
+
+        Entity target = event.getEntity();
+        Entity attackerEntity = event.getSource().getEntity();
+        String carianExtraDamage = "carian_extra_damage";
+        CompoundTag persistentData = target.getPersistentData();
+
+        if (persistentData.contains(carianExtraDamage)) {
+            persistentData.remove(carianExtraDamage);
             return;
         }
 
-        LivingEntity target = event.getEntity();
-        Entity entity = event.getSource().getEntity();
-        if (entity instanceof LivingEntity attacker) {
+        if (attackerEntity instanceof LivingEntity attacker) {
+            int freezingLevel = getEnchantmentLevel(attacker, FREEZING_ENCHANTMENT);
+            float freezeMultiplier = 1.0f + 0.2f * freezingLevel;
+
             if (holdDarkMoonGreatsword(attacker)) {
                 float originalDamage = event.getAmount();
-                float correctionDamage = damageAfterArmor(target, originalDamage);
-                float magicDamage = (originalDamage * 1.2F) + correctionDamage;
-                float freezeDamage = originalDamage * 0.7F;
+                float magicDamage = originalDamage * freezeMultiplier;
+                float freezeDamage = originalDamage * 0.7F * freezeMultiplier;
+
                 if (attacker instanceof ServerPlayer) {
-                    target.hurt(attacker.damageSources().magic(), magicDamage);
-                    if (RANDOM.nextFloat() <= 0.7F) {
-                        target.hurt(attacker.damageSources().freeze(), freezeDamage);
+                    persistentData.putBoolean(carianExtraDamage, true);
+                    try {
+                        target.hurt(attacker.damageSources().magic(), magicDamage);
+                        if (RANDOM.nextFloat() <= 0.7F) {
+                            target.hurt(attacker.damageSources().freeze(), freezeDamage);
+                        }
+                    } finally {
+                        persistentData.remove(carianExtraDamage);
                     }
                 }
             }
 
             if (holdCarianKnightsSword(attacker)) {
                 float originalDamage = event.getAmount();
-                float correctionDamage = damageAfterArmor(target, originalDamage);
-                float finalDamage = originalDamage + correctionDamage;
+                float finalDamage = originalDamage * freezeMultiplier;
+
                 if (attacker instanceof ServerPlayer) {
-                    target.hurt(attacker.damageSources().magic(), finalDamage);
+                    persistentData.putBoolean(carianExtraDamage, true);
+                    try {
+                        target.hurt(attacker.damageSources().magic(), finalDamage);
+                    } finally {
+                        persistentData.remove(carianExtraDamage);
+                    }
                 }
             }
         }
@@ -87,9 +104,6 @@ public class AshOfSinCarianEvent {
         if (holdDarkMoonGreatsword(livingEntity)) {
             if (damageSource.is(DamageTypes.MAGIC)) {
                 float originalDamage = event.getAmount();
-                if (hasProtectionEnchantmentAromor(livingEntity, Enchantments.ALL_DAMAGE_PROTECTION)) {
-                    originalDamage = damageAftertArmorProtection(livingEntity.getArmorSlots(), originalDamage);
-                }
 
                 float reductionDamage = originalDamage * 0.2F;
                 if (livingEntity instanceof ServerPlayer) {
@@ -101,9 +115,6 @@ public class AshOfSinCarianEvent {
         if (holdCarianKnightsSword(livingEntity)) {
             if (damageSource.is(DamageTypes.MAGIC)) {
                 float originalDamage = event.getAmount();
-                if (hasProtectionEnchantmentAromor(livingEntity, Enchantments.ALL_DAMAGE_PROTECTION)) {
-                    originalDamage = damageAftertArmorProtection(livingEntity.getArmorSlots(), originalDamage);
-                }
 
                 float reductionDamage = originalDamage * 0.5F;
                 if (livingEntity instanceof ServerPlayer) {
@@ -113,52 +124,11 @@ public class AshOfSinCarianEvent {
         }
     }
 
-    public static float damageAfterArmor(LivingEntity entity, float baseDamage) {
-        float armorValue = entity.getArmorValue();
-        float toughnessValue = (float) entity.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
-
-        return damageAfterArmorReduction(armorValue, toughnessValue, baseDamage);
-    }
-
-    public static float damageAfterArmorReduction(float armorValue, float toughnessValue, float baseDamage) {
-        float damageAfterArmorReduction;
-        float damageAfterToughnessReduction;
-        if (toughnessValue == 0) {
-            damageAfterArmorReduction = (baseDamage * Math.max(10 / (10 + armorValue), 0.2f));
-        } else {
-            if (baseDamage > (40 / (toughnessValue + 1))) {
-                damageAfterToughnessReduction = baseDamage - ((40 / (toughnessValue + 1)) / 2);
-                damageAfterArmorReduction = (damageAfterToughnessReduction * Math.max(10 / (10 + armorValue), 0.2f));
-            } else {
-                damageAfterToughnessReduction = baseDamage - (40 / (toughnessValue + 1));
-                damageAfterArmorReduction = (damageAfterToughnessReduction * Math.max(10 / (10 + armorValue), 0.2f));
-            }
+    public static int getEnchantmentLevel(LivingEntity entity, Enchantment enchantment) {
+        if (enchantment == null) {
+            return 0;
         }
-        return damageAfterArmorReduction;
-    }
-
-    public static boolean hasProtectionEnchantmentAromor(LivingEntity livingEntity, Enchantment enchantment) {
-        Iterable<ItemStack> armors = livingEntity.getArmorSlots();
-        for (ItemStack stack : armors) {
-            if (EnchantmentHelper.getItemEnchantmentLevel(enchantment, stack) > 0) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static float damageAftertArmorProtection(Iterable<ItemStack> armorItems, float originalDamage) {
-        float damageAfterArmorProtection = 0;
-        for (ItemStack armorItem : armorItems) {
-            Map<Enchantment, Integer> enchants = EnchantmentHelper.getEnchantments(armorItem);
-            for (Map.Entry<Enchantment, Integer> entry : enchants.entrySet()) {
-                if (entry.getKey() instanceof ProtectionEnchantment) {
-                    int protectLevel = entry.getValue();
-
-                    damageAfterArmorProtection += originalDamage * (10 / (10.0f + protectLevel));
-                }
-            }
-        }
-        return damageAfterArmorProtection;
+        ItemStack mainHand = entity.getMainHandItem();
+        return EnchantmentHelper.getItemEnchantmentLevel(enchantment, mainHand);
     }
 }
