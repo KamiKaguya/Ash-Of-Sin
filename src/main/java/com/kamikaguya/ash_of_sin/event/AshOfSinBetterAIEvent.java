@@ -86,6 +86,7 @@ public class AshOfSinBetterAIEvent {
     @SubscribeEvent
     public static void onServerTick(TickEvent.ServerTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
+        if (!BetterAIConfig.BETTER_AI_ON.get()) return;
 
         MinecraftServer server = event.getServer();
         if (server == null) return;
