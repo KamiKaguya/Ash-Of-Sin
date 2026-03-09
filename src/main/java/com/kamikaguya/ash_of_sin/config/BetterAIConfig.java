@@ -8,17 +8,68 @@ import net.minecraftforge.fml.loading.FMLPaths;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.List;
 
 public class BetterAIConfig {
     public static final ForgeConfigSpec BETTER_AI_CONFIG;
     public static ForgeConfigSpec.BooleanValue BETTER_AI_ON;
+    public static ForgeConfigSpec.ConfigValue<Integer> BATTLE_LIMIT;
+    public static ForgeConfigSpec.DoubleValue TRACKING_RANGE;
+    public static ForgeConfigSpec.BooleanValue EXCLUSION_ENABLED;
+    public static ForgeConfigSpec.ConfigValue<List<? extends String>> EXCLUSION_LIST;
     public final Path configPath;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
-        BETTER_AI_ON = builder.comment("Better AI On")
-                .comment("Allow lower beings to possess wisdom.(Enable Better AI)")
-                .define("Better AI On", true);
+        builder.push("Better AI Settings");
+        BETTER_AI_ON = builder
+                .comment("Enable better AI system (based on hate and attack limit).")
+                .define("betterAIOn", true);
+
+        BATTLE_LIMIT = builder
+                .comment("Maximum number of mobs that can simultaneously attack a player.")
+                .defineInRange("battleLimit", 3, 1, 39);
+
+        TRACKING_RANGE = builder
+                .comment("Distance (in blocks) within which mobs consider players as candidates.")
+                .defineInRange("trackingRange", 32.0, 8.0, 128.0);
+
+        EXCLUSION_ENABLED = builder
+                .comment("Enable exclusion list for inactive mob behavior (bosses and custom entities).")
+                .define("exclusionEnabled", true);
+
+        EXCLUSION_LIST = builder
+                .comment("List of entity IDs (e.g., 'minecraft:ender_dragon') that are excluded from inactive mob behavior control. Default includes common bosses.")
+                .defineList("exclusionList",
+                        Arrays.asList(
+                                "minecraft:wither",
+                                "minecraft:ender_dragon",
+                                "minecraft:warden",
+                                "cataclysm:ancient_remnant",
+                                "cataclysm:the_leviathan",
+                                "cataclysm:the_harbinger",
+                                "cataclysm:netherite_monstrosity",
+                                "cataclysm:ignis",
+                                "cataclysm:ender_guardian",
+                                "cataclysm:maledictus",
+                                "cataclysm:scylla",
+                                "mowziesmobs:ferrous_wroughtnaut",
+                                "mowziesmobs:frostmaw",
+                                "mowziesmobs:umvuthi",
+                                "mowziesmobs:naga",
+                                "aquamirae:captain_cornelia",
+                                "irons_spellbooks:dead_king",
+                                "irons_spellbooks:fire_boss",
+                                "alexsmobs:void_worm",
+                                "alexsmobs:void_worm_part",
+                                "bosses_of_mass_destruction:gauntlet",
+                                "bosses_of_mass_destruction:lich",
+                                "bosses_of_mass_destruction:obsidilith",
+                                "bosses_of_mass_destruction:void_blossom"
+                        ),
+                        it -> it instanceof String);
+
         BETTER_AI_CONFIG = builder.build();
     }
 
