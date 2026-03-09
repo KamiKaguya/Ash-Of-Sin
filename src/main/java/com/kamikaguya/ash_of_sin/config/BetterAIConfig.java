@@ -8,11 +8,16 @@ import net.minecraftforge.fml.loading.FMLPaths;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.List;
 
 public class BetterAIConfig {
     public static final ForgeConfigSpec BETTER_AI_CONFIG;
     public static ForgeConfigSpec.BooleanValue BETTER_AI_ON;
     public static ForgeConfigSpec.ConfigValue<Integer> BATTLE_LIMIT;
+    public static ForgeConfigSpec.DoubleValue TRACKING_RANGE;
+    public static ForgeConfigSpec.BooleanValue EXCLUSION_ENABLED;
+    public static ForgeConfigSpec.ConfigValue<List<? extends String>> EXCLUSION_LIST;
     public final Path configPath;
 
     static {
@@ -25,6 +30,65 @@ public class BetterAIConfig {
         BATTLE_LIMIT = builder
                 .comment("Maximum number of mobs that can simultaneously attack a player.")
                 .defineInRange("battleLimit", 3, 1, 39);
+
+        TRACKING_RANGE = builder
+                .comment("Distance (in blocks) within which mobs consider players as candidates.")
+                .defineInRange("trackingRange", 32.0, 8.0, 128.0);
+
+        EXCLUSION_ENABLED = builder
+                .comment("Enable exclusion list for inactive mob behavior (bosses and custom entities).")
+                .define("exclusionEnabled", true);
+
+        EXCLUSION_LIST = builder
+                .comment("List of entity IDs (e.g., 'minecraft:ender_dragon') that are excluded from inactive mob behavior control. Default includes common bosses.")
+                .defineList("exclusionList",
+                        Arrays.asList(
+                                "minecraft:wither",
+                                "minecraft:ender_dragon",
+                                "minecraft:warden",
+                                "cataclysm:ancient_remnant",
+                                "cataclysm:the_leviathan",
+                                "cataclysm:the_harbinger",
+                                "cataclysm:netherite_monstrosity",
+                                "cataclysm:ignis",
+                                "cataclysm:ender_guardian",
+                                "cataclysm:maledictus",
+                                "cataclysm:scylla",
+                                "mowziesmobs:ferrous_wroughtnaut",
+                                "mowziesmobs:frostmaw",
+                                "mowziesmobs:umvuthi",
+                                "mowziesmobs:naga",
+                                "aquamirae:captain_cornelia",
+                                "irons_spellbooks:dead_king",
+                                "irons_spellbooks:fire_boss",
+                                "alexsmobs:void_worm",
+                                "alexsmobs:void_worm_part",
+                                "bosses_of_mass_destruction:gauntlet",
+                                "bosses_of_mass_destruction:lich",
+                                "bosses_of_mass_destruction:obsidilith",
+                                "bosses_of_mass_destruction:void_blossom",
+                                "fromtheshadows:nehemoth",
+                                "nightfall_invade:arterius",
+                                "dodosmobs:bone_chimera",
+                                "fdbosses:malkuth",
+                                "fdbosses:chesed",
+                                "fdbosses:geburah",
+                                "ba_bt:land_golem",
+                                "ba_bt:ocean_golem",
+                                "ba_bt:core_golem",
+                                "ba_bt:nether_golem",
+                                "ba_bt:sky_golem",
+                                "ba_bt:end_golem",
+                                "tcr_bosses:scylla_humanoid",
+                                "tcr_bosses:ancient_remnant_humanoid",
+                                "tcr_bosses:harbinger_humanoid",
+                                "tcr_bosses:maledictus_humanoid",
+                                "tcr_bosses:netherite_humanoid",
+                                "tcr_bosses:ender_guardian_humanoid",
+                                "tcr_bosses:leviathan_humanoid",
+                                "tcr_bosses:ignis_humanoid"
+                        ),
+                        it -> it instanceof String);
         BETTER_AI_CONFIG = builder.build();
     }
 

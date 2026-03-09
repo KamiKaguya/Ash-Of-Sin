@@ -2,6 +2,8 @@ package com.kamikaguya.ash_of_sin.event;
 
 import com.kamikaguya.ash_of_sin.config.BetterAIConfig;
 import com.kamikaguya.ash_of_sin.main.AshOfSin;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -256,6 +258,9 @@ public class AshOfSinBetterAIEvent {
     private static void handleInactiveMobs(MinecraftServer server, List<ServerPlayer> survivalPlayers) {
         if (survivalPlayers.isEmpty()) return;
 
+        boolean exclusionEnabled = BetterAIConfig.EXCLUSION_ENABLED.get();
+        List<String> exclusionList = exclusionEnabled ? BetterAIConfig.EXCLUSION_LIST.get().stream().map(s -> (String) s).toList() : Collections.emptyList();
+
         for (ServerLevel level : server.getAllLevels()) {
             for (Entity entity : level.getAllEntities()) {
                 if (!(entity instanceof Mob mob)) continue;
@@ -269,6 +274,13 @@ public class AshOfSinBetterAIEvent {
                     }
                 }
                 if (isActive) continue;
+
+                if (exclusionEnabled) {
+                    ResourceLocation id = BuiltInRegistries.ENTITY_TYPE.getKey(mob.getType());
+                    if (id != null && exclusionList.contains(id.toString())) {
+                        continue;
+                    }
+                }
 
                 ServerPlayer nearestPlayer = null;
                 double nearestDistSq = Double.MAX_VALUE;
