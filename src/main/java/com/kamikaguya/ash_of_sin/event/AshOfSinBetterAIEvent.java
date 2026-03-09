@@ -238,7 +238,13 @@ public class AshOfSinBetterAIEvent {
     }
 
     private static boolean isNaturallyHostileTo(Mob mob, ServerPlayer player) {
-        if (mob.getType().getCategory() != MobCategory.MONSTER) return false;
+        if (mob.getType().getCategory() != MobCategory.MONSTER) {
+            if (mob.getTarget() instanceof ServerPlayer) {
+                return true;
+            } else {
+                return false;
+            }
+        }
         return true;
     }
 
