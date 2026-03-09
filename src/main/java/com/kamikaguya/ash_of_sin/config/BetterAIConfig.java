@@ -12,13 +12,19 @@ import java.nio.file.Path;
 public class BetterAIConfig {
     public static final ForgeConfigSpec BETTER_AI_CONFIG;
     public static ForgeConfigSpec.BooleanValue BETTER_AI_ON;
+    public static ForgeConfigSpec.ConfigValue<Integer> BATTLE_LIMIT;
     public final Path configPath;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
-        BETTER_AI_ON = builder.comment("Better AI On")
-                .comment("Allow lower beings to possess wisdom.(Enable Better AI)")
-                .define("Better AI On", true);
+        builder.push("Better AI Settings");
+        BETTER_AI_ON = builder
+                .comment("Enable better AI system (based on hate and attack limit).")
+                .define("betterAIOn", true);
+
+        BATTLE_LIMIT = builder
+                .comment("Maximum number of mobs that can simultaneously attack a player.")
+                .defineInRange("battleLimit", 3, 1, 39);
         BETTER_AI_CONFIG = builder.build();
     }
 
