@@ -278,7 +278,7 @@ public class AshOfSinBetterAIEvent {
 
                 if (exclusionEnabled) {
                     ResourceLocation id = BuiltInRegistries.ENTITY_TYPE.getKey(mob.getType());
-                    if (id != null && exclusionList.contains(id.toString())) {
+                    if (exclusionList.contains(id.toString())) {
                         continue;
                     }
                 }
