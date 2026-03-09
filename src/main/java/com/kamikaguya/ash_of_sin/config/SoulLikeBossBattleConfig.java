@@ -20,13 +20,17 @@ public class SoulLikeBossBattleConfig {
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> PLAYER_GAMEMODE;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> IRON_GOLEM;
     public static ForgeConfigSpec.ConfigValue<Boolean> ANTI_IRON_GOLEM;
+    public static ForgeConfigSpec.BooleanValue MULTIPLIER_PER_PLAYER_ON;
+    public static ForgeConfigSpec.ConfigValue<Double> MULTIPLIER_PER_PLAYER;
     public final Path configPath;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+
         SOUL_LIKE_BOSS_BATTLE_ON = builder.comment("Soul Like Boss Battle On")
                 .comment("Enable Soul Like Boss Battle")
                 .define("Soul Like Boss Battle On", true);
+
         SOUL_LIKE_BOSS_BATTLE_ENTITY = builder.comment("Soul Like Boss Battle Entity")
                 .comment("Soul Like Boss Battle Entity id.")
                 .defineList("Soul Like Boss Battle Entity",
@@ -34,41 +38,53 @@ public class SoulLikeBossBattleConfig {
                                 "minecraft:wither",
                                 "minecraft:ender_dragon",
                                 "minecraft:warden",
-                                "cataclysm:ender_guardian",
-                                "cataclysm:ignis",
-                                "cataclysm:netherite_monstrosity",
-                                "cataclysm:the_harbinger",
-                                "cataclysm:the_leviathan",
-                                "cataclysm:ancient_ancient_remnant",
                                 "cataclysm:ancient_remnant",
+                                "cataclysm:the_leviathan",
+                                "cataclysm:the_harbinger",
+                                "cataclysm:netherite_monstrosity",
+                                "cataclysm:ignis",
+                                "cataclysm:ender_guardian",
                                 "cataclysm:maledictus",
-                                "aquamirae:captain_cornelia",
-                                "block_factorys_bosses:infernal_dragon",
-                                "block_factorys_bosses:sandworm",
-                                "block_factorys_bosses:yeti",
-                                "block_factorys_bosses:underworld_knight",
-                                "fdbosses:malkuth",
-                                "fdbosses:chesed",
-                                "nightfall_invade:arterius",
-                                "alexsmobs:void_worm",
+                                "cataclysm:scylla",
                                 "mowziesmobs:ferrous_wroughtnaut",
                                 "mowziesmobs:frostmaw",
                                 "mowziesmobs:umvuthi",
+                                "mowziesmobs:naga",
+                                "aquamirae:captain_cornelia",
+                                "irons_spellbooks:dead_king",
+                                "irons_spellbooks:fire_boss",
+                                "alexsmobs:void_worm",
+                                "alexsmobs:void_worm_part",
                                 "bosses_of_mass_destruction:gauntlet",
                                 "bosses_of_mass_destruction:lich",
                                 "bosses_of_mass_destruction:obsidilith",
                                 "bosses_of_mass_destruction:void_blossom",
+                                "fromtheshadows:nehemoth",
+                                "nightfall_invade:arterius",
+                                "dodosmobs:bone_chimera",
+                                "fdbosses:malkuth",
+                                "fdbosses:chesed",
+                                "fdbosses:geburah",
                                 "ba_bt:land_golem",
                                 "ba_bt:ocean_golem",
                                 "ba_bt:core_golem",
                                 "ba_bt:nether_golem",
                                 "ba_bt:sky_golem",
-                                "ba_bt:end_golem"
+                                "ba_bt:end_golem",
+                                "tcr_bosses:scylla_humanoid",
+                                "tcr_bosses:ancient_remnant_humanoid",
+                                "tcr_bosses:harbinger_humanoid",
+                                "tcr_bosses:maledictus_humanoid",
+                                "tcr_bosses:netherite_humanoid",
+                                "tcr_bosses:ender_guardian_humanoid",
+                                "tcr_bosses:leviathan_humanoid",
+                                "tcr_bosses:ignis_humanoid"
                         )),
                         obj -> obj instanceof String);
         BOSS_BATTLE_DISTANCE = builder.comment("Soul Like Boss Battle Distance")
                 .comment("Radius of Soul Like Boss Battle. Minimum is 1, maximum is 128.(Default is 64 blocks)")
                 .defineInRange("Soul Like Boss Battle Distance", 64,1,128);
+
         PLAYER_GAMEMODE = builder.comment("Soul Like Boss Battle Check Player Gamemode")
                 .comment("Soul Like Boss Battle Valid Player's Gamemode: [survival, adventure, creative, spectator]")
                 .defineList("Gamemode",
@@ -77,18 +93,27 @@ public class SoulLikeBossBattleConfig {
                                 "adventure"
                         )),
                         obj -> obj instanceof String);
+
         IRON_GOLEM = builder.comment("Iron Golem Entity")
                 .comment("Iron Golem entity id.")
                 .defineList("Iron Golem Entity",
                         () -> new ArrayList<>(Arrays.asList(
-                                "minecraft:iron_golem",
-                                "create:contraption",
-                                "create:stationary_contraption"
+                                "minecraft:iron_golem"
                         )),
                         obj -> obj instanceof String);
+
         ANTI_IRON_GOLEM = builder.comment("Anti-Iron Golem")
                 .comment("Not allow Iron Golem hurt BOSS.")
                 .define("Anti-Iron Golem",true);
+
+        MULTIPLIER_PER_PLAYER_ON = builder
+                .comment("Enable scaling boss health and damage based on number of nearby players.")
+                .define("MultiplierPerPlayerOn", true);
+
+        MULTIPLIER_PER_PLAYER = builder
+                .comment("Multiplier per additional player for boss stats (health and damage). When two or more players are near, each extra player increases boss stats by this percentage (e.g., 0.25 = +25% per player).")
+                .defineInRange("MultiplierPerPlayer", 0.25, 0.0, 10.0);
+
         SOUL_LIKE_BOSS_BATTLE_CONFIG = builder.build();
     }
 
