@@ -212,26 +212,26 @@ public class AshOfSinSoulLikeBossBattleEvent {
         AttributeInstance attackDamageAttr = boss.getAttribute(Attributes.ATTACK_DAMAGE);
         if (maxHealthAttr == null || attackDamageAttr == null) return;
 
-        float oldHealth = boss.getHealth();
-        double oldBaseMax = maxHealthAttr.getBaseValue();
+        float currentHealth = boss.getHealth();
+        float oldMax = boss.getMaxHealth();
 
         maxHealthAttr.removeModifier(BOSS_HEALTH_MODIFIER_UUID);
         attackDamageAttr.removeModifier(BOSS_DAMAGE_MODIFIER_UUID);
 
         if (multiplier != 1.0) {
             double amount = multiplier - 1.0;
-
             maxHealthAttr.addPermanentModifier(new AttributeModifier(
-                    BOSS_HEALTH_MODIFIER_UUID, "Boss player count health boost", amount, AttributeModifier.Operation.MULTIPLY_BASE));
+                    BOSS_HEALTH_MODIFIER_UUID, "Boss battle health boost", amount, AttributeModifier.Operation.MULTIPLY_BASE));
             attackDamageAttr.addPermanentModifier(new AttributeModifier(
-                    BOSS_DAMAGE_MODIFIER_UUID, "Boss player count damage boost", amount, AttributeModifier.Operation.MULTIPLY_BASE));
+                    BOSS_DAMAGE_MODIFIER_UUID, "Boss battle damage boost", amount, AttributeModifier.Operation.MULTIPLY_BASE));
 
-            double newMax = maxHealthAttr.getValue();
-            float newHealth = (float) (oldHealth * newMax / oldBaseMax);
-            boss.setHealth(Math.min(newHealth, (float) newMax));
+            float newMax = boss.getMaxHealth();
+            float newHealth = currentHealth * newMax / oldMax;
+            boss.setHealth(Math.min(newHealth, newMax));
         } else {
-            if (oldHealth > oldBaseMax) {
-                boss.setHealth((float) oldBaseMax);
+            float newMax = boss.getMaxHealth();
+            if (currentHealth > newMax) {
+                boss.setHealth(newMax);
             }
         }
     }
