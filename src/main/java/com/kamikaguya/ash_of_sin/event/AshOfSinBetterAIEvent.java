@@ -228,7 +228,7 @@ public class AshOfSinBetterAIEvent {
             for (Entity entity : level.getAllEntities()) {
                 if (!(entity instanceof Mob mob)) continue;
                 if (candidates.contains(mob.getUUID())) continue;
-                if (!isNaturallyHostileTo(mob, player)) continue;
+                if (!isHostileTo(mob, player)) continue;
                 if (mob.distanceToSqr(player) > TRACKING_RANGE * TRACKING_RANGE) continue;
 
                 UUID mobId = mob.getUUID();
@@ -241,9 +241,9 @@ public class AshOfSinBetterAIEvent {
         return candidates;
     }
 
-    private static boolean isNaturallyHostileTo(Mob mob, ServerPlayer player) {
+    private static boolean isHostileTo(Mob mob, ServerPlayer player) {
         if (mob.getType().getCategory() != MobCategory.MONSTER) {
-            if (mob.getTarget() instanceof ServerPlayer) {
+            if (mob.getTarget() != null && mob.getTarget() instanceof ServerPlayer) {
                 return true;
             } else {
             return false;
