@@ -17,15 +17,20 @@ public class SoulLikeBossBattleConfig {
     public static ForgeConfigSpec.BooleanValue SOUL_LIKE_BOSS_BATTLE_ON;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> SOUL_LIKE_BOSS_BATTLE_ENTITY;
     public static ForgeConfigSpec.ConfigValue<Integer> BOSS_BATTLE_DISTANCE;
+    public static ForgeConfigSpec.ConfigValue<List<? extends String>> PLAYER_GAMEMODE;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> IRON_GOLEM;
     public static ForgeConfigSpec.ConfigValue<Boolean> ANTI_IRON_GOLEM;
+    public static ForgeConfigSpec.BooleanValue MULTIPLIER_PER_PLAYER_ON;
+    public static ForgeConfigSpec.ConfigValue<Double> MULTIPLIER_PER_PLAYER;
     public final Path configPath;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+
         SOUL_LIKE_BOSS_BATTLE_ON = builder.comment("Soul Like Boss Battle On")
                 .comment("Enable Soul Like Boss Battle")
                 .define("Soul Like Boss Battle On", true);
+
         SOUL_LIKE_BOSS_BATTLE_ENTITY = builder.comment("Soul Like Boss Battle Entity")
                 .comment("Soul Like Boss Battle entity id.")
                 .defineList("Soul Like Boss Battle Entity",
@@ -105,19 +110,40 @@ public class SoulLikeBossBattleConfig {
                                 "soulsweapons:returning_knight"
                         )),
                         obj -> obj instanceof String);
+
         BOSS_BATTLE_DISTANCE = builder.comment("Soul Like Boss Battle Distance")
-                .comment("Radius of Soul Like Boss Battle. Minimum is 1, maximum is 128.(Default is 64 block)")
-                .defineInRange("Soul Like Boss Battle Distance", 64,1,128);
+                .comment("Radius of Soul Like Boss Battle. Minimum is 1, maximum is 128.(Default is 64 blocks)")
+                .defineInRange("Soul Like Boss Battle Distance", 64, 1, 128);
+
+        PLAYER_GAMEMODE = builder.comment("Soul Like Boss Battle Check Player Gamemode")
+                .comment("Soul Like Boss Battle Valid Player's Gamemode: [survival, adventure, creative, spectator]")
+                .defineList("Gamemode",
+                        () -> new ArrayList<>(Arrays.asList(
+                                "survival",
+                                "adventure"
+                        )),
+                        obj -> obj instanceof String);
+
         IRON_GOLEM = builder.comment("Iron Golem Entity")
                 .comment("Iron Golem entity id.")
                 .defineList("Iron Golem Entity",
-                        () -> new ArrayList<>(List.of(
+                        () -> new ArrayList<>(Arrays.asList(
                                 "minecraft:iron_golem"
                         )),
                         obj -> obj instanceof String);
+
         ANTI_IRON_GOLEM = builder.comment("Anti-Iron Golem")
                 .comment("Not allow Iron Golem hurt BOSS.")
-                .define("Anti-Iron Golem",true);
+                .define("Anti-Iron Golem", true);
+
+        MULTIPLIER_PER_PLAYER_ON = builder
+                .comment("Enable scaling boss health and damage based on number of nearby players.")
+                .define("MultiplierPerPlayerOn", true);
+
+        MULTIPLIER_PER_PLAYER = builder
+                .comment("Multiplier per additional player for boss stats (health and damage). When two or more players are near, each extra player increases boss stats by this percentage (e.g., 0.25 = +25% per player).")
+                .defineInRange("MultiplierPerPlayer", 0.25, 0.0, 10.0);
+
         SOUL_LIKE_BOSS_BATTLE_CONFIG = builder.build();
     }
 
