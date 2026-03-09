@@ -40,6 +40,12 @@ public class AshOfSinBetterAIEvent {
     private static final double IDEAL_DISTANCE_SQ = 25.0;
     private static final double DISTANCE_TOLERANCE = 1.0;
 
+    private static boolean isExcluded(Entity entity) {
+        if (!BetterAIConfig.EXCLUSION_ENABLED.get()) return false;
+        ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(entity.getType());
+        return BetterAIConfig.EXCLUSION_LIST.get().contains(id.toString());
+    }
+
     /**
      * 增加仇恨值
      */
@@ -87,6 +93,7 @@ public class AshOfSinBetterAIEvent {
     @SubscribeEvent
     public static void onServerTick(TickEvent.ServerTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
+        if (!BetterAIConfig.BETTER_AI_ON.get()) return;
 
         MinecraftServer server = event.getServer();
         if (server == null) return;
@@ -108,29 +115,60 @@ public class AshOfSinBetterAIEvent {
 
         for (ServerPlayer player : survivalPlayers) {
             UUID playerId = player.getUUID();
-            List<UUID> candidateMobs = getCandidateMobsForPlayer(player);
+            List<UUID> allCandidates = getCandidateMobsForPlayer(player);
+
+            List<UUID> excludedCandidates = allCandidates.stream()
+                    .filter(id -> {
+                        Entity e = getEntityByUUID(server, id);
+                        return e != null && isExcluded(e);
+                    })
+                    .collect(Collectors.toList());
+            List<UUID> normalCandidates = allCandidates.stream()
+                    .filter(id -> {
+                        Entity e = getEntityByUUID(server, id);
+                        return e != null && !isExcluded(e);
+                    })
+                    .collect(Collectors.toList());
+
             List<UUID> activeList = ACTIVE_ATTACKERS.getOrDefault(playerId, new ArrayList<>());
 
-            activeList.removeIf(mobId -> !candidateMobs.contains(mobId));
+            activeList.removeIf(mobId -> !allCandidates.contains(mobId));
+
+            for (UUID excludedId : excludedCandidates) {
+                if (!activeList.contains(excludedId)) {
+                    activeList.add(excludedId);
+                }
+            }
 
             long lastRot = LAST_ROTATION_TIME.getOrDefault(playerId, 0L);
             if (gameTime - lastRot >= ROTATION_INTERVAL) {
-                Collections.shuffle(candidateMobs);
-                List<UUID> newActive = candidateMobs.stream()
+                Collections.shuffle(normalCandidates);
+                List<UUID> newNormalActive = normalCandidates.stream()
                         .limit(BATTLE_LIMIT)
                         .collect(Collectors.toList());
+
+                List<UUID> newActive = new ArrayList<>();
+                newActive.addAll(excludedCandidates);
+                newActive.addAll(newNormalActive);
                 ACTIVE_ATTACKERS.put(playerId, newActive);
                 LAST_ROTATION_TIME.put(playerId, gameTime);
             } else {
-                while (activeList.size() < BATTLE_LIMIT && !candidateMobs.isEmpty()) {
-                    List<UUID> available = candidateMobs.stream()
-                            .filter(id -> !activeList.contains(id))
+                List<UUID> currentNormalActive = activeList.stream()
+                        .filter(id -> !excludedCandidates.contains(id))
+                        .collect(Collectors.toList());
+                while (currentNormalActive.size() < BATTLE_LIMIT && !normalCandidates.isEmpty()) {
+                    List<UUID> available = normalCandidates.stream()
+                            .filter(id -> !currentNormalActive.contains(id))
                             .collect(Collectors.toList());
                     if (available.isEmpty()) break;
                     Collections.shuffle(available);
-                    activeList.add(available.get(0));
+                    currentNormalActive.add(available.get(0));
                 }
-                ACTIVE_ATTACKERS.put(playerId, activeList);
+
+                List<UUID> newActive = new ArrayList<>();
+                newActive.addAll(excludedCandidates);
+                newActive.addAll(currentNormalActive);
+                ACTIVE_ATTACKERS.put(playerId, newActive);
             }
         }
 
