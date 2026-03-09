@@ -299,6 +299,8 @@ public class AshOfSinBetterAIEvent {
             for (Entity entity : level.getAllEntities()) {
                 if (!(entity instanceof Mob mob)) continue;
 
+                if (mob.getType().getCategory() != MobCategory.MONSTER) continue;
+
                 boolean isActive = false;
                 for (ServerPlayer player : survivalPlayers) {
                     List<UUID> activeList = ACTIVE_ATTACKERS.get(player.getUUID());
