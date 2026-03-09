@@ -170,6 +170,10 @@ public class AshOfSinBetterAIEvent {
                 ACTIVE_ATTACKERS.put(playerId, newActive);
             }
         }
+
+        updateMobTargets(server);
+
+        handleInactiveMobs(server, survivalPlayers);
     }
 
     /**
