@@ -28,12 +28,10 @@ import java.util.UUID;
 public class AshOfSinSoulLikeBossBattleEvent {
 
     public static final boolean SOUL_LIKE_BOSS_BATTLE_ON = SoulLikeBossBattleConfig.SOUL_LIKE_BOSS_BATTLE_ON.get();
-    public static final int DISTANCE = SoulLikeBossBattleConfig.BOSS_BATTLE_DISTANCE.get();
     public static final boolean ANTI_ON = SoulLikeBossBattleConfig.ANTI_IRON_GOLEM.get();
 
     private static final UUID BOSS_HEALTH_MODIFIER_UUID = UUID.fromString("a1b2c3d4-e5f6-7890-abcd-ef1234567890");
     private static final UUID BOSS_DAMAGE_MODIFIER_UUID = UUID.fromString("b2c3d4e5-f6a7-8901-bcde-f234567890ab");
-    private static final double BOSS_BASE_MULTIPLIER_PER_PLAYER = SoulLikeBossBattleConfig.MULTIPLIER_PER_PLAYER.get();
 
     @SubscribeEvent
     public static void onPlayerDeath(LivingDeathEvent event) {
@@ -65,8 +63,8 @@ public class AshOfSinSoulLikeBossBattleEvent {
                 }
 
                 List<LivingEntity> nearbyEntities = world.getEntitiesOfClass(LivingEntity.class, new AABB(
-                        playerX - DISTANCE, playerY - 8, playerZ - DISTANCE,
-                        playerX + DISTANCE, playerY + 8, playerZ + DISTANCE
+                        playerX - SoulLikeBossBattleConfig.BOSS_BATTLE_DISTANCE.get(), playerY - 8, playerZ - SoulLikeBossBattleConfig.BOSS_BATTLE_DISTANCE.get(),
+                        playerX + SoulLikeBossBattleConfig.BOSS_BATTLE_DISTANCE.get(), playerY + 8, playerZ + SoulLikeBossBattleConfig.BOSS_BATTLE_DISTANCE.get()
                 ));
 
                 for (LivingEntity nearbyEntity : nearbyEntities) {
@@ -114,8 +112,8 @@ public class AshOfSinSoulLikeBossBattleEvent {
 
     public static boolean allNearbyPlayerDied(Level world, LivingEntity boss, ServerPlayer player) {
         List<ServerPlayer> nearbyPlayers = world.getEntitiesOfClass(ServerPlayer.class, new AABB(
-                boss.getX() - DISTANCE, boss.getY() - 8, boss.getZ() - DISTANCE,
-                boss.getX() + DISTANCE, boss.getY() + 8, boss.getZ() + DISTANCE
+                boss.getX() - SoulLikeBossBattleConfig.BOSS_BATTLE_DISTANCE.get(), boss.getY() - 8, boss.getZ() - SoulLikeBossBattleConfig.BOSS_BATTLE_DISTANCE.get(),
+                boss.getX() + SoulLikeBossBattleConfig.BOSS_BATTLE_DISTANCE.get(), boss.getY() + 8, boss.getZ() + SoulLikeBossBattleConfig.BOSS_BATTLE_DISTANCE.get()
         ));
 
         return nearbyPlayers.stream()
