@@ -7,10 +7,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
@@ -45,6 +42,13 @@ public class AshOfSinBetterAIEvent {
         ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(entity.getType());
         return BetterAIConfig.EXCLUSION_LIST.get().contains(id.toString());
     }
+
+    private static final Set<EntityType<?>> NEUTRAL_MONSTERS = Set.of(
+            EntityType.ENDERMAN,
+            EntityType.PIGLIN,
+            EntityType.PIGLIN_BRUTE,
+            EntityType.ZOMBIFIED_PIGLIN
+    );
 
     /**
      * 增加仇恨值
@@ -229,7 +233,7 @@ public class AshOfSinBetterAIEvent {
             for (Entity entity : level.getAllEntities()) {
                 if (!(entity instanceof Mob mob)) continue;
                 if (candidates.contains(mob.getUUID())) continue; // 已在列表中
-                if (!isNaturallyHostileTo(mob, player)) continue;
+                if (!isHostileTo(mob, player)) continue;
                 if (mob.distanceToSqr(player) > TRACKING_RANGE * TRACKING_RANGE) continue;
 
                 UUID mobId = mob.getUUID();
@@ -242,13 +246,13 @@ public class AshOfSinBetterAIEvent {
         return candidates;
     }
 
-    private static boolean isNaturallyHostileTo(Mob mob, ServerPlayer player) {
-        if (mob.getType().getCategory() != MobCategory.MONSTER) {
-            if (mob.getTarget() instanceof ServerPlayer) {
-                return true;
-            } else {
-                return false;
-            }
+    private static boolean isHostileTo(Mob mob, ServerPlayer player) {
+        EntityType<?> type = mob.getType();
+        if (type.getCategory() != MobCategory.MONSTER) {
+            return mob.getTarget() == player;
+        }
+        if (NEUTRAL_MONSTERS.contains(type)) {
+            return mob.getTarget() == player;
         }
         return true;
     }
@@ -300,8 +304,8 @@ public class AshOfSinBetterAIEvent {
         }
     }
 
-    private static void handleInactiveMobs(MinecraftServer server, List<ServerPlayer> survivalPlayers) {
-        if (survivalPlayers.isEmpty()) return;
+    private static void handleInactiveMobs(MinecraftServer server, List<ServerPlayer> normalPlayers) {
+        if (normalPlayers.isEmpty()) return;
 
         boolean exclusionEnabled = BetterAIConfig.EXCLUSION_ENABLED.get();
         List<String> exclusionList = exclusionEnabled ? BetterAIConfig.EXCLUSION_LIST.get().stream().map(s -> (String) s).toList() : Collections.emptyList();
@@ -312,8 +316,21 @@ public class AshOfSinBetterAIEvent {
 
                 if (mob.getType().getCategory() != MobCategory.MONSTER) continue;
 
+                if (NEUTRAL_MONSTERS.contains(mob.getType())) {
+                    boolean isHostileNow = false;
+                    for (ServerPlayer player : normalPlayers) {
+                        if (mob.getTarget() == player) {
+                            isHostileNow = true;
+                            break;
+                        }
+                    }
+                    if (!isHostileNow) {
+                        continue;
+                    }
+                }
+
                 boolean isActive = false;
-                for (ServerPlayer player : survivalPlayers) {
+                for (ServerPlayer player : normalPlayers) {
                     List<UUID> activeList = ACTIVE_ATTACKERS.get(player.getUUID());
                     if (activeList != null && activeList.contains(mob.getUUID())) {
                         isActive = true;
@@ -324,14 +341,14 @@ public class AshOfSinBetterAIEvent {
 
                 if (exclusionEnabled) {
                     ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(mob.getType());
-                    if (id != null && exclusionList.contains(id.toString())) {
+                    if (exclusionList.contains(id.toString())) {
                         continue;
                     }
                 }
 
                 ServerPlayer nearestPlayer = null;
                 double nearestDistSq = Double.MAX_VALUE;
-                for (ServerPlayer player : survivalPlayers) {
+                for (ServerPlayer player : normalPlayers) {
                     double distSq = mob.distanceToSqr(player);
                     if (distSq < nearestDistSq && distSq <= TRACKING_RANGE * TRACKING_RANGE) {
                         nearestDistSq = distSq;
