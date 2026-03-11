@@ -29,10 +29,8 @@ public class AshOfSinBetterAIEvent {
     private static final Map<UUID, List<UUID>> ACTIVE_ATTACKERS = new ConcurrentHashMap<>();
     private static final Map<UUID, Long> LAST_ROTATION_TIME = new HashMap<>();
 
-    private static final int BATTLE_LIMIT = BetterAIConfig.BATTLE_LIMIT.get();
     private static final double HATE_DECAY_RATE = 0.99; // 每20刻衰减1%
     private static final int ROTATION_INTERVAL = 10 * 20;
-    private static final double TRACKING_RANGE = 32.0; // 玩家附近范围
     private static final double IDEAL_DISTANCE_SQ = 25.0;
     private static final double DISTANCE_TOLERANCE = 1.0;
 
@@ -144,10 +142,11 @@ public class AshOfSinBetterAIEvent {
             }
 
             long lastRot = LAST_ROTATION_TIME.getOrDefault(playerId, 0L);
+            int battleLimit = BetterAIConfig.BATTLE_LIMIT.get();
             if (gameTime - lastRot >= ROTATION_INTERVAL) {
                 Collections.shuffle(normalCandidates);
                 List<UUID> newNormalActive = normalCandidates.stream()
-                        .limit(BATTLE_LIMIT)
+                        .limit(battleLimit)
                         .collect(Collectors.toList());
 
                 List<UUID> newActive = new ArrayList<>();
@@ -159,7 +158,7 @@ public class AshOfSinBetterAIEvent {
                 List<UUID> currentNormalActive = activeList.stream()
                         .filter(id -> !excludedCandidates.contains(id))
                         .collect(Collectors.toList());
-                while (currentNormalActive.size() < BATTLE_LIMIT && !normalCandidates.isEmpty()) {
+                while (currentNormalActive.size() < battleLimit && !normalCandidates.isEmpty()) {
                     List<UUID> available = normalCandidates.stream()
                             .filter(id -> !currentNormalActive.contains(id))
                             .collect(Collectors.toList());
@@ -214,6 +213,7 @@ public class AshOfSinBetterAIEvent {
 
     private static List<UUID> getCandidateMobsForPlayer(ServerPlayer player) {
         List<UUID> candidates = new ArrayList<>();
+        double trackingRange = BetterAIConfig.TRACKING_RANGE.get();
         for (Map.Entry<UUID, Map<UUID, Float>> entry : HATE_MAP.entrySet()) {
             UUID mobId = entry.getKey();
             Map<UUID, Float> hateForMob = entry.getValue();
@@ -223,7 +223,7 @@ public class AshOfSinBetterAIEvent {
             if (!(mob instanceof Mob livingMob)) continue;
 
             double dist = livingMob.distanceToSqr(player);
-            if (dist <= TRACKING_RANGE * TRACKING_RANGE) {
+            if (dist <= trackingRange * trackingRange) {
                 candidates.add(mobId);
             }
         }
@@ -233,7 +233,7 @@ public class AshOfSinBetterAIEvent {
                 if (!(entity instanceof Mob mob)) continue;
                 if (candidates.contains(mob.getUUID())) continue;
                 if (!isHostileTo(mob, player)) continue;
-                if (mob.distanceToSqr(player) > TRACKING_RANGE * TRACKING_RANGE) continue;
+                if (mob.distanceToSqr(player) > trackingRange * trackingRange) continue;
 
                 UUID mobId = mob.getUUID();
                 HATE_MAP.computeIfAbsent(mobId, k -> new ConcurrentHashMap<>())
@@ -347,9 +347,10 @@ public class AshOfSinBetterAIEvent {
 
                 ServerPlayer nearestPlayer = null;
                 double nearestDistSq = Double.MAX_VALUE;
+                double trackingRange = BetterAIConfig.TRACKING_RANGE.get();
                 for (ServerPlayer player : normalPlayers) {
                     double distSq = mob.distanceToSqr(player);
-                    if (distSq < nearestDistSq && distSq <= TRACKING_RANGE * TRACKING_RANGE) {
+                    if (distSq < nearestDistSq && distSq <= trackingRange * trackingRange) {
                         nearestDistSq = distSq;
                         nearestPlayer = player;
                     }
