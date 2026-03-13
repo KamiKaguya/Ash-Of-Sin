@@ -86,10 +86,27 @@ public class AshOfSinBetterAIEvent {
             LAST_ATTACK_TIME.remove(deadMobId);
         } else if (event.getEntity() instanceof ServerPlayer player) {
             UUID deadPlayerId = player.getUUID();
-            HATE_MAP.values().forEach(playerMap -> playerMap.remove(deadPlayerId));
-            LAST_ATTACK_TIME.values().forEach(playerMap -> playerMap.remove(deadPlayerId));
-            HATE_MAP.values().removeIf(Map::isEmpty);
+            MinecraftServer server = player.server;
+
+            List<UUID> mobsToClearTarget = new ArrayList<>();
+            Iterator<Map.Entry<UUID, Map<UUID, Float>>> mobIt = HATE_MAP.entrySet().iterator();
+            while (mobIt.hasNext()) {
+                Map.Entry<UUID, Map<UUID, Float>> mobEntry = mobIt.next();
+                UUID mobId = mobEntry.getKey();
+                Map<UUID, Float> playerMap = mobEntry.getValue();
+                playerMap.remove(deadPlayerId);
+                if (playerMap.isEmpty()) {
+                    mobIt.remove();
+                    LAST_ATTACK_TIME.remove(mobId);
+                    mobsToClearTarget.add(mobId);
+                }
+            }
+            LAST_ATTACK_TIME.values().forEach(map -> map.remove(deadPlayerId));
             LAST_ATTACK_TIME.values().removeIf(Map::isEmpty);
+
+            for (UUID mobId : mobsToClearTarget) {
+                clearTargetIfNeeded(mobId, server);
+            }
         }
     }
 
@@ -105,7 +122,7 @@ public class AshOfSinBetterAIEvent {
         long gameTime = server.overworld().getGameTime();
 
         if (gameTime % 20 == 0) {
-            decayHate(gameTime);
+            decayHate(server, gameTime);
         }
 
         cleanupInvalidEntities(server);
@@ -183,12 +200,15 @@ public class AshOfSinBetterAIEvent {
 
     // ==================== 仇恨管理 ====================
 
-    private static void decayHate(long currentGameTime) {
-        for (Map.Entry<UUID, Map<UUID, Float>> mobEntry : HATE_MAP.entrySet()) {
+    private static void decayHate(MinecraftServer server, long currentGameTime) {
+        List<UUID> mobsToClearTarget = new ArrayList<>();
+
+        Iterator<Map.Entry<UUID, Map<UUID, Float>>> mobIt = HATE_MAP.entrySet().iterator();
+        while (mobIt.hasNext()) {
+            Map.Entry<UUID, Map<UUID, Float>> mobEntry = mobIt.next();
             UUID mobId = mobEntry.getKey();
             Map<UUID, Float> playerHateMap = mobEntry.getValue();
             Map<UUID, Long> lastAttackMap = LAST_ATTACK_TIME.get(mobId);
-
             if (lastAttackMap == null) continue;
 
             Iterator<Map.Entry<UUID, Float>> hateIt = playerHateMap.entrySet().iterator();
@@ -213,12 +233,26 @@ public class AshOfSinBetterAIEvent {
             }
 
             if (playerHateMap.isEmpty()) {
-                HATE_MAP.remove(mobId);
+                mobIt.remove();
                 LAST_ATTACK_TIME.remove(mobId);
+                mobsToClearTarget.add(mobId);
             }
         }
 
         LAST_ATTACK_TIME.values().removeIf(Map::isEmpty);
+
+        for (UUID mobId : mobsToClearTarget) {
+            clearTargetIfNeeded(mobId, server);
+        }
+    }
+
+    private static void clearTargetIfNeeded(UUID mobId, MinecraftServer server) {
+        Entity entity = getEntityByUUID(server, mobId);
+        if (entity instanceof Mob mob) {
+            if (mob.getTarget() instanceof Player) {
+                mob.setTarget(null);
+            }
+        }
     }
 
     private static void cleanupInvalidEntities(MinecraftServer server) {
