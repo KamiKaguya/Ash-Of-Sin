@@ -447,7 +447,7 @@ public class AshOfSinBetterAIEvent {
                     targetSpeed = targetSpeed.add(lateral);
                 }
 
-                targetSpeed = new Vec3(targetSpeed.x, 0, targetSpeed.z);
+                targetSpeed = new Vec3(targetSpeed.x, mob.getDeltaMovement().y, targetSpeed.z);
                 mob.setDeltaMovement(targetSpeed);
             }
         }
