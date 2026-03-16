@@ -10,8 +10,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -31,12 +33,37 @@ public class AshOfSinBetterAIEvent {
     private static final double IDEAL_DISTANCE_SQ = 25.0;
     private static final double DISTANCE_TOLERANCE = 1.0;
 
-    private static final Set<EntityType<?>> NEUTRAL_MONSTERS = Set.of(
-            EntityType.ENDERMAN,
-            EntityType.PIGLIN,
-            EntityType.PIGLIN_BRUTE,
-            EntityType.ZOMBIFIED_PIGLIN
-    );
+    private static final Set<EntityType<?>> NEUTRAL_MONSTERS = loadNeutralMonsters();
+
+    private static Set<EntityType<?>> loadNeutralMonsters() {
+        List<? extends String> ids = BetterAIConfig.NEUTRAL_MONSTER_LIST.get();
+        Set<EntityType<?>> set = new HashSet<>();
+        for (String id : ids) {
+            EntityType<?> type = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(id));
+            if (type != null) {
+                set.add(type);
+            } else {
+                System.err.println("[Ash Of Sin-Better AI] Unknown entity type in neutral monster list: " + id);
+            }
+        }
+        return set;
+    }
+
+    private static final Set<EntityType<?>> FRIENDLY_MOBS = loadFriendlyMobs();
+
+    private static Set<EntityType<?>> loadFriendlyMobs() {
+        List<? extends String> ids = BetterAIConfig.FRIENDLY_LIST.get();
+        Set<EntityType<?>> set = new HashSet<>();
+        for (String id : ids) {
+            EntityType<?> type = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(id));
+            if (type != null) {
+                set.add(type);
+            } else {
+                System.err.println("[Ash Of Sin-Better AI] Unknown entity type in friendly list: " + id);
+            }
+        }
+        return set;
+    }
 
     private static boolean isExcluded(Entity entity) {
         if (!BetterAIConfig.EXCLUSION_ENABLED.get()) return false;
@@ -55,6 +82,7 @@ public class AshOfSinBetterAIEvent {
         if (player.isCreative() || player.isSpectator()) return;
 
         LivingEntity target = event.getEntityLiving();
+        if (FRIENDLY_MOBS.contains(target.getType())) return;
         if (!(target instanceof Mob)) return;
 
         UUID mobId = target.getUUID();
@@ -191,6 +219,24 @@ public class AshOfSinBetterAIEvent {
 
         updateMobTargets(server);
         handleInactiveMobs(server, normalPlayers);
+
+        for (ServerLevel level : server.getAllLevels()) {
+            for (Entity entity : level.getAllEntities()) {
+                if (entity instanceof Mob mob && FRIENDLY_MOBS.contains(mob.getType())) {
+                    if (mob.getTarget() instanceof Player) {
+                        mob.setTarget(null);
+                    }
+                }
+            }
+        }
+
+//        for (ServerPlayer player : normalPlayers) {
+//            AABB range = new AABB(player.blockPosition()).inflate(BetterAIConfig.TRACKING_RANGE.get());
+//            for (Mob mob : player.serverLevel().getEntitiesOfClass(Mob.class, range,
+//                    mob -> FRIENDLY_MOBS.contains(mob.getType()) && mob.getTarget() == player)) {
+//                mob.setTarget(null);
+//            }
+//        }
     }
 
     // ==================== 仇恨管理 ====================
@@ -284,6 +330,7 @@ public class AshOfSinBetterAIEvent {
 
             Entity mob = getEntityByUUID(player.server, mobId);
             if (!(mob instanceof Mob livingMob)) continue;
+            if (FRIENDLY_MOBS.contains(mob.getType())) continue;
 
             double dist = livingMob.distanceToSqr(player);
             if (dist <= trackingRange * trackingRange) {
@@ -295,6 +342,7 @@ public class AshOfSinBetterAIEvent {
             for (Entity entity : level.getAllEntities()) {
                 if (!(entity instanceof Mob mob)) continue;
                 if (candidates.contains(mob.getUUID())) continue;
+                if (FRIENDLY_MOBS.contains(mob.getType())) continue;
                 if (!isHostileTo(mob, player)) continue;
                 if (mob.distanceToSqr(player) > trackingRange * trackingRange) continue;
 
@@ -328,6 +376,13 @@ public class AshOfSinBetterAIEvent {
             UUID mobId = mobEntry.getKey();
             Entity mobEntity = getEntityByUUID(server, mobId);
             if (!(mobEntity instanceof Mob mob)) continue;
+
+            if (FRIENDLY_MOBS.contains(mob.getType())) {
+                if (mob.getTarget() instanceof Player) {
+                    mob.setTarget(null);
+                }
+                continue;
+            }
 
             Map<UUID, Float> hateToPlayers = mobEntry.getValue();
 
@@ -373,6 +428,8 @@ public class AshOfSinBetterAIEvent {
         for (ServerLevel level : server.getAllLevels()) {
             for (Entity entity : level.getAllEntities()) {
                 if (!(entity instanceof Mob mob)) continue;
+
+                if (FRIENDLY_MOBS.contains(mob.getType())) continue;
 
                 if (mob.getType().getCategory() != MobCategory.MONSTER) continue;
 
@@ -459,5 +516,14 @@ public class AshOfSinBetterAIEvent {
             if (entity != null) return entity;
         }
         return null;
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void onLivingChangeTarget(LivingChangeTargetEvent event) {
+        if (!(event.getEntity() instanceof Mob mob)) return;
+        if (!FRIENDLY_MOBS.contains(mob.getType())) return;
+        if (event.getNewTarget() instanceof Player) {
+            mob.setTarget(null);
+        }
     }
 }
