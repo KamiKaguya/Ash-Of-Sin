@@ -18,6 +18,8 @@ public class BetterAIConfig {
     public static ForgeConfigSpec.DoubleValue TRACKING_RANGE;
     public static ForgeConfigSpec.BooleanValue EXCLUSION_ENABLED;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> EXCLUSION_LIST;
+    public static ForgeConfigSpec.ConfigValue<List<? extends String>> NEUTRAL_MONSTER_LIST;
+    public static ForgeConfigSpec.ConfigValue<List<? extends String>> FRIENDLY_LIST;
     public final Path configPath;
 
     static {
@@ -89,6 +91,24 @@ public class BetterAIConfig {
                                 "tcr_bosses:ignis_humanoid"
                         ),
                         it -> it instanceof String);
+
+        NEUTRAL_MONSTER_LIST = builder
+                .comment("List of entity IDs that are considered neutral monsters (e.g., 'minecraft:enderman'). These entities will only become hostile when provoked.")
+                .defineList("neutralMonsterList",
+                        Arrays.asList(
+                                "minecraft:enderman",
+                                "minecraft:piglin",
+                                "minecraft:piglin_brute",
+                                "minecraft:zombified_piglin"
+                        ),
+                        obj -> obj instanceof String);
+
+        FRIENDLY_LIST = builder
+                .comment("List of entity IDs that are always friendly and will never attack players (e.g., 'minecraft:villager'). These entities will be ignored by the entire system.")
+                .defineList("friendlyList",
+                        Arrays.asList(
+                        ),
+                        obj -> obj instanceof String);
         BETTER_AI_CONFIG = builder.build();
     }
 

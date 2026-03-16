@@ -103,7 +103,7 @@ minecraft {
 //            arg "-mixin.config=ash_of_sin.mixins.json"
 
             mods {
-                ash_of_sin {
+                "${mod_id}" {
                     source sourceSets.main
                 }
             }

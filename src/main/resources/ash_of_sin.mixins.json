@@ -4,6 +4,7 @@
   "package": "com.kamikaguya.ash_of_sin.mixin",
   "compatibilityLevel": "JAVA_17",
   "refmap": "ash_of_sin.refmap.json",
+  "plugin": "com.kamikaguya.ash_of_sin.mixin.MixinConditionPlugin",
   "mixins": [
   ],
   "client": [],
