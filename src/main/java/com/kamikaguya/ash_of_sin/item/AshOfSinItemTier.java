@@ -30,7 +30,7 @@ public enum AshOfSinItemTier implements Tier {
     CHAOS_MELEE_BLADE(4, 10000, 39.0F, 8.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
     }),
-    SHIKAMA_DOJI(4, 10000, 39.0F, 7.0F, 39, () -> {
+    SHIKAMA_DOJI(4, 10000, 39.0F, 12.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
     }),
     FLAME_KATANA_CARAVELLA(4, 10000, 39.0F, 6.0F, 39, () -> {
@@ -96,7 +96,7 @@ public enum AshOfSinItemTier implements Tier {
     CALAMITY_SCYTHE(4, 10000, 20.0F, 7.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
     }),
-    DESPAIR_SCYTHE(4, 10000, 20.0F, 7.0F, 39, () -> {
+    DESPAIR_SCYTHE(4, 10000, 20.0F, 12.0F, 39, () -> {
         return Ingredient.of(Items.NETHERITE_INGOT);
     }),
     SCULK_CLEAVER(4, 10000, 20.0F, 9.0F, 39, () -> {

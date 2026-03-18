@@ -154,5 +154,8 @@
     "itemGroup.ash_of_sin.weapons": "§4Ash Of Sin§f: §5Weapon",
     "message.ash_of_sin.chalk_wall": "Chalk Wall",
     "death.attack.devour": "%1$s was devoured by %2$s...",
+    "death.attack.devour.player": "%1$s was devoured by %2$s...",
+    "death.attack.frozen": "%1$s froze to death",
+    "death.attack.frozen.player": "%1$s was frozen by %2$s",
     "enchantment.chalk_wall.tick_tack":""
 }

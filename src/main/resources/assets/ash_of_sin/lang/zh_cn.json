@@ -100,7 +100,7 @@
   "item.ash_of_sin.lambent_light": "闪烁之光",
   "item.ash_of_sin.lambent_light.tooltip.unique": "§4独特",
   "item.ash_of_sin.lambent_light.tooltip": "以冬之痕为素材由莉兹贝特打造",
-  "item.ash_of_sin.lambent_light.tooltip.owner": "§5该武器尚未找到拥有者",
+  "item.ash_of_sin.lambent_light.tooltip.owner": "§5拥有者§f：§6Asrewrl",
   "item.ash_of_sin.frostmourne": "霜之哀伤",
   "item.ash_of_sin.frostmourne.tooltip.unique": "§4独特",
   "item.ash_of_sin.frostmourne.tooltip": "其中注有巫妖王的力量，是被诅咒之剑",
@@ -132,7 +132,7 @@
   "item.ash_of_sin.despair_scythe": "绝望之镰",
   "item.ash_of_sin.despair_scythe.tooltip.unique": "§4独特",
   "item.ash_of_sin.despair_scythe.tooltip": "神话时代中天灾-风暴的化身持有的武器。\n诞生于最后的星辰闪耀之际，即使度过的岁月无穷无尽，性能却没有丝毫的钝化。",
-  "item.ash_of_sin.despair_scythe.tooltip.owner": "§5该武器尚未找到拥有者",
+  "item.ash_of_sin.despair_scythe.tooltip.owner": "§5拥有者§f：§6Tahora",
   "item.ash_of_sin.sculk_axe": "幽匿斧",
   "item.ash_of_sin.sculk_axe.tooltip.sculk": "§1幽匿",
   "item.ash_of_sin.sculk_axe.tooltip": "深暗之域第[X]共振波段的具象化结晶",
@@ -154,5 +154,8 @@
   "itemGroup.ash_of_sin.weapons": "§4罪业余烬§f：§5武器",
   "message.ash_of_sin.chalk_wall": "时为朦胧的白垩之壁……",
   "death.attack.devour": "%1$s成为了%2$s的食粮……",
+  "death.attack.devour.player": "%1$s成为了%2$s的食粮……",
+  "death.attack.frozen": "%1$s冻死了",
+  "death.attack.frozen.player": "%1$s被%2$s冻死了",
   "enchantment.chalk_wall.tick_tack": ""
 }

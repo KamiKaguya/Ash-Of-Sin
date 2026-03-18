@@ -22,7 +22,7 @@ import java.util.Random;
 public class AshOfSinCarianEvent {
 
     public static final Random RANDOM = new Random();
-    private static final Enchantment FREEZING_ENCHANTMENT = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation("fromtheshadows", "freezing"));
+    private static final Enchantment ENHANCE_ENCHANTMENT = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation("minecraft", "sweeping"));
 
     @SubscribeEvent
     public static void carian(LivingHurtEvent event) {
@@ -41,7 +41,7 @@ public class AshOfSinCarianEvent {
         }
 
         if (attackerEntity instanceof LivingEntity attacker) {
-            int freezingLevel = getEnchantmentLevel(attacker, FREEZING_ENCHANTMENT);
+            int freezingLevel = getEnchantmentLevel(attacker, ENHANCE_ENCHANTMENT);
             float freezeMultiplier = 1.0f + 0.2f * freezingLevel;
 
             if (holdDarkMoonGreatsword(attacker)) {

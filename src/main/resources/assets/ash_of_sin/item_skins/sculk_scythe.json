@@ -3,9 +3,9 @@
 		"color": [5, 42, 50],
     	"begin_pos": [0.0, 0.15, -0.8],
     	"end_pos": [0.0, 0.35, -1.2],
-    	"lifetime": 20,
-		"interpolations": 20,
-    	"texture_path": "wom:textures/particle/antitheus/weapon_trail/basic.png",
-    	"particle_type": "epicfight:swing_trail"
+		"lifetime": 6,
+		"interpolations": 10,
+		"texture_path": "epicfightx:textures/particle/scythe.png",
+		"particle_type": "epicfight:swing_trail"
     }
 }

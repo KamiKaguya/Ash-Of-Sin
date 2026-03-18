@@ -3,10 +3,11 @@
 	{
 		"common":
 		{
-			"armor_negation":25.0,
-			"impact":2.1,
-			"max_strikes":6
+			"armor_negation":35.0,
+			"speed_bonus": 0,
+			"impact":4.4,
+			"max_strikes":5
 		}
 	},
-	"type":"wom:antitheus"
+	"type":"epicfightx:scythe"
 }

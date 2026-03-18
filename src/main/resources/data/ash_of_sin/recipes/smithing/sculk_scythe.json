@@ -4,7 +4,7 @@
         "item": "minecraft:sculk_catalyst"
     },
     "base": {
-        "item": "epicfight:netherite_spear"
+        "item": "epicfightx:eternal_night_scythe"
     },
     "result": {
         "item": "ash_of_sin:sculk_scythe"

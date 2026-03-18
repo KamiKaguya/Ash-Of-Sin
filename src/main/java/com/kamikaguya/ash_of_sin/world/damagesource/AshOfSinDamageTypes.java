@@ -9,4 +9,5 @@ public final class AshOfSinDamageTypes {
     private AshOfSinDamageTypes() {}
 
     public static final ResourceKey<DamageType> DEVOUR = ResourceKey.create(Registries.DAMAGE_TYPE, AshOfSin.identifier("devour"));
+    public static final ResourceKey<DamageType> FROZEN = ResourceKey.create(Registries.DAMAGE_TYPE, AshOfSin.identifier("frozen"));
 }

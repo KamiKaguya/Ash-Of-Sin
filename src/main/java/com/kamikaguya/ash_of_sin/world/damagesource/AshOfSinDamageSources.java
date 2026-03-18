@@ -14,6 +14,10 @@ public final class AshOfSinDamageSources {
         return new AshOfSinDamageSource(getDamageTypeHolder(owner, AshOfSinDamageTypes.DEVOUR), owner, owner, owner.position());
     }
 
+    public static AshOfSinDamageSource frozen(LivingEntity owner) {
+        return new AshOfSinDamageSource(getDamageTypeHolder(owner, AshOfSinDamageTypes.FROZEN), owner, owner, owner.position());
+    }
+
     private static Holder<DamageType> getDamageTypeHolder(Entity entity, ResourceKey<DamageType> damageTypeKey) {
         return entity.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(damageTypeKey);
     }
