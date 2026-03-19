@@ -10,8 +10,8 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -198,38 +198,48 @@ public class AshOfSinSculkEvent {
     }
 
     private static void applySingleTargetEffect(LivingEntity attacker, LivingEntity target, float baseDamage) {
-        // 概率伤害倍率
         float damageMultiplier = ThreadLocalRandom.current().nextFloat() <= 0.25F ? 1.25F : 2.0F;
         target.hurt(attacker.damageSources().magic(), baseDamage * damageMultiplier);
-        target.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 33*20, 2));
+        target.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 33 * 20, 2));
 
-        // 单体特效
         if (target.level() instanceof ServerLevel serverLevel) {
             Vec3 center = target.position().add(0, 1.5, 0);
 
-            // 环形粒子
-            for (int i = 0; i < 24; i++) {
-                double angle = i * Math.PI * 2 / 24;
-                Vec3 pos = center.add(
-                        Math.cos(angle) * 1.2,
-                        Math.sin(System.currentTimeMillis()%2000/1000.0*Math.PI)*0.5, // 动态高度
-                        Math.sin(angle) * 1.2
-                );
+            // 1. 生成冲击波粒子（从中心向外扩散）
+            for (int i = 0; i < 30; i++) {
+                double angle = i * Math.PI * 2 / 30;
+                Vec3 dir = new Vec3(Math.cos(angle), 0, Math.sin(angle)).normalize();
+                // 水平扩散 + 轻微垂直随机
                 serverLevel.sendParticles(
                         ParticleTypes.SONIC_BOOM,
-                        pos.x, pos.y, pos.z,
-                        3, 0.2, 0.2, 0.2, 0.1
+                        center.x, center.y + (Math.sin(angle) * 0.2), center.z,
+                        1,
+                        dir.x * 0.5, ThreadLocalRandom.current().nextGaussian() * 0.1, dir.z * 0.5,
+                        0.1
                 );
             }
 
-            // 中心聚爆特效
+            // 2. 向上冲击波
+            for (int i = 0; i < 10; i++) {
+                serverLevel.sendParticles(
+                        ParticleTypes.SONIC_BOOM,
+                        center.x + ThreadLocalRandom.current().nextGaussian() * 0.5,
+                        center.y,
+                        center.z + ThreadLocalRandom.current().nextGaussian() * 0.5,
+                        1,
+                        0, 0.3, 0,
+                        0.1
+                );
+            }
+
+            // 3. 中心聚爆特效（保留原电火花）
             serverLevel.sendParticles(
                     ParticleTypes.ELECTRIC_SPARK,
                     center.x, center.y, center.z,
                     15, 0.5, 0.5, 0.5, 0.2
             );
 
-            // 单体音效
+            // 4. 音效
             serverLevel.playSound(
                     null, center.x, center.y, center.z,
                     SoundEvents.WARDEN_SONIC_BOOM,
@@ -270,49 +280,80 @@ public class AshOfSinSculkEvent {
     }
 
     private static void applyChainEffect(LivingEntity attacker, LivingEntity from, LivingEntity to, float baseDamage) {
-        // 概率伤害倍率
         float damageMultiplier = ThreadLocalRandom.current().nextFloat() <= 0.25F ? 1.25F : 2.0F;
         to.hurt(attacker.damageSources().magic(), baseDamage * damageMultiplier);
-        to.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 33*20, 2));
+        to.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 33 * 20, 2));
 
-        // 生成链式音爆粒子
         if (from.level() instanceof ServerLevel serverLevel) {
-            // 计算粒子路径
             Vec3 start = from.getEyePosition(1.0f);
             Vec3 end = to.getEyePosition(1.0f);
-            Vec3 direction = end.subtract(start);
-            double distance = direction.length();
-            direction = direction.normalize();
+            Vec3 direction = end.subtract(start).normalize();
+            double distance = start.distanceTo(end);
 
-            // 生成连接线粒子
-            for (double d = 0; d < distance; d += 0.5) {
-                Vec3 pos = start.add(direction.scale(d));
+            // 1. 在起点生成冲击波粒子（模拟音爆发射）
+            for (int i = 0; i < 20; i++) {
+                // 随机方向，但偏向目标方向
+                Vec3 randomDir = new Vec3(
+                        ThreadLocalRandom.current().nextGaussian() * 0.3,
+                        ThreadLocalRandom.current().nextGaussian() * 0.2,
+                        ThreadLocalRandom.current().nextGaussian() * 0.3
+                ).normalize();
+                Vec3 velocity = direction.add(randomDir).normalize().scale(0.5); // 速度大小0.5
                 serverLevel.sendParticles(
-                        ParticleTypes.ELECTRIC_SPARK,
-                        pos.x, pos.y + 0.2, pos.z,
-                        1, 0, 0, 0, 0
+                        ParticleTypes.SONIC_BOOM,
+                        start.x, start.y, start.z,
+                        1, // 每个粒子单独发送以赋予不同速度
+                        velocity.x, velocity.y, velocity.z,
+                        0.1
                 );
             }
 
-            // 生成端点特效
+            // 2. 沿直线生成定向粒子（模拟冲击波前进）
+            int steps = (int) (distance * 2); // 每0.5格一个粒子
+            for (int s = 1; s <= steps; s++) {
+                double t = s / (double) steps;
+                Vec3 pos = start.add(direction.scale(distance * t));
+                // 每个位置生成少量粒子，速度沿方向继续前进
+                serverLevel.sendParticles(
+                        ParticleTypes.SONIC_BOOM,
+                        pos.x, pos.y, pos.z,
+                        3,
+                        direction.x * 0.3, direction.y * 0.3, direction.z * 0.3,
+                        0.1
+                );
+            }
+
+            // 3. 在终点生成爆裂粒子
+            for (int i = 0; i < 15; i++) {
+                Vec3 randomDir = new Vec3(
+                        ThreadLocalRandom.current().nextGaussian() * 0.4,
+                        ThreadLocalRandom.current().nextGaussian() * 0.2,
+                        ThreadLocalRandom.current().nextGaussian() * 0.4
+                ).normalize();
+                serverLevel.sendParticles(
+                        ParticleTypes.SONIC_BOOM,
+                        end.x, end.y + 0.2, end.z,
+                        1,
+                        randomDir.x * 0.4, randomDir.y * 0.4, randomDir.z * 0.4,
+                        0.1
+                );
+            }
+
+            // 4. 添加幽匿能量粒子增强氛围
             serverLevel.sendParticles(
-                    ParticleTypes.SONIC_BOOM,
-                    start.x, start.y + 0.5, start.z,
-                    3, 0.2, 0.2, 0.2, 0
-            );
-            serverLevel.sendParticles(
-                    ParticleTypes.SONIC_BOOM,
-                    end.x, end.y + 0.5, end.z,
-                    3, 0.2, 0.2, 0.2, 0
+                    ParticleTypes.SCULK_CHARGE_POP,
+                    start.x, start.y, start.z,
+                    5, 0.3, 0.3, 0.3, 0.1
             );
 
-            // 播放音爆音效
+            // 5. 播放音爆音效（根据距离调整音调）
+            float pitch = 1.8F - 0.2F * (float)(distance / 10);
             serverLevel.playSound(
                     null,
                     start.x, start.y, start.z,
                     SoundEvents.WARDEN_SONIC_BOOM,
                     SoundSource.PLAYERS,
-                    2.0F, 1.8F - 0.2F * (float)(distance / 10)
+                    3.0F, pitch
             );
         }
     }
