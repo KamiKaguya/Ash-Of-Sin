@@ -7,7 +7,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.storage.LevelResource;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -20,7 +19,6 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -93,10 +91,8 @@ public class AshOfSinNoMoreInvalidStatisticEvent {
             JsonObject statsObject;
             if (root.has("stats") && root.get("stats").isJsonObject()) {
                 statsObject = root.getAsJsonObject("stats");
-                LOGGER.debug("Found 'stats' wrapper in file: {}", filePath.getFileName());
             } else {
                 statsObject = root;
-                LOGGER.debug("No 'stats' wrapper, using root object for file: {}", filePath.getFileName());
             }
 
             boolean modified = false;
@@ -121,9 +117,8 @@ public class AshOfSinNoMoreInvalidStatisticEvent {
                     }
                 }
 
-                LOGGER.debug("Category {}: found {} invalid entries", categoryKey, keysToRemove.size());
-
                 if (!keysToRemove.isEmpty()) {
+                    LOGGER.debug("Category {}: found {} invalid entries", categoryKey, keysToRemove.size());
                     for (String key : keysToRemove) {
                         categoryObj.remove(key);
                         LOGGER.debug("Removed invalid stat: {} from category {}", key, categoryKey);
@@ -139,16 +134,12 @@ public class AshOfSinNoMoreInvalidStatisticEvent {
             }
 
             if (modified) {
-                Path tempFile = filePath.resolveSibling(filePath.getFileName() + ".tmp");
-                try (Writer writer = Files.newBufferedWriter(tempFile)) {
+                try (Writer writer = Files.newBufferedWriter(filePath)) {
                     GSON.toJson(root, writer);
-                    Files.move(tempFile, filePath, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
                     LOGGER.info("Cleaned stats file: {} (removed entries)", filePath.getFileName());
                 } catch (IOException e) {
                     LOGGER.error("Failed to write cleaned stats file: {}", filePath, e);
                 }
-            } else {
-                LOGGER.debug("No changes needed for file: {}", filePath.getFileName());
             }
         } catch (Exception e) {
             LOGGER.error("Failed to process stats file: {}", filePath, e);
