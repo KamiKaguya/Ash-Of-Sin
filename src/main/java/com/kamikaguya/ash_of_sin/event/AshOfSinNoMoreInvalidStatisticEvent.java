@@ -6,101 +6,158 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.storage.LevelResource;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 @Mod.EventBusSubscriber(modid = AshOfSin.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AshOfSinNoMoreInvalidStatisticEvent {
-
+    private static final Logger LOGGER = LogManager.getLogger();
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
+    // 服务器启动时清理所有统计文件
     @SubscribeEvent
-    public static void onServerAboutToStart(ServerAboutToStartEvent event) {
+    public static void onServerStarting(ServerStartingEvent event) {
         MinecraftServer server = event.getServer();
         Path statsDir = server.getWorldPath(LevelResource.PLAYER_STATS_DIR);
-
         if (!Files.isDirectory(statsDir)) {
+            LOGGER.info("Stats directory not found, skipping.");
             return;
         }
 
+        LOGGER.info("Scanning stats directory for invalid entries: {}", statsDir);
         try (Stream<Path> paths = Files.list(statsDir)) {
             paths.filter(path -> path.toString().endsWith(".json"))
                     .forEach(AshOfSinNoMoreInvalidStatisticEvent::cleanStatFile);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("Failed to list stats directory", e);
         }
+    }
+
+    // 玩家登录时再次清理该玩家的文件（防止启动后首次登录的玩家文件在启动时未被清理）
+    @SubscribeEvent
+    public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
+        UUID uuid = event.getEntity().getUUID();
+        MinecraftServer server = event.getEntity().getServer();
+        if (server == null) return;
+
+        Path statsDir = server.getWorldPath(LevelResource.PLAYER_STATS_DIR);
+        Path playerStatFile = statsDir.resolve(uuid + ".json");
+        if (Files.exists(playerStatFile)) {
+            cleanStatFile(playerStatFile);
+        }
+    }
+
+    private enum RegistryType { ITEM, BLOCK, ENTITY, CUSTOM, UNKNOWN }
+
+    private static RegistryType getRegistryType(String categoryKey) {
+        int lastColon = categoryKey.lastIndexOf(':');
+        if (lastColon == -1 || lastColon == categoryKey.length() - 1) {
+            LOGGER.debug("Invalid category key format: {}", categoryKey);
+            return RegistryType.UNKNOWN;
+        }
+        String categoryName = categoryKey.substring(lastColon + 1);
+
+        RegistryType type = switch (categoryName) {
+            case "used", "broken", "crafted", "picked_up", "dropped" -> RegistryType.ITEM;
+            case "mined" -> RegistryType.BLOCK;
+            case "killed", "killed_by" -> RegistryType.ENTITY;
+            case "custom" -> RegistryType.CUSTOM;
+            default -> RegistryType.UNKNOWN;
+        };
+        LOGGER.debug("Category key: {} -> extracted name: {} -> type: {}", categoryKey, categoryName, type);
+        return type;
     }
 
     private static void cleanStatFile(Path filePath) {
         try (Reader reader = Files.newBufferedReader(filePath)) {
             JsonObject root = JsonParser.parseReader(reader).getAsJsonObject();
+
+            JsonObject statsObject;
+            if (root.has("stats") && root.get("stats").isJsonObject()) {
+                statsObject = root.getAsJsonObject("stats");
+                LOGGER.debug("Found 'stats' wrapper in file: {}", filePath.getFileName());
+            } else {
+                statsObject = root;
+                LOGGER.debug("No 'stats' wrapper, using root object for file: {}", filePath.getFileName());
+            }
+
             boolean modified = false;
 
-            for (Map.Entry<String, JsonElement> categoryEntry : root.entrySet()) {
-                String categoryKey = categoryEntry.getKey(); // 例如 "stats.minecraft:used"
+            for (Map.Entry<String, JsonElement> categoryEntry : statsObject.entrySet()) {
+                String categoryKey = categoryEntry.getKey();
                 JsonElement categoryValue = categoryEntry.getValue();
                 if (!categoryValue.isJsonObject()) continue;
 
                 JsonObject categoryObj = categoryValue.getAsJsonObject();
                 RegistryType registryType = getRegistryType(categoryKey);
-                if (registryType == RegistryType.UNKNOWN) continue;
+                if (registryType == RegistryType.UNKNOWN) {
+                    LOGGER.debug("Skipping unknown category: {}", categoryKey);
+                    continue;
+                }
 
+                List<String> keysToRemove = new ArrayList<>();
                 for (Map.Entry<String, JsonElement> statEntry : categoryObj.entrySet()) {
                     String statId = statEntry.getKey();
                     if (!isValidStatId(statId, registryType)) {
-                        categoryObj.remove(statId);
-                        modified = true;
+                        keysToRemove.add(statId);
                     }
                 }
 
+                LOGGER.debug("Category {}: found {} invalid entries", categoryKey, keysToRemove.size());
+
+                if (!keysToRemove.isEmpty()) {
+                    for (String key : keysToRemove) {
+                        categoryObj.remove(key);
+                        LOGGER.debug("Removed invalid stat: {} from category {}", key, categoryKey);
+                    }
+                    modified = true;
+                }
+
                 if (categoryObj.size() == 0) {
-                    root.remove(categoryKey);
+                    statsObject.remove(categoryKey);
+                    LOGGER.debug("Removed empty category: {}", categoryKey);
                     modified = true;
                 }
             }
 
             if (modified) {
-                try (Writer writer = Files.newBufferedWriter(filePath)) {
+                Path tempFile = filePath.resolveSibling(filePath.getFileName() + ".tmp");
+                try (Writer writer = Files.newBufferedWriter(tempFile)) {
                     GSON.toJson(root, writer);
+                    Files.move(tempFile, filePath, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
+                    LOGGER.info("Cleaned stats file: {} (removed entries)", filePath.getFileName());
+                } catch (IOException e) {
+                    LOGGER.error("Failed to write cleaned stats file: {}", filePath, e);
                 }
+            } else {
+                LOGGER.debug("No changes needed for file: {}", filePath.getFileName());
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Failed to process stats file: {}", filePath, e);
         }
-    }
-
-    private enum RegistryType {
-        ITEM, BLOCK, ENTITY, CUSTOM, UNKNOWN
-    }
-
-    private static RegistryType getRegistryType(String categoryKey) {
-        String[] parts = categoryKey.split(":");
-        if (parts.length != 2) return RegistryType.UNKNOWN;
-        String categoryName = parts[1];
-
-        return switch (categoryName) {
-            case "used", "broken", "crafted", "picked_up", "dropped" -> RegistryType.ITEM;
-            case "mined" -> RegistryType.BLOCK;
-            case "killed", "killed_by" -> RegistryType.ENTITY;
-            case "custom" -> RegistryType.CUSTOM;
-            default -> RegistryType.UNKNOWN; // 可扩展其他模组的统计类型
-        };
     }
 
     private static boolean isValidStatId(String id, RegistryType type) {
         ResourceLocation loc = ResourceLocation.tryParse(id);
         if (loc == null) return false;
-
         return switch (type) {
             case ITEM -> ForgeRegistries.ITEMS.containsKey(loc);
             case BLOCK -> ForgeRegistries.BLOCKS.containsKey(loc);
