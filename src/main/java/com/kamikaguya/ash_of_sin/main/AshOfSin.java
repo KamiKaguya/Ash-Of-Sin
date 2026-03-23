@@ -9,6 +9,7 @@ import com.kamikaguya.ash_of_sin.event.enchantent.AshOfSinChalkWallEvent;
 import com.kamikaguya.ash_of_sin.event.special.*;
 import com.kamikaguya.ash_of_sin.event.unique.*;
 import com.kamikaguya.ash_of_sin.gameasset.AshOfSinSounds;
+import com.kamikaguya.ash_of_sin.register.AshOfSinRegistry;
 import com.kamikaguya.ash_of_sin.world.biome.AshOfSinBiomes;
 import com.kamikaguya.ash_of_sin.world.dimension.AbsoluteSpaceTimeRealmDimension;
 import com.kamikaguya.ash_of_sin.world.effect.WrathOfGod;
@@ -75,6 +76,7 @@ public class AshOfSin {
 
     public AshOfSin() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        AshOfSinRegistry.register(bus);
         PROXY.init();
         bus.addListener(this::setup);
         bus.addListener(this::doClientStuff);

@@ -1,0 +1,6 @@
+{
+	"parent": "block/cube_all",
+	"textures": {
+		"all": "ash_of_sin:block/ash_of_sin"
+	}
+}

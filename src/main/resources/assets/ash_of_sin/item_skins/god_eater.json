@@ -1,0 +1,11 @@
+{
+    "trail": {
+    	"color": [139, 0, 0],
+    	"begin_pos": [0.0, -0.5, -0.6],
+    	"end_pos": [0.0, -0.5, -1.8],
+    	"lifetime": 6,
+		"interpolations": 12,
+    	"texture_path": "wom:textures/particle/torment/weapon_trail/basic.png",
+    	"particle_type": "epicfight:swing_trail"
+    }
+}

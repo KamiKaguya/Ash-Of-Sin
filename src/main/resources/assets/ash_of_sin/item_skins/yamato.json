@@ -1,0 +1,11 @@
+{
+    "trail": {
+        "color": [0, 239, 255],
+        "begin_pos": [0.0, 0.0, -0.2],
+        "end_pos": [0.0, 0.1, -2.5],
+        "lifetime": 10,
+	    "interpolations": 7,
+	    "texture_path": "ash_of_sin:textures/particle/yamato/weapon_trail/basic.png",
+	    "particle_type": "epicfight:swing_trail"
+    }
+}
