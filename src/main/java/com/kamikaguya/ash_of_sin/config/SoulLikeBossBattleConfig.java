@@ -20,6 +20,7 @@ public class SoulLikeBossBattleConfig {
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> PLAYER_GAMEMODE;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> IRON_GOLEM;
     public static ForgeConfigSpec.ConfigValue<Boolean> ANTI_IRON_GOLEM;
+    public static ForgeConfigSpec.BooleanValue REMOVE_EFFECT;
     public static ForgeConfigSpec.BooleanValue MULTIPLIER_PER_PLAYER_ON;
     public static ForgeConfigSpec.ConfigValue<Double> MULTIPLIER_PER_PLAYER;
     public final Path configPath;
@@ -94,6 +95,10 @@ public class SoulLikeBossBattleConfig {
         ANTI_IRON_GOLEM = builder.comment("Anti-Iron Golem")
                 .comment("Not allow Iron Golem hurt BOSS.")
                 .define("Anti-Iron Golem", true);
+
+        REMOVE_EFFECT = builder.comment("Soul Like Boss Battle Remove Boss Effects")
+                .comment("Enable Soul Like Boss Battle Remove Effects")
+                .define("Remove Effect", true);
 
         MULTIPLIER_PER_PLAYER_ON = builder
                 .comment("Enable scaling boss health and damage based on number of nearby players.")

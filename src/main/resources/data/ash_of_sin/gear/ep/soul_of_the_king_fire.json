@@ -1,0 +1,7 @@
+{
+	"evolvingItem": "minecraft:air",
+	"gainEP": 0.0015,
+	"item": "ash_of_sin:soul_of_the_king_fire",
+	"maxEP": 2147483647,
+	"minEP": 0
+}

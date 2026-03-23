@@ -1,0 +1,7 @@
+{
+	"evolvingItem": "minecraft:air",
+	"gainEP": 0.0015,
+	"item": "ash_of_sin:calamity_blade_thin",
+	"maxEP": 2147483647,
+	"minEP": 0
+}
