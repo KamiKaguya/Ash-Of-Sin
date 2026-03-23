@@ -10,6 +10,9 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.TickEvent;
@@ -32,11 +35,17 @@ public class AshOfSinBetterAIEvent {
     private static final Map<UUID, Map<UUID, Long>> LAST_ATTACK_TIME = new ConcurrentHashMap<>();
     private static final Map<UUID, List<UUID>> ACTIVE_ATTACKERS = new ConcurrentHashMap<>();
     private static final Map<UUID, Long> LAST_ROTATION_TIME = new HashMap<>();
+    private static final Map<UUID, Map<UUID, Integer>> LAST_ENCHANT_TYPE = new ConcurrentHashMap<>();
 
     private static final double HATE_DECAY_RATE = 0.90; // 每20刻衰减10%
     private static final int ROTATION_INTERVAL = 10 * 20;
     private static final double IDEAL_DISTANCE_SQ = 25.0;
     private static final double DISTANCE_TOLERANCE = 1.0;
+
+    private static final double MT_HATE_MULTIPLIER = 10.0;    // MT仇恨倍率
+    private static final double ST_HATE_MULTIPLIER = 5.0;    // ST仇恨倍率
+    private static final double MT_DECAY_RATE = 0.97;        // MT衰减率（每20刻衰减3%）
+    private static final double ST_DECAY_RATE = 0.94;        // ST衰减率（每20刻衰减6%）
 
     private static final Set<EntityType<?>> NEUTRAL_MONSTERS = loadNeutralMonsters();
 
@@ -72,7 +81,7 @@ public class AshOfSinBetterAIEvent {
 
     private static boolean isExcluded(Entity entity) {
         if (!BetterAIConfig.EXCLUSION_ENABLED.get()) return false;
-        ResourceLocation id = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
+        ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(entity.getType());
         return BetterAIConfig.EXCLUSION_LIST.get().contains(id.toString());
     }
 
@@ -82,24 +91,45 @@ public class AshOfSinBetterAIEvent {
         if (event.getEntity().level().isClientSide()) return;
 
         Entity source = event.getSource().getEntity();
-        if (!(source instanceof ServerPlayer player)) return;
+        if (source == null) return;
 
-        if (player.isCreative() || player.isSpectator()) return;
+        if (source instanceof ServerPlayer player) {
+            if (player.isCreative() || player.isSpectator()) return;
+        }
 
         LivingEntity target = event.getEntity();
         if (FRIENDLY_MOBS.contains(target.getType())) return;
         if (!(target instanceof Mob)) return;
 
         UUID mobId = target.getUUID();
-        UUID playerId = player.getUUID();
+        UUID sourceId = source.getUUID();
 
         float damage = event.getAmount();
-        HATE_MAP.computeIfAbsent(mobId, k -> new ConcurrentHashMap<>())
-                .merge(playerId, damage, Float::sum);
+        float multiplier = 1.0f;
+        int enchantType = 0;
 
-        long gameTime = player.server.overworld().getGameTime();
+        if (source instanceof LivingEntity livingEntity) {
+            int mtLevel = getEnchantmentLevel(livingEntity, "ash_of_sin:mt");
+            int stLevel = getEnchantmentLevel(livingEntity, "ash_of_sin:st");
+            if (mtLevel > 0) {
+                multiplier = (float) MT_HATE_MULTIPLIER;
+                enchantType = 2;
+            } else if (stLevel > 0) {
+                multiplier = (float) ST_HATE_MULTIPLIER;
+                enchantType = 1;
+            }
+        }
+
+        float adjustedDamage = damage * multiplier;
+
+        HATE_MAP.computeIfAbsent(mobId, k -> new ConcurrentHashMap<>())
+                .merge(sourceId, adjustedDamage, Float::sum);
+
+        long gameTime = source.level().getGameTime();
         LAST_ATTACK_TIME.computeIfAbsent(mobId, k -> new ConcurrentHashMap<>())
-                .put(playerId, gameTime);
+                .put(sourceId, gameTime);
+        LAST_ENCHANT_TYPE.computeIfAbsent(mobId, k -> new ConcurrentHashMap<>())
+                .put(sourceId, enchantType);
     }
 
     @SubscribeEvent
@@ -131,6 +161,7 @@ public class AshOfSinBetterAIEvent {
             }
             LAST_ATTACK_TIME.values().forEach(map -> map.remove(deadPlayerId));
             LAST_ATTACK_TIME.values().removeIf(Map::isEmpty);
+            LAST_ENCHANT_TYPE.values().forEach(map -> map.remove(deadPlayerId));
 
             for (UUID mobId : mobsToClearTarget) {
                 clearTargetIfNeeded(mobId, server);
@@ -254,24 +285,50 @@ public class AshOfSinBetterAIEvent {
             UUID mobId = mobEntry.getKey();
             Map<UUID, Float> playerHateMap = mobEntry.getValue();
             Map<UUID, Long> lastAttackMap = LAST_ATTACK_TIME.get(mobId);
+            Map<UUID, Integer> enchantMap = LAST_ENCHANT_TYPE.get(mobId);
             if (lastAttackMap == null) continue;
 
             Iterator<Map.Entry<UUID, Float>> hateIt = playerHateMap.entrySet().iterator();
             while (hateIt.hasNext()) {
                 Map.Entry<UUID, Float> entry = hateIt.next();
-                UUID playerId = entry.getKey();
-                Long lastTime = lastAttackMap.get(playerId);
+                UUID attackerId = entry.getKey();
+                Long lastTime = lastAttackMap.get(attackerId);
+                int enchantType = enchantMap != null ? enchantMap.getOrDefault(attackerId, 0) : 0;
 
-                if (lastTime == null || currentGameTime - lastTime > 10 * 20) {
+                Entity attacker = getEntityByUUID(server, attackerId);
+                if (attacker == null) {
                     hateIt.remove();
-                    lastAttackMap.remove(playerId);
+                    if (enchantMap != null) enchantMap.remove(attackerId);
+                    lastAttackMap.remove(attackerId);
                     continue;
                 }
 
-                float newValue = entry.getValue() * (float) HATE_DECAY_RATE;
+                double decayRate;
+                int timeout;
+                if (enchantType == 2) { // MT
+                    decayRate = MT_DECAY_RATE;
+                    timeout = 30 * 20;
+                } else if (enchantType == 1) { // ST
+                    decayRate = ST_DECAY_RATE;
+                    timeout = 30 * 20;
+                } else {
+                    decayRate = HATE_DECAY_RATE;
+                    timeout = 10 * 20;
+                }
+                float floatDecayRate = (float) decayRate;
+
+                if (lastTime == null || currentGameTime - lastTime > timeout) {
+                    hateIt.remove();
+                    if (enchantMap != null) enchantMap.remove(attackerId);
+                    lastAttackMap.remove(attackerId);
+                    continue;
+                }
+
+                float newValue = entry.getValue() * floatDecayRate;
                 if (newValue < 1.0f) {
                     hateIt.remove();
-                    lastAttackMap.remove(playerId);
+                    if (enchantMap != null) enchantMap.remove(attackerId);
+                    lastAttackMap.remove(attackerId);
                 } else {
                     entry.setValue(newValue);
                 }
@@ -280,11 +337,13 @@ public class AshOfSinBetterAIEvent {
             if (playerHateMap.isEmpty()) {
                 mobIt.remove();
                 LAST_ATTACK_TIME.remove(mobId);
+                LAST_ENCHANT_TYPE.remove(mobId);
                 mobsToClearTarget.add(mobId);
             }
         }
 
         LAST_ATTACK_TIME.values().removeIf(Map::isEmpty);
+        LAST_ENCHANT_TYPE.values().removeIf(Map::isEmpty);
 
         for (UUID mobId : mobsToClearTarget) {
             clearTargetIfNeeded(mobId, server);
@@ -303,6 +362,7 @@ public class AshOfSinBetterAIEvent {
     private static void cleanupInvalidEntities(MinecraftServer server) {
         HATE_MAP.keySet().removeIf(uuid -> getEntityByUUID(server, uuid) == null);
         LAST_ATTACK_TIME.keySet().removeIf(uuid -> getEntityByUUID(server, uuid) == null);
+        LAST_ENCHANT_TYPE.keySet().removeIf(uuid -> getEntityByUUID(server, uuid) == null);
 
         Set<UUID> onlinePlayers = server.getPlayerList().getPlayers().stream()
                 .map(Player::getUUID)
@@ -312,14 +372,34 @@ public class AshOfSinBetterAIEvent {
         LAST_ROTATION_TIME.keySet().removeIf(uuid -> !onlinePlayers.contains(uuid));
 
         for (Map<UUID, Float> playerHate : HATE_MAP.values()) {
-            playerHate.keySet().removeIf(uuid -> !onlinePlayers.contains(uuid));
+            Iterator<UUID> it = playerHate.keySet().iterator();
+            while (it.hasNext()) {
+                UUID attackerId = it.next();
+                Entity attacker = getEntityByUUID(server, attackerId);
+                if (attacker == null) {
+                    it.remove();
+                } else if (attacker instanceof Player && !onlinePlayers.contains(attackerId)) {
+                    it.remove();
+                }
+            }
         }
+
         for (Map<UUID, Long> lastAttack : LAST_ATTACK_TIME.values()) {
-            lastAttack.keySet().removeIf(uuid -> !onlinePlayers.contains(uuid));
+            lastAttack.keySet().removeIf(attackerId -> {
+                Entity attacker = getEntityByUUID(server, attackerId);
+                return attacker == null || (attacker instanceof Player && !onlinePlayers.contains(attackerId));
+            });
+        }
+        for (Map<UUID, Integer> enchantMap : LAST_ENCHANT_TYPE.values()) {
+            enchantMap.keySet().removeIf(attackerId -> {
+                Entity attacker = getEntityByUUID(server, attackerId);
+                return attacker == null || (attacker instanceof Player && !onlinePlayers.contains(attackerId));
+            });
         }
 
         HATE_MAP.values().removeIf(Map::isEmpty);
         LAST_ATTACK_TIME.values().removeIf(Map::isEmpty);
+        LAST_ENCHANT_TYPE.values().removeIf(Map::isEmpty);
     }
 
     // ==================== 候选列表相关 ====================
@@ -355,6 +435,8 @@ public class AshOfSinBetterAIEvent {
                         .putIfAbsent(player.getUUID(), 10.0f);
                 LAST_ATTACK_TIME.computeIfAbsent(mobId, k -> new ConcurrentHashMap<>())
                         .putIfAbsent(player.getUUID(), player.server.overworld().getGameTime());
+                LAST_ENCHANT_TYPE.computeIfAbsent(mobId, k -> new ConcurrentHashMap<>())
+                        .putIfAbsent(player.getUUID(), 0);
                 candidates.add(mobId);
             }
         }
@@ -385,20 +467,30 @@ public class AshOfSinBetterAIEvent {
                 continue;
             }
 
-            Map<UUID, Float> hateToPlayers = mobEntry.getValue();
+            Map<UUID, Float> hateToEntities = mobEntry.getValue();
 
             UUID bestTargetId = null;
             float maxHate = 0;
 
-            for (Map.Entry<UUID, Float> playerHate : hateToPlayers.entrySet()) {
-                UUID playerId = playerHate.getKey();
-                float hate = playerHate.getValue();
+            for (Map.Entry<UUID, Float> entry : hateToEntities.entrySet()) {
+                UUID targetId = entry.getKey();
+                float hate = entry.getValue();
 
-                List<UUID> activeForPlayer = ACTIVE_ATTACKERS.get(playerId);
-                if (activeForPlayer != null && activeForPlayer.contains(mobId)) {
+                Entity targetEntity = getEntityByUUID(server, targetId);
+                if (!(targetEntity instanceof LivingEntity livingEntity)) continue;
+
+                if (targetEntity instanceof Player) {
+                    List<UUID> activeForPlayer = ACTIVE_ATTACKERS.get(targetId);
+                    if (activeForPlayer != null && activeForPlayer.contains(mobId)) {
+                        if (hate > maxHate) {
+                            maxHate = hate;
+                            bestTargetId = targetId;
+                        }
+                    }
+                } else {
                     if (hate > maxHate) {
                         maxHate = hate;
-                        bestTargetId = playerId;
+                        bestTargetId = targetId;
                     }
                 }
             }
@@ -457,7 +549,7 @@ public class AshOfSinBetterAIEvent {
 
                 // 排除列表检查
                 if (exclusionEnabled) {
-                    ResourceLocation id = BuiltInRegistries.ENTITY_TYPE.getKey(mob.getType());
+                    ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(mob.getType());
                     if (exclusionList.contains(id.toString())) continue;
                 }
 
@@ -523,5 +615,16 @@ public class AshOfSinBetterAIEvent {
         if (event.getNewTarget() instanceof Player) {
             mob.setTarget(null);
         }
+    }
+
+    private static int getEnchantmentLevel(LivingEntity entity, String enchantmentId) {
+        Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(enchantmentId));
+        if (enchantment == null) return 0;
+        int level = 0;
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
+            ItemStack stack = entity.getItemBySlot(slot);
+            level += EnchantmentHelper.getItemEnchantmentLevel(enchantment, stack);
+        }
+        return level;
     }
 }

@@ -29,6 +29,7 @@ public class AshOfSinSoulLikeBossBattleEvent {
 
     public static final boolean SOUL_LIKE_BOSS_BATTLE_ON = SoulLikeBossBattleConfig.SOUL_LIKE_BOSS_BATTLE_ON.get();
     public static final boolean ANTI_ON = SoulLikeBossBattleConfig.ANTI_IRON_GOLEM.get();
+    public static final boolean REMOVE_EFFECT = SoulLikeBossBattleConfig.REMOVE_EFFECT.get();
 
     private static final UUID BOSS_HEALTH_MODIFIER_UUID = UUID.fromString("a1b2c3d4-e5f6-7890-abcd-ef1234567890");
     private static final UUID BOSS_DAMAGE_MODIFIER_UUID = UUID.fromString("b2c3d4e5-f6a7-8901-bcde-f234567890ab");
@@ -70,7 +71,9 @@ public class AshOfSinSoulLikeBossBattleEvent {
                 for (LivingEntity nearbyEntity : nearbyEntities) {
                     if (bossType.equals(nearbyEntity.getType())) {
                         if (allNearbyPlayerDied(world, nearbyEntity, player)) {
-                            nearbyEntity.removeAllEffects();
+                            if (REMOVE_EFFECT) {
+                                nearbyEntity.removeAllEffects();
+                            }
                             if (nearbyEntity.getLastHurtByMobTimestamp() > 20) {
                                 nearbyEntity.setHealth(nearbyEntity.getMaxHealth());
                             }

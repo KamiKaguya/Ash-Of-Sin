@@ -1,6 +1,10 @@
 {
     "enchantment.ash_of_sin.chalk_wall": "Chalk Wall",
     "enchantment.ash_of_sin.chalk_wall.desc": "",
+    "enchantment.ash_of_sin.main_tank": "MT",
+    "enchantment.ash_of_sin.main_tank.desc": "Greatly increases enmity gain and slows enmity decay",
+    "enchantment.ash_of_sin.sub_tank": "ST",
+    "enchantment.ash_of_sin.sub_tank.desc": "Increases enmity gain and slows enmity decay",
     "item.ash_of_sin.mirror_of_the_dark_night": "Mirror Of The Dark Night",
     "item.ash_of_sin.mirror_of_the_dark_night.tooltip.unique": "§4UNIQUE",
     "item.ash_of_sin.mirror_of_the_dark_night.tooltip": "Mirror Of The Dark Night",

@@ -1,6 +1,10 @@
 {
   "enchantment.ash_of_sin.chalk_wall": "白垩之壁",
   "enchantment.ash_of_sin.chalk_wall.desc": "已然遥远的理想之城亦为终将如旧的梦想之城",
+  "enchantment.ash_of_sin.main_tank": "MT",
+  "enchantment.ash_of_sin.main_tank.desc": "大幅增加仇恨量并延缓仇恨衰减",
+  "enchantment.ash_of_sin.sub_tank": "ST",
+  "enchantment.ash_of_sin.sub_tank.desc": "增加仇恨量并延缓仇恨衰减",
   "item.ash_of_sin.mirror_of_the_dark_night": "暗夜之影",
   "item.ash_of_sin.mirror_of_the_dark_night.tooltip.unique": "§4独特",
   "item.ash_of_sin.mirror_of_the_dark_night.tooltip": "防御特化的大盾",
