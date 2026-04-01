@@ -618,11 +618,7 @@ public class AshOfSinBetterAIEvent {
     private static int getEnchantmentLevel(LivingEntity entity, String enchantmentId) {
         Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(enchantmentId));
         if (enchantment == null) return 0;
-        int level = 0;
-        for (EquipmentSlot slot : EquipmentSlot.values()) {
-            ItemStack stack = entity.getItemBySlot(slot);
-            level += EnchantmentHelper.getItemEnchantmentLevel(enchantment, stack);
-        }
-        return level;
+        ItemStack chest = entity.getItemBySlot(EquipmentSlot.CHEST);
+        return EnchantmentHelper.getItemEnchantmentLevel(enchantment, chest);
     }
 }
