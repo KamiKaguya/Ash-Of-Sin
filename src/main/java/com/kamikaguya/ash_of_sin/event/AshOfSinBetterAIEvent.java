@@ -430,6 +430,8 @@ public class AshOfSinBetterAIEvent {
                 if (!isHostileTo(mob, player)) continue;
                 if (mob.distanceToSqr(player) > trackingRange * trackingRange) continue;
 
+                if (!mob.hasLineOfSight(player)) continue;
+
                 UUID mobId = mob.getUUID();
                 HATE_MAP.computeIfAbsent(mobId, k -> new ConcurrentHashMap<>())
                         .putIfAbsent(player.getUUID(), 10.0f);
