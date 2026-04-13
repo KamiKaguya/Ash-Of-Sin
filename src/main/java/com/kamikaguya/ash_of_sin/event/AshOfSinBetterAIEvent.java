@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -45,42 +46,57 @@ public class AshOfSinBetterAIEvent {
     private static final double MT_DECAY_RATE = 0.97;        // MT衰减率（每20刻衰减3%）
     private static final double ST_DECAY_RATE = 0.94;        // ST衰减率（每20刻衰减6%）
 
-    private static final Set<EntityType<?>> NEUTRAL_MONSTERS = loadNeutralMonsters();
+    private static final Set<EntityType<?>> EXCLUDED_LIST = loadExcludedList();
 
-    private static Set<EntityType<?>> loadNeutralMonsters() {
-        List<? extends String> ids = BetterAIConfig.NEUTRAL_MONSTER_LIST.get();
+    private static Set<EntityType<?>> loadExcludedList() {
+        return loadEntityListFromConfig(BetterAIConfig.EXCLUSION_LIST.get(), "exclusion list");
+    }
+
+    private static Set<EntityType<?>> loadEntityListFromConfig(List<? extends String> entries, String listName) {
         Set<EntityType<?>> set = new HashSet<>();
-        for (String id : ids) {
-            EntityType<?> type = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(id));
-            if (type != null) {
-                set.add(type);
+        for (String entry : entries) {
+            if (entry.startsWith("#")) {
+                ResourceLocation tagId = new ResourceLocation(entry.substring(1));
+                TagKey<EntityType<?>> tagKey = TagKey.create(ForgeRegistries.ENTITIES.getRegistryKey(), tagId);
+                var tag = ForgeRegistries.ENTITIES.tags().getTag(tagKey);
+                if (tag != null) {
+                    set.addAll(tag.stream().toList());
+                } else {
+                    System.err.println("[Ash Of Sin-Better AI] Unknown entity tag in " + listName + ": " + entry);
+                }
             } else {
-                System.err.println("[Ash Of Sin-Better AI] Unknown entity type in neutral monster list: " + id);
+                EntityType<?> type = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(entry));
+                if (type != null) {
+                    set.add(type);
+                } else {
+                    System.err.println("[Ash Of Sin-Better AI] Unknown entity type in " + listName + ": " + entry);
+                }
             }
         }
         return set;
     }
 
+    private static final Set<EntityType<?>> NEUTRAL_MONSTERS = loadNeutralMonsters();
+
     private static final Set<EntityType<?>> FRIENDLY_MOBS = loadFriendlyMobs();
 
+    private static final Set<EntityType<?>> BLACK_LIST = loadBlackList();
+
+    private static Set<EntityType<?>> loadNeutralMonsters() {
+        return loadEntityListFromConfig(BetterAIConfig.NEUTRAL_MONSTER_LIST.get(), "neutral monster list");
+    }
+
     private static Set<EntityType<?>> loadFriendlyMobs() {
-        List<? extends String> ids = BetterAIConfig.FRIENDLY_LIST.get();
-        Set<EntityType<?>> set = new HashSet<>();
-        for (String id : ids) {
-            EntityType<?> type = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(id));
-            if (type != null) {
-                set.add(type);
-            } else {
-                System.err.println("[Ash Of Sin-Better AI] Unknown entity type in friendly list: " + id);
-            }
-        }
-        return set;
+        return loadEntityListFromConfig(BetterAIConfig.FRIENDLY_LIST.get(), "friendly list");
+    }
+
+    private static Set<EntityType<?>> loadBlackList() {
+        return loadEntityListFromConfig(BetterAIConfig.BLACK_LIST.get(), "black list");
     }
 
     private static boolean isExcluded(Entity entity) {
         if (!BetterAIConfig.EXCLUSION_ENABLED.get()) return false;
-        ResourceLocation id = ForgeRegistries.ENTITIES.getKey(entity.getType());
-        return BetterAIConfig.EXCLUSION_LIST.get().contains(id.toString());
+        return EXCLUDED_LIST.contains(entity.getType());
     }
 
     @SubscribeEvent
@@ -96,7 +112,9 @@ public class AshOfSinBetterAIEvent {
         }
 
         LivingEntity target = event.getEntityLiving();
+        if (source == target) return;
         if (FRIENDLY_MOBS.contains(target.getType())) return;
+        if (BLACK_LIST.contains(target.getType())) return;
         if (!(target instanceof Mob)) return;
 
         UUID mobId = target.getUUID();
@@ -413,6 +431,7 @@ public class AshOfSinBetterAIEvent {
             Entity mob = getEntityByUUID(player.server, mobId);
             if (!(mob instanceof Mob livingMob)) continue;
             if (FRIENDLY_MOBS.contains(mob.getType())) continue;
+            if (BLACK_LIST.contains(mob.getType())) continue;
 
             double dist = livingMob.distanceToSqr(player);
             if (dist <= trackingRange * trackingRange) {
@@ -425,6 +444,7 @@ public class AshOfSinBetterAIEvent {
                 if (!(entity instanceof Mob mob)) continue;
                 if (candidates.contains(mob.getUUID())) continue;
                 if (FRIENDLY_MOBS.contains(mob.getType())) continue;
+                if (BLACK_LIST.contains(mob.getType())) continue;
                 if (!isHostileTo(mob, player)) continue;
                 if (mob.distanceToSqr(player) > trackingRange * trackingRange) continue;
 
@@ -524,6 +544,8 @@ public class AshOfSinBetterAIEvent {
 
                 if (FRIENDLY_MOBS.contains(mob.getType())) continue;
 
+                if (BLACK_LIST.contains(mob.getType())) continue;
+
                 if (mob.getType().getCategory() != MobCategory.MONSTER) continue;
 
                 if (NEUTRAL_MONSTERS.contains(mob.getType())) {
@@ -612,6 +634,7 @@ public class AshOfSinBetterAIEvent {
     public static void onLivingChangeTarget(LivingChangeTargetEvent event) {
         if (!(event.getEntity() instanceof Mob mob)) return;
         if (!FRIENDLY_MOBS.contains(mob.getType())) return;
+        if (BLACK_LIST.contains(mob.getType())) return;
         if (event.getNewTarget() instanceof Player) {
             mob.setTarget(null);
         }
