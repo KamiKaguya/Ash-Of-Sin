@@ -20,6 +20,7 @@ public class BetterAIConfig {
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> EXCLUSION_LIST;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> NEUTRAL_MONSTER_LIST;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> FRIENDLY_LIST;
+    public static ForgeConfigSpec.ConfigValue<List<? extends String>> BLACK_LIST;
     public final Path configPath;
 
     static {
@@ -42,38 +43,18 @@ public class BetterAIConfig {
                 .define("exclusionEnabled", true);
 
         EXCLUSION_LIST = builder
-                .comment("List of entity IDs (e.g., 'minecraft:ender_dragon') that are excluded from inactive mob behavior control. Default includes common bosses.")
+                .comment("List of entity IDs or tags (prefixed with '#') that are excluded from inactive mob behavior control (bosses and custom entities)." +
+                        "Example: 'minecraft:ender_dragon' or '#minecraft:illager'.")
                 .defineList("exclusionList",
                         Arrays.asList(
                                 "minecraft:wither",
                                 "minecraft:ender_dragon",
-                                "minecraft:warden",
-                                "cataclysm:ancient_remnant",
-                                "cataclysm:the_leviathan",
-                                "cataclysm:the_harbinger",
-                                "cataclysm:netherite_monstrosity",
-                                "cataclysm:ignis",
-                                "cataclysm:ender_guardian",
-                                "cataclysm:maledictus",
-                                "cataclysm:scylla",
-                                "mowziesmobs:ferrous_wroughtnaut",
-                                "mowziesmobs:frostmaw",
-                                "mowziesmobs:umvuthi",
-                                "mowziesmobs:naga",
-                                "aquamirae:captain_cornelia",
-                                "irons_spellbooks:dead_king",
-                                "irons_spellbooks:fire_boss",
-                                "alexsmobs:void_worm",
-                                "alexsmobs:void_worm_part",
-                                "bosses_of_mass_destruction:gauntlet",
-                                "bosses_of_mass_destruction:lich",
-                                "bosses_of_mass_destruction:obsidilith",
-                                "bosses_of_mass_destruction:void_blossom"
+                                "minecraft:warden"
                         ),
                         it -> it instanceof String);
 
         NEUTRAL_MONSTER_LIST = builder
-                .comment("List of entity IDs that are considered neutral monsters (e.g., 'minecraft:enderman'). These entities will only become hostile when provoked.")
+                .comment("List of entity IDs or tags (prefixed with '#') that are considered neutral monsters.")
                 .defineList("neutralMonsterList",
                         Arrays.asList(
                                 "minecraft:enderman",
@@ -84,12 +65,20 @@ public class BetterAIConfig {
                         obj -> obj instanceof String);
 
         FRIENDLY_LIST = builder
-                .comment("List of entity IDs that are always friendly and will never attack players (e.g., 'minecraft:villager'). These entities will be ignored by the entire system.")
+                .comment("List of entity IDs or tags (prefixed with '#') that are always friendly and will never attack players. " +
+                        "These entities will be ignored by the entire system.")
                 .defineList("friendlyList",
                         Arrays.asList(
-                                "minecraft:iron_golem"
                         ),
                         obj -> obj instanceof String);
+
+        BLACK_LIST = builder
+                .comment("List of entity IDs or tags (prefixed with '#') that are excluded from better AI entirely.")
+                .defineList("blackList",
+                        Arrays.asList(
+                                "minecraft:ender_dragon"
+                        ),
+                        it -> it instanceof String);
         BETTER_AI_CONFIG = builder.build();
     }
 
