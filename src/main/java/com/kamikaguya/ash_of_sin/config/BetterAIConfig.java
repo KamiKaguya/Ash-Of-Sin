@@ -20,6 +20,7 @@ public class BetterAIConfig {
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> EXCLUSION_LIST;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> NEUTRAL_MONSTER_LIST;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> FRIENDLY_LIST;
+    public static ForgeConfigSpec.ConfigValue<List<? extends String>> BLACK_LIST;
     public final Path configPath;
 
     static {
@@ -42,7 +43,8 @@ public class BetterAIConfig {
                 .define("exclusionEnabled", true);
 
         EXCLUSION_LIST = builder
-                .comment("List of entity IDs (e.g., 'minecraft:ender_dragon') that are excluded from inactive mob behavior control. Default includes common bosses.")
+                .comment("List of entity IDs or tags (prefixed with '#') that are excluded from inactive mob behavior control (bosses and custom entities)." +
+                        "Example: 'minecraft:ender_dragon' or '#minecraft:illager'.")
                 .defineList("exclusionList",
                         Arrays.asList(
                                 "minecraft:wither",
@@ -93,7 +95,7 @@ public class BetterAIConfig {
                         it -> it instanceof String);
 
         NEUTRAL_MONSTER_LIST = builder
-                .comment("List of entity IDs that are considered neutral monsters (e.g., 'minecraft:enderman'). These entities will only become hostile when provoked.")
+                .comment("List of entity IDs or tags (prefixed with '#') that are considered neutral monsters.")
                 .defineList("neutralMonsterList",
                         Arrays.asList(
                                 "minecraft:enderman",
@@ -104,11 +106,27 @@ public class BetterAIConfig {
                         obj -> obj instanceof String);
 
         FRIENDLY_LIST = builder
-                .comment("List of entity IDs that are always friendly and will never attack players (e.g., 'minecraft:villager'). These entities will be ignored by the entire system.")
+                .comment("List of entity IDs or tags (prefixed with '#') that are always friendly and will never attack players. " +
+                        "These entities will be ignored by the entire system.")
                 .defineList("friendlyList",
                         Arrays.asList(
                         ),
                         obj -> obj instanceof String);
+
+        BLACK_LIST = builder
+                .comment("List of entity IDs or tags (prefixed with '#') that are excluded from better AI entirely.")
+                .defineList("blackList",
+                        Arrays.asList(
+                                "tcr_bosses:scylla_humanoid",
+                                "tcr_bosses:ancient_remnant_humanoid",
+                                "tcr_bosses:harbinger_humanoid",
+                                "tcr_bosses:maledictus_humanoid",
+                                "tcr_bosses:netherite_humanoid",
+                                "tcr_bosses:ender_guardian_humanoid",
+                                "tcr_bosses:leviathan_humanoid",
+                                "tcr_bosses:ignis_humanoid"
+                        ),
+                        it -> it instanceof String);
         BETTER_AI_CONFIG = builder.build();
     }
 
